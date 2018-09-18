@@ -12,17 +12,30 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/colorPrimary"
+      app:titleTextColor="@color/colorAccent"
+      android:theme="?attr/actionBarTheme"
     android:minHeight="?attr/actionBarSize"
-    android:theme="?attr/actionBarTheme"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    app:theme="@style/ThemeOverlay.AppCompat.Dark" />
+    app:theme="@style/ThemeOverlay.AppCompat.Dark"
+      android:fitsSystemWindows="true"
+      />
+
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
   <ImageView
     android:id="@+id/ivImage"
-    android:layout_width="wrap_content"
+    android:scaleType="fitXY"
+    android:layout_width="match_parent"
     android:layout_height="300dp"
     android:layout_gravity="center"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="0dp"
     android:src="@drawable/rose" />
 
   <TextView
@@ -30,7 +43,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
-    android:padding="5dp"
+    android:padding="25dp"
     android:text="TextView"
     android:textSize="18sp" />
+
+    </LinearLayout>
+
+  </ScrollView>
+
 </LinearLayout>
