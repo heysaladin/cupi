@@ -21,7 +21,7 @@ public class MyAdapter extends RecyclerView.Adapter<FlowerViewHolder> {
     private Context mContext;
     private List<DestinationData> mFlowerList;
 
-    MyAdapter(Context mContext, List<DestinationData> mFlowerList) {
+    public MyAdapter(Context mContext, List<DestinationData> mFlowerList) {
         this.mContext = mContext;
         this.mFlowerList = mFlowerList;
     }
