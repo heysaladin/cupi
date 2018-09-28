@@ -19,9 +19,9 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<FlowerViewHolder> {
 
     private Context mContext;
-    private List<FlowerData> mFlowerList;
+    private List<DestinationData> mFlowerList;
 
-    MyAdapter(Context mContext, List<FlowerData> mFlowerList) {
+    MyAdapter(Context mContext, List<DestinationData> mFlowerList) {
         this.mContext = mContext;
         this.mFlowerList = mFlowerList;
     }
@@ -34,15 +34,15 @@ public class MyAdapter extends RecyclerView.Adapter<FlowerViewHolder> {
 
     @Override
     public void onBindViewHolder(final FlowerViewHolder holder, int position) {
-        holder.mImage.setImageResource(mFlowerList.get(position).getFlowerImage());
-        holder.mTitle.setText(mFlowerList.get(position).getFlowerName());
+        holder.mImage.setImageResource(mFlowerList.get(position).getDestinationImage());
+        holder.mTitle.setText(mFlowerList.get(position).getDestinationName());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mIntent = new Intent(mContext, DetailActivity.class);
-                mIntent.putExtra("Title", mFlowerList.get(holder.getAdapterPosition()).getFlowerName());
-                mIntent.putExtra("Description", mFlowerList.get(holder.getAdapterPosition()).getFlowerDescription());
-                mIntent.putExtra("Image", mFlowerList.get(holder.getAdapterPosition()).getFlowerImage());
+                mIntent.putExtra("Title", mFlowerList.get(holder.getAdapterPosition()).getDestinationName());
+                mIntent.putExtra("Description", mFlowerList.get(holder.getAdapterPosition()).getDestinationDescription());
+                mIntent.putExtra("Image", mFlowerList.get(holder.getAdapterPosition()).getDestinationImage());
                 mContext.startActivity(mIntent);
             }
         });
