@@ -25,7 +25,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +39,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemOneFragment extends Fragment {
+
+    private  View view;
+
     public static ItemOneFragment newInstance() {
         ItemOneFragment fragment = new ItemOneFragment();
         return fragment;
@@ -45,24 +50,66 @@ public class ItemOneFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_item_one, container, false);
 
-                    ViewPager viewPager = (ViewPager) view.findViewById(R.id.pager);
-            ViewPagerAdapter adapter = new ViewPagerAdapter(((MainActivity) getActivity()).getSupportFragmentManager());
-            adapter.addFragment(new FragmentOne(), "FRAG1");
-            adapter.addFragment(new FragmentTwo(), "FRAG2");
-            viewPager.setAdapter(adapter);
+        /*
+        Fragment selectedFragment = com.codingdemos.flowers.fragments.FragmentOne.newInstance();
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_layout, selectedFragment);
+        transaction.commit();
+        */
 
-            TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tabs);
-            tabLayout.setupWithViewPager(viewPager);
+         view = inflater.inflate(R.layout.fragment_item_one, container, false);
+
+        ViewPager viewPager = (ViewPager) view.findViewById(R.id.pager);
+
+
+        // ViewPagerAdapter adapter = new ViewPagerAdapter(((MainActivity) getActivity()).getSupportFragmentManager());
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+         adapter.addFragment(new FragmentOne(), "FRAG1");
+         adapter.addFragment(new FragmentTwo(), "FRAG2");
+//        adapter.addFragment(com.codingdemos.flowers.fragments.FragmentOne.newInstance(), "FRAG1");
+//        adapter.addFragment(com.codingdemos.flowers.fragments.FragmentTwo.newInstance(), "FRAG2");
+        viewPager.setAdapter(adapter);
+
+        // vpPager = (ViewPager)view.findViewById(R.id.vpPager);
+        viewPager.setOffscreenPageLimit(2);
+        //vpPager.setAdapter(pagerAdapter);
+        // viewPager.addOnPageChangeListener(adapter);
+
+        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+        Log.d("LOG", "tabLayout.getSelectedTabPosition() = " + tabLayout.getSelectedTabPosition());
+//        Log.d("LOG", "getParentFragment() = " + this.getParentFragment());
+        Log.d("LOG", "viewPager.getCurrentItem() = " + viewPager.getCurrentItem());
+
+//        Fragment fragment = ((MainActivity) getActivity()).getSupportFragmentManager().findFragmentById(R.id.container);
+//        FragmentManager childFm = fragment.getChildFragmentManager();
+
+//        Fragment selectedFragment = com.codingdemos.flowers.fragments.ItemOneFragment.newInstance();
+//        FragmentTransaction transaction = ((MainActivity) getActivity()).getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.frame_layout, selectedFragment);
+//        transaction.commit();
+
+//        FragmentTransaction transaction = ((MainActivity) getActivity()).getSupportFragmentManager().beginTransaction();
+//        transaction.replace(R.id.pager, fragment);
+//        transaction.commit();
+
+
+
 
         return view;
     }
+
 
 
 
@@ -73,10 +120,12 @@ public class ItemOneFragment extends Fragment {
 
         public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
+            Log.d("LOG", "manager = " + manager);
         }
 
         @Override
         public Fragment getItem(int position) {
+            Log.d("LOG", "position = " + position);
             return mFragmentList.get(position);
         }
 
@@ -86,15 +135,22 @@ public class ItemOneFragment extends Fragment {
         }
 
         public void addFragment(Fragment fragment, String title) {
+            Log.d("LOG", "fragment = " + fragment);
+            Log.d("LOG", "title = " + title);
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
+            Log.d("LOG", "getPageTitle position = " + position);
             return mFragmentTitleList.get(position);
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
+    }
 }

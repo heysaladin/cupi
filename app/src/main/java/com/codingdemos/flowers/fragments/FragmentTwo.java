@@ -23,6 +23,11 @@ import java.util.List;
 
 public class FragmentTwo extends Fragment {
 
+    public static FragmentTwo newInstance() {
+        FragmentTwo fragment = new FragmentTwo();
+        return fragment;
+    }
+
 //    private OnFragmentInteractionListener mListener;
 
     Toolbar mToolbar;
@@ -37,6 +42,7 @@ public class FragmentTwo extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("LOG", "onCreate two");
 
 
 
@@ -45,6 +51,7 @@ public class FragmentTwo extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d("LOG", "onCreateView two");
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_two, container, false);
 

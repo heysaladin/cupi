@@ -18,6 +18,7 @@ import android.view.MenuItem;
 
 import com.codingdemos.flowers.fragments.FragmentOne;
 import com.codingdemos.flowers.fragments.FragmentTwo;
+import com.codingdemos.flowers.fragments.ItemOneFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
             //Manually displaying the first fragment - one time only
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.frame_layout, com.codingdemos.flowers.fragments.ItemOneFragment.newInstance());
+            // transaction.replace(R.id.frame_layout, com.codingdemos.flowers.fragments.FragmentOne.newInstance());
             transaction.commit();
 
             //Used to select an item programmatically
