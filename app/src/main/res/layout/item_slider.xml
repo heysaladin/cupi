@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:id="@+id/linearLayout"
-    android:orientation="vertical">
+    android:id="@+id/relativeLayout">
+
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="1dp"
+        android:gravity="center"
         android:textColor="@android:color/white"
-        android:textSize="20sp" />
+        android:textSize="28sp" />
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/item_slide_image_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/hagia_sophia"
+        />
+
+
+</RelativeLayout>

@@ -76,9 +76,19 @@ public class DestinationListAdapter extends RecyclerView.Adapter < DestinationLi
                     Intent intent = new Intent(context, DetailActivity.class);
                     intent.putExtra(intent_param_post_id, model.getPostID());
                     intent.putExtra(intent_param_menu_id, model.getMenuID());
+
+                    intent.putExtra("Title", model.getName());
+                    intent.putExtra("Description", model.getName());
+                    intent.putExtra("Image", model.getName());
+
                     context.startActivity(intent);
                 } else if (groupName.equals(group_karma_spa)) {
                     Intent intent = new Intent(context, DetailActivity.class);
+
+                    intent.putExtra("Title", model.getName());
+                    intent.putExtra("Description", model.getName());
+                    intent.putExtra("Image", model.getName());
+
 //                    intent.putExtra(AppStrings.Unique.intent_param_post_id, model.getPostID());
 //                    intent.putExtra(AppStrings.Unique.intent_param_menu_id, model.getMenuID());
 //                    intent.putExtra(AppStrings.Unique.intent_param_spa_name, model.getName());
@@ -92,19 +102,40 @@ public class DestinationListAdapter extends RecyclerView.Adapter < DestinationLi
                     context.startActivity(intent);
                 } else if (groupName.equals("SubRestaurant")) {
                     Intent intent = new Intent(context, DetailActivity.class);
+
+                    intent.putExtra("Title", model.getName());
+                    intent.putExtra("Description", model.getName());
+                    intent.putExtra("Image", model.getName());
+
                     intent.putExtra(intent_param_post_id, model.getPostID());
                     intent.putExtra(intent_param_menu_id, model.getMenuID());
                     context.startActivity(intent);
                 } else if (groupName.equals(group_karma_boutique)) {
                     Intent intent = new Intent(context, DetailActivity.class);
+
+                    intent.putExtra("Title", model.getName());
+                    intent.putExtra("Description", model.getName());
+                    intent.putExtra("Image", model.getName());
+
                     intent.putExtra(intent_param_post_id, model.getPostID());
                     intent.putExtra(intent_param_menu_id, model.getMenuID());
                     context.startActivity(intent);
                 } else {
                     Intent intent = new Intent(context, DetailActivity.class);
+
+                    intent.putExtra("Title", model.getName());
+                    intent.putExtra("Description", model.getName());
+                    intent.putExtra("Image", model.getName());
+
 //                    intent.putExtra(AppStrings.Unique.intent_param_post_id, model.getPostID());
 //                    intent.putExtra(AppStrings.Unique.intent_param_post_title, model.getName());
 //                    intent.putExtra(AppStrings.Unique.intent_param_menu_id, model.getMenuID());
+
+
+                    intent.putExtra("Title", model.getName());
+                    intent.putExtra("Description", model.getName());
+                    intent.putExtra("Image", model.getName());
+
                     context.startActivity(intent);
                 }
             }

@@ -89,12 +89,22 @@ public class GuestDestinationsAdapter extends RecyclerView.Adapter <GuestDestina
                     context.startActivity(intent);
                 } else if (model.getMenuName().equals(group_karma_boutique)) {
                     Intent intent = new Intent(context, DetailActivity.class);
+
+                    intent.putExtra("Title", model.getName());
+                    intent.putExtra("Description", model.getName());
+                    intent.putExtra("Image", model.getName());
+
                     context.startActivity(intent);
                 } else {
                     Intent intent = new Intent(context, DetailActivity.class);
                     intent.putExtra(intent_param_post_id, model.getPostID());
                     intent.putExtra(intent_param_post_title, model.getName());
                     intent.putExtra(intent_param_menu_id, model.getMenuID());
+
+                    intent.putExtra("Title", model.getName());
+                    intent.putExtra("Description", model.getName());
+                    intent.putExtra("Image", model.getName());
+
                     context.startActivity(intent);
                 }
             }

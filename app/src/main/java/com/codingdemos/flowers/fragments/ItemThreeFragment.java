@@ -116,14 +116,14 @@ public class ItemThreeFragment extends Fragment {
         viewPager=(ViewPager)view.findViewById(R.id.viewPager);
         indicator=(TabLayout)view.findViewById(R.id.indicator);
         color = new ArrayList<>();
-        color.add(Color.RED);
-        color.add(Color.GREEN);
-        color.add(Color.BLUE);
+        color.add(Color.BLACK);
+        color.add(Color.BLACK);
+        color.add(Color.BLACK);
 
         colorName = new ArrayList<>();
-        colorName.add("RED");
-        colorName.add("GREEN");
-        colorName.add("BLUE");
+        colorName.add("Hegia Sopia");
+        colorName.add("Masjid");
+        colorName.add("Arena");
 
         viewPager.setAdapter(new SliderAdapter(this.getContext(), color, colorName));
         indicator.setupWithViewPager(viewPager, true);

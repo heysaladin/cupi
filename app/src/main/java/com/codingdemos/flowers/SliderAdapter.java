@@ -1,12 +1,15 @@
 package com.codingdemos.flowers;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -33,16 +36,18 @@ public class SliderAdapter extends PagerAdapter {
         return view == object;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.item_slider, null);
 
         TextView textView = (TextView) view.findViewById(R.id.textView);
-        LinearLayout linearLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
+        RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
 
         textView.setText(colorName.get(position));
-        linearLayout.setBackgroundColor(color.get(position));
+        relativeLayout.setBackgroundColor(color.get(position));
+
 
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view, 0);
