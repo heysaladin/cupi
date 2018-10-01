@@ -75,8 +75,8 @@ public class ItemOneFragment extends Fragment {
 
         // ViewPagerAdapter adapter = new ViewPagerAdapter(((MainActivity) getActivity()).getSupportFragmentManager());
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
+        adapter.addFragment(new FragmentTwo(), "FRAG2");
          adapter.addFragment(new FragmentOne(), "FRAG1");
-         adapter.addFragment(new FragmentTwo(), "FRAG2");
 //        adapter.addFragment(com.codingdemos.flowers.fragments.FragmentOne.newInstance(), "FRAG1");
 //        adapter.addFragment(com.codingdemos.flowers.fragments.FragmentTwo.newInstance(), "FRAG2");
         viewPager.setAdapter(adapter);
