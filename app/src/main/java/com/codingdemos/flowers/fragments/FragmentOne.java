@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import com.codingdemos.flowers.DestinationData;
 import com.codingdemos.flowers.MainActivity;
 import com.codingdemos.flowers.MyAdapter;
+import com.codingdemos.flowers.MyLineAdapter;
 import com.codingdemos.flowers.R;
 import com.codingdemos.flowers.SliderAdapter;
 
@@ -138,7 +139,7 @@ public class FragmentOne extends Fragment {
         mFlowerList.add(mDestinationData);
 
 
-        MyAdapter myAdapter = new MyAdapter(view.getContext(), mFlowerList);
+        MyLineAdapter myAdapter = new MyLineAdapter(view.getContext(), mFlowerList);
         mRecyclerView.setAdapter(myAdapter);
 
 
