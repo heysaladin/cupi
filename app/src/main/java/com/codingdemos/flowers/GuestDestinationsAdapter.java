@@ -60,9 +60,11 @@ public class GuestDestinationsAdapter extends RecyclerView.Adapter <GuestDestina
         String img = "https://www.dakwatuna.com/wp-content/uploads/2015/07/masjidil-haram.jpg";
         Log.d("LOG", "model.getImage() +++++++++++++++ " + model.getImage());
         Glide.with(context)
-                .load(model.getImage().replace(" ", "%20"))
-                .placeholder(R.drawable.hagia_sophia)
-                .error(R.drawable.hagia_sophia)
+                .load(model.getImage()
+//                        .replace(" ", "%20")
+                )
+//                .placeholder(R.drawable.hagia_sophia)
+//                .error(R.drawable.hagia_sophia)
                 .into(holder.item_home_destination_image_iv);
 //        Glide.with(context)
 //                .load(img.replace(" ", "%20"))

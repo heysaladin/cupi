@@ -21,7 +21,9 @@
 package com.codingdemos.flowers.fragments;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -34,7 +36,6 @@ import android.view.ViewGroup;
 
 import com.codingdemos.flowers.DestinationsModel;
 import com.codingdemos.flowers.GuestDestinationsAdapter;
-import com.codingdemos.flowers.HomeDestinationsModel;
 import com.codingdemos.flowers.R;
 import com.codingdemos.flowers.SliderAdapter;
 
@@ -47,11 +48,30 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ItemThreeFragment extends Fragment {
+import com.codingdemos.flowers.rest.AsyncHttpResponse;
+import com.loopj.android.http.RequestParams;
+
+public class ItemThreeFragment extends Fragment
+        implements
+        AsyncHttpResponse.AsyncHttpResponseListener
+//        ,
+//        VolleyResponse.VolleyResponseListener
+{
 
 
     private String data = "[{\"name\":\"KarmaBavaria-Germany\",\"postID\":\"731\",\"image\":\"1520823610K_Bavaria_White.png\",\"bgimage\":\"Karma-Bavariaimg.png\",\"favouriteStatus\":0,\"id\":\"1\",\"isParent\":\"0\",\"child\":\"0\",\"email\":null},{\"name\":\"KarmaBorgoDiColleoli-Italy\",\"postID\":\"69\",\"image\":\"1533624842new_logo.png\",\"bgimage\":\"152997960203096a4c-karma-tuscany-2-min.jpg\",\"favouriteStatus\":0,\"id\":\"73\",\"isParent\":\"0\",\"child\":\"0\",\"email\":null},{\"name\":\"KarmaRottnest-Australia\",\"postID\":\"802\",\"image\":\"1520823724K_Rottnest_White.png\",\"bgimage\":\"1537947603karma_rottnest_display.jpg\",\"favouriteStatus\":0,\"id\":\"4\",\"isParent\":\"0\",\"child\":\"0\",\"email\":null},{\"name\":\"KarmaKandara-Bali\",\"postID\":\"193\",\"image\":\"1520823697K_Kandara_White.png\",\"bgimage\":\"1537947614karma_kandara_display.jpg\",\"favouriteStatus\":0,\"id\":\"3\",\"isParent\":\"0\",\"child\":\"0\",\"email\":null},{\"name\":\"KarmaJimbaran-Bali\",\"postID\":\"837\",\"image\":\"1520823633K_Jimbaran_White.png\",\"bgimage\":\"1537957239karma_jimbaran2__display.jpg\",\"favouriteStatus\":0,\"id\":\"2\",\"isParent\":\"0\",\"child\":\"0\",\"email\":null},{\"menuID\":\"2\",\"menuName\":\"KarmaRetreats\",\"image\":\"K_retreats.png\",\"bgimage\":\"K_retreatsimg.png\",\"subGroupNames\":[{\"name\":\"KarmaCâyTre-Vietnam\",\"postID\":\"963\",\"image\":\"1520823761K_Cay_Tre_White.png\",\"bgimage\":\"K_caytreimg.png\",\"favouriteStatus\":0,\"id\":\"5\",\"isParent\":\"0\",\"child\":\"0\",\"email\":null},{\"name\":\"KarmaChakra-India\",\"postID\":\"940\",\"image\":\"1520823800K_Chakra_White.png\",\"bgimage\":\"K_chakraimg.png\",\"favouriteStatus\":0,\"id\":\"6\",\"isParent\":\"0\",\"child\":\"0\",\"email\":null},{\"name\":\"KarmaHaveli-India\",\"postID\":\"782\",\"image\":\"1520823823K_Haveli_White.png\",\"bgimage\":\"K_haveliimg.png\",\"favouriteStatus\":0,\"id\":\"7\",\"isParent\":\"0\",\"child\":\"0\",\"email\":null},{\"name\":\"KarmaMayura-Bali\",\"postID\":\"889\",\"image\":\"1520823849K_Mayura_White.png\",\"bgimage\":\"karma_mayuraimg.png\",\"favouriteStatus\":0,\"id\":\"8\",\"isParent\":\"0\",\"child\":\"0\",\"email\":null},{\"name\":\"KarmaSt.Martin's-IslesofScilly\",\"postID\":\"914\",\"image\":\"1520823892K_St.Martin's_White.png\",\"bgimage\":\"karma_stmartinsimg.png\",\"favouriteStatus\":0,\"id\":\"10\",\"isParent\":\"0\",\"child\":\"0\",\"email\":null},{\"name\":\"KarmaReef-Indonesia\",\"postID\":\"866\",\"image\":\"1520823870K_Reef_White.png\",\"bgimage\":\"karma_reefimg.png\",\"favouriteStatus\":0,\"id\":\"9\",\"isParent\":\"0\",\"child\":\"0\",\"email\":null},{\"name\":\"KarmaResidenceNormande-France\",\"postID\":\"72\",\"image\":\"153362451520ef2aac-white-300x224.png\",\"bgimage\":\"1530690865back-1.jpg\",\"favouriteStatus\":0,\"id\":\"76\",\"isParent\":\"0\",\"child\":\"0\",\"email\":null},{\"name\":\"KarmaExotica-Dharamshala\",\"postID\":\"71\",\"image\":\"1530676667c2576fa3-karma-dharmasala-logo.png\",\"bgimage\":\"1530676667amen-1.jpg\",\"favouriteStatus\":0,\"id\":\"75\",\"isParent\":\"0\",\"child\":\"0\",\"email\":null},{\"name\":\"KarmaManoirdesDeuxAmants-France\",\"postID\":\"70\",\"image\":\"1533624740logo.png\",\"bgimage\":\"1529979700c22d7ea8-karma-manoir-12.jpg\",\"favouriteStatus\":0,\"id\":\"74\",\"isParent\":\"0\",\"child\":\"0\",\"email\":null},{\"name\":\"KarmaMinoan-Greece\",\"postID\":\"10\",\"image\":\"1528350256KMinoan-Logo.png\",\"bgimage\":\"1528350256minoan-background.jpg\",\"favouriteStatus\":0,\"id\":\"72\",\"isParent\":\"0\",\"child\":\"0\",\"email\":null}]},{\"menuID\":\"4\",\"menuName\":\"KarmaEstate\",\"image\":\"1520824596K_Estates_White.png\",\"bgimage\":\"K_estatesimg.png\",\"subGroupNames\":[{\"name\":\"Pelikanos-Mykonos\",\"postID\":\"1331\",\"image\":\"Pelikanos.png\",\"bgimage\":\"pelikanosimg.png\",\"favouriteStatus\":0,\"id\":\"21\",\"isParent\":\"0\",\"child\":\"0\",\"email\":null},{\"name\":\"LePreverger-France\",\"postID\":\"1285\",\"image\":\"lepreverger.png\",\"bgimage\":\"leprevergerimg.png\",\"favouriteStatus\":0,\"id\":\"22\",\"isParent\":\"0\",\"child\":\"0\",\"email\":null}]}]";
 
+    /*
+    name
+    postID
+    image
+    bgimage
+    "favouriteStatus":0,
+    "id":"1",
+    "isParent":"0",
+    "child":"0",
+    "email":null
+     */
 
     private View view;
 
@@ -85,6 +105,8 @@ public class ItemThreeFragment extends Fragment {
     String latitude ="latitude";
     String longitude ="longitude";
 
+    private JSONArray dataDestinations = null;
+
     private ViewPager viewPager;
     private TabLayout indicator;
 
@@ -106,12 +128,17 @@ public class ItemThreeFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_item_three, container, false);
 
-
+//        try {
+            getKarmaGroupsApiRequest();
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
         viewPager=(ViewPager)view.findViewById(R.id.viewPager);
         indicator=(TabLayout)view.findViewById(R.id.indicator);
@@ -133,15 +160,42 @@ public class ItemThreeFragment extends Fragment {
 
 
 
-        try {
-            JSONArray dataJson = new JSONArray(data);
 
-        guest_destinations_rv = (RecyclerView) view.findViewById(R.id.guest_destinations_rv);
-        destinationsArrayList = new ArrayList < > ();
-        linearLayoutManager = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        guest_destinations_rv.setLayoutManager(linearLayoutManager);
-        guestDestinationsAdapter = new GuestDestinationsAdapter(this.getActivity(), destinationsArrayList);
-        guest_destinations_rv.setAdapter(guestDestinationsAdapter);
+        return view;
+    }
+
+    private void processData() {
+
+        try {
+            // JSONArray dataJson = new JSONArray(data);
+            JSONArray dataJson = new JSONArray();
+
+            JSONObject dataObj = new JSONObject(
+                    "{" +
+                            "\"name\":" + "\"name\"" + "," +
+                            "\"postID\":" + "\"name\"" + "," +
+                            "\"image\":" + "\"https://www.dakwatuna.com/wp-content/uploads/2015/07/masjidil-haram.jpg\"" + "," +
+                            "\"bgimage\":" + "\"https://www.dakwatuna.com/wp-content/uploads/2015/07/masjidil-haram.jpg\"" + "," +
+                            "\"favouriteStatus\":" + 0 + "," +
+                            "\"id\":" + "1"+ "," +
+                            "\"isParent\":" + "0"+ "," +
+                            "\"child\":" + "0"+ "," +
+                            "\"email\":" + null +
+                            "}"
+            );
+
+//            for(int i=1; i<5; i++) {
+//                dataJson.put(dataObj);
+//            }
+
+            dataJson = dataDestinations;
+
+            guest_destinations_rv = (RecyclerView) view.findViewById(R.id.guest_destinations_rv);
+            destinationsArrayList = new ArrayList < > ();
+            linearLayoutManager = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false);
+            guest_destinations_rv.setLayoutManager(linearLayoutManager);
+            guestDestinationsAdapter = new GuestDestinationsAdapter(this.getActivity(), destinationsArrayList);
+            guest_destinations_rv.setAdapter(guestDestinationsAdapter);
 
 
 //        JSONObject jsonObject = new JSONObject(response);
@@ -155,23 +209,23 @@ public class ItemThreeFragment extends Fragment {
 //                JSONObject jobj = jsonArray.getJSONObject(i);
 //                HomeDestinationsModel hModel = new HomeDestinationsModel();
 //                hModel.setMenuName(jobj.optString(menuName));
-                JSONArray jarry = dataJson;
-                ArrayList < DestinationsModel > dma = new ArrayList < > ();
-                dma.clear();
-                for (int j = 0; j < jarry.length(); j++) {
-                    JSONObject job = jarry.getJSONObject(j);
-                    DestinationsModel model = new DestinationsModel();
-                    model.setMenuID(String.valueOf(j));
-                    model.setMenuName("nama"+j);
-                    model.setName(job.optString(name));
-                    model.setPostID(job.optString(postID));
-                    String img = "https://www.dakwatuna.com/wp-content/uploads/2015/07/masjidil-haram.jpg";
-                    Log.d("LOG", "img >>>>>>>>> " + img);
-                    // model.setImage(job.optString(image));
-                    model.setImage(img);
-                    dma.add(model);
-                    destinationsArrayList.add(model);
-                }
+            JSONArray jarry = dataJson;
+            ArrayList < DestinationsModel > dma = new ArrayList < > ();
+            dma.clear();
+            for (int j = 0; j < jarry.length(); j++) {
+                JSONObject job = jarry.getJSONObject(j);
+                DestinationsModel model = new DestinationsModel();
+                model.setMenuID(String.valueOf(j));
+                model.setMenuName("nama"+j);
+                model.setName(job.optString(name));
+                model.setPostID(job.optString(postID));
+                String img = "https://www.dakwatuna.com/wp-content/uploads/2015/07/masjidil-haram.jpg";
+                Log.d("LOG", "img >>>>>>>>> " + img);
+                model.setImage(job.optString(image));
+//                    model.setImage(img);
+                dma.add(model);
+                destinationsArrayList.add(model);
+            }
 //                hModel.setDestinationsModelArrayList(dma);
 //            }
             guestDestinationsAdapter.notifyDataSetChanged();
@@ -183,9 +237,42 @@ public class ItemThreeFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        return view;
     }
+
+// throws JSONException
+    private void getKarmaGroupsApiRequest() {
+//        if (AppUtils.isConnectingToInternet(this)) {
+            AsyncHttpResponse response = new AsyncHttpResponse(this, false);
+            RequestParams params = new RequestParams();
+//            if (sm.getBooleanData(AppStrings.Session.isKarmaMember)) {
+//                params.put(AppStrings.ResponseData.memberID, sm.getStringData(AppStrings.Session.memberID));
+//                params.put(AppStrings.ResponseData.surName, sm.getStringData(AppStrings.Session.member_surName));
+//            }
+            response.getAsyncHttp("https://big-mom.glitch.me/destinations", params);
+//        } else {
+//            AppUtils.alertForNoInternet(this);
+//        }
+    }
+
+
+    @Override
+    public void onAsyncHttpResponseGet(String response, String url) throws JSONException {
+        Log.d("TAG", "onAsyncHttpResponseGet() called with: response = [" + response + "], url = [" + url + "]");
+        if (url.equals("https://big-mom.glitch.me/destinations")) {
+            // sm.setStringData(AppStrings.Session.api_getKarmaGroupsDev, response);
+            Log.d("TAG", "x onAsyncHttpResponseGet() called with: response = [" + response + "], url = [" + url + "]");
+
+            dataDestinations = new JSONArray(response);
+
+            processData();
+
+        }
+    }
+
+//    @Override
+//    public void onVolleyResponseGet(String response, String url, String requestType) throws JSONException {
+//
+//    }
 
 
     private class SliderTimer extends TimerTask {
