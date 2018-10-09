@@ -318,7 +318,7 @@ public class AsyncHttpResponse {
         } catch (UnsupportedEncodingException e1) {
             e1.printStackTrace();
         }
-        if (URL.equals(com.karmagroups.rest.RestApis.KarmaGroups.karmawarehouse)) {
+        if (URL.equals(RestApis.KarmaGroups.karmawarehouse)) {
             RequestQueue queue = Volley.newRequestQueue(this.context);
             StringRequest postRequest = new StringRequest(Request.Method.POST, URL,
                     new Response.Listener < String > () {

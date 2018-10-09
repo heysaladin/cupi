@@ -36,6 +36,7 @@ import android.view.ViewGroup;
 
 import com.codingdemos.flowers.DestinationsModel;
 import com.codingdemos.flowers.GuestDestinationsAdapter;
+import com.codingdemos.flowers.GuestDestinationsLongAdapter;
 import com.codingdemos.flowers.R;
 import com.codingdemos.flowers.SliderAdapter;
 
@@ -49,6 +50,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.codingdemos.flowers.rest.AsyncHttpResponse;
+import com.codingdemos.flowers.rest.RestApis;
 import com.loopj.android.http.RequestParams;
 
 public class ItemThreeFragment extends Fragment
@@ -106,17 +108,24 @@ public class ItemThreeFragment extends Fragment
     String longitude ="longitude";
 
     private JSONArray dataDestinations = null;
+    private JSONArray dataNews = null;
 
     private ViewPager viewPager;
     private TabLayout indicator;
 
     private List<Integer> color;
     private List<String> colorName;
+    private List<String> colorImage;
 
-    private RecyclerView guest_destinations_rv;
-    private LinearLayoutManager linearLayoutManager;
-    private ArrayList <DestinationsModel> destinationsArrayList;
-    private GuestDestinationsAdapter guestDestinationsAdapter;
+    private RecyclerView guest_destinations_rv, guest_destinations_rv_architecture,guest_destinations_rv_culinary,guest_destinations_rv_art;
+    private LinearLayoutManager linearLayoutManager, linearLayoutManagerArch, linearLayoutManagerCulinary, linearLayoutManagerArt;
+    private ArrayList <DestinationsModel> destinationsArrayList, destinationsArrayListArch, destinationsArrayListCulinary, destinationsArrayListArt;
+    private GuestDestinationsAdapter guestDestinationsAdapter, guestDestinationsAdapterArch, guestDestinationsAdapterCulinary, guestDestinationsAdapterArt;
+
+    private RecyclerView guest_destinations_rv_long;
+    private LinearLayoutManager linearLayoutManagerLong;
+    private ArrayList <DestinationsModel> destinationsArrayListLong;
+    private GuestDestinationsLongAdapter guestDestinationsAdapterLong;
 
     public static ItemThreeFragment newInstance() {
         ItemThreeFragment fragment = new ItemThreeFragment();
@@ -136,6 +145,7 @@ public class ItemThreeFragment extends Fragment
 
 //        try {
             getKarmaGroupsApiRequest();
+        getKarmaGroupsApiRequestNews();
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //        }
@@ -152,7 +162,12 @@ public class ItemThreeFragment extends Fragment
         colorName.add("Masjid");
         colorName.add("Arena");
 
-        viewPager.setAdapter(new SliderAdapter(this.getContext(), color, colorName));
+        colorImage = new ArrayList<>();
+        colorImage.add("https://karmaexperience.in/wp-content/themes/karmaexp/templates/images/karma-haveli-b.jpg");
+        colorImage.add("https://karmaexperience.in/wp-content/uploads/2017/08/banner-karma-haatimahal.jpg");
+        colorImage.add("https://karmaexperience.in/wp-content/themes/karmaexp/templates/images/karma-exotica.jpg");
+
+        viewPager.setAdapter(new SliderAdapter(this.getContext(), color, colorName, colorImage));
         indicator.setupWithViewPager(viewPager, true);
 
         Timer timer = new Timer();
@@ -163,6 +178,7 @@ public class ItemThreeFragment extends Fragment
 
         return view;
     }
+
 
     private void processData() {
 
@@ -198,11 +214,53 @@ public class ItemThreeFragment extends Fragment
             guest_destinations_rv.setAdapter(guestDestinationsAdapter);
 
 
+            guest_destinations_rv_architecture = (RecyclerView) view.findViewById(R.id.guest_destinations_rv_architecture);
+            destinationsArrayListArch = new ArrayList < > ();
+            linearLayoutManagerArch = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false);
+            guest_destinations_rv_architecture.setLayoutManager(linearLayoutManagerArch);
+            guestDestinationsAdapterArch = new GuestDestinationsAdapter(this.getActivity(), destinationsArrayListArch);
+            guest_destinations_rv_architecture.setAdapter(guestDestinationsAdapterArch);
+
+
+            guest_destinations_rv_culinary = (RecyclerView) view.findViewById(R.id.guest_destinations_rv_culinary);
+            destinationsArrayListCulinary = new ArrayList < > ();
+            linearLayoutManagerCulinary = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false);
+            guest_destinations_rv_culinary.setLayoutManager(linearLayoutManagerCulinary);
+            guestDestinationsAdapterCulinary = new GuestDestinationsAdapter(this.getActivity(), destinationsArrayListCulinary);
+            guest_destinations_rv_culinary.setAdapter(guestDestinationsAdapterCulinary);
+
+
+            guest_destinations_rv_art = (RecyclerView) view.findViewById(R.id.guest_destinations_rv_art);
+            destinationsArrayListArt = new ArrayList < > ();
+            linearLayoutManagerArt = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false);
+            guest_destinations_rv_art.setLayoutManager(linearLayoutManagerArt);
+            guestDestinationsAdapterArt = new GuestDestinationsAdapter(this.getActivity(), destinationsArrayListArt);
+            guest_destinations_rv_art.setAdapter(guestDestinationsAdapterArt);
+
+
+
+
+//            guest_destinations_rv_long = (RecyclerView) view.findViewById(R.id.guest_destinations_rv_long);
+//            destinationsArrayListLong = new ArrayList < > ();
+//            linearLayoutManagerLong = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false);
+//            guest_destinations_rv_long.setLayoutManager(linearLayoutManagerLong);
+//            guestDestinationsAdapterLong = new GuestDestinationsLongAdapter(this.getActivity(), destinationsArrayListLong);
+//            guest_destinations_rv_long.setAdapter(guestDestinationsAdapterLong);
+
+
+
+
 //        JSONObject jsonObject = new JSONObject(response);
 //        int status = jsonObject.getInt(AppStrings.ResponseData.status);
 //        String message = jsonObject.optString(AppStrings.ResponseData.message);
 //        if (status == 1) {
             destinationsArrayList.clear();
+            destinationsArrayListArch.clear();
+            destinationsArrayListCulinary.clear();
+            destinationsArrayListArt.clear();
+
+//            destinationsArrayListLong.clear();
+
 //            sm.setStringData(AppStrings.Session.api_homeDestinationsDev, response);
 //            JSONArray jsonArray = dataJson;
 //            for (int i = 0; i < jsonArray.length(); i++) {
@@ -218,17 +276,137 @@ public class ItemThreeFragment extends Fragment
                 model.setMenuID(String.valueOf(j));
                 model.setMenuName("nama"+j);
                 model.setName(job.optString(name));
-                model.setPostID(job.optString(postID));
+                model.setPostID(job.optString("id"));
                 String img = "https://www.dakwatuna.com/wp-content/uploads/2015/07/masjidil-haram.jpg";
                 Log.d("LOG", "img >>>>>>>>> " + img);
                 model.setImage(job.optString(image));
 //                    model.setImage(img);
                 dma.add(model);
-                destinationsArrayList.add(model);
+//                if (job.optString("category").equals("1")) {
+//                destinationsArrayList.add(model);
+//                destinationsArrayListArch.add(model);
+//                destinationsArrayListCulinary.add(model);
+//                destinationsArrayListArt.add(model);
+
+
+
+
+//                destinationsArrayListLong.add(model);
+
+
+
+                switch (Integer.parseInt(job.optString("category"))) {
+                    case 1:
+                        destinationsArrayList.add(model);
+                        break;
+                    case 2:
+                        destinationsArrayListArch.add(model);
+                        break;
+                    case 3:
+                        destinationsArrayListCulinary.add(model);
+                        break;
+                    case 4:
+                        destinationsArrayListArt.add(model);
+                        break;
+                    default:
+                        break;
+                }
+
+
+
             }
 //                hModel.setDestinationsModelArrayList(dma);
 //            }
             guestDestinationsAdapter.notifyDataSetChanged();
+            guestDestinationsAdapterArch.notifyDataSetChanged();
+            guestDestinationsAdapterCulinary.notifyDataSetChanged();
+            guestDestinationsAdapterArt.notifyDataSetChanged();
+
+//            guestDestinationsAdapterLong.notifyDataSetChanged();
+
+//        } else {
+//            AppUtils.alertWithOk(this, message);
+//        }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void processDataNews() {
+
+        try {
+            // JSONArray dataJson = new JSONArray(data);
+            JSONArray dataJson = new JSONArray();
+
+            JSONObject dataObj = new JSONObject(
+                    "{" +
+                            "\"name\":" + "\"name\"" + "," +
+                            "\"postID\":" + "\"name\"" + "," +
+                            "\"image\":" + "\"https://www.dakwatuna.com/wp-content/uploads/2015/07/masjidil-haram.jpg\"" + "," +
+                            "\"bgimage\":" + "\"https://www.dakwatuna.com/wp-content/uploads/2015/07/masjidil-haram.jpg\"" + "," +
+                            "\"favouriteStatus\":" + 0 + "," +
+                            "\"id\":" + "1"+ "," +
+                            "\"isParent\":" + "0"+ "," +
+                            "\"child\":" + "0"+ "," +
+                            "\"email\":" + null +
+                            "}"
+            );
+
+//            for(int i=1; i<5; i++) {
+//                dataJson.put(dataObj);
+//            }
+
+            dataJson = dataNews;
+
+
+            guest_destinations_rv_long = (RecyclerView) view.findViewById(R.id.guest_destinations_rv_long);
+            destinationsArrayListLong = new ArrayList < > ();
+            linearLayoutManagerLong = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false);
+            guest_destinations_rv_long.setLayoutManager(linearLayoutManagerLong);
+            guestDestinationsAdapterLong = new GuestDestinationsLongAdapter(this.getActivity(), destinationsArrayListLong);
+            guest_destinations_rv_long.setAdapter(guestDestinationsAdapterLong);
+
+
+
+
+//        JSONObject jsonObject = new JSONObject(response);
+//        int status = jsonObject.getInt(AppStrings.ResponseData.status);
+//        String message = jsonObject.optString(AppStrings.ResponseData.message);
+//        if (status == 1) {
+
+            destinationsArrayListLong.clear();
+
+//            sm.setStringData(AppStrings.Session.api_homeDestinationsDev, response);
+//            JSONArray jsonArray = dataJson;
+//            for (int i = 0; i < jsonArray.length(); i++) {
+//                JSONObject jobj = jsonArray.getJSONObject(i);
+//                HomeDestinationsModel hModel = new HomeDestinationsModel();
+//                hModel.setMenuName(jobj.optString(menuName));
+            JSONArray jarry = dataJson;
+            ArrayList < DestinationsModel > dma = new ArrayList < > ();
+            dma.clear();
+            for (int j = 0; j < jarry.length(); j++) {
+                JSONObject job = jarry.getJSONObject(j);
+                DestinationsModel model = new DestinationsModel();
+                model.setMenuID(String.valueOf(j));
+                model.setMenuName("nama"+j);
+                model.setName(job.optString(name));
+                model.setPostID(job.optString("id"));
+                String img = "https://www.dakwatuna.com/wp-content/uploads/2015/07/masjidil-haram.jpg";
+                Log.d("LOG", "img >>>>>>>>> " + img);
+                model.setImage(job.optString(image));
+//                    model.setImage(img);
+                dma.add(model);
+
+                destinationsArrayListLong.add(model);
+            }
+//                hModel.setDestinationsModelArrayList(dma);
+//            }
+
+            guestDestinationsAdapterLong.notifyDataSetChanged();
+
 //        } else {
 //            AppUtils.alertWithOk(this, message);
 //        }
@@ -248,17 +426,32 @@ public class ItemThreeFragment extends Fragment
 //                params.put(AppStrings.ResponseData.memberID, sm.getStringData(AppStrings.Session.memberID));
 //                params.put(AppStrings.ResponseData.surName, sm.getStringData(AppStrings.Session.member_surName));
 //            }
-            response.getAsyncHttp("https://big-mom.glitch.me/destinations", params);
+            response.getAsyncHttp(RestApis.KarmaGroups.vacapediaDestinations, params);
 //        } else {
 //            AppUtils.alertForNoInternet(this);
 //        }
     }
 
 
+    // throws JSONException
+    private void getKarmaGroupsApiRequestNews() {
+//        if (AppUtils.isConnectingToInternet(this)) {
+        AsyncHttpResponse response = new AsyncHttpResponse(this, false);
+        RequestParams params = new RequestParams();
+//            if (sm.getBooleanData(AppStrings.Session.isKarmaMember)) {
+//                params.put(AppStrings.ResponseData.memberID, sm.getStringData(AppStrings.Session.memberID));
+//                params.put(AppStrings.ResponseData.surName, sm.getStringData(AppStrings.Session.member_surName));
+//            }
+        response.getAsyncHttp(RestApis.KarmaGroups.vacapediaNews, params);
+//        } else {
+//            AppUtils.alertForNoInternet(this);
+//        }
+    }
+
     @Override
     public void onAsyncHttpResponseGet(String response, String url) throws JSONException {
         Log.d("TAG", "onAsyncHttpResponseGet() called with: response = [" + response + "], url = [" + url + "]");
-        if (url.equals("https://big-mom.glitch.me/destinations")) {
+        if (url.equals(RestApis.KarmaGroups.vacapediaDestinations)) {
             // sm.setStringData(AppStrings.Session.api_getKarmaGroupsDev, response);
             Log.d("TAG", "x onAsyncHttpResponseGet() called with: response = [" + response + "], url = [" + url + "]");
 
@@ -267,6 +460,17 @@ public class ItemThreeFragment extends Fragment
             processData();
 
         }
+
+        if (url.equals(RestApis.KarmaGroups.vacapediaNews)) {
+            // sm.setStringData(AppStrings.Session.api_getKarmaGroupsDev, response);
+            Log.d("TAG", "x onAsyncHttpResponseGet() called with: response = [" + response + "], url = [" + url + "]");
+
+            dataNews = new JSONArray(response);
+
+            processDataNews();
+
+        }
+
     }
 
 //    @Override

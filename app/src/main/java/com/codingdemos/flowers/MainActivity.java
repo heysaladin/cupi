@@ -162,8 +162,8 @@ public class MainActivity extends AppCompatActivity {
         actionBar.show(); // or even hide the actionbar
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
+//        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+//        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
 
     }

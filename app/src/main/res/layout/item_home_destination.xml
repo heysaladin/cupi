@@ -5,7 +5,7 @@
     android:id="@+id/item_home_destination_parent_rl"
     android:layout_width="200dp"
     android:layout_height="160dp"
-    android:background="@color/white"
+    android:background="@color/trans"
     android:fillViewport="true"
     tools:ignore="MissingPrefix">
 
@@ -54,7 +54,7 @@
                 android:id="@+id/item_home_destination_name_tv"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/space_60dp"
-                android:background="#80000000"
+                android:background="@drawable/gradient_background"
                 android:paddingTop="@dimen/space_3dp"
                 android:paddingBottom="@dimen/space_3dp"
                 android:paddingLeft="@dimen/space_10dp"

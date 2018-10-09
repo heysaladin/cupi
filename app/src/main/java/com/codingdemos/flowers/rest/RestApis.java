@@ -1,4 +1,4 @@
-package com.karmagroups.rest;
+package com.codingdemos.flowers.rest;
 
 public class RestApis {
 
@@ -10,6 +10,10 @@ public class RestApis {
         /**
          * GET Request
          */
+
+        String vacapediaDestinations = "https://vacapedia.glitch.me/destinations";
+        String vacapediaNews = "https://vacapedia.glitch.me/news";
+
         String hotelReservation = "https://karmagroup-d66ca.appspot.com/app/hotel_reservation/";
         // String getOffers = BaseURl + "getOffers.php";
         String getOffers = BaseURl + "karmaOffers.php";

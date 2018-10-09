@@ -8,9 +8,12 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -19,11 +22,13 @@ public class SliderAdapter extends PagerAdapter {
     private Context context;
     private List<Integer> color;
     private List<String> colorName;
+    private List<String> colorImage;
 
-    public SliderAdapter(Context context, List<Integer> color, List<String> colorName) {
+    public SliderAdapter(Context context, List<Integer> color, List<String> colorName, List<String> colorImage) {
         this.context = context;
         this.color = color;
         this.colorName = colorName;
+        this.colorImage = colorImage;
     }
 
     @Override
@@ -47,6 +52,17 @@ public class SliderAdapter extends PagerAdapter {
 
         textView.setText(colorName.get(position));
         relativeLayout.setBackgroundColor(color.get(position));
+
+        ImageView imageView = (ImageView) view.findViewById(R.id.item_slide_image_iv);
+        Glide.with(context)
+                .load(
+                        colorImage.get(position)
+                        //model.getImage()
+//                        .replace(" ", "%20")
+                )
+//                .placeholder(R.drawable.hagia_sophia)
+//                .error(R.drawable.hagia_sophia)
+                .into(imageView);
 
 
         ViewPager viewPager = (ViewPager) container;
