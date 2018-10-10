@@ -156,16 +156,22 @@ public class ItemThreeFragment extends Fragment
         color.add(Color.BLACK);
         color.add(Color.BLACK);
         color.add(Color.BLACK);
+        color.add(Color.BLACK);
+        color.add(Color.BLACK);
 
         colorName = new ArrayList<>();
-        colorName.add("Hegia Sopia");
-        colorName.add("Masjid");
-        colorName.add("Arena");
+        colorName.add("Fun on Beach");
+        colorName.add("Amazing Tample");
+        colorName.add("Exotic Culinaries");
+        colorName.add("Wonderful Cultures");
+        colorName.add("Vacation Planning");
 
         colorImage = new ArrayList<>();
-        colorImage.add("https://karmaexperience.in/wp-content/themes/karmaexp/templates/images/karma-haveli-b.jpg");
-        colorImage.add("https://karmaexperience.in/wp-content/uploads/2017/08/banner-karma-haatimahal.jpg");
-        colorImage.add("https://karmaexperience.in/wp-content/themes/karmaexp/templates/images/karma-exotica.jpg");
+        colorImage.add("http://www.bravotv.com/sites/nbcubravotv/files/field_blog_image/2017/05/most-wanted-beach-must-haves-promote.jpg");
+        colorImage.add("https://image.freepik.com/free-photo/pura-ulun-danu-bratan-temple-bali-indonesia_30824-288.jpg");
+        colorImage.add("https://s20642.pcdn.co/wp-content/uploads/2016/07/Bumbu-Bali-Nusa.jpg");
+        colorImage.add("https://statik.tempo.co/data/2015/12/30/id_468670/468670_620.jpg");
+        colorImage.add("https://s.yimg.com/ny/api/res/1.2/NmvEqUC_SWc12zxYi6GwsQ--~A/YXBwaWQ9aGlnaGxhbmRlcjtzbT0xO3c9ODAwO2lsPXBsYW5l/http://41.media.tumblr.com/535416e4be3cca14974d7d5a6d9d65df/tumblr_inline_nz6mhnXO6r1tcrvl6_1280.jpg");
 
         viewPager.setAdapter(new SliderAdapter(this.getContext(), color, colorName, colorImage));
         indicator.setupWithViewPager(viewPager, true);

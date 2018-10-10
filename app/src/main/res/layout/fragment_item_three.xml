@@ -104,7 +104,7 @@
         android:padding="@dimen/space_10dp"
         android:layout_marginTop="@dimen/space_0dp"
         android:layout_marginLeft="@dimen/space_8dp"
-        android:text="Test Exotic Culinary"
+        android:text="Taste The Exotic Culinary"
         android:textColor="#333"
         android:textSize="18dp" />
 
