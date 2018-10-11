@@ -211,12 +211,12 @@ public class ItemThreeFragment extends Fragment
                 buffer.add(listTarget.get(numbers.get(i)));
             }
             Log.d("LOG", "buffer >>>>>>>>> " + buffer);
-            listResult = buffer;
+            return listResult = buffer;
         } else {
-            listResult = listTarget;
+            return listResult = listTarget;
         }
 
-        return listResult;
+        // return listResult;
     };
 
     private void processData() {
@@ -246,41 +246,33 @@ public class ItemThreeFragment extends Fragment
             dataJson = dataDestinations;
 
 
-//            destinationsArrayList = new ArrayList < > ();
-//            destinationsArrayListArch = new ArrayList < > ();
-//            destinationsArrayListCulinary = new ArrayList < > ();
-//            destinationsArrayListArt = new ArrayList < > ();
+            destinationsArrayListBuffer = new ArrayList < > ();
+            destinationsArrayListArchBuffer = new ArrayList < > ();
+            destinationsArrayListCulinaryBuffer = new ArrayList < > ();
+            destinationsArrayListArtBuffer = new ArrayList < > ();
 
             guest_destinations_rv = (RecyclerView) view.findViewById(R.id.guest_destinations_rv);
             destinationsArrayList = new ArrayList < > ();
             linearLayoutManager = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false);
             guest_destinations_rv.setLayoutManager(linearLayoutManager);
-            guestDestinationsAdapter = new GuestDestinationsAdapter(this.getActivity(), destinationsArrayList);
-            guest_destinations_rv.setAdapter(guestDestinationsAdapter);
 
 
             guest_destinations_rv_architecture = (RecyclerView) view.findViewById(R.id.guest_destinations_rv_architecture);
             destinationsArrayListArch = new ArrayList < > ();
             linearLayoutManagerArch = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false);
             guest_destinations_rv_architecture.setLayoutManager(linearLayoutManagerArch);
-            guestDestinationsAdapterArch = new GuestDestinationsAdapter(this.getActivity(), destinationsArrayListArch);
-            guest_destinations_rv_architecture.setAdapter(guestDestinationsAdapterArch);
 
 
             guest_destinations_rv_culinary = (RecyclerView) view.findViewById(R.id.guest_destinations_rv_culinary);
             destinationsArrayListCulinary = new ArrayList < > ();
             linearLayoutManagerCulinary = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false);
             guest_destinations_rv_culinary.setLayoutManager(linearLayoutManagerCulinary);
-            guestDestinationsAdapterCulinary = new GuestDestinationsAdapter(this.getActivity(), destinationsArrayListCulinary);
-            guest_destinations_rv_culinary.setAdapter(guestDestinationsAdapterCulinary);
 
 
             guest_destinations_rv_art = (RecyclerView) view.findViewById(R.id.guest_destinations_rv_art);
             destinationsArrayListArt = new ArrayList < > ();
             linearLayoutManagerArt = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false);
             guest_destinations_rv_art.setLayoutManager(linearLayoutManagerArt);
-            guestDestinationsAdapterArt = new GuestDestinationsAdapter(this.getActivity(), destinationsArrayListArt);
-            guest_destinations_rv_art.setAdapter(guestDestinationsAdapterArt);
 
 
 
@@ -326,7 +318,6 @@ public class ItemThreeFragment extends Fragment
                 Log.d("LOG", "img >>>>>>>>> " + img);
                 model.setImage(job.optString(image));
 //                    model.setImage(img);
-                dma.add(model);
 //                if (job.optString("category").equals("1")) {
 //                destinationsArrayList.add(model);
 //                destinationsArrayListArch.add(model);
@@ -342,23 +333,29 @@ public class ItemThreeFragment extends Fragment
 
                 switch (Integer.parseInt(job.optString("category"))) {
                     case 1:
+                        dma.add(model);
                         destinationsArrayList.add(model);
-//                        if (j == jarry.length()-1) {
-//                            destinationsArrayList = createRandomList(destinationsArrayListBuffer);
+//                        if (destinationsArrayList.size() == 7) {
+//                            destinationsArrayList = createRandomList(destinationsArrayList);
 //                        }
                         break;
                     case 2:
+                        dma.add(model);
                         destinationsArrayListArch.add(model);
                         break;
                     case 3:
+                        dma.add(model);
                         destinationsArrayListCulinary.add(model);
                         break;
                     case 4:
+                        dma.add(model);
                         destinationsArrayListArt.add(model);
                         break;
                     default:
+                        dma.add(model);
                         break;
                 }
+
 
 
 //                if (j == jarry.length()-1){
@@ -376,6 +373,32 @@ public class ItemThreeFragment extends Fragment
 //            }
 
 
+
+//            Log.d("LOG", "destinationsArrayList before >>>>>>>>> " + destinationsArrayList);
+//            destinationsArrayListBuffer = createRandomList(destinationsArrayList);
+//            Log.d("LOG", "destinationsArrayList after >>>>>>>>> " + destinationsArrayList);
+
+
+            destinationsArrayListBuffer = createRandomList(destinationsArrayList);
+            destinationsArrayListArchBuffer = createRandomList(destinationsArrayListArch);
+            destinationsArrayListCulinaryBuffer = createRandomList(destinationsArrayListCulinary);
+            destinationsArrayListArtBuffer = createRandomList(destinationsArrayListArt);
+
+
+            guestDestinationsAdapter = new GuestDestinationsAdapter(this.getActivity(), destinationsArrayListBuffer);
+            guest_destinations_rv.setAdapter(guestDestinationsAdapter);
+
+
+            guestDestinationsAdapterArch = new GuestDestinationsAdapter(this.getActivity(), destinationsArrayListArchBuffer);
+            guest_destinations_rv_architecture.setAdapter(guestDestinationsAdapterArch);
+
+
+            guestDestinationsAdapterCulinary = new GuestDestinationsAdapter(this.getActivity(), destinationsArrayListCulinaryBuffer);
+            guest_destinations_rv_culinary.setAdapter(guestDestinationsAdapterCulinary);
+
+
+            guestDestinationsAdapterArt = new GuestDestinationsAdapter(this.getActivity(), destinationsArrayListArtBuffer);
+            guest_destinations_rv_art.setAdapter(guestDestinationsAdapterArt);
 
 
             guestDestinationsAdapter.notifyDataSetChanged();
