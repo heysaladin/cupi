@@ -8,17 +8,16 @@
   tools:context="com.codingdemos.flowers.DetailActivity">
 
   <android.support.v7.widget.Toolbar
-    android:id="@+id/toolbar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?attr/colorPrimary"
-      app:titleTextColor="@color/colorAccent"
-      android:theme="?attr/actionBarTheme"
-    android:minHeight="?attr/actionBarSize"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-    app:theme="@style/ThemeOverlay.AppCompat.Dark"
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?attr/colorPrimary"
       android:fitsSystemWindows="true"
-      />
+      android:minHeight="?attr/actionBarSize"
+      android:theme="?attr/actionBarTheme"
+      app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+      app:theme="@style/ThemeOverlay.AppCompat.Dark"
+      app:titleTextColor="#fff" />
 
   <ScrollView
       android:layout_width="match_parent"
@@ -31,7 +30,7 @@
 
   <ImageView
     android:id="@+id/ivImage"
-    android:scaleType="fitXY"
+    android:scaleType="centerCrop"
     android:layout_width="match_parent"
     android:layout_height="300dp"
     android:layout_gravity="center"

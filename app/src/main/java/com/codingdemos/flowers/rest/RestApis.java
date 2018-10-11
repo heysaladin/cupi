@@ -11,8 +11,11 @@ public class RestApis {
          * GET Request
          */
 
-        String vacapediaDestinations = "https://vacapedia.glitch.me/destinations";
-        String vacapediaNews = "https://vacapedia.glitch.me/news";
+        // String vacapediaDestinations = "https://vacapedia.glitch.me/destinations";
+        // String vacapediaNews = "https://vacapedia.glitch.me/news";
+
+        String vacapediaDestinations = "https://geonknode.herokuapp.com/destinations";
+        String vacapediaNews = "https://geonknode.herokuapp.com/newses";
 
         String hotelReservation = "https://karmagroup-d66ca.appspot.com/app/hotel_reservation/";
         // String getOffers = BaseURl + "getOffers.php";

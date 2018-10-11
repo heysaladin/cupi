@@ -20,12 +20,14 @@
 
 package com.codingdemos.flowers.fragments;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -75,8 +77,8 @@ public class ItemOneFragment extends Fragment {
 
         // ViewPagerAdapter adapter = new ViewPagerAdapter(((MainActivity) getActivity()).getSupportFragmentManager());
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new FragmentTwo(), "FRAG2");
-         adapter.addFragment(new FragmentOne(), "FRAG1");
+        adapter.addFragment(new FragmentTwo(), "Destinations");
+         adapter.addFragment(new FragmentOne(), "Edit Data");
 //        adapter.addFragment(com.codingdemos.flowers.fragments.FragmentOne.newInstance(), "FRAG1");
 //        adapter.addFragment(com.codingdemos.flowers.fragments.FragmentTwo.newInstance(), "FRAG2");
         viewPager.setAdapter(adapter);
@@ -104,6 +106,9 @@ public class ItemOneFragment extends Fragment {
 //        transaction.replace(R.id.pager, fragment);
 //        transaction.commit();
 
+
+//        Drawable drawable = ContextCompat.getDrawable(((MainActivity)getActivity()),R.drawable.ic_account_box_black_24dp);
+//        ((MainActivity)getActivity()).getActionBar().setOverflowIcon(drawable);
 
 
 

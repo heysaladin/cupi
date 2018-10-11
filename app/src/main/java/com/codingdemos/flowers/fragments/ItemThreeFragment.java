@@ -45,7 +45,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -117,6 +120,8 @@ public class ItemThreeFragment extends Fragment
     private List<String> colorName;
     private List<String> colorImage;
 
+    private ArrayList <DestinationsModel> destinationsArrayListBuffer, destinationsArrayListArchBuffer, destinationsArrayListCulinaryBuffer, destinationsArrayListArtBuffer;
+
     private RecyclerView guest_destinations_rv, guest_destinations_rv_architecture,guest_destinations_rv_culinary,guest_destinations_rv_art;
     private LinearLayoutManager linearLayoutManager, linearLayoutManagerArch, linearLayoutManagerCulinary, linearLayoutManagerArt;
     private ArrayList <DestinationsModel> destinationsArrayList, destinationsArrayListArch, destinationsArrayListCulinary, destinationsArrayListArt;
@@ -186,6 +191,34 @@ public class ItemThreeFragment extends Fragment
     }
 
 
+    private ArrayList<DestinationsModel> createRandomList(ArrayList<DestinationsModel> listTarget) {
+        Log.d("LOG", "listTarget >>>>>>>>> " + listTarget);
+        ArrayList<DestinationsModel> listResult;
+        List<Integer> numbers=new ArrayList<>();
+        for(int i = 0; i < listTarget.size(); i++)
+        {
+            numbers.add(i);
+        }
+        Collections.shuffle(numbers);
+        Log.d("LOG", "createRandomList numbers >>>>>>>>> " + numbers);
+
+        int size = 7;
+        ArrayList<DestinationsModel> buffer = new ArrayList<DestinationsModel>();
+
+        if (listTarget.size() >= size) {
+            for (int i = 0; i < size; i++) {
+                Log.d("LOG", "createRandomList hashSet.get(i) >>>>>>>>> " + numbers.get(i));
+                buffer.add(listTarget.get(numbers.get(i)));
+            }
+            Log.d("LOG", "buffer >>>>>>>>> " + buffer);
+            listResult = buffer;
+        } else {
+            listResult = listTarget;
+        }
+
+        return listResult;
+    };
+
     private void processData() {
 
         try {
@@ -211,6 +244,12 @@ public class ItemThreeFragment extends Fragment
 //            }
 
             dataJson = dataDestinations;
+
+
+//            destinationsArrayList = new ArrayList < > ();
+//            destinationsArrayListArch = new ArrayList < > ();
+//            destinationsArrayListCulinary = new ArrayList < > ();
+//            destinationsArrayListArt = new ArrayList < > ();
 
             guest_destinations_rv = (RecyclerView) view.findViewById(R.id.guest_destinations_rv);
             destinationsArrayList = new ArrayList < > ();
@@ -304,6 +343,9 @@ public class ItemThreeFragment extends Fragment
                 switch (Integer.parseInt(job.optString("category"))) {
                     case 1:
                         destinationsArrayList.add(model);
+//                        if (j == jarry.length()-1) {
+//                            destinationsArrayList = createRandomList(destinationsArrayListBuffer);
+//                        }
                         break;
                     case 2:
                         destinationsArrayListArch.add(model);
@@ -319,10 +361,23 @@ public class ItemThreeFragment extends Fragment
                 }
 
 
+//                if (j == jarry.length()-1){
+//
+//                    destinationsArrayList = createRandomList(destinationsArrayListBuffer);
+//                    destinationsArrayListArch = createRandomList(destinationsArrayListArchBuffer);
+//                    destinationsArrayListCulinary = createRandomList(destinationsArrayListCulinaryBuffer);
+//                    destinationsArrayListArt = createRandomList(destinationsArrayListArtBuffer);
+//
+//                }
+
 
             }
 //                hModel.setDestinationsModelArrayList(dma);
 //            }
+
+
+
+
             guestDestinationsAdapter.notifyDataSetChanged();
             guestDestinationsAdapterArch.notifyDataSetChanged();
             guestDestinationsAdapterCulinary.notifyDataSetChanged();
@@ -333,6 +388,8 @@ public class ItemThreeFragment extends Fragment
 //        } else {
 //            AppUtils.alertWithOk(this, message);
 //        }
+
+
 
 
         } catch (JSONException e) {
@@ -364,8 +421,44 @@ public class ItemThreeFragment extends Fragment
 //                dataJson.put(dataObj);
 //            }
 
-            dataJson = dataNews;
+            // dataJson = dataNews;
 
+//            HashSet<Integer> hashSet=new HashSet<>();
+            List<Integer> numbers=new ArrayList<>();
+//            Random random = new Random();
+//now add random number to this set
+//            while(true)
+//            {
+//                hashSet.add(random.nextInt(dataNews.length()));
+//                if(hashSet.size()==dataNews.length())
+//                    break;
+//            }
+
+            //define ArrayList to hold Integer objects
+//            ArrayList numbers = new ArrayList();
+
+            for(int i = 0; i < dataNews.length(); i++)
+            {
+                numbers.add(i);
+            }
+            Collections.shuffle(numbers);
+            Log.d("LOG", "numbers >>>>>>>>> " + numbers);
+
+            int size = 5;
+            JSONArray buffer = new JSONArray();
+
+            if (dataNews.length() == size) {
+                for (int i = 0; i < size; i++) {
+                    Log.d("LOG", "hashSet.get(i) >>>>>>>>> " + numbers.get(i));
+                    buffer.put(dataNews.get(numbers.get(i)));
+                }
+            }
+
+            if (dataNews.length() == size && buffer.length() == size) {
+                dataJson = buffer;
+            } else {
+                dataJson = dataNews;
+            }
 
             guest_destinations_rv_long = (RecyclerView) view.findViewById(R.id.guest_destinations_rv_long);
             destinationsArrayListLong = new ArrayList < > ();
