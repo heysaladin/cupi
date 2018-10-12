@@ -20,10 +20,12 @@
 
 package com.codingdemos.flowers.fragments;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -34,6 +36,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.codingdemos.flowers.DestinationsModel;
 import com.codingdemos.flowers.GuestDestinationsAdapter;
@@ -195,6 +198,45 @@ public class ItemThreeFragment extends Fragment
 
         return view;
     }
+
+
+    CoordinatorLayout.Behavior behavior;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        if(behavior != null)
+            return;
+
+        FrameLayout layout =(FrameLayout) getActivity().findViewById(R.id.frame_layout);
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) layout.getLayoutParams();
+
+        behavior = params.getBehavior();
+        params.setBehavior(null);
+
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if(behavior == null)
+            return;
+
+        FrameLayout layout =(FrameLayout) getActivity().findViewById(R.id.frame_layout);
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) layout.getLayoutParams();
+
+        params.setBehavior(behavior);
+
+        layout.setLayoutParams(params);
+
+        behavior = null;
+    }
+
+
+
+
+
 
 
     private ArrayList<DestinationsModel> createRandomList(ArrayList<DestinationsModel> listTarget) {
@@ -625,6 +667,34 @@ public class ItemThreeFragment extends Fragment
             }
         }
     }
+
+    private int fragment = 0;
+    public int getFragment() {
+        return fragment;
+    }
+    public void setFragment(int fragment) {
+        this.fragment = fragment;
+    }
+
+    public void onResume(){
+        super.onResume();
+        ((MainActivity) getActivity()).setActionBarTitle("Vacapedia");
+        ((MainActivity) getActivity()).setFragment(1);
+        this.setFragment(1);
+    }
+
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if (visible) {
+            if(this.getFragment() != 0) {
+                ((MainActivity) getActivity()).setActionBarTitle("Vacapedia");
+                ((MainActivity) getActivity()).setFragment(1);
+            }
+            Log.d("LOG", "Vacapedia");
+        }
+    }
+
 
 
 }

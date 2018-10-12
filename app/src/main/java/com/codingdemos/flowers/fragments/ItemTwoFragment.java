@@ -22,10 +22,12 @@ package com.codingdemos.flowers.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.codingdemos.flowers.MainActivity;
 import com.codingdemos.flowers.R;
 
 public class ItemTwoFragment extends Fragment {
@@ -44,4 +46,19 @@ public class ItemTwoFragment extends Fragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_item_two, container, false);
     }
+
+    public void onResume(){
+        super.onResume();
+        ((MainActivity) getActivity()).setActionBarTitle("Account");
+    }
+
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if (visible) {
+            ((MainActivity) getActivity()).setActionBarTitle("Account");
+            Log.d("LOG", "one");
+        }
+    }
+
 }

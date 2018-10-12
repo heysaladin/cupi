@@ -29,6 +29,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,6 +72,16 @@ public class ItemOneFragment extends Fragment {
         */
 
          view = inflater.inflate(R.layout.fragment_item_one, container, false);
+
+
+//        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+//        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
+//        ((MainActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        ((MainActivity)getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+
+//        ((MainActivity)getActivity()).setActionBar(t);
+
+//        toolbar.setVisibility(View.GONE);
 
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.pager);
 
@@ -153,9 +164,18 @@ public class ItemOneFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onResume() {
+    public void onResume(){
         super.onResume();
-
+        ((MainActivity) getActivity()).setActionBarTitle("Destinations");
     }
+
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if (visible) {
+            ((MainActivity) getActivity()).setActionBarTitle("Destinations");
+            Log.d("LOG", "one");
+        }
+    }
+
 }

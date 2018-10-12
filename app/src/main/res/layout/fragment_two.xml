@@ -27,6 +27,8 @@
     tools:context="com.codingdemos.flowers.MainActivity">
 
     <android.support.v7.widget.RecyclerView
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

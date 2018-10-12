@@ -185,7 +185,7 @@ public class FragmentTwo extends Fragment {
     }
     public void onResume(){
         super.onResume();
-        ((MainActivity) getActivity()).setActionBarTitle("two title");
+        ((MainActivity) getActivity()).setActionBarTitle("Destinations");
         ((MainActivity) getActivity()).setFragment(1);
         this.setFragment(1);
         Log.d("LOG", "RESUME two");
@@ -227,7 +227,7 @@ public class FragmentTwo extends Fragment {
         super.setMenuVisibility(visible);
         if (visible) {
             if(this.getFragment() != 0) {
-                ((MainActivity) getActivity()).setActionBarTitle("two title");
+                ((MainActivity) getActivity()).setActionBarTitle("Destinations");
                 ((MainActivity) getActivity()).setFragment(1);
             }
             Log.d("LOG", "two");

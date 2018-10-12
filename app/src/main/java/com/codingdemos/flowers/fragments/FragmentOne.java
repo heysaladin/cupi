@@ -191,7 +191,7 @@ public class FragmentOne extends Fragment {
     public void setMenuVisibility(final boolean visible) {
         super.setMenuVisibility(visible);
         if (visible) {
-            ((MainActivity) getActivity()).setActionBarTitle("one title");
+            ((MainActivity) getActivity()).setActionBarTitle("Edit Data");
 //            ((MainActivity) getActivity()).setFragment(2);
             Log.d("LOG", "one");
         }

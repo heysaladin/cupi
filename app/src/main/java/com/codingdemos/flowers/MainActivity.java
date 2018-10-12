@@ -1,5 +1,7 @@
 package com.codingdemos.flowers;
 
+import android.app.Activity;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
@@ -16,6 +18,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.codingdemos.flowers.fragments.FragmentOne;
 import com.codingdemos.flowers.fragments.FragmentTwo;
@@ -60,6 +65,32 @@ public class MainActivity extends AppCompatActivity {
             // Sets the Toolbar to act as the ActionBar for this Activity window.
             // Make sure the toolbar exists in the activity and is not null
             setSupportActionBar(toolbar);
+
+
+            // Membaca view Toolbar yang ada di XML dan mengaturnya sebagai ActionBar
+//            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//            setSupportActionBar(toolbar);
+
+// Menampilkan ikon di Toolbar
+//            getSupportActionBar().setDisplayShowHomeEnabled(true);
+//            getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+//            getSupportActionBar().setDisplayUseLogoEnabled(true);
+
+// Menghapus title default
+//            getSupportActionBar().setDisplayShowTitleEnabled(false);
+// Mengambil akses TextView yang ada di dalam Toolbar
+//            TextView mTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//                Window w = getWindow(); // di dalam onCreate
+//                w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+//            }
+
+
+
+
+
+
 
 //            ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 //            ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -122,6 +153,10 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+
+
+
+
 
     public int getFragment() {
         return fragment;
