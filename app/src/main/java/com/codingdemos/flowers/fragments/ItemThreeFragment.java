@@ -29,6 +29,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,7 @@ import android.view.ViewGroup;
 import com.codingdemos.flowers.DestinationsModel;
 import com.codingdemos.flowers.GuestDestinationsAdapter;
 import com.codingdemos.flowers.GuestDestinationsLongAdapter;
+import com.codingdemos.flowers.MainActivity;
 import com.codingdemos.flowers.R;
 import com.codingdemos.flowers.SliderAdapter;
 
@@ -147,6 +149,10 @@ public class ItemThreeFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_item_three, container, false);
+
+
+
+
 
 //        try {
             getKarmaGroupsApiRequest();
