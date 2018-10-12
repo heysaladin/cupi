@@ -12,16 +12,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
-/**
- * Created by abdalla on 1/12/18.
- */
-
-public class MyAdapter extends RecyclerView.Adapter<FlowerViewHolder> {
+public class MyAdapter extends RecyclerView.Adapter < FlowerViewHolder > {
 
     private Context mContext;
-    private List<DestinationData> mFlowerList;
+    private List < DestinationData > mFlowerList;
 
-    public MyAdapter(Context mContext, List<DestinationData> mFlowerList) {
+    public MyAdapter(Context mContext, List < DestinationData > mFlowerList) {
         this.mContext = mContext;
         this.mFlowerList = mFlowerList;
     }

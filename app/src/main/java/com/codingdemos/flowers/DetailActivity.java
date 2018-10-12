@@ -29,7 +29,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        
+
         getIntentData();
 
         mToolbar = findViewById(R.id.toolbar);
@@ -38,7 +38,6 @@ public class DetailActivity extends AppCompatActivity {
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // finish();
                 onBackPressed();
             }
         });
@@ -49,21 +48,15 @@ public class DetailActivity extends AppCompatActivity {
             mToolbar.setTitle(mBundle.getString("Title"));
             if (imageUrl != null) {
                 Glide.with(this)
-                        .load(
-                                imageUrl
-                                //model.getImage()
-//                        .replace(" ", "%20")
-                        )
-//                .placeholder(R.drawable.hagia_sophia)
-//                .error(R.drawable.hagia_sophia)
+                        .load(imageUrl)
                         .into(mFlower);
             } else {
                 mFlower.setImageResource(mBundle.getInt("Image"));
             }
             mDescription.setText(mBundle.getString("Description"));
 
-        Drawable drawable = ContextCompat.getDrawable(this,R.drawable.ic_account_box_black_24dp);
-        mToolbar.setOverflowIcon(drawable);
+            Drawable drawable = ContextCompat.getDrawable(this, R.drawable.ic_account_box_black_24dp);
+            mToolbar.setOverflowIcon(drawable);
 
         }
     }

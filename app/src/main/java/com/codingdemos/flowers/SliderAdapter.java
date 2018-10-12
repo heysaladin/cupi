@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,11 +19,11 @@ import java.util.List;
 public class SliderAdapter extends PagerAdapter {
 
     private Context context;
-    private List<Integer> color;
-    private List<String> colorName;
-    private List<String> colorImage;
+    private List < Integer > color;
+    private List < String > colorName;
+    private List < String > colorImage;
 
-    public SliderAdapter(Context context, List<Integer> color, List<String> colorName, List<String> colorImage) {
+    public SliderAdapter(Context context, List < Integer > color, List < String > colorName, List < String > colorImage) {
         this.context = context;
         this.color = color;
         this.colorName = colorName;
@@ -55,15 +54,8 @@ public class SliderAdapter extends PagerAdapter {
 
         ImageView imageView = (ImageView) view.findViewById(R.id.item_slide_image_iv);
         Glide.with(context)
-                .load(
-                        colorImage.get(position)
-                        //model.getImage()
-//                        .replace(" ", "%20")
-                )
-//                .placeholder(R.drawable.hagia_sophia)
-//                .error(R.drawable.hagia_sophia)
+                .load(colorImage.get(position))
                 .into(imageView);
-
 
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view, 0);

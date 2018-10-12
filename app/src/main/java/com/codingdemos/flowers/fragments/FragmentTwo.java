@@ -1,6 +1,5 @@
 package com.codingdemos.flowers.fragments;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -38,11 +38,9 @@ public class FragmentTwo extends Fragment {
         this.fragment = fragment;
     }
 
-//    private OnFragmentInteractionListener mListener;
-
     Toolbar mToolbar;
     RecyclerView mRecyclerView;
-    List<DestinationData> mFlowerList;
+    List < DestinationData > mFlowerList;
     DestinationData mDestinationData;
 
     public FragmentTwo() {
@@ -52,34 +50,23 @@ public class FragmentTwo extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         Log.d("LOG", "onCreate two");
-
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d("LOG", "onCreateView two");
+
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_two, container, false);
-
-
-        // mToolbar = view.findViewById(R.id.toolbar);
-        // mToolbar.setTitle(getResources().getString(R.string.app_name));
-
-        // getActivity().setTitle("two title");
-
-//        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-//        toolbar.setTitle("Two");
-
+        View view = inflater.inflate(R.layout.fragment_two, container, false);
 
         mRecyclerView = view.findViewById(R.id.recyclerview);
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(view.getContext(), 2);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
 
-        mFlowerList = new ArrayList<>();
+        mFlowerList = new ArrayList < > ();
         mDestinationData = new DestinationData("Masjidil Haram", "Masjidil Haram, Masjid al-Haram atau al-Masjid al-Haram (bahasa Arab: المسجد الحرام, pengucapan bahasa Arab: [ʔælmæsʤɪd ælħaram]) adalah sebuah masjid yang berlokasi di pusat kota Mekkah[1] yang dipandang sebagai tempat tersuci bagi umat Islam. Masjid ini juga merupakan tujuan utama dalam ibadah haji. Masjid ini dibangun mengelilingi Ka'bah yang menjadi arah kiblat bagi umat Islam dalam mengerjakan ibadah Salat. Masjid ini juga merupakan masjid terbesar di dunia, diikuti oleh Masjid Nabawi di Madinah al-Munawarah sebagai masjid terbesar kedua di dunia serta merupakan dua masjid suci utama bagi umat Muslim. Luas keseluruhan masjid ini mencapai 356.800 m2 (3.841.000 sq ft)dengan kemampuan menampung jamaah sebanyak 820.000 jamaah ketika musim Haji dan mampu bertambah menjadi dua juta jamaah ketika salat Id.\n" +
                 "\n" +
                 "Kepentingan masjid ini sangat diperhitungkan dalam agama Islam, karena selain menjadi kiblat, masjid ini juga menjadi tempat bagi para jamaah Haji melakukan beberapa ritual wajib, yaitu tawaf, dan sa'i.\n" +
@@ -140,99 +127,75 @@ public class FragmentTwo extends Fragment {
         mDestinationData = new DestinationData("Colosseum", "Kolosseum adalah sebuah peninggalan bersejarah berupa arena gladiator, dibangun oleh Vespasian. Tempat pertunjukan yang besar berbentuk elips yang disebut amfiteater atau dengan nama aslinya Flavian Amphitheatre, yang termasuk salah satu dari Enam Puluh Sembilan Keajaiban Dunia Pertengahan. Situs ini terletak di kota kecil di Italia, Roma, yang didirikan oleh Wali kota Vespasian pada masa Domitianus dan diselesaikan oleh anaknya Titus[1], dan menjadi salah satu karya terbesar dari arsitektur Kerajaan Romawi yang pernah dibangun. Kolosseum dirancang untuk menampung 50.000 orang penonton.",
                 R.drawable.colosseum);
         mFlowerList.add(mDestinationData);
-        /*
-        mDestinationData = new DestinationData("Rose", getString(R.string.description_flower_rose),
-                R.drawable.rose);
-        mFlowerList.add(mDestinationData);
-        mDestinationData = new DestinationData("Carnation", getString(R.string.description_flower_carnation),
-                R.drawable.carnation);
-        mFlowerList.add(mDestinationData);
-        mDestinationData = new DestinationData("Tulip", getString(R.string.description_flower_tulip),
-                R.drawable.tulip);
-        mFlowerList.add(mDestinationData);
-        mDestinationData = new DestinationData("Daisy", getString(R.string.description_flower_daisy),
-                R.drawable.daisy);
-        mFlowerList.add(mDestinationData);
-        mDestinationData = new DestinationData("Sunflower", getString(R.string.description_flower_sunflower),
-                R.drawable.sunflower);
-        mFlowerList.add(mDestinationData);
-        mDestinationData = new DestinationData("Daffodil", getString(R.string.description_flower_daffodil),
-                R.drawable.daffodil);
-        mFlowerList.add(mDestinationData);
-        mDestinationData = new DestinationData("Gerbera", getString(R.string.description_flower_gerbera),
-                R.drawable.gerbera);
-        mFlowerList.add(mDestinationData);
-        mDestinationData = new DestinationData("Orchid", getString(R.string.description_flower_orchid),
-                R.drawable.orchid);
-        mFlowerList.add(mDestinationData);
-        mDestinationData = new DestinationData("Iris", getString(R.string.description_flower_iris),
-                R.drawable.lris);
-        mFlowerList.add(mDestinationData);
-        mDestinationData = new DestinationData("Lilac", getString(R.string.description_flower_lilac),
-                R.drawable.lilac);
-        mFlowerList.add(mDestinationData);
-        */
+  /*
+  mDestinationData = new DestinationData("Rose", getString(R.string.description_flower_rose),
+          R.drawable.rose);
+  mFlowerList.add(mDestinationData);
+  mDestinationData = new DestinationData("Carnation", getString(R.string.description_flower_carnation),
+          R.drawable.carnation);
+  mFlowerList.add(mDestinationData);
+  mDestinationData = new DestinationData("Tulip", getString(R.string.description_flower_tulip),
+          R.drawable.tulip);
+  mFlowerList.add(mDestinationData);
+  mDestinationData = new DestinationData("Daisy", getString(R.string.description_flower_daisy),
+          R.drawable.daisy);
+  mFlowerList.add(mDestinationData);
+  mDestinationData = new DestinationData("Sunflower", getString(R.string.description_flower_sunflower),
+          R.drawable.sunflower);
+  mFlowerList.add(mDestinationData);
+  mDestinationData = new DestinationData("Daffodil", getString(R.string.description_flower_daffodil),
+          R.drawable.daffodil);
+  mFlowerList.add(mDestinationData);
+  mDestinationData = new DestinationData("Gerbera", getString(R.string.description_flower_gerbera),
+          R.drawable.gerbera);
+  mFlowerList.add(mDestinationData);
+  mDestinationData = new DestinationData("Orchid", getString(R.string.description_flower_orchid),
+          R.drawable.orchid);
+  mFlowerList.add(mDestinationData);
+  mDestinationData = new DestinationData("Iris", getString(R.string.description_flower_iris),
+          R.drawable.lris);
+  mFlowerList.add(mDestinationData);
+  mDestinationData = new DestinationData("Lilac", getString(R.string.description_flower_lilac),
+          R.drawable.lilac);
+  mFlowerList.add(mDestinationData);
+  */
 
         MyAdapter myAdapter = new MyAdapter(view.getContext(), mFlowerList);
         mRecyclerView.setAdapter(myAdapter);
 
-
-//        getActivity().setTitle("Team B");
-
         return view;
-
-
     }
-    public void onResume(){
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle clicks
+        return true;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.menu_one, menu);
+    }
+
+    public void onResume() {
         super.onResume();
         ((MainActivity) getActivity()).setActionBarTitle("Destinations");
         ((MainActivity) getActivity()).setFragment(1);
         this.setFragment(1);
         Log.d("LOG", "RESUME two");
-
-
-
-
-        // Set title bar
-//        ((MainActivity) getActivity()).setActionBarTitle("one title");
-//        ((MainActivity) getActivity()).getSupportActionBar().setTitle("one title");
-
     }
-
-//    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//        try {
-//            mListener = (OnFragmentInteractionListener) activity;
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException(activity.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
-//
-//    public interface OnFragmentInteractionListener {
-//        public void onFragmentInteraction(String title);
-//    }
-
-
 
     @Override
     public void setMenuVisibility(final boolean visible) {
         super.setMenuVisibility(visible);
         if (visible) {
-            if(this.getFragment() != 0) {
+            if (this.getFragment() != 0) {
                 ((MainActivity) getActivity()).setActionBarTitle("Destinations");
                 ((MainActivity) getActivity()).setFragment(1);
             }
             Log.d("LOG", "two");
-
-
         }
     }
 

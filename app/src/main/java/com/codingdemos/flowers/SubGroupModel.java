@@ -2,7 +2,7 @@ package com.codingdemos.flowers;
 
 public class SubGroupModel {
 
-    private String menuID, menuName, name, postID,image,bgimage, id, isParent, child;
+    private String menuID, menuName, name, postID, image, bgimage, id, isParent, child;
     private int favouriteStatus;
 
     public SubGroupModel() {}

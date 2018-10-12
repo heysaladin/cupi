@@ -1,47 +1,35 @@
 package com.codingdemos.flowers.fragments;
 
-import android.app.Activity;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.codingdemos.flowers.DestinationData;
 import com.codingdemos.flowers.MainActivity;
-import com.codingdemos.flowers.MyAdapter;
 import com.codingdemos.flowers.MyLineAdapter;
 import com.codingdemos.flowers.R;
-import com.codingdemos.flowers.SliderAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class FragmentOne extends Fragment {
 
     RecyclerView mRecyclerView;
-    List<DestinationData> mFlowerList;
+    List < DestinationData > mFlowerList;
     DestinationData mDestinationData;
-
 
     public static FragmentOne newInstance() {
         FragmentOne fragment = new FragmentOne();
         return fragment;
     }
-
-//    private OnFragmentInteractionListener mListener;
-
 
     public FragmentOne() {
         // Required empty public constructor
@@ -50,6 +38,7 @@ public class FragmentOne extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         Log.d("LOG", "onCreate one");
     }
 
@@ -58,25 +47,13 @@ public class FragmentOne extends Fragment {
                              Bundle savedInstanceState) {
         Log.d("LOG", "onCreateView one");
 
-
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_one, container, false);
-
-
-
-//        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-//        toolbar.setTitle("One");
-
-        // getActivity().setTitle("one title");
-
-//        getActivity().setTitle("Team A");
-
-
         mRecyclerView = view.findViewById(R.id.recyclerview);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(view.getContext());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
-        mFlowerList = new ArrayList<>();
+        mFlowerList = new ArrayList < > ();
         mDestinationData = new DestinationData("Masjidil Haram", "Masjidil Haram, Masjid al-Haram atau al-Masjid al-Haram (bahasa Arab: المسجد الحرام, pengucapan bahasa Arab: [ʔælmæsʤɪd ælħaram]) adalah sebuah masjid yang berlokasi di pusat kota Mekkah[1] yang dipandang sebagai tempat tersuci bagi umat Islam. Masjid ini juga merupakan tujuan utama dalam ibadah haji. Masjid ini dibangun mengelilingi Ka'bah yang menjadi arah kiblat bagi umat Islam dalam mengerjakan ibadah Salat. Masjid ini juga merupakan masjid terbesar di dunia, diikuti oleh Masjid Nabawi di Madinah al-Munawarah sebagai masjid terbesar kedua di dunia serta merupakan dua masjid suci utama bagi umat Muslim. Luas keseluruhan masjid ini mencapai 356.800 m2 (3.841.000 sq ft)dengan kemampuan menampung jamaah sebanyak 820.000 jamaah ketika musim Haji dan mampu bertambah menjadi dua juta jamaah ketika salat Id.\n" +
                 "\n" +
                 "Kepentingan masjid ini sangat diperhitungkan dalam agama Islam, karena selain menjadi kiblat, masjid ini juga menjadi tempat bagi para jamaah Haji melakukan beberapa ritual wajib, yaitu tawaf, dan sa'i.\n" +
@@ -137,67 +114,38 @@ public class FragmentOne extends Fragment {
         mDestinationData = new DestinationData("Colosseum", "Kolosseum adalah sebuah peninggalan bersejarah berupa arena gladiator, dibangun oleh Vespasian. Tempat pertunjukan yang besar berbentuk elips yang disebut amfiteater atau dengan nama aslinya Flavian Amphitheatre, yang termasuk salah satu dari Enam Puluh Sembilan Keajaiban Dunia Pertengahan. Situs ini terletak di kota kecil di Italia, Roma, yang didirikan oleh Wali kota Vespasian pada masa Domitianus dan diselesaikan oleh anaknya Titus[1], dan menjadi salah satu karya terbesar dari arsitektur Kerajaan Romawi yang pernah dibangun. Kolosseum dirancang untuk menampung 50.000 orang penonton.",
                 R.drawable.colosseum);
         mFlowerList.add(mDestinationData);
-
 
         MyLineAdapter myAdapter = new MyLineAdapter(view.getContext(), mFlowerList);
         mRecyclerView.setAdapter(myAdapter);
 
-
-
-
         return view;
     }
 
-//    public void setUserVisibleHint(){
-//
-//    }
-
-
-
-    public void onResume(){
-        super.onResume();
-        Log.d("LOG", "RESUME one");
-
-        // Set title bar
-//        ((MainActivity) getActivity()).setActionBarTitle("two title");
-//        ((MainActivity) getActivity()).getSupportActionBar().setTitle("two title");
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle clicks
+        return true;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.menu_edit, menu);
+    }
 
-//    @Override
-//    public void onAttach(Activity activity) {
-//        super.onAttach(activity);
-//        try {
-//            mListener = (OnFragmentInteractionListener) activity;
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException(activity.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
-//
-//    @Override
-//    public void onDetach() {
-//        super.onDetach();
-//        mListener = null;
-//    }
-//
-//    public interface OnFragmentInteractionListener {
-//        public void onFragmentInteraction(String title);
-//    }
-
+    public void onResume() {
+        super.onResume();
+        Log.d("LOG", "RESUME one");
+    }
 
     @Override
     public void setMenuVisibility(final boolean visible) {
         super.setMenuVisibility(visible);
         if (visible) {
             ((MainActivity) getActivity()).setActionBarTitle("Edit Data");
-//            ((MainActivity) getActivity()).setFragment(2);
             Log.d("LOG", "one");
         }
     }
-
-
-
 
 }

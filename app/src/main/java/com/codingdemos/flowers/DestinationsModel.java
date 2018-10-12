@@ -2,7 +2,7 @@ package com.codingdemos.flowers;
 
 public class DestinationsModel {
 
-    String name,postID,image,menuID,menuName;
+    String name, postID, image, menuID, menuName;
 
     public DestinationsModel() {}
 

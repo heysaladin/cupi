@@ -1,80 +1,15 @@
-<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-                <!--xmlns:tools="http://schemas.android.com/tools"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--tools:context="com.codingdemos.flowers.fragments.ItemOneFragment">-->
-
-    <!--<ImageView-->
-        <!--android:id="@+id/truiton_image"-->
-        <!--android:layout_width="300dp"-->
-        <!--android:layout_height="300dp"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--/>-->
-    <!--&lt;!&ndash;android:src="@mipmap/truiton"&ndash;&gt;-->
-
-    <!--<TextView-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_below="@id/truiton_image"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:text="Fragment 1"-->
-        <!--android:textSize="30sp"/>-->
-
-
-
-
-
-
-<!--</RelativeLayout>-->
-
-<!--<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content">-->
-
-                <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/activity_main"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                tools:context="com.codingdemos.flowers.MainActivity">
-
-    <!--<android.support.design.widget.AppBarLayout-->
-    <!--android:id="@+id/appBar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar">-->
-
-        <!--android:fitsSystemWindows="true"-->
-
-    <!--<include-->
-    <!--layout="@layout/toolbar_main"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"/>-->
-
-    <!--<android.support.v7.widget.Toolbar-->
-    <!--android:id="@+id/toolbar"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="?attr/actionBarSize"-->
-    <!--android:background="?attr/colorPrimary"-->
-    <!--app:layout_scrollFlags="scroll|enterAlways" />-->
-
-
-        <!--<android.support.v7.widget.Toolbar-->
-            <!--android:id="@+id/toolbar"-->
-            <!--android:minHeight="?attr/actionBarSize"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="?attr/actionBarSize"-->
-            <!--app:titleTextColor="@android:color/black"-->
-            <!--android:background="?attr/colorPrimary"-->
-            <!--app:layout_scrollFlags="scroll|enterAlways"-->
-            <!--/>-->
-
-
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.codingdemos.flowers.MainActivity">
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs"
+        app:elevation="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -83,20 +18,8 @@
         app:tabMode="fixed"
         app:tabSelectedTextColor="#fff"
         app:tabTextColor="#FFF" />
-
-        <!-- -->
-        <!--app:layout_scrollFlags="scroll|enterAlways"-->
-
-    <!--</android.support.design.widget.AppBarLayout>-->
-
     <android.support.v4.view.ViewPager
-    android:id="@+id/pager"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
-
-
-
-
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>
-
-<!--</android.support.design.widget.CoordinatorLayout>-->

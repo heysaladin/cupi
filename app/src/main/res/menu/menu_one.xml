@@ -7,9 +7,4 @@
         android:icon="@drawable/ic_account_box_black_24dp"
         app:showAsAction="ifRoom"
         android:title="Compose" />
-    <item
-        android:id="@+id/action_settings"
-        android:icon="@drawable/ic_account_circle_black_24dp"
-        app:showAsAction="ifRoom|withText"
-        android:title="Profile" />
 </menu>

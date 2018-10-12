@@ -27,7 +27,6 @@
         android:layout_margin="@dimen/space_20dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY" />
-    <!--android:src="@drawable/icn_star"-->
     <ImageView
         android:id="@+id/item_destination_logo_iv"
         android:layout_width="match_parent"

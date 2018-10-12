@@ -16,33 +16,22 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class GuestDestinationsLongAdapter extends RecyclerView.Adapter <GuestDestinationsLongAdapter.AdapterHolder> {
+public class GuestDestinationsLongAdapter extends RecyclerView.Adapter < GuestDestinationsLongAdapter.AdapterHolder > {
 
-    String activity_terms = "activity_terms";
     String group_karma_beach = "Karma Beach";
     String group_karma_spa = "Karma Spa";
     String group_karma_restaurant = "Karma Restaurants";
     String group_karma_boutique = "Boutique";
-
-
-    String intent_param_activity = "activity";
     String intent_param_sub_group = "sub_group";
     String intent_param_post_id = "postID";
     String intent_param_post_title = "postTitle";
     String intent_param_menu_id = "menuID";
-    String intent_param_resort_name = "resort_name";
-    String intent_param_resort_email = "resort_email";
-    String intent_param_restaurant_name = "restaurant_name";
-    String intent_param_restaurant_email = "restaurant_email";
-    String intent_param_spa_name = "spa_name";
-    String intent_param_spa_email = "spa_email";
-
 
     private static final String TAG = "GuestDestinationsAdapter";
-    ArrayList<DestinationsModel> arrayList;
+    ArrayList < DestinationsModel > arrayList;
     Context context;
 
-    public GuestDestinationsLongAdapter(Context context, ArrayList <DestinationsModel> arrayList) {
+    public GuestDestinationsLongAdapter(Context context, ArrayList < DestinationsModel > arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -60,16 +49,8 @@ public class GuestDestinationsLongAdapter extends RecyclerView.Adapter <GuestDes
         String img = "https://www.dakwatuna.com/wp-content/uploads/2015/07/masjidil-haram.jpg";
         Log.d("LOG", "model.getImage() +++++++++++++++ " + model.getImage());
         Glide.with(context)
-                .load(model.getImage()
-//                        .replace(" ", "%20")
-                )
-//                .placeholder(R.drawable.hagia_sophia)
-//                .error(R.drawable.hagia_sophia)
+                .load(model.getImage())
                 .into(holder.item_home_destination_image_iv);
-//        Glide.with(context)
-//                .load(img.replace(" ", "%20"))
-//                .into(holder.item_home_destination_image_iv);
-        // holder.item_home_destination_image_iv.setImageDrawable(R.drawable.hagia_sophia);
         holder.item_home_destination_name_tv.setText(model.getName());
         holder.item_home_destination_parent_rl.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("LongLogTag")

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class HomeDestinationsModel {
 
     String menuName;
-    ArrayList<DestinationsModel> destinationsModelArrayList;
+    ArrayList < DestinationsModel > destinationsModelArrayList;
 
     public HomeDestinationsModel() {}
 
@@ -16,11 +16,11 @@ public class HomeDestinationsModel {
         this.menuName = menuName;
     }
 
-    public ArrayList<DestinationsModel> getDestinationsModelArrayList() {
+    public ArrayList < DestinationsModel > getDestinationsModelArrayList() {
         return destinationsModelArrayList;
     }
 
-    public void setDestinationsModelArrayList(ArrayList<DestinationsModel> destinationsModelArrayList) {
+    public void setDestinationsModelArrayList(ArrayList < DestinationsModel > destinationsModelArrayList) {
         this.destinationsModelArrayList = destinationsModelArrayList;
     }
 

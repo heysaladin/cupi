@@ -9,16 +9,12 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-/**
- * Created by abdalla on 1/12/18.
- */
-
-public class MyLineAdapter extends RecyclerView.Adapter<FlowerViewHolder> {
+public class MyLineAdapter extends RecyclerView.Adapter < FlowerViewHolder > {
 
     private Context mContext;
-    private List<DestinationData> mFlowerList;
+    private List < DestinationData > mFlowerList;
 
-    public MyLineAdapter(Context mContext, List<DestinationData> mFlowerList) {
+    public MyLineAdapter(Context mContext, List < DestinationData > mFlowerList) {
         this.mContext = mContext;
         this.mFlowerList = mFlowerList;
     }
@@ -50,4 +46,3 @@ public class MyLineAdapter extends RecyclerView.Adapter<FlowerViewHolder> {
         return mFlowerList.size();
     }
 }
-

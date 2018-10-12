@@ -1,9 +1,5 @@
 package com.codingdemos.flowers;
 
-/**
- * Created by abdalla on 1/12/18.
- */
-
 public class DestinationData {
 
     private String destinationName;

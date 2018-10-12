@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:id="@+id/relativeLayout">
-
-
     <LinearLayout
         android:background="@drawable/gradient_background"
         android:gravity="bottom"
@@ -15,15 +14,15 @@
         android:paddingHorizontal="@dimen/space_25dp"
         android:paddingBottom="@dimen/space_50dp"
         android:orientation="vertical">
-    <TextView
-        android:layout_above="@id/textViewDesc"
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/space_3dp"
-        android:gravity="center"
-        android:textColor="@android:color/white"
-        android:textSize="24sp" />
+        <TextView
+            android:layout_above="@id/textViewDesc"
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_3dp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="24sp" />
         <TextView
             android:layout_below="@+id/textView"
             android:id="@+id/textViewDesc"
@@ -34,7 +33,6 @@
             android:textColor="#ccc"
             android:textSize="14sp" />
     </LinearLayout>
-
     <ImageView
         android:id="@+id/item_slide_image_iv"
         android:layout_width="match_parent"
@@ -43,6 +41,4 @@
         android:layout_alignParentTop="true"
         android:scaleType="centerCrop"
         android:src="@drawable/hagia_sophia" />
-
-
 </RelativeLayout>

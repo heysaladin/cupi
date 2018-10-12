@@ -15,7 +15,9 @@ import com.android.volley.toolbox.Volley;
 //import com.karmagroups.utils.AppIntegers;
 //import com.karmagroups.utils.AppStrings;
 //import com.karmagroups.widgets.BusyDialog;
+import com.codingdemos.flowers.AppIntegers;
 import com.codingdemos.flowers.rest.RestBase;
+import com.codingdemos.flowers.widgets.BusyDialog;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -60,7 +62,7 @@ public class AsyncHttpResponse {
 
     private static final String TAG = "AsyncHttpResponse";
     private Context context;
-//    private BusyDialog progressDialog;
+    private BusyDialog progressDialog;
     private boolean isProgressVisible;
     private AsyncHttpResponseListener mListener;
 
@@ -78,15 +80,15 @@ public class AsyncHttpResponse {
 
     private void showProgressDialog() {
         if (isProgressVisible) {
-//            progressDialog = new BusyDialog(context, false, "");
-//            progressDialog.show();
+            progressDialog = new BusyDialog(context, false, "");
+            progressDialog.show();
         }
     }
 
     private void dismissProgressDialog() {
         try {
             if (isProgressVisible) {
-//                progressDialog.dismiss();
+                progressDialog.dismiss();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,7 +134,7 @@ public class AsyncHttpResponse {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 dismissProgressDialog();
                 try {
-//                    if (statusCode == AppIntegers.Unauthorized) {}
+                    if (statusCode == AppIntegers.Unauthorized) {}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -145,7 +147,7 @@ public class AsyncHttpResponse {
                 super.onFailure(statusCode, headers, responseString, throwable);
                 dismissProgressDialog();
                 try {
-//                    if (statusCode == AppIntegers.Unauthorized) {}
+                    if (statusCode == AppIntegers.Unauthorized) {}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -155,7 +157,7 @@ public class AsyncHttpResponse {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 dismissProgressDialog();
                 try {
-//                    if (statusCode == AppIntegers.Unauthorized) {}
+                    if (statusCode == AppIntegers.Unauthorized) {}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -203,7 +205,7 @@ public class AsyncHttpResponse {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 dismissProgressDialog();
                 try {
-//                    if (statusCode == AppIntegers.Unauthorized) {}
+                    if (statusCode == AppIntegers.Unauthorized) {}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -216,7 +218,7 @@ public class AsyncHttpResponse {
                 super.onFailure(statusCode, headers, responseString, throwable);
                 dismissProgressDialog();
                 try {
-//                    if (statusCode == AppIntegers.Unauthorized) {}
+                    if (statusCode == AppIntegers.Unauthorized) {}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -226,7 +228,7 @@ public class AsyncHttpResponse {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 dismissProgressDialog();
                 try {
-//                    if (statusCode == AppIntegers.Unauthorized) {}
+                    if (statusCode == AppIntegers.Unauthorized) {}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -237,9 +239,9 @@ public class AsyncHttpResponse {
 
     public String getAsyncHttps(final String URL) {
         showProgressDialog();
-//        if (URL.contains(AppStrings.Unique.https)) {
-//            handleSSLHandshake();
-//        }
+        if (URL.contains("https")) {
+            handleSSLHandshake();
+        }
         com.karmagroups.rest.RestBaseHttps.getAsync(URL, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -276,7 +278,7 @@ public class AsyncHttpResponse {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 dismissProgressDialog();
                 try {
-//                    if (statusCode == AppIntegers.Unauthorized) {}
+                    if (statusCode == AppIntegers.Unauthorized) {}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -289,7 +291,7 @@ public class AsyncHttpResponse {
                 super.onFailure(statusCode, headers, responseString, throwable);
                 dismissProgressDialog();
                 try {
-//                    if (statusCode == AppIntegers.Unauthorized) {}
+                    if (statusCode == AppIntegers.Unauthorized) {}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -300,7 +302,7 @@ public class AsyncHttpResponse {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 dismissProgressDialog();
                 try {
-//                    if (statusCode == AppIntegers.Unauthorized) {}
+                    if (statusCode == AppIntegers.Unauthorized) {}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -393,7 +395,7 @@ public class AsyncHttpResponse {
                     super.onFailure(statusCode, headers, throwable, errorResponse);
                     dismissProgressDialog();
                     try {
-//                        if (statusCode == AppIntegers.Unauthorized) {}
+                        if (statusCode == AppIntegers.Unauthorized) {}
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -406,7 +408,7 @@ public class AsyncHttpResponse {
                     super.onFailure(statusCode, headers, responseString, throwable);
                     dismissProgressDialog();
                     try {
-//                        if (statusCode == AppIntegers.Unauthorized) {}
+                        if (statusCode == AppIntegers.Unauthorized) {}
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -416,7 +418,7 @@ public class AsyncHttpResponse {
                     super.onFailure(statusCode, headers, throwable, errorResponse);
                     dismissProgressDialog();
                     try {
-//                        if (statusCode == AppIntegers.Unauthorized) {}
+                        if (statusCode == AppIntegers.Unauthorized) {}
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -473,7 +475,7 @@ public class AsyncHttpResponse {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 dismissProgressDialog();
                 try {
-//                    if (statusCode == AppIntegers.Unauthorized) {}
+                    if (statusCode == AppIntegers.Unauthorized) {}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -486,7 +488,7 @@ public class AsyncHttpResponse {
                 super.onFailure(statusCode, headers, responseString, throwable);
                 dismissProgressDialog();
                 try {
-//                    if (statusCode == AppIntegers.Unauthorized) {}
+                    if (statusCode == AppIntegers.Unauthorized) {}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -496,10 +498,10 @@ public class AsyncHttpResponse {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
                 dismissProgressDialog();
                 try {
-                    // Log.e(TAG, "onFailure: URL = [" + URL + "] throwable--->" + throwable);
-                    //Log.e(TAG, "onFailure: URL = [" + URL + "] statusCode--->" + statusCode);
-                    // Log.e(TAG, "onFailure: URL = [" + URL + "] errorResponse--->" + errorResponse);
-//                    if (statusCode == AppIntegers.Unauthorized) {}
+                    Log.e(TAG, "onFailure: URL = [" + URL + "] throwable--->" + throwable);
+                    Log.e(TAG, "onFailure: URL = [" + URL + "] statusCode--->" + statusCode);
+                    Log.e(TAG, "onFailure: URL = [" + URL + "] errorResponse--->" + errorResponse);
+                    if (statusCode == AppIntegers.Unauthorized) {}
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
