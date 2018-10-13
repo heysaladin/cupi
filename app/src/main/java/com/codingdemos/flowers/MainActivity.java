@@ -1,5 +1,6 @@
 package com.codingdemos.flowers;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,6 +16,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.codingdemos.flowers.fragments.FragmentOne;
+import com.codingdemos.flowers.fragments.ItemFourFragment;
 import com.codingdemos.flowers.fragments.ItemOneFragment;
 import com.codingdemos.flowers.fragments.ItemThreeFragment;
 import com.codingdemos.flowers.fragments.ItemTwoFragment;
@@ -32,10 +35,14 @@ public class MainActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_status:
-                Toast.makeText(this, "Calls Icon Click", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Notes", Toast.LENGTH_SHORT).show();
+                Intent mIntentNotes = new Intent(this, NotesActivity.class);
+                this.startActivity(mIntentNotes);
                 return true;
             case R.id.action_settings:
-                Toast.makeText(this, "Clear call log", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Notifications", Toast.LENGTH_SHORT).show();
+                Intent mIntentNotificstions = new Intent(this, NotificationsActivity.class);
+                this.startActivity(mIntentNotificstions);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -78,6 +85,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.action_item3:
                         selectedFragment = ItemThreeFragment.newInstance();
                         break;
+                    case R.id.action_item4:
+                        selectedFragment = ItemFourFragment.newInstance();
+                        break;
                 }
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, selectedFragment);
@@ -85,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+        BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
 
         //Manually displaying the first fragment - one time only
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

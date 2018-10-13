@@ -1,65 +1,79 @@
-package com.codingdemos.flowers.fragments;
+package com.codingdemos.flowers;
 
 import android.content.Intent;
-import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.codingdemos.flowers.DestinationData;
-import com.codingdemos.flowers.DetailActivity;
-import com.codingdemos.flowers.MainActivity;
-import com.codingdemos.flowers.MyLineAdapter;
-import com.codingdemos.flowers.R;
-import com.codingdemos.flowers.SwipeController;
-import com.codingdemos.flowers.SwipeControllerActions;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentOne extends Fragment {
+public class NotificationsActivity extends AppCompatActivity {
+
+    Toolbar mToolbar;
+    ImageView mFlower;
+    TextView mDescription;
+
+    private String imageUrl = null;
 
     RecyclerView mRecyclerView;
-    List < DestinationData > mFlowerList;
+    List< DestinationData > mFlowerList;
     DestinationData mDestinationData;
     SwipeController swipeController = null;
     private MyLineAdapter mAdapter;
 
-    public static FragmentOne newInstance() {
-        FragmentOne fragment = new FragmentOne();
-        return fragment;
-    }
-
-    public FragmentOne() {
-        // Required empty public constructor
+    private void getIntentData() {
+        Intent intent = getIntent();
+        imageUrl = intent.getStringExtra("Image");
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-        Log.d("LOG", "onCreate one");
-    }
+        setContentView(R.layout.activity_notifications);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        Log.d("LOG", "onCreateView one");
+        getIntentData();
 
-        // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_one, container, false);
-        mRecyclerView = view.findViewById(R.id.recyclerview);
-        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(view.getContext());
+        mToolbar = findViewById(R.id.toolbar);
+        mFlower = findViewById(R.id.ivImage);
+        mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+        mDescription = findViewById(R.id.tvDescription);
+        mToolbar.setTitle("Notifications");
+
+        Bundle mBundle = getIntent().getExtras();
+        if (mBundle != null) {
+            mToolbar.setTitle(mBundle.getString("Title"));
+            if (imageUrl != null) {
+                Glide.with(this)
+                        .load(imageUrl)
+                        .into(mFlower);
+            } else {
+                mFlower.setImageResource(mBundle.getInt("Image"));
+            }
+            mDescription.setText(mBundle.getString("Description"));
+
+            Drawable drawable = ContextCompat.getDrawable(this, R.drawable.ic_account_box_black_24dp);
+            mToolbar.setOverflowIcon(drawable);
+
+        }
+
+        mRecyclerView = findViewById(R.id.recyclerview);
+        LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
 
 //        SwipeController swipeController = new SwipeController();
@@ -67,7 +81,7 @@ public class FragmentOne extends Fragment {
 //        itemTouchhelper.attachToRecyclerView(mRecyclerView);
 
 
-        mFlowerList = new ArrayList < > ();
+        mFlowerList = new ArrayList< >();
         mDestinationData = new DestinationData("Masjidil Haram", "Masjidil Haram, Masjid al-Haram atau al-Masjid al-Haram (bahasa Arab: المسجد الحرام, pengucapan bahasa Arab: [ʔælmæsʤɪd ælħaram]) adalah sebuah masjid yang berlokasi di pusat kota Mekkah[1] yang dipandang sebagai tempat tersuci bagi umat Islam. Masjid ini juga merupakan tujuan utama dalam ibadah haji. Masjid ini dibangun mengelilingi Ka'bah yang menjadi arah kiblat bagi umat Islam dalam mengerjakan ibadah Salat. Masjid ini juga merupakan masjid terbesar di dunia, diikuti oleh Masjid Nabawi di Madinah al-Munawarah sebagai masjid terbesar kedua di dunia serta merupakan dua masjid suci utama bagi umat Muslim. Luas keseluruhan masjid ini mencapai 356.800 m2 (3.841.000 sq ft)dengan kemampuan menampung jamaah sebanyak 820.000 jamaah ketika musim Haji dan mampu bertambah menjadi dua juta jamaah ketika salat Id.\n" +
                 "\n" +
                 "Kepentingan masjid ini sangat diperhitungkan dalam agama Islam, karena selain menjadi kiblat, masjid ini juga menjadi tempat bagi para jamaah Haji melakukan beberapa ritual wajib, yaitu tawaf, dan sa'i.\n" +
@@ -129,143 +143,9 @@ public class FragmentOne extends Fragment {
                 R.drawable.colosseum);
         mFlowerList.add(mDestinationData);
 
-        MyLineAdapter myAdapter = new MyLineAdapter(view.getContext(), mFlowerList);
+        MyLineAdapter myAdapter = new MyLineAdapter(this, mFlowerList);
         mAdapter = myAdapter;
         mRecyclerView.setAdapter(myAdapter);
 
-
-
-//
-//        mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-//            @Override
-//            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-//                int action = e.getAction();
-//                switch (action) {
-//                    case MotionEvent.ACTION_MOVE:
-//                        rv.getParent().requestDisallowInterceptTouchEvent(true);
-//                        break;
-//                }
-//                return false;
-//            }
-//
-//            @Override
-//            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-//
-//            }
-//        });
-//
-
-
-
-
-        swipeController = new SwipeController(new SwipeControllerActions() {
-            @Override
-            public void onRightClicked(int position) {
-//                MyLineAdapter myAdapter = new MyLineAdapter(view.getContext(), mFlowerList);
-                mFlowerList.remove(position);
-//                mAdapter.players.remove(position);
-                mAdapter.notifyItemRemoved(position);
-                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
-            }
-            @Override
-            public void onCenterClicked(int position) {
-                Log.d("LOG", "position" + position);
-//                Log.d("LOG", "mFlowerList.get(position)" + mFlowerList.get(position));
-                callEdit(position);
-                mAdapter.notifyItemChanged(position);
-                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
-            }
-            @Override
-            public void onLeftClicked(int position) {
-            }
-        });
-
-        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
-        itemTouchhelper.attachToRecyclerView(mRecyclerView);
-
-        mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
-            @Override
-            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-                swipeController.onDraw(c);
-            }
-        });
-
-
-
-        return view;
     }
-
-    private void callEdit(int position) {
-        Intent mIntent = new Intent(FragmentOne.this.getActivity(), DetailActivity.class);
-        mIntent.putExtra("Title", mFlowerList.get(position).getDestinationName());
-        mIntent.putExtra("Description", mFlowerList.get(position).getDestinationDescription());
-        mIntent.putExtra("Image", mFlowerList.get(position).getDestinationImage());
-        FragmentOne.this.getActivity().startActivity(mIntent);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle clicks
-        return true;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        menu.clear();
-        inflater.inflate(R.menu.menu_edit, menu);
-    }
-
-    public void onResume() {
-        super.onResume();
-        Log.d("LOG", "RESUME one");
-    }
-
-    @Override
-    public void setMenuVisibility(final boolean visible) {
-        super.setMenuVisibility(visible);
-        if (visible) {
-            ((MainActivity) getActivity()).setActionBarTitle("Edit Data");
-            Log.d("LOG", "one");
-        }
-    }
-
-
-//    private void setupRecyclerView() {
-////        View view = inflater.inflate(R.layout.fragment_one, container, false);
-////        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
-//
-//        RecyclerView recyclerView = mRecyclerView;
-//
-//                recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
-//        recyclerView.setAdapter(mAdapter);
-//
-//        swipeController = new SwipeController(new SwipeControllerActions() {
-//            @Override
-//            public void onRightClicked(int position) {
-//                mFlowerList.remove(position);
-////                mAdapter.players.remove(position);
-//                mAdapter.notifyItemRemoved(position);
-//                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
-//            }
-//        });
-//
-//        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
-//        itemTouchhelper.attachToRecyclerView(recyclerView);
-//
-//        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
-//            @Override
-//            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-//                swipeController.onDraw(c);
-//            }
-//        });
-//    }
-
-
-
 }

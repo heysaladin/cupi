@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/action_search"
-        android:icon="@drawable/ic_account_box_black_24dp"
-        android:title="Joko"
-        app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_sort"
+        android:icon="@drawable/ic_filter_list_black_24dp"
+        app:showAsAction="ifRoom"
+        android:title="Compose" />
+    <item
+        android:id="@+id/action_filter"
+        android:icon="@drawable/ic_tune_black_24dp"
+        app:showAsAction="ifRoom"
+        android:title="Compose" />
+    <item
+        android:id="@+id/action_add"
+        android:icon="@drawable/ic_insert_drive_file_black_24dp"
+        app:showAsAction="ifRoom"
+        android:title="Add New" />
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        app:showAsAction="ifRoom"
+        android:title="Search" />
     <item android:id="@+id/action_status"
         android:orderInCategory="10"
-        android:title="Yanti"
+        android:title="Enable"
         app:showAsAction="never"/>
     <item android:id="@+id/action_settings"
         android:orderInCategory="11"
-        android:title="Bambang"
+        android:title="Disable"
         app:showAsAction="never"/>
 </menu>

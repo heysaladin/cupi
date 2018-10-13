@@ -25,22 +25,13 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-      <ImageView
-          android:id="@+id/ivImage"
-          android:scaleType="centerCrop"
+      <android.support.v7.widget.RecyclerView
+          android:clipToPadding="false"
+          app:layout_behavior="@string/appbar_scrolling_view_behavior"
+          android:id="@+id/recyclerview"
           android:layout_width="match_parent"
-          android:layout_height="300dp"
-          android:layout_gravity="center"
-          android:layout_marginTop="0dp"
-          android:src="@drawable/rose" />
-      <TextView
-          android:id="@+id/tvDescription"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="5dp"
-          android:padding="25dp"
-          android:text="TextView"
-          android:textSize="18sp" />
+          android:layout_height="match_parent"
+          android:scrollbars="vertical" />
     </LinearLayout>
   </ScrollView>
 </LinearLayout>

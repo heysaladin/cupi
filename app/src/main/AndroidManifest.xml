@@ -54,6 +54,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".DetailActivity" />
+        <activity android:name=".NotesActivity" />
+        <activity android:name=".NoteActivity" />
+        <activity android:name=".NotificationsActivity" />
     </application>
 
 </manifest>
