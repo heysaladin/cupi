@@ -29,7 +29,7 @@ public class NotificationsActivity extends AppCompatActivity {
     List< DestinationData > mFlowerList;
     DestinationData mDestinationData;
     SwipeController swipeController = null;
-    private MyLineAdapter mAdapter;
+    private NotificationAdapter mAdapter;
 
     private void getIntentData() {
         Intent intent = getIntent();
@@ -143,7 +143,7 @@ public class NotificationsActivity extends AppCompatActivity {
                 R.drawable.colosseum);
         mFlowerList.add(mDestinationData);
 
-        MyLineAdapter myAdapter = new MyLineAdapter(this, mFlowerList);
+        NotificationAdapter myAdapter = new NotificationAdapter(this, mFlowerList);
         mAdapter = myAdapter;
         mRecyclerView.setAdapter(myAdapter);
 

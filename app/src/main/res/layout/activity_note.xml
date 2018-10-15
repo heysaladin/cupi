@@ -9,6 +9,9 @@
     tools:context="com.codingdemos.flowers.DetailActivity">
   <android.support.v7.widget.Toolbar
       android:id="@+id/toolbar"
+      app:contentInsetLeft="0dp"
+      app:contentInsetStart="0dp"
+      app:contentInsetStartWithNavigation="0dp"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:background="?attr/colorPrimary"

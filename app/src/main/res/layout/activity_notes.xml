@@ -10,6 +10,9 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -32,6 +35,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         app:backgroundTint="@color/colorPrimary"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@drawable/ic_input_add_white" />
 
 </android.support.design.widget.CoordinatorLayout>

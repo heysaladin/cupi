@@ -489,6 +489,7 @@ public class SwipeController extends Callback {
         p.setTextSize(desiredTextSize);
         c.drawRoundRect(centerButton, corners, corners, p);
         drawText("EDIT", c, centerButton, p);
+        //drawIconAndText(canvas, 100, 200, drawable, "More Text");
 
         RectF leftButton = new RectF(itemView.getRight() - (buttonWidthWithoutPadding*3) -15, itemView.getTop()+20, itemView.getRight()- (buttonWidthWithoutPadding*2) -40, itemView.getBottom()-20);
         p.setColor(Color.GRAY);

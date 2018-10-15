@@ -25,6 +25,7 @@ import com.codingdemos.flowers.R;
 import com.codingdemos.flowers.SliderAdapter;
 import com.codingdemos.flowers.rest.AsyncHttpResponse;
 import com.codingdemos.flowers.rest.RestApis;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
@@ -68,6 +69,8 @@ public class ItemThreeFragment extends Fragment
     private ArrayList < DestinationsModel > destinationsArrayListLong;
     private GuestDestinationsLongAdapter guestDestinationsAdapterLong;
 
+    private ShimmerFrameLayout mShimmerViewContainer;
+
     public static ItemThreeFragment newInstance() {
         ItemThreeFragment fragment = new ItemThreeFragment();
         return fragment;
@@ -82,9 +85,14 @@ public class ItemThreeFragment extends Fragment
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.fragment_item_three, container, false);
+
+        mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
+
         getKarmaGroupsApiRequest();
         getKarmaGroupsApiRequestNews();
+
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         indicator = (TabLayout) view.findViewById(R.id.indicator);
 
@@ -283,6 +291,10 @@ public class ItemThreeFragment extends Fragment
             guestDestinationsAdapterArch.notifyDataSetChanged();
             guestDestinationsAdapterCulinary.notifyDataSetChanged();
             guestDestinationsAdapterArt.notifyDataSetChanged();
+
+            // Stopping Shimmer Effect's animation after data is loaded to ListView
+            mShimmerViewContainer.stopShimmerAnimation();
+            mShimmerViewContainer.setVisibility(View.GONE);
 
         } catch (JSONException e) {
             e.printStackTrace();

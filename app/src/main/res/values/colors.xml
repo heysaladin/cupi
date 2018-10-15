@@ -17,4 +17,6 @@
 
     <color name="trans">#00FFFFFF</color>
 
+  <color name="background">#dddddd</color>
+
 </resources>
