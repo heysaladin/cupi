@@ -57,6 +57,7 @@
         <activity android:name=".NotesActivity" />
         <activity android:name=".NoteActivity" />
         <activity android:name=".NotificationsActivity" />
+        <activity android:name=".AddNoteActivity" />
     </application>
 
 </manifest>

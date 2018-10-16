@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_home_destination_parent_rl"
+    android:layout_width="200dp"
+    android:layout_height="160dp"
+    android:background="@color/trans"
+    android:fillViewport="true"
+    tools:ignore="MissingPrefix">
+    <android.support.v7.widget.CardView
+        android:layout_marginHorizontal="@dimen/space_5dp"
+        android:layout_marginTop="@dimen/space_5dp"
+        android:layout_marginBottom="@dimen/space_10dp"
+        android:paddingLeft="@dimen/space_5dp"
+        android:paddingRight="@dimen/space_5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center"
+        app:cardCornerRadius="@dimen/space_8dp"
+        app:cardElevation="5dp">
+        <RelativeLayout
+            android:id="@+id/item_home_destination_wrapper_rv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded"
+            android:scaleType="centerCrop"
+            android:orientation="vertical">
+            <ProgressBar
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:id="@+id/progressBar2" />
+            <ImageView
+                android:id="@+id/item_home_destination_image_iv"
+                android:layout_width="200dp"
+                android:layout_height="160dp"
+                android:src="@drawable/hagia_sophia"
+                android:adjustViewBounds="true"
+                android:background="@drawable/rounded"
+                android:scaleType="centerCrop" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_60dp"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true" >
+                <TextView
+                    android:gravity="left|fill_vertical"
+                    android:id="@+id/item_home_destination_name_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_60dp"
+                    android:background="@drawable/gradient_background"
+                    android:paddingTop="@dimen/space_3dp"
+                    android:paddingBottom="@dimen/space_3dp"
+                    android:paddingLeft="@dimen/space_10dp"
+                    android:paddingRight="@dimen/space_10dp"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_medium" />
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

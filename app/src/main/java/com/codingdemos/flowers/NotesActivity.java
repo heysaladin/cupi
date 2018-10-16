@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.codingdemos.flowers.fragments.FragmentOne;
 
 public class NotesActivity extends AppCompatActivity {
 
@@ -43,6 +44,8 @@ public class NotesActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent mIntent = new Intent(NotesActivity.this, AddNoteActivity.class);
+                NotesActivity.this.startActivity(mIntent);
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
