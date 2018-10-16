@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -52,8 +51,7 @@ public class FragmentOne extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d("LOG", "onCreateView one");
 
         // Inflate the layout for this fragment
@@ -61,11 +59,6 @@ public class FragmentOne extends Fragment {
         mRecyclerView = view.findViewById(R.id.recyclerview);
         LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(view.getContext());
         mRecyclerView.setLayoutManager(mLinearLayoutManager);
-
-//        SwipeController swipeController = new SwipeController();
-//        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
-//        itemTouchhelper.attachToRecyclerView(mRecyclerView);
-
 
         mFlowerList = new ArrayList < > ();
         mDestinationData = new DestinationData("Masjidil Haram", "Masjidil Haram, Masjid al-Haram atau al-Masjid al-Haram (bahasa Arab: المسجد الحرام, pengucapan bahasa Arab: [ʔælmæsʤɪd ælħaram]) adalah sebuah masjid yang berlokasi di pusat kota Mekkah[1] yang dipandang sebagai tempat tersuci bagi umat Islam. Masjid ini juga merupakan tujuan utama dalam ibadah haji. Masjid ini dibangun mengelilingi Ka'bah yang menjadi arah kiblat bagi umat Islam dalam mengerjakan ibadah Salat. Masjid ini juga merupakan masjid terbesar di dunia, diikuti oleh Masjid Nabawi di Madinah al-Munawarah sebagai masjid terbesar kedua di dunia serta merupakan dua masjid suci utama bagi umat Muslim. Luas keseluruhan masjid ini mencapai 356.800 m2 (3.841.000 sq ft)dengan kemampuan menampung jamaah sebanyak 820.000 jamaah ketika musim Haji dan mampu bertambah menjadi dua juta jamaah ketika salat Id.\n" +
@@ -133,49 +126,16 @@ public class FragmentOne extends Fragment {
         mAdapter = myAdapter;
         mRecyclerView.setAdapter(myAdapter);
 
-
-
-//
-//        mRecyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-//            @Override
-//            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-//                int action = e.getAction();
-//                switch (action) {
-//                    case MotionEvent.ACTION_MOVE:
-//                        rv.getParent().requestDisallowInterceptTouchEvent(true);
-//                        break;
-//                }
-//                return false;
-//            }
-//
-//            @Override
-//            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-//
-//            }
-//        });
-//
-
-
-
-
         swipeController = new SwipeController(new SwipeControllerActions() {
             @Override
             public void onRightClicked(int position) {
-//                MyLineAdapter myAdapter = new MyLineAdapter(view.getContext(), mFlowerList);
                 mFlowerList.remove(position);
-//                mAdapter.players.remove(position);
                 mAdapter.notifyItemRemoved(position);
                 mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
             }
             @Override
             public void onCenterClicked(int position) {
                 Log.d("LOG", "position" + position);
-//                Log.d("LOG", "mFlowerList.get(position)" + mFlowerList.get(position));
                 callEdit(position);
                 mAdapter.notifyItemChanged(position);
                 mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
@@ -194,8 +154,6 @@ public class FragmentOne extends Fragment {
                 swipeController.onDraw(c);
             }
         });
-
-
 
         return view;
     }
@@ -234,38 +192,5 @@ public class FragmentOne extends Fragment {
             Log.d("LOG", "one");
         }
     }
-
-
-//    private void setupRecyclerView() {
-////        View view = inflater.inflate(R.layout.fragment_one, container, false);
-////        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
-//
-//        RecyclerView recyclerView = mRecyclerView;
-//
-//                recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity(), LinearLayoutManager.VERTICAL, false));
-//        recyclerView.setAdapter(mAdapter);
-//
-//        swipeController = new SwipeController(new SwipeControllerActions() {
-//            @Override
-//            public void onRightClicked(int position) {
-//                mFlowerList.remove(position);
-////                mAdapter.players.remove(position);
-//                mAdapter.notifyItemRemoved(position);
-//                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
-//            }
-//        });
-//
-//        ItemTouchHelper itemTouchhelper = new ItemTouchHelper(swipeController);
-//        itemTouchhelper.attachToRecyclerView(recyclerView);
-//
-//        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
-//            @Override
-//            public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-//                swipeController.onDraw(c);
-//            }
-//        });
-//    }
-
-
 
 }

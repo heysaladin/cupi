@@ -84,6 +84,8 @@ public class RestApis {
         /**
          * POST REQUEST
          */
+        String addNote = "https://geonknode.herokuapp.com/notes";
+
         String updateFavourite = BaseURl + "updateFavourite.php";
         String getFavourites = BaseURl + "getFavourites.php";
         String submit = BaseURl + "submit.php";
