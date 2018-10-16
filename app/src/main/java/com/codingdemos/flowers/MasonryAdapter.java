@@ -53,6 +53,26 @@ public class MasonryAdapter extends RecyclerView.Adapter<MasonryAdapter.MasonryV
                 context.startActivity(mIntent);
             }
         });
+        holder.edit_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mIntent = new Intent(context, NoteActivity.class);
+                mIntent.putExtra("Title", nameList[holder.getAdapterPosition()]);
+                mIntent.putExtra("Note", noteList[holder.getAdapterPosition()]);
+                //mIntent.putExtra("Image", imgList[holder.getAdapterPosition()]);
+                context.startActivity(mIntent);
+            }
+        });
+        holder.delete_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*
+                mFlowerList.remove(position);
+                mAdapter.notifyItemRemoved(position);
+                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
+                */
+            }
+        });
     }
 
     @Override
@@ -65,6 +85,7 @@ public class MasonryAdapter extends RecyclerView.Adapter<MasonryAdapter.MasonryV
         TextView textView;
         TextView textViewNote;
         LinearLayout wrapper;
+        ImageView edit_iv, delete_iv;
 
         public MasonryView(View itemView) {
             super(itemView);
@@ -72,6 +93,8 @@ public class MasonryAdapter extends RecyclerView.Adapter<MasonryAdapter.MasonryV
             // imageView = (ImageView) itemView.findViewById(R.id.img);
             textView = (TextView) itemView.findViewById(R.id.img_name);
             textViewNote = (TextView) itemView.findViewById(R.id.img_note);
+            edit_iv = (ImageView) itemView.findViewById(R.id.edit_iv);
+            delete_iv = (ImageView) itemView.findViewById(R.id.delete_iv);
             wrapper = (LinearLayout) itemView.findViewById(R.id.wrapper);
 
         }

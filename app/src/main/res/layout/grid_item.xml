@@ -5,21 +5,47 @@
     android:padding="@dimen/space_5dp"
     android:layout_margin="@dimen/space_5dp"
     android:background="@android:color/white"
-    android:id="@+id/wrapper"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:id="@+id/wrapper"
+        android:gravity="right"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
     <TextView
         android:id="@+id/img_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left"
         android:padding="8dp" />
-
     <TextView
         android:id="@+id/img_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="left"
         android:padding="8dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="right"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_marginVertical="@dimen/space_5dp"
+            android:layout_marginHorizontal="@dimen/space_10dp"
+            android:id="@+id/edit_iv"
+            android:src="@drawable/ic_edit_black_24dp"
+            android:layout_width="@dimen/space_25dp"
+            android:layout_height="@dimen/space_25dp" />
+        <ImageView
+            android:layout_marginVertical="@dimen/space_5dp"
+            android:layout_marginHorizontal="@dimen/space_10dp"
+            android:id="@+id/delete_iv"
+            android:src="@drawable/ic_delete_black_24dp"
+            android:layout_width="@dimen/space_25dp"
+            android:layout_height="@dimen/space_25dp" />
+    </LinearLayout>
 
 </LinearLayout>
