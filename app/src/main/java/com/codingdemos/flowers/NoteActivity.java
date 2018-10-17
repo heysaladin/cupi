@@ -23,6 +23,8 @@ public class NoteActivity extends AppCompatActivity {
     private String title = null;
     private String note = null;
 
+        ImageView edit_iv, delete_iv;
+
     private void getIntentData() {
         Intent intent = getIntent();
         imageUrl = intent.getStringExtra("Image");
@@ -50,7 +52,35 @@ public class NoteActivity extends AppCompatActivity {
         mTitle = findViewById(R.id.tvTitle);
         mToolbar.setTitle("Note");
 
-        Bundle mBundle = getIntent().getExtras();
+
+            edit_iv = (ImageView) findViewById(R.id.edit_iv);
+            delete_iv = (ImageView) findViewById(R.id.delete_iv);
+
+                edit_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mIntent = new Intent(NoteActivity.this, AddNoteActivity.class);
+//                mIntent.putExtra("Title", nameList[holder.getAdapterPosition()]);
+//                mIntent.putExtra("Note", noteList[holder.getAdapterPosition()]);
+                //mIntent.putExtra("Image", imgList[holder.getAdapterPosition()]);
+                NoteActivity.this.startActivity(mIntent);
+            }
+        });
+        delete_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /*
+                mFlowerList.remove(position);
+                mAdapter.notifyItemRemoved(position);
+                mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
+                */
+            }
+        });
+
+
+
+
+    Bundle mBundle = getIntent().getExtras();
         if (mBundle != null) {
             // mToolbar.setTitle(mBundle.getString("Title"));
 //            if (imageUrl != null) {
