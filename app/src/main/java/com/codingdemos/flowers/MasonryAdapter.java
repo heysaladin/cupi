@@ -1,5 +1,6 @@
 package com.codingdemos.flowers;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -51,6 +52,8 @@ public class MasonryAdapter extends RecyclerView.Adapter<MasonryAdapter.MasonryV
                 mIntent.putExtra("Note", noteList[holder.getAdapterPosition()]);
                 //mIntent.putExtra("Image", imgList[holder.getAdapterPosition()]);
                 context.startActivity(mIntent);
+                Activity activity = (Activity)context;
+                activity.overridePendingTransition(R.anim.zoom_enter, R.anim.zoom_exit);
             }
         });
 //        holder.edit_iv.setOnClickListener(new View.OnClickListener() {
