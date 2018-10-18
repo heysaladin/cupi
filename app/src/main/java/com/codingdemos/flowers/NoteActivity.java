@@ -19,15 +19,17 @@ public class NoteActivity extends AppCompatActivity {
     TextView mDescription;
     TextView mTitle;
 
-    private String imageUrl = null;
+    private String id = null;
     private String title = null;
     private String note = null;
 
         ImageView edit_iv, delete_iv;
 
+        private String mID = null;
+
     private void getIntentData() {
         Intent intent = getIntent();
-        imageUrl = intent.getStringExtra("Image");
+        id = intent.getStringExtra("id");
         title = intent.getStringExtra("Title");
         note = intent.getStringExtra("Note");
     }
@@ -59,7 +61,8 @@ public class NoteActivity extends AppCompatActivity {
                 edit_iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mIntent = new Intent(NoteActivity.this, AddNoteActivity.class);
+                Intent mIntent = new Intent(NoteActivity.this, EditNoteActivity.class);
+                mIntent.putExtra("id", mID);
 //                mIntent.putExtra("Title", nameList[holder.getAdapterPosition()]);
 //                mIntent.putExtra("Note", noteList[holder.getAdapterPosition()]);
                 //mIntent.putExtra("Image", imgList[holder.getAdapterPosition()]);
@@ -90,6 +93,9 @@ public class NoteActivity extends AppCompatActivity {
 //            } else {
 //                mFlower.setImageResource(mBundle.getInt("Image"));
 //            }
+
+            mID = mBundle.getString("Title");
+
             mDescription.setText(mBundle.getString("Note"));
             mTitle.setText(mBundle.getString("Title"));
 
