@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,21 +50,23 @@ public class MasonryAdapter extends RecyclerView.Adapter<MasonryAdapter.MasonryV
 
     @Override
     public void onBindViewHolder(final MasonryView holder, int position) {
+        Log.d("LOG", "position >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + position);
+        Log.d("LOG", "mFlowerList.get(holder.getAdapterPosition()).getTitle() >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + mFlowerList.get(holder.getAdapterPosition()).getTitle());
 //        final NoteData model = mFlowerList.get(position);
         // holder.imageView.setImageResource(imgList[position]);
-        holder.textView.setText(nameList[position]);
-        holder.textViewNote.setText(noteList[position]);
+//        holder.textView.setText(nameList[position]);
+//        holder.textViewNote.setText(noteList[position]);
 //        holder.textView.setText(model.getTitle());
 //        holder.textViewNote.setText(model.getContent());
-//        holder.textView.setText(mFlowerList.get(holder.getAdapterPosition()-1).getTitle());
-//        holder.textViewNote.setText(mFlowerList.get(holder.getAdapterPosition()-1).getContent());
+        holder.textView.setText(mFlowerList.get(holder.getAdapterPosition()).getTitle());
+        holder.textViewNote.setText(mFlowerList.get(holder.getAdapterPosition()).getContent());
         holder.wrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mIntent = new Intent(context, NoteActivity.class);
 //                mIntent.putExtra("Title", nameList[holder.getAdapterPosition()]);
 //                mIntent.putExtra("Note", noteList[holder.getAdapterPosition()]);
-                mIntent.putExtra("id", mFlowerList.get(holder.getAdapterPosition()).get_id());
+                mIntent.putExtra("_id", mFlowerList.get(holder.getAdapterPosition()).get_id());
                 mIntent.putExtra("title", mFlowerList.get(holder.getAdapterPosition()).getTitle());
                 mIntent.putExtra("content", mFlowerList.get(holder.getAdapterPosition()).getContent());
                 //mIntent.putExtra("Image", imgList[holder.getAdapterPosition()]);
@@ -96,7 +99,8 @@ public class MasonryAdapter extends RecyclerView.Adapter<MasonryAdapter.MasonryV
 
     @Override
     public int getItemCount() {
-        return nameList.length;
+//        return nameList.length;
+        return mFlowerList.size();
     }
 
     class MasonryView extends RecyclerView.ViewHolder {

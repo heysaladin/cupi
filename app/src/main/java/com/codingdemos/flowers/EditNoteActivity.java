@@ -26,16 +26,22 @@ public class EditNoteActivity extends AppCompatActivity
         implements View.OnClickListener,
         AsyncHttpResponse.AsyncHttpResponseListener {
     Toolbar mToolbar;
-    private static final String TAG = "AddNoteActivity";
+    private static final String TAG = "EditNoteActivity";
     private EditText title_tv;
     private EditText note_tv;
     private AlertDialog.Builder alertDialogBuilder = null;
     private AlertDialog alertDialog = null;
     private String noteID = null;
 
+    private String id = null;
+    private String title = null;
+    private String note = null;
+
     private void getIntentData() {
         Intent intent = this.getIntent();
-        noteID = intent.getStringExtra("id");
+        id = intent.getStringExtra("_id");
+        title = intent.getStringExtra("title");
+        note = intent.getStringExtra("content");
     }
 
     @Override
@@ -65,6 +71,9 @@ public class EditNoteActivity extends AppCompatActivity
         dd_booking_form_tv.setOnClickListener(this);
         title_tv = (EditText) findViewById(R.id.title_tv);
         note_tv = (EditText) findViewById(R.id.note_tv);
+
+        title_tv.setText(title);
+        note_tv.setText(note);
 
         Toast.makeText(EditNoteActivity.this, noteID, Toast.LENGTH_LONG).show();
 
@@ -137,7 +146,7 @@ public class EditNoteActivity extends AppCompatActivity
         }
         final JSONObject finalJobjContactDetails = jobjContactDetails;
         Log.d(TAG, "finalJobjContactDetails: " + finalJobjContactDetails);
-        response.postJson(RestApis.KarmaGroups.addNote, finalJobjContactDetails);
+        response.putJson(RestApis.KarmaGroups.addNote + "/" + id, finalJobjContactDetails);
         if (alertDialog != null && alertDialog.isShowing()) {
             alertDialog.dismiss();
         }
@@ -152,7 +161,7 @@ public class EditNoteActivity extends AppCompatActivity
         } else {
             alertDialogBuilder = new AlertDialog.Builder(this);
         }
-        alertDialogBuilder.setMessage(message).setCancelable(false).setPositiveButton(getResources().getString(0),
+        alertDialogBuilder.setMessage(message).setCancelable(false).setPositiveButton(getResources().getString(R.string.ok),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();

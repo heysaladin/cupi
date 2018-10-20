@@ -9,8 +9,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.codingdemos.flowers.rest.RestApis;
 
 public class NoteActivity extends AppCompatActivity {
 
@@ -25,13 +33,13 @@ public class NoteActivity extends AppCompatActivity {
 
         ImageView edit_iv, delete_iv;
 
-        private String mID = null;
+//        private String mID = null;
 
     private void getIntentData() {
         Intent intent = getIntent();
-        id = intent.getStringExtra("id");
-        title = intent.getStringExtra("Title");
-        note = intent.getStringExtra("Note");
+        id = intent.getStringExtra("_id");
+        title = intent.getStringExtra("title");
+        note = intent.getStringExtra("content");
     }
 
     @Override
@@ -62,9 +70,9 @@ public class NoteActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent mIntent = new Intent(NoteActivity.this, EditNoteActivity.class);
-                mIntent.putExtra("id", mID);
-//                mIntent.putExtra("Title", nameList[holder.getAdapterPosition()]);
-//                mIntent.putExtra("Note", noteList[holder.getAdapterPosition()]);
+                mIntent.putExtra("_id", id);
+                mIntent.putExtra("title", title);
+                mIntent.putExtra("content", note);
                 //mIntent.putExtra("Image", imgList[holder.getAdapterPosition()]);
                 NoteActivity.this.startActivity(mIntent);
             }
@@ -77,6 +85,39 @@ public class NoteActivity extends AppCompatActivity {
                 mAdapter.notifyItemRemoved(position);
                 mAdapter.notifyItemRangeChanged(position, mAdapter.getItemCount());
                 */
+                final RequestQueue mRequestQueue;
+                // Setup instance
+                mRequestQueue = Volley.newRequestQueue(NoteActivity.this);
+
+                String url = RestApis.KarmaGroups.vacapediaNotes + "/" + id;
+
+                StringRequest dr = new StringRequest(Request.Method.DELETE, url,
+                        new Response.Listener<String>()
+                        {
+                            @Override
+                            public void onResponse(String response) {
+                                // response
+//                                Toast.makeText(this, response, Toast.LENGTH_LONG).show();
+
+
+                                Intent in = new Intent(NoteActivity.this, NotesActivity.class);
+                                NoteActivity.this.startActivity( in );
+
+                                NoteActivity.this.finish();
+
+                            }
+                        },
+                        new Response.ErrorListener()
+                        {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // error.
+
+                            }
+                        }
+                );
+                mRequestQueue.add(dr);
+
             }
         });
 
@@ -94,10 +135,12 @@ public class NoteActivity extends AppCompatActivity {
 //                mFlower.setImageResource(mBundle.getInt("Image"));
 //            }
 
-            mID = mBundle.getString("Title");
+//            mID = mBundle.getString("Title");
 
-            mDescription.setText(mBundle.getString("Note"));
-            mTitle.setText(mBundle.getString("Title"));
+//            mDescription.setText(mBundle.getString("Note"));
+//            mTitle.setText(mBundle.getString("Title"));
+            mTitle.setText(title);
+            mDescription.setText(note);
 
             Drawable drawable = ContextCompat.getDrawable(this, R.drawable.ic_account_box_black_24dp);
             mToolbar.setOverflowIcon(drawable);

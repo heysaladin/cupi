@@ -192,5 +192,28 @@ public class NotesActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    protected void onStart() {
 
+//        getKarmaGroupsApiRequestNews();
+
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onResume() {
+
+//        getKarmaGroupsApiRequestNews();
+
+        super.onResume();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        // super.onBackPressed();
+        Intent mIntent = new Intent(this, MainActivity.class);
+        this.startActivity(mIntent);
+    }
 }

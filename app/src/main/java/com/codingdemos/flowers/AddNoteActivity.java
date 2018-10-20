@@ -132,7 +132,7 @@ public class AddNoteActivity extends AppCompatActivity
         }
         final JSONObject finalJobjContactDetails = jobjContactDetails;
         Log.d(TAG, "finalJobjContactDetails: " + finalJobjContactDetails);
-        response.postJson(RestApis.KarmaGroups.addNote, finalJobjContactDetails);
+        response.postJson(RestApis.KarmaGroups.vacapediaNotes, finalJobjContactDetails);
         if (alertDialog != null && alertDialog.isShowing()) {
             alertDialog.dismiss();
         }
@@ -147,7 +147,7 @@ public class AddNoteActivity extends AppCompatActivity
         } else {
             alertDialogBuilder = new AlertDialog.Builder(this);
         }
-        alertDialogBuilder.setMessage(message).setCancelable(false).setPositiveButton(getResources().getString(0),
+        alertDialogBuilder.setMessage(message).setCancelable(false).setPositiveButton(getResources().getString(R.string.ok),
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
