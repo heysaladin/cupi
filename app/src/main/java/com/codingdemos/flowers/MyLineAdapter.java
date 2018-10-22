@@ -46,32 +46,4 @@ public class MyLineAdapter extends RecyclerView.Adapter < FlowerViewHolder > {
         return mFlowerList.size();
     }
 
-
-
-//    @Override
-//    public PlayerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        View itemView = LayoutInflater.from(parent.getContext())
-//                .inflate(R.layout.player_row, parent, false);
-//
-//        return new PlayerViewHolder(itemView);
-//    }
-
-//    @Override
-//    public void onBindViewHolder(PlayerViewHolder holder, int position) {
-//        Player player = players.get(position);
-//        holder.name.setText(player.getName());
-//        holder.nationality.setText(player.getNationality());
-//        holder.club.setText(player.getClub());
-//        holder.rating.setText(player.getRating().toString());
-//        holder.age.setText(player.getAge().toString());
-//    }
-
-//    @Override
-//    public int getItemCount() {
-//        return players.size();
-//    }
-
-
-
-
 }

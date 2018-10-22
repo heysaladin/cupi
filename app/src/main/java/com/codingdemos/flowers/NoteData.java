@@ -6,25 +6,7 @@ public class NoteData {
     private String title;
     private String content;
 
-//    public NoteData(String noteId, String noteTitle, String noteContent) {
-//        this.set_id(noteId);
-//        this.setTitle(noteTitle);
-//        this.setContent(noteContent);
-//    }
-
-    public NoteData(){}
-
-//    public String getNoteId() {
-//        return get_id();
-//    }
-//
-//    public String getNoteTitle() {
-//        return getTitle();
-//    }
-//
-//    public String getNoteContent() {
-//        return getContent();
-//    }
+    public NoteData() {}
 
     public String get_id() {
         return _id;
@@ -49,4 +31,5 @@ public class NoteData {
     public void setContent(String content) {
         this.content = content;
     }
+
 }
