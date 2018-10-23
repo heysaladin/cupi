@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.codingdemos.flowers.R;
 
 import java.util.List;
@@ -17,9 +18,9 @@ import java.util.List;
 public class NotificationAdapter extends RecyclerView.Adapter < FlowerViewHolder > {
 
     private Context mContext;
-    private List < DestinationData > mFlowerList;
+    private List < DestinationsModel > mFlowerList;
 
-    public NotificationAdapter(Context mContext, List < DestinationData > mFlowerList) {
+    public NotificationAdapter(Context mContext, List < DestinationsModel > mFlowerList) {
         this.mContext = mContext;
         this.mFlowerList = mFlowerList;
     }
@@ -30,17 +31,41 @@ public class NotificationAdapter extends RecyclerView.Adapter < FlowerViewHolder
         return new FlowerViewHolder(mView);
     }
 
+//    @Override
+//    public void onBindViewHolder(final FlowerViewHolder holder, int position) {
+//        holder.mImage.setImageResource(mFlowerList.get(position).getDestinationImage());
+//        holder.mTitle.setText(mFlowerList.get(position).getDestinationName());
+//        holder.mCardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent mIntent = new Intent(mContext, DetailActivity.class);
+//                mIntent.putExtra("Title", mFlowerList.get(holder.getAdapterPosition()).getDestinationName());
+//                mIntent.putExtra("Description", mFlowerList.get(holder.getAdapterPosition()).getDestinationDescription());
+//                mIntent.putExtra("Image", mFlowerList.get(holder.getAdapterPosition()).getDestinationImage());
+//                mContext.startActivity(mIntent);
+//            }
+//        });
+//    }
+
     @Override
     public void onBindViewHolder(final FlowerViewHolder holder, int position) {
-        holder.mImage.setImageResource(mFlowerList.get(position).getDestinationImage());
-        holder.mTitle.setText(mFlowerList.get(position).getDestinationName());
+//        holder.mImage.setImageResource(mFlowerList.get(position).getDestinationImage());
+//        holder.mTitle.setText(mFlowerList.get(position).getDestinationName());
+//        holder.mImage.setImageResource(Integer.parseInt(mFlowerList.get(position).getImage()));
+        Glide.with(mContext)
+                .load(mFlowerList.get(position).getImage().replace(" ", "%20"))
+                .into(holder.mImage);
+        holder.mTitle.setText(mFlowerList.get(position).getName());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mIntent = new Intent(mContext, DetailActivity.class);
-                mIntent.putExtra("Title", mFlowerList.get(holder.getAdapterPosition()).getDestinationName());
-                mIntent.putExtra("Description", mFlowerList.get(holder.getAdapterPosition()).getDestinationDescription());
-                mIntent.putExtra("Image", mFlowerList.get(holder.getAdapterPosition()).getDestinationImage());
+//                mIntent.putExtra("Title", mFlowerList.get(holder.getAdapterPosition()).getDestinationName());
+//                mIntent.putExtra("Description", mFlowerList.get(holder.getAdapterPosition()).getDestinationDescription());
+//                mIntent.putExtra("Image", mFlowerList.get(holder.getAdapterPosition()).getDestinationImage());
+                mIntent.putExtra("Title", mFlowerList.get(holder.getAdapterPosition()).getName());
+                mIntent.putExtra("Description", "desc");
+                mIntent.putExtra("Image", mFlowerList.get(holder.getAdapterPosition()).getImage());
                 mContext.startActivity(mIntent);
             }
         });
