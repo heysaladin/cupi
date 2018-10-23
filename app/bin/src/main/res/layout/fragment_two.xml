@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#eee"
     android:orientation="vertical"
-    tools:context="com.codingdemos.flowers.MainActivity">
+    tools:context="com.codingdemos.flowers.com.codingdemos.vacapedia.MainActivity">
     <android.support.v7.widget.RecyclerView
         android:clipToPadding="false"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"

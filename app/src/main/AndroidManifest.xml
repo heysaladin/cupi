@@ -45,7 +45,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.codingdemos.vacapedia.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -53,12 +53,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailActivity" />
-        <activity android:name=".NotesActivity" />
-        <activity android:name=".NoteActivity" />
-        <activity android:name=".NotificationsActivity" />
-        <activity android:name=".AddNoteActivity" />
-        <activity android:name=".EditNoteActivity" />
+        <activity android:name="com.codingdemos.vacapedia.DetailActivity" />
+        <activity android:name="com.codingdemos.vacapedia.NotesActivity" />
+        <activity android:name="com.codingdemos.vacapedia.NoteActivity" />
+        <activity android:name="com.codingdemos.vacapedia.NotificationsActivity" />
+        <activity android:name="com.codingdemos.vacapedia.AddNoteActivity" />
+        <activity android:name="com.codingdemos.vacapedia.EditNoteActivity" />
     </application>
 
 </manifest>

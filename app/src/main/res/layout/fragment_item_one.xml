@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.codingdemos.flowers.MainActivity">
+    tools:context="com.codingdemos.flowers.com.codingdemos.vacapedia.MainActivity">
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs"
         app:elevation="10dp"
