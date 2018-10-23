@@ -15,20 +15,20 @@ import com.codingdemos.flowers.R;
 
 import java.util.List;
 
-public class NotificationAdapter extends RecyclerView.Adapter < FlowerViewHolder > {
+public class NotificationAdapter extends RecyclerView.Adapter < NotificationViewHolder > {
 
     private Context mContext;
-    private List < DestinationsModel > mFlowerList;
+    private List < NotificationsModel > mFlowerList;
 
-    public NotificationAdapter(Context mContext, List < DestinationsModel > mFlowerList) {
+    public NotificationAdapter(Context mContext, List < NotificationsModel > mFlowerList) {
         this.mContext = mContext;
         this.mFlowerList = mFlowerList;
     }
 
     @Override
-    public FlowerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public NotificationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_row_item_notification, parent, false);
-        return new FlowerViewHolder(mView);
+        return new NotificationViewHolder(mView);
     }
 
 //    @Override
@@ -48,14 +48,14 @@ public class NotificationAdapter extends RecyclerView.Adapter < FlowerViewHolder
 //    }
 
     @Override
-    public void onBindViewHolder(final FlowerViewHolder holder, int position) {
+    public void onBindViewHolder(final NotificationViewHolder holder, int position) {
 //        holder.mImage.setImageResource(mFlowerList.get(position).getDestinationImage());
 //        holder.mTitle.setText(mFlowerList.get(position).getDestinationName());
 //        holder.mImage.setImageResource(Integer.parseInt(mFlowerList.get(position).getImage()));
         Glide.with(mContext)
                 .load(mFlowerList.get(position).getImage().replace(" ", "%20"))
                 .into(holder.mImage);
-        holder.mTitle.setText(mFlowerList.get(position).getName());
+        holder.mTitle.setText(mFlowerList.get(position).getTitle());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,7 +63,7 @@ public class NotificationAdapter extends RecyclerView.Adapter < FlowerViewHolder
 //                mIntent.putExtra("Title", mFlowerList.get(holder.getAdapterPosition()).getDestinationName());
 //                mIntent.putExtra("Description", mFlowerList.get(holder.getAdapterPosition()).getDestinationDescription());
 //                mIntent.putExtra("Image", mFlowerList.get(holder.getAdapterPosition()).getDestinationImage());
-                mIntent.putExtra("Title", mFlowerList.get(holder.getAdapterPosition()).getName());
+                mIntent.putExtra("Title", mFlowerList.get(holder.getAdapterPosition()).getTitle());
                 mIntent.putExtra("Description", "desc");
                 mIntent.putExtra("Image", mFlowerList.get(holder.getAdapterPosition()).getImage());
                 mContext.startActivity(mIntent);

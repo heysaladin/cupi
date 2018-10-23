@@ -22,12 +22,14 @@ public class SliderAdapter extends PagerAdapter {
     private Context context;
     private List < Integer > color;
     private List < String > colorName;
+    private List < String > colorCopy;
     private List < String > colorImage;
 
-    public SliderAdapter(Context context, List < Integer > color, List < String > colorName, List < String > colorImage) {
+    public SliderAdapter(Context context, List < Integer > color, List < String > colorName, List < String > colorCopy, List < String > colorImage) {
         this.context = context;
         this.color = color;
         this.colorName = colorName;
+        this.colorCopy = colorCopy;
         this.colorImage = colorImage;
     }
 
@@ -49,9 +51,11 @@ public class SliderAdapter extends PagerAdapter {
 
         TextView textView = (TextView) view.findViewById(R.id.textView);
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.relativeLayout);
+        TextView textViewDesc = (TextView) view.findViewById(R.id.textViewDesc);
 
         textView.setText(colorName.get(position));
         relativeLayout.setBackgroundColor(color.get(position));
+        textViewDesc.setText(colorCopy.get(position));
 
         ImageView imageView = (ImageView) view.findViewById(R.id.item_slide_image_iv);
         Glide.with(context)

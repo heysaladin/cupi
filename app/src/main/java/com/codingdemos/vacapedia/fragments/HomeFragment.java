@@ -49,6 +49,7 @@ public class HomeFragment extends Fragment
 
     private JSONArray dataDestinations = null;
     private JSONArray dataNews = null;
+    private JSONArray dataSlides = null;
 
     private ViewPager viewPager;
     private TabLayout indicator;
@@ -56,6 +57,7 @@ public class HomeFragment extends Fragment
     private List < Integer > color;
     private List < String > colorName;
     private List < String > colorImage;
+    private List < String > colorCopy;
 
     private ArrayList < DestinationsModel > destinationsArrayListBuffer, destinationsArrayListArchBuffer, destinationsArrayListCulinaryBuffer, destinationsArrayListArtBuffer;
 
@@ -92,36 +94,7 @@ public class HomeFragment extends Fragment
 
         getKarmaGroupsApiRequest();
         getKarmaGroupsApiRequestNews();
-
-        viewPager = (ViewPager) view.findViewById(R.id.viewPager);
-        indicator = (TabLayout) view.findViewById(R.id.indicator);
-
-        color = new ArrayList < > ();
-        color.add(Color.BLACK);
-        color.add(Color.BLACK);
-        color.add(Color.BLACK);
-        color.add(Color.BLACK);
-        color.add(Color.BLACK);
-
-        colorName = new ArrayList < > ();
-        colorName.add("Fun on Beach");
-        colorName.add("Amazing Tample");
-        colorName.add("Exotic Culinaries");
-        colorName.add("Wonderful Cultures");
-        colorName.add("Vacation Planning");
-
-        colorImage = new ArrayList < > ();
-        colorImage.add("http://www.bravotv.com/sites/nbcubravotv/files/field_blog_image/2017/05/most-wanted-beach-must-haves-promote.jpg");
-        colorImage.add("https://image.freepik.com/free-photo/pura-ulun-danu-bratan-temple-bali-indonesia_30824-288.jpg");
-        colorImage.add("https://s20642.pcdn.co/wp-content/uploads/2016/07/Bumbu-Bali-Nusa.jpg");
-        colorImage.add("https://statik.tempo.co/data/2015/12/30/id_468670/468670_620.jpg");
-        colorImage.add("https://s.yimg.com/ny/api/res/1.2/NmvEqUC_SWc12zxYi6GwsQ--~A/YXBwaWQ9aGlnaGxhbmRlcjtzbT0xO3c9ODAwO2lsPXBsYW5l/http://41.media.tumblr.com/535416e4be3cca14974d7d5a6d9d65df/tumblr_inline_nz6mhnXO6r1tcrvl6_1280.jpg");
-
-        viewPager.setAdapter(new SliderAdapter(this.getContext(), color, colorName, colorImage));
-        indicator.setupWithViewPager(viewPager, true);
-
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new SliderTimer(), 4000, 6000);
+        getKarmaGroupsApiRequestSlides();
 
         return view;
     }
@@ -186,22 +159,7 @@ public class HomeFragment extends Fragment
 
     private void processData() {
         try {
-            JSONArray dataJson = new JSONArray();
-            JSONObject dataObj = new JSONObject(
-                    "{" +
-                            "\"name\":" + "\"name\"" + "," +
-                            "\"postID\":" + "\"name\"" + "," +
-                            "\"image\":" + "\"https://www.dakwatuna.com/wp-content/uploads/2015/07/masjidil-haram.jpg\"" + "," +
-                            "\"bgimage\":" + "\"https://www.dakwatuna.com/wp-content/uploads/2015/07/masjidil-haram.jpg\"" + "," +
-                            "\"favouriteStatus\":" + 0 + "," +
-                            "\"id\":" + "1" + "," +
-                            "\"isParent\":" + "0" + "," +
-                            "\"child\":" + "0" + "," +
-                            "\"email\":" + null +
-                            "}"
-            );
-
-            dataJson = dataDestinations;
+            JSONArray dataJson = dataDestinations;
 
             destinationsArrayListBuffer = new ArrayList < > ();
             destinationsArrayListArchBuffer = new ArrayList < > ();
@@ -243,8 +201,6 @@ public class HomeFragment extends Fragment
                 model.setMenuName("nama" + j);
                 model.setName(job.optString(name));
                 model.setPostID(job.optString("id"));
-                String img = "https://www.dakwatuna.com/wp-content/uploads/2015/07/masjidil-haram.jpg";
-                Log.d("LOG", "img >>>>>>>>> " + img);
                 model.setImage(job.optString(image));
 
                 switch (Integer.parseInt(job.optString("category"))) {
@@ -304,19 +260,6 @@ public class HomeFragment extends Fragment
     private void processDataNews() {
         try {
             JSONArray dataJson = new JSONArray();
-            JSONObject dataObj = new JSONObject(
-                    "{" +
-                            "\"name\":" + "\"name\"" + "," +
-                            "\"postID\":" + "\"name\"" + "," +
-                            "\"image\":" + "\"https://www.dakwatuna.com/wp-content/uploads/2015/07/masjidil-haram.jpg\"" + "," +
-                            "\"bgimage\":" + "\"https://www.dakwatuna.com/wp-content/uploads/2015/07/masjidil-haram.jpg\"" + "," +
-                            "\"favouriteStatus\":" + 0 + "," +
-                            "\"id\":" + "1" + "," +
-                            "\"isParent\":" + "0" + "," +
-                            "\"child\":" + "0" + "," +
-                            "\"email\":" + null +
-                            "}"
-            );
             List < Integer > numbers = new ArrayList < > ();
             for (int i = 0; i < dataNews.length(); i++) {
                 numbers.add(i);
@@ -381,6 +324,12 @@ public class HomeFragment extends Fragment
         response.getAsyncHttp(RestApis.KarmaGroups.vacapediaNews, params);
     }
 
+    private void getKarmaGroupsApiRequestSlides() {
+        AsyncHttpResponse response = new AsyncHttpResponse(this, false);
+        RequestParams params = new RequestParams();
+        response.getAsyncHttp(RestApis.KarmaGroups.vacapediaSlides, params);
+    }
+
     @Override
     public void onAsyncHttpResponseGet(String response, String url) throws JSONException {
         Log.d("TAG", "onAsyncHttpResponseGet() called with: response = [" + response + "], url = [" + url + "]");
@@ -393,6 +342,59 @@ public class HomeFragment extends Fragment
             Log.d("TAG", "x onAsyncHttpResponseGet() called with: response = [" + response + "], url = [" + url + "]");
             dataNews = new JSONArray(response);
             processDataNews();
+        }
+        if (url.equals(RestApis.KarmaGroups.vacapediaSlides)) {
+            Log.d("TAG", "x onAsyncHttpResponseGet() called with: response = [" + response + "], url = [" + url + "]");
+            dataSlides = new JSONArray(response);
+
+            viewPager = (ViewPager) view.findViewById(R.id.viewPager);
+            indicator = (TabLayout) view.findViewById(R.id.indicator);
+
+            color = new ArrayList < > ();
+//        color.add(Color.BLACK);
+//        color.add(Color.BLACK);
+//        color.add(Color.BLACK);
+//        color.add(Color.BLACK);
+//        color.add(Color.BLACK);
+
+            colorName = new ArrayList < > ();
+//        colorName.add("Fun on Beach");
+//        colorName.add("Amazing Tample");
+//        colorName.add("Exotic Culinaries");
+//        colorName.add("Wonderful Cultures");
+//        colorName.add("Vacation Planning");
+
+
+            colorCopy = new ArrayList < > ();
+
+            colorImage = new ArrayList < > ();
+//        colorImage.add("http://www.bravotv.com/sites/nbcubravotv/files/field_blog_image/2017/05/most-wanted-beach-must-haves-promote.jpg");
+//        colorImage.add("https://image.freepik.com/free-photo/pura-ulun-danu-bratan-temple-bali-indonesia_30824-288.jpg");
+//        colorImage.add("https://s20642.pcdn.co/wp-content/uploads/2016/07/Bumbu-Bali-Nusa.jpg");
+//        colorImage.add("https://statik.tempo.co/data/2015/12/30/id_468670/468670_620.jpg");
+//        colorImage.add("https://s.yimg.com/ny/api/res/1.2/NmvEqUC_SWc12zxYi6GwsQ--~A/YXBwaWQ9aGlnaGxhbmRlcjtzbT0xO3c9ODAwO2lsPXBsYW5l/http://41.media.tumblr.com/535416e4be3cca14974d7d5a6d9d65df/tumblr_inline_nz6mhnXO6r1tcrvl6_1280.jpg");
+
+            if (dataSlides != null) {
+                try {
+                    JSONArray jarry = dataSlides;
+                    for (int j = 0; j < jarry.length(); j++) {
+                        JSONObject job = jarry.getJSONObject(j);
+                        color.add(Color.BLACK);
+                        colorName.add(job.optString("title"));
+                        colorCopy.add(job.optString("body_copy"));
+                        colorImage.add(job.optString("image"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            viewPager.setAdapter(new SliderAdapter(this.getContext(), color, colorName, colorCopy, colorImage));
+            indicator.setupWithViewPager(viewPager, true);
+
+            Timer timer = new Timer();
+            timer.scheduleAtFixedRate(new SliderTimer(), 4000, 6000);
+
         }
     }
 
