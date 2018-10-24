@@ -17,7 +17,7 @@ import com.codingdemos.flowers.R;
 
 import java.util.ArrayList;
 
-public class SlidesAdapter extends RecyclerView.Adapter < SlidesAdapter.AdapterHolder > {
+public class UserAdapter extends RecyclerView.Adapter < UserAdapter.AdapterHolder > {
 
     String group_karma_beach = "Karma Beach";
     String group_karma_spa = "Karma Spa";
@@ -32,20 +32,20 @@ public class SlidesAdapter extends RecyclerView.Adapter < SlidesAdapter.AdapterH
     ArrayList < NotificationsModel > arrayList;
     Context context;
 
-    public SlidesAdapter(Context context, ArrayList < NotificationsModel > arrayList) {
+    public UserAdapter(Context context, ArrayList < NotificationsModel > arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
 
     @Override
-    public SlidesAdapter.AdapterHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public UserAdapter.AdapterHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_destination, parent, false);
         AdapterHolder viewHolder = new AdapterHolder(itemLayoutView);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(SlidesAdapter.AdapterHolder holder, int position) {
+    public void onBindViewHolder(UserAdapter.AdapterHolder holder, int position) {
         final NotificationsModel model = arrayList.get(position);
         String img = "https://www.dakwatuna.com/wp-content/uploads/2015/07/masjidil-haram.jpg";
         Log.d("LOG", "model.getImage() +++++++++++++++ " + model.getImage());

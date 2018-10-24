@@ -43,6 +43,11 @@ public class MainActivity extends AppCompatActivity {
                 Intent mIntentNotificstions = new Intent(this, NotificationsActivity.class);
                 this.startActivity(mIntentNotificstions);
                 return true;
+            case R.id.action_add:
+                Toast.makeText(this, "Destination", Toast.LENGTH_SHORT).show();
+                Intent mIntentDestinationAdd = new Intent(this, AddDestinationActivity.class);
+                this.startActivity(mIntentDestinationAdd);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

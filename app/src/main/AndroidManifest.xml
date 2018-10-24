@@ -59,6 +59,8 @@
         <activity android:name="com.codingdemos.vacapedia.NotificationsActivity" />
         <activity android:name="com.codingdemos.vacapedia.AddNoteActivity" />
         <activity android:name="com.codingdemos.vacapedia.EditNoteActivity" />
+        <activity android:name="com.codingdemos.vacapedia.AddDestinationActivity" />
+        <activity android:name="com.codingdemos.vacapedia.EditDestinationActivity" />
     </application>
 
 </manifest>
