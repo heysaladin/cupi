@@ -18,4 +18,20 @@
         android:icon="@drawable/ic_edit_black_24dp"
         app:showAsAction="ifRoom"
         android:title="Compose" />
+    <item android:id="@+id/action_add_slide"
+        android:orderInCategory="11"
+        android:title="Add Slide"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_list_slides"
+        android:orderInCategory="11"
+        android:title="List Slide"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_add_promo"
+        android:orderInCategory="11"
+        android:title="Add Promo"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_list_promos"
+        android:orderInCategory="11"
+        android:title="List Promo"
+        app:showAsAction="never"/>
 </menu>

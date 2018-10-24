@@ -34,7 +34,7 @@ public class AddDestinationActivity extends AppCompatActivity
     private EditText image;
     private EditText category;
     private EditText location;
-    private EditText decription;
+    private EditText description;
     private EditText latitude;
     private EditText longitude;
     private EditText address;
@@ -78,7 +78,7 @@ public class AddDestinationActivity extends AppCompatActivity
         image = (EditText) findViewById(R.id.image);
         category = (EditText) findViewById(R.id.category);
         location = (EditText) findViewById(R.id.location);
-        decription = (EditText) findViewById(R.id.decription);
+        description = (EditText) findViewById(R.id.description);
         latitude = (EditText) findViewById(R.id.latitude);
         longitude = (EditText) findViewById(R.id.longitude);
         address = (EditText) findViewById(R.id.address);
@@ -114,22 +114,21 @@ public class AddDestinationActivity extends AppCompatActivity
     @SuppressLint("LongLogTag")
     private void bookValidations() {
         final AsyncHttpResponse responseValidation = new AsyncHttpResponse(this, true);
-//        if (title_tv.getText() == null || title_tv.length() == 0) {
-//            alertWithOk(this, "please provide title!");
-//        } else if (note_tv.getText() == null || note_tv.length() == 0) {
-//            alertWithOk(this, "please provide note content!");
-//        } else {
+        if (name.getText() == null || name.length() == 0) {
+            alertWithOk(this, "please provide name!");
+        } else if (image.getText() == null || image.length() == 0) {
+            alertWithOk(this, "please provide note image!");
+        } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 alertDialogBuilder = new AlertDialog.Builder(this, Theme_Material_Light_Dialog_Alert);
             } else {
                 alertDialogBuilder = new AlertDialog.Builder(this);
             }
-            StringBuilder listAgeChildren = new StringBuilder("");
             afterSuccess();
             synchronized(responseValidation) {
                 alertForSuccessfulBookingEnquiry("Thank you, your submission has been sent.");
             }
-//        }
+        }
     }
 
     @SuppressLint("LongLogTag")
@@ -148,7 +147,7 @@ public class AddDestinationActivity extends AppCompatActivity
             jobjContactDetails.put("image", String.valueOf(image.getText()).trim());
             jobjContactDetails.put("category", String.valueOf(category.getText()).trim());
             jobjContactDetails.put("location", String.valueOf(location.getText()).trim());
-            jobjContactDetails.put("decription", String.valueOf(decription.getText()).trim());
+            jobjContactDetails.put("description", String.valueOf(description.getText()).trim());
             jobjContactDetails.put("latitude", String.valueOf(latitude.getText()).trim());
             jobjContactDetails.put("longitude", String.valueOf(longitude.getText()).trim());
             jobjContactDetails.put("address", String.valueOf(address.getText()).trim());

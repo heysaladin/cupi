@@ -14,28 +14,28 @@ import com.codingdemos.flowers.R;
 
 import java.util.List;
 
-public class NotificationAdapter extends RecyclerView.Adapter < NotificationViewHolder > {
+public class FamilyAdapter extends RecyclerView.Adapter < FamilyViewHolder > {
 
     private Context mContext;
-    private List < NotificationsModel > mFlowerList;
+    private List < FamilyModel > mFlowerList;
 
-    public NotificationAdapter(Context mContext, List < NotificationsModel > mFlowerList) {
+    public FamilyAdapter(Context mContext, List < FamilyModel > mFlowerList) {
         this.mContext = mContext;
         this.mFlowerList = mFlowerList;
     }
 
     @Override
-    public NotificationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FamilyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_row_item_notification, parent, false);
-        return new NotificationViewHolder(mView);
+        return new FamilyViewHolder(mView);
     }
 
     @Override
-    public void onBindViewHolder(final NotificationViewHolder holder, int position) {
+    public void onBindViewHolder(final FamilyViewHolder holder, int position) {
         Glide.with(mContext)
-                .load(mFlowerList.get(position).getImage().replace(" ", "%20"))
+                .load(mFlowerList.get(position).getFamily_photo().replace(" ", "%20"))
                 .into(holder.mImage);
-        holder.mTitle.setText(mFlowerList.get(position).getTitle());
+        holder.mTitle.setText(mFlowerList.get(position).getName());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,13 +56,13 @@ public class NotificationAdapter extends RecyclerView.Adapter < NotificationView
     }
 }
 
-class NotificationViewHolder extends RecyclerView.ViewHolder {
+class FamilyViewHolder extends RecyclerView.ViewHolder {
 
     ImageView mImage;
     TextView mTitle;
     CardView mCardView;
 
-    NotificationViewHolder(View itemView) {
+    FamilyViewHolder(View itemView) {
         super(itemView);
 
         mImage = itemView.findViewById(R.id.ivImage);

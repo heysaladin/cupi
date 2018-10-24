@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 
 import com.codingdemos.flowers.R;
 import com.codingdemos.vacapedia.DestinationsModel;
-import com.codingdemos.vacapedia.DetailActivity;
+import com.codingdemos.vacapedia.EditDestinationActivity;
 import com.codingdemos.vacapedia.GuestDestinationsAdapter;
 import com.codingdemos.vacapedia.MainActivity;
 import com.codingdemos.vacapedia.MyLineAdapter;
@@ -75,10 +75,20 @@ public class DestinationsEditPageFragment
     }
 
     private void callEdit(int position) {
-        Intent mIntent = new Intent(DestinationsEditPageFragment.this.getActivity(), DetailActivity.class);
-        mIntent.putExtra("Title", destinationsArrayListBuffer.get(position).getName());
-        mIntent.putExtra("Description", "description");
-        mIntent.putExtra("Image", destinationsArrayListBuffer.get(position).getImage());
+        Intent mIntent = new Intent(DestinationsEditPageFragment.this.getActivity(), EditDestinationActivity.class);
+        mIntent.putExtra("_id", destinationsArrayListBuffer.get(position).get_id());
+        mIntent.putExtra("name", destinationsArrayListBuffer.get(position).getName());
+        mIntent.putExtra("image", destinationsArrayListBuffer.get(position).getImage());
+        mIntent.putExtra("category", destinationsArrayListBuffer.get(position).getCategory());
+        mIntent.putExtra("location", destinationsArrayListBuffer.get(position).getLocation());
+        mIntent.putExtra("description", destinationsArrayListBuffer.get(position).getDescription());
+        mIntent.putExtra("latitude", destinationsArrayListBuffer.get(position).getLatitude());
+        mIntent.putExtra("longitude", destinationsArrayListBuffer.get(position).getLongitude());
+        mIntent.putExtra("address", destinationsArrayListBuffer.get(position).getAddress());
+        mIntent.putExtra("distance", destinationsArrayListBuffer.get(position).getDistance());
+        mIntent.putExtra("note", destinationsArrayListBuffer.get(position).getNote());
+        mIntent.putExtra("costs", destinationsArrayListBuffer.get(position).getCosts());
+        mIntent.putExtra("total_cost", destinationsArrayListBuffer.get(position).getTotal_cost());
         DestinationsEditPageFragment.this.getActivity().startActivity(mIntent);
     }
 
@@ -129,6 +139,19 @@ public class DestinationsEditPageFragment
                 model.setName(job.optString(name));
                 model.setPostID(job.optString("id"));
                 model.setImage(job.optString(image));
+
+                model.set_id(job.optString("_id"));
+                model.setCategory(job.optString("category"));
+                model.setLocation(job.optString("location"));
+                model.setDescription(job.optString("description"));
+                model.setLatitude(job.optString("latitude"));
+                model.setLongitude(job.optString("longitude"));
+                model.setAddress(job.optString("address"));
+                model.setDistance(job.optString("distance"));
+                model.setNote(job.optString("note"));
+                model.setCosts(job.optString("costs"));
+                model.setTotal_cost(job.optString("total_cost"));
+
                 dma.add(model);
                 destinationsArrayList.add(model);
             }

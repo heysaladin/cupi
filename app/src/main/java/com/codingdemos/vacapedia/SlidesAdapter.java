@@ -1,6 +1,7 @@
 package com.codingdemos.vacapedia;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,24 +15,24 @@ import com.codingdemos.flowers.R;
 
 import java.util.List;
 
-public class NotificationAdapter extends RecyclerView.Adapter < NotificationViewHolder > {
+public class SlidesAdapter extends RecyclerView.Adapter < SlidesViewHolder > {
 
     private Context mContext;
-    private List < NotificationsModel > mFlowerList;
+    private List < SlidesModel > mFlowerList;
 
-    public NotificationAdapter(Context mContext, List < NotificationsModel > mFlowerList) {
+    public SlidesAdapter(Context mContext, List < SlidesModel > mFlowerList) {
         this.mContext = mContext;
         this.mFlowerList = mFlowerList;
     }
 
     @Override
-    public NotificationViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SlidesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_row_item_notification, parent, false);
-        return new NotificationViewHolder(mView);
+        return new SlidesViewHolder(mView);
     }
 
     @Override
-    public void onBindViewHolder(final NotificationViewHolder holder, int position) {
+    public void onBindViewHolder(final SlidesViewHolder holder, int position) {
         Glide.with(mContext)
                 .load(mFlowerList.get(position).getImage().replace(" ", "%20"))
                 .into(holder.mImage);
@@ -39,13 +40,14 @@ public class NotificationAdapter extends RecyclerView.Adapter < NotificationView
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-    /*
-    Intent mIntent = new Intent(mContext, DetailActivity.class);
-    mIntent.putExtra("Title", mFlowerList.get(holder.getAdapterPosition()).getTitle());
-    mIntent.putExtra("Description", "desc");
-    mIntent.putExtra("Image", mFlowerList.get(holder.getAdapterPosition()).getImage());
-    mContext.startActivity(mIntent);
-    */
+                Intent mIntent = new Intent(mContext, EditSlideActivity.class);
+                mIntent.putExtra("_id", mFlowerList.get(holder.getAdapterPosition()).get_id());
+                mIntent.putExtra("body_copy", mFlowerList.get(holder.getAdapterPosition()).getBody_copy());
+                mIntent.putExtra("category", mFlowerList.get(holder.getAdapterPosition()).getCategory());
+                mIntent.putExtra("title", mFlowerList.get(holder.getAdapterPosition()).getTitle());
+                mIntent.putExtra("description", mFlowerList.get(holder.getAdapterPosition()).getDescription());
+                mIntent.putExtra("image", mFlowerList.get(holder.getAdapterPosition()).getImage());
+                mContext.startActivity(mIntent);
             }
         });
     }
@@ -56,17 +58,18 @@ public class NotificationAdapter extends RecyclerView.Adapter < NotificationView
     }
 }
 
-class NotificationViewHolder extends RecyclerView.ViewHolder {
+class SlidesViewHolder extends RecyclerView.ViewHolder {
 
     ImageView mImage;
     TextView mTitle;
     CardView mCardView;
 
-    NotificationViewHolder(View itemView) {
+    SlidesViewHolder(View itemView) {
         super(itemView);
 
         mImage = itemView.findViewById(R.id.ivImage);
         mTitle = itemView.findViewById(R.id.tvTitle);
         mCardView = itemView.findViewById(R.id.cardview);
     }
+
 }

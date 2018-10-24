@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.codingdemos.flowers.R;
 import com.codingdemos.vacapedia.rest.AsyncHttpResponse;
@@ -25,13 +24,16 @@ import org.json.JSONObject;
 
 import static android.R.style.Theme_Material_Light_Dialog_Alert;
 
-public class AddNoteActivity extends AppCompatActivity
+public class AddPromoActivity extends AppCompatActivity
         implements View.OnClickListener,
         AsyncHttpResponse.AsyncHttpResponseListener {
     Toolbar mToolbar;
-    private static final String TAG = "AddNoteActivity";
-    private EditText title_tv;
-    private EditText note_tv;
+    private static final String TAG = "AddDestinationActivity";
+    private EditText title;
+    private EditText image;
+    private EditText category;
+    private EditText body_copy;
+    private EditText description;
     private AlertDialog.Builder alertDialogBuilder = null;
     private AlertDialog alertDialog = null;
 
@@ -42,7 +44,7 @@ public class AddNoteActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_note_add);
+        setContentView(R.layout.activity_promo_add);
         mToolbar = findViewById(R.id.toolbar);
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -64,8 +66,11 @@ public class AddNoteActivity extends AppCompatActivity
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         TextView dd_booking_form_tv = (TextView) findViewById(R.id.dd_booking_form_tv);
         dd_booking_form_tv.setOnClickListener(this);
-        title_tv = (EditText) findViewById(R.id.title_tv);
-        note_tv = (EditText) findViewById(R.id.note_tv);
+        title = (EditText) findViewById(R.id.title);
+        image = (EditText) findViewById(R.id.image);
+        category = (EditText) findViewById(R.id.category);
+        body_copy = (EditText) findViewById(R.id.body_copy);
+        description = (EditText) findViewById(R.id.description);
     }
 
     /*
@@ -94,17 +99,16 @@ public class AddNoteActivity extends AppCompatActivity
     @SuppressLint("LongLogTag")
     private void bookValidations() {
         final AsyncHttpResponse responseValidation = new AsyncHttpResponse(this, true);
-        if (title_tv.getText() == null || title_tv.length() == 0) {
+        if (title.getText() == null || title.length() == 0) {
             alertWithOk(this, "please provide title!");
-        } else if (note_tv.getText() == null || note_tv.length() == 0) {
-            alertWithOk(this, "please provide note content!");
+        } else if (image.getText() == null || image.length() == 0) {
+            alertWithOk(this, "please provide note image!");
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 alertDialogBuilder = new AlertDialog.Builder(this, Theme_Material_Light_Dialog_Alert);
             } else {
                 alertDialogBuilder = new AlertDialog.Builder(this);
             }
-            StringBuilder listAgeChildren = new StringBuilder("");
             afterSuccess();
             synchronized(responseValidation) {
                 alertForSuccessfulBookingEnquiry("Thank you, your submission has been sent.");
@@ -123,8 +127,11 @@ public class AddNoteActivity extends AppCompatActivity
         JSONObject jobjContactDetails = null;
         try {
             jobjContactDetails = new JSONObject();
-            jobjContactDetails.put("title", String.valueOf(title_tv.getText()).trim());
-            jobjContactDetails.put("content", String.valueOf(note_tv.getText()).trim());
+            jobjContactDetails.put("title", String.valueOf(title.getText()).trim());
+            jobjContactDetails.put("image", String.valueOf(image.getText()).trim());
+            jobjContactDetails.put("category", String.valueOf(category.getText()).trim());
+            jobjContactDetails.put("body_copy", String.valueOf(body_copy.getText()).trim());
+            jobjContactDetails.put("description", String.valueOf(description.getText()).trim());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -135,7 +142,7 @@ public class AddNoteActivity extends AppCompatActivity
         }
         final JSONObject finalJobjContactDetails = jobjContactDetails;
         Log.d(TAG, "finalJobjContactDetails: " + finalJobjContactDetails);
-        response.postJson(RestApis.KarmaGroups.vacapediaNotes, finalJobjContactDetails);
+        response.postJson(RestApis.KarmaGroups.vacapediaNews, finalJobjContactDetails);
         if (alertDialog != null && alertDialog.isShowing()) {
             alertDialog.dismiss();
         }
@@ -154,10 +161,10 @@ public class AddNoteActivity extends AppCompatActivity
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
-                        Intent in = new Intent(AddNoteActivity.this, NotesActivity.class);
-                        AddNoteActivity.this.startActivity( in );
-                        AddNoteActivity.this.finish();
-                        Toast.makeText(AddNoteActivity.this, "Thank You", Toast.LENGTH_LONG).show();
+                        Intent in = new Intent(AddPromoActivity.this, MainActivity.class);
+                        AddPromoActivity.this.startActivity( in );
+                        AddPromoActivity.this.finish();
+                        // Toast.makeText(AddNoteActivity.this, "Thank You", Toast.LENGTH_LONG).show();
                     }
                 });
         if (alertDialog != null && alertDialog.isShowing()) {

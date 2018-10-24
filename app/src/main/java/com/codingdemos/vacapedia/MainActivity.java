@@ -44,9 +44,29 @@ public class MainActivity extends AppCompatActivity {
                 this.startActivity(mIntentNotificstions);
                 return true;
             case R.id.action_add:
-                Toast.makeText(this, "Destination", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "AddDestinationActivity", Toast.LENGTH_SHORT).show();
                 Intent mIntentDestinationAdd = new Intent(this, AddDestinationActivity.class);
                 this.startActivity(mIntentDestinationAdd);
+                return true;
+            case R.id.action_add_slide:
+                Toast.makeText(this, "AddSlideActivity", Toast.LENGTH_SHORT).show();
+                Intent mIntentDestinationAddSlide = new Intent(this, AddSlideActivity.class);
+                this.startActivity(mIntentDestinationAddSlide);
+                return true;
+            case R.id.action_add_promo:
+                Toast.makeText(this, "AddPromoActivity", Toast.LENGTH_SHORT).show();
+                Intent mIntentDestinationAddPromo = new Intent(this, AddPromoActivity.class);
+                this.startActivity(mIntentDestinationAddPromo);
+                return true;
+            case R.id.action_list_slides:
+                Toast.makeText(this, "ListSlideActivity", Toast.LENGTH_SHORT).show();
+                Intent mIntentDestinationAddSlides = new Intent(this, ListSlidesActivity.class);
+                this.startActivity(mIntentDestinationAddSlides);
+                return true;
+            case R.id.action_list_promos:
+                Toast.makeText(this, "ListPromoActivity", Toast.LENGTH_SHORT).show();
+                Intent mIntentDestinationAddPromos = new Intent(this, ListPromosActivity.class);
+                this.startActivity(mIntentDestinationAddPromos);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
