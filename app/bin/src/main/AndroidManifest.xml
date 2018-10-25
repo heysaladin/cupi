@@ -57,6 +57,17 @@
         <activity android:name="com.codingdemos.vacapedia.NotesActivity" />
         <activity android:name="com.codingdemos.vacapedia.NoteActivity" />
         <activity android:name="com.codingdemos.vacapedia.NotificationsActivity" />
+        <activity android:name="com.codingdemos.vacapedia.AddNoteActivity" />
+        <activity android:name="com.codingdemos.vacapedia.EditNoteActivity" />
+        <activity android:name="com.codingdemos.vacapedia.AddDestinationActivity" />
+        <activity android:name="com.codingdemos.vacapedia.EditDestinationActivity" />
+        <activity android:name="com.codingdemos.vacapedia.AddSlideActivity" />
+        <activity android:name="com.codingdemos.vacapedia.EditSlideActivity" />
+        <activity android:name="com.codingdemos.vacapedia.AddPromoActivity" />
+        <activity android:name="com.codingdemos.vacapedia.EditPromoActivity" />
+        <activity android:name="com.codingdemos.vacapedia.ListSlidesActivity" />
+        <activity android:name="com.codingdemos.vacapedia.ListPromosActivity" />
+        <activity android:name="com.codingdemos.vacapedia.ScrollActivity" />
     </application>
 
 </manifest>

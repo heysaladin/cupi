@@ -34,7 +34,6 @@
           app:cardCornerRadius="@dimen/space_8dp"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:layout_below="@+id/header_cover_image"
           android:layout_centerHorizontal="true"
           android:layout_marginTop="0dp"
           app:cardElevation="5dp">
@@ -60,6 +59,27 @@
           android:paddingHorizontal="25dp"
           android:text="TextView"
           android:textSize="18sp" />
+      <LinearLayout
+          android:padding="@dimen/space_10dp"
+          android:gravity="right"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+        <ImageView
+            android:layout_marginVertical="@dimen/space_5dp"
+            android:layout_marginHorizontal="@dimen/space_10dp"
+            android:id="@+id/edit_iv"
+            android:src="@drawable/ic_edit_black_24dp"
+            android:layout_width="@dimen/space_25dp"
+            android:layout_height="@dimen/space_25dp" />
+        <ImageView
+            android:layout_marginVertical="@dimen/space_5dp"
+            android:layout_marginHorizontal="@dimen/space_10dp"
+            android:id="@+id/delete_iv"
+            android:src="@drawable/ic_delete_black_24dp"
+            android:layout_width="@dimen/space_25dp"
+            android:layout_height="@dimen/space_25dp" />
+      </LinearLayout>
     </LinearLayout>
       </android.support.v7.widget.CardView>
   </ScrollView>

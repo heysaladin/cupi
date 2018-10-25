@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_scroll:
                 Toast.makeText(this, "ListPromoActivity", Toast.LENGTH_SHORT).show();
-                Intent mIntentDestinationAddScroll = new Intent(this, ScrollActivity.class);
+                Intent mIntentDestinationAddScroll = new Intent(this, CheeseDetailActivity.class);
                 this.startActivity(mIntentDestinationAddScroll);
                 return true;
             default:
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         // Sets the Toolbar to act as the ActionBar for this Activity window.
         // Make sure the toolbar exists in the activity and is not null
         setSupportActionBar(toolbar);
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
+        final BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -125,6 +126,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
+
+
+        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottomNavigationView.getLayoutParams();
+        layoutParams.setBehavior(new BottomNavigationViewBehavior());
+
 
         //Manually displaying the first fragment - one time only
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

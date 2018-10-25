@@ -1,5 +1,6 @@
 package com.codingdemos.vacapedia;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
@@ -9,9 +10,11 @@ import android.support.v4.view.WindowInsetsCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewParent;
 import android.widget.FrameLayout;
+import android.widget.ScrollView;
 
 import com.codingdemos.flowers.R;
 
@@ -165,6 +168,7 @@ public class CollapsingImageLayout extends FrameLayout {
 
     class OnOffsetChangedListener implements AppBarLayout.OnOffsetChangedListener {
 
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
 
@@ -218,6 +222,31 @@ public class CollapsingImageLayout extends FrameLayout {
 //                    Log.d("TAG", ">>>>>>>>>" + "mTitleTopCollapsed" + mTitleTopCollapsed);
                     if (topOffset==28&&leftOffset==-(leftWindow-mTitleLeftCollapsed)) {
                         Log.d("TAG", ">>>>>>>>>" + "SAMPAIIIIIIIIII!!!!!");
+
+
+//                        ScrollView scr = (ScrollView) findViewById(R.id.scr);
+//                        scr.setOnTouchListener(new ScrollView.OnTouchListener() {
+//                            @Override
+//                            public boolean onTouch(View v, MotionEvent event) {
+//                                int action = event.getAction();
+//                                switch (action) {
+//                                    case MotionEvent.ACTION_DOWN:
+//                                        // Disallow ScrollView to intercept touch events.
+//                                        v.getParent().requestDisallowInterceptTouchEvent(true);
+//                                        break;
+//
+//                                    case MotionEvent.ACTION_UP:
+//                                        // Allow ScrollView to intercept touch events.
+//                                        v.getParent().requestDisallowInterceptTouchEvent(false);
+//                                        break;
+//                                }
+//
+//                                // Handle ScrollView touch events.
+//                                v.onTouchEvent(event);
+//                                return true;
+//                            }
+//                        });
+
                     }
                     if (topOffset==0&&leftOffset==0) {
                         Log.d("TAG", ">>>>>>>>>" + "PULANGG!!!!!");

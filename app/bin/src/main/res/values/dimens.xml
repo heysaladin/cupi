@@ -78,4 +78,33 @@
     <dimen name="padding_10">10dp</dimen>
 
 
+
+    <!--<dimen name="toolbar_padding_normal">0dp</dimen>-->
+    <!--<dimen name="toolbar_padding_translucent">0dp</dimen>-->
+    <!--<dimen name="toolbar_height_normal">56dp</dimen>-->
+    <!--<dimen name="toolbar_height_translucent">56dp</dimen>-->
+
+
+
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+    <!--<dimen name="image_left_margin_collapsed">16dp</dimen>-->
+    <!--<dimen name="image_top_margin_collapsed">64dp</dimen>-->
+    <!--<dimen name="title_left_margin_collapsed">72dp</dimen>-->
+    <!--<dimen name="title_top_margin_collapsed">64dp</dimen>-->
+    <!--<dimen name="subtitle_left_margin_collapsed">72dp</dimen>-->
+    <!--<dimen name="subtitle_top_margin_collapsed">88dp</dimen>-->
+
+
+    <dimen name="image_left_margin_collapsed">16dp</dimen>
+    <dimen name="image_top_margin_collapsed">64dp</dimen>
+    <dimen name="title_left_margin_collapsed">16dp</dimen>
+    <dimen name="title_top_margin_collapsed">64dp</dimen>
+    <dimen name="subtitle_left_margin_collapsed">16dp</dimen>
+    <dimen name="subtitle_top_margin_collapsed">88dp</dimen>
+
+
+
 </resources>
