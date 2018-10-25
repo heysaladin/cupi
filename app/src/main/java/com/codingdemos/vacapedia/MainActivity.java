@@ -68,6 +68,11 @@ public class MainActivity extends AppCompatActivity {
                 Intent mIntentDestinationAddPromos = new Intent(this, ListPromosActivity.class);
                 this.startActivity(mIntentDestinationAddPromos);
                 return true;
+            case R.id.action_scroll:
+                Toast.makeText(this, "ListPromoActivity", Toast.LENGTH_SHORT).show();
+                Intent mIntentDestinationAddScroll = new Intent(this, ScrollActivity.class);
+                this.startActivity(mIntentDestinationAddScroll);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

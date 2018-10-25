@@ -34,4 +34,8 @@
         android:orderInCategory="11"
         android:title="List Promo"
         app:showAsAction="never"/>
+    <item android:id="@+id/action_scroll"
+        android:orderInCategory="11"
+        android:title="Scroll"
+        app:showAsAction="never"/>
 </menu>

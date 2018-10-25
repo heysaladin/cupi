@@ -67,6 +67,7 @@
         <activity android:name="com.codingdemos.vacapedia.EditPromoActivity" />
         <activity android:name="com.codingdemos.vacapedia.ListSlidesActivity" />
         <activity android:name="com.codingdemos.vacapedia.ListPromosActivity" />
+        <activity android:name="com.codingdemos.vacapedia.ScrollActivity" />
     </application>
 
 </manifest>
