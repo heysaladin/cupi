@@ -135,6 +135,7 @@ public class UserAdapter extends RecyclerView.Adapter < UserViewHolder > {
 
     @Override
     public void onBindViewHolder(final UserViewHolder holder, int position) {
+        // Log.d("TAG", "mFlowerList.get(position) >>>>>>>>> " + mFlowerList.get(position));
         Glide.with(mContext)
                 .load(mFlowerList.get(position).getPhoto_profile().replace(" ", "%20"))
                 .into(holder.mImage);

@@ -217,7 +217,7 @@ public class AccountFragment extends Fragment
                     currentUser.set_id(job.optString("_id"));
                     currentUser.setName(job.optString("name"));
                     currentUser.setFull_name(job.optString("full_name"));
-                    currentUser.setPhone_number(job.optString("photo_profile"));
+                    currentUser.setPhoto_profile(job.optString("photo_profile"));
                     currentUser.setSex_type(job.optString("sex_type"));
                     currentUser.setBirth_date(job.optString("birth_date"));
                     currentUser.setEmail_address(job.optString("email_address"));
