@@ -18,6 +18,7 @@ public class RestApis {
         String vacapediaUsers = "https://geonknode.herokuapp.com/users";
         String vacapediaFamilies = "https://geonknode.herokuapp.com/families";
         String vacapediaNotifications = "https://geonknode.herokuapp.com/notifications";
+        String vacapediaPlans = "https://geonknode.herokuapp.com/plans";
 
         /**
          * POST REQUEST
