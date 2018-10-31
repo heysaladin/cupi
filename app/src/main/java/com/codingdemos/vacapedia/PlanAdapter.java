@@ -78,10 +78,12 @@ public class PlanAdapter extends RecyclerView.Adapter < PlanViewHolder >
 //        List < Integer >
                 numbers = new ArrayList < > ();
         dataUserFamily = new JSONArray();
-        // Log.d("TAG", "mFlowerList.get(position) >>>>>>>>> " + mFlowerList.get(position));
-//        Glide.with(mContext)
-//                .load(mFlowerList.get(position).getPhoto_profile().replace(" ", "%20"))
-//                .into(holder.mImage);
+         Log.d("TAG", "mFlowerList.get(position) >>>>>>>>> " + mFlowerList.get(position));
+         if(mFlowerList.get(position).getImage()!="null" || mFlowerList.get(position).getImage()!=null || mFlowerList.get(position).getImage() != "") {
+             Glide.with(mContext)
+                     .load(mFlowerList.get(position).getImage().replace(" ", "%20"))
+                     .into(holder.mImage);
+         }
         holder.mTitle.setText(mFlowerList.get(position).getTitle());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,123 +103,123 @@ public class PlanAdapter extends RecyclerView.Adapter < PlanViewHolder >
 
 //        AsyncHttpResponse response = new AsyncHttpResponse(mContext, false);
 
-try {
-//    ArrayList < String >
-            listTarget = new ArrayList<>();
-//    dataUserFamily = new JSONArray();
-//    Log.d("TAG", "dataUserFamily XXX >>>>>>>>> " + dataUserFamily);
-////    JSONArray
-//    Log.d("TAG", "mFlowerList.get(position).getDestinations() >>>>>>>>> " + mFlowerList.get(position).getDestinations());
-            jsonArrayUsersFamily = mFlowerList.get(position).getDestinations();
-//    Log.d("TAG", "jsonArrayUsersFamily >>>>>>>>> " + jsonArrayUsersFamily);
-//    Log.d("TAG", "jsonArrayUsersFamily.length() >>>>>>>>> " + jsonArrayUsersFamily.length());
-        for (int k = 0; k < jsonArrayUsersFamily.length(); k++) {
-            JSONObject jobk = jsonArrayUsersFamily.getJSONObject(k);
-            String nowUserId = jobk.optString("destination_id");
-
-
-            String url = RestApis.KarmaGroups.vacapediaDestinations + "/" + nowUserId;
-
-            mQueue = Volley.newRequestQueue(mContext);
-            final int finalK = k;
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                                dataUser = response;
-                            Log.d("TAG", "dataUser >>>>>>>>> " + dataUser);
-
-                            try {
-
-                            listTarget.add(String.valueOf( dataUser.getString("image") ));
-
-                            for (int i = 0; i < listTarget.size(); i++) {
-                numbers.add(i);
-            }
-            Collections.shuffle(numbers);
-            Log.d("LOG", "createRandomList numbers >>>>>>>>> " + numbers);
-
-                                    RequestOptions options = new RequestOptions();
-                                    options.centerCrop();
-//                                Glide.with(mContext).load(listTarget.get(numbers.get(0)).replace(" ", "%20")).apply(options).into(holder.mImage);
-                                 Glide.with(mContext).load(dataUser.getString("image").replace(" ", "%20")).apply(options).into(holder.mImage);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-
-                            //processData();
-
-//                            dataUserFamily.put(dataUser);
+//try {
+////    ArrayList < String >
+//            listTarget = new ArrayList<>();
+////    dataUserFamily = new JSONArray();
+////    Log.d("TAG", "dataUserFamily XXX >>>>>>>>> " + dataUserFamily);
+//////    JSONArray
+////    Log.d("TAG", "mFlowerList.get(position).getDestinations() >>>>>>>>> " + mFlowerList.get(position).getDestinations());
+//            jsonArrayUsersFamily = mFlowerList.get(position).getDestinations();
+////    Log.d("TAG", "jsonArrayUsersFamily >>>>>>>>> " + jsonArrayUsersFamily);
+////    Log.d("TAG", "jsonArrayUsersFamily.length() >>>>>>>>> " + jsonArrayUsersFamily.length());
+//        for (int k = 0; k < jsonArrayUsersFamily.length(); k++) {
+//            JSONObject jobk = jsonArrayUsersFamily.getJSONObject(k);
+//            String nowUserId = jobk.optString("destination_id");
 //
 //
+//            String url = RestApis.KarmaGroups.vacapediaDestinations + "/" + nowUserId;
 //
-////            if(k<jsonArrayUsersFamily.length()-1 ){
-//                            Log.d("TAG", "dataUserFamily lengthx >>>>>>>>> " + dataUserFamily.length());
-////            if (dataUserFamily.length() == (jsonArrayUsersFamily.length()-1)) {
+//            mQueue = Volley.newRequestQueue(mContext);
+//            final int finalK = k;
+//            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+//                    new Response.Listener<JSONObject>() {
+//                        @Override
+//                        public void onResponse(JSONObject response) {
+//                                dataUser = response;
+//                            Log.d("TAG", "dataUser >>>>>>>>> " + dataUser);
+//
 //                            try {
-////                    destinationsArrayList = new ArrayList<>();
-////                    destinationsArrayList.clear();
-//                                for (int j = 0; j < dataUserFamily.length(); j++) {
-//                                    JSONObject job = dataUserFamily.getJSONObject(j);
-//                                    DestinationsModel model = new DestinationsModel();
-//                                    model.setName(job.optString("name"));
-//                                    model.setImage(job.optString("image"));
 //
-//                                    model.set_id(job.optString("_id"));
-//                                    model.setCategory(job.optString("category"));
-//                                    model.setLocation(job.optString("location"));
-//                                    model.setDescription(job.optString("description"));
-//                                    model.setLatitude(job.optString("latitude"));
-//                                    model.setLongitude(job.optString("longitude"));
-//                                    model.setAddress(job.optString("address"));
-//                                    model.setDistance(job.optString("distance"));
-//                                    model.setNote(job.optString("note"));
-//                                    model.setCosts(job.optString("costs"));
-//                                    model.setTotal_cost(job.optString("total_cost"));
+//                            listTarget.add(String.valueOf( dataUser.getString("image") ));
 //
-////                        destinationsArrayList.add(model);
+//                            for (int i = 0; i < listTarget.size(); i++) {
+//                numbers.add(i);
+//            }
+//            Collections.shuffle(numbers);
+//            Log.d("LOG", "createRandomList numbers >>>>>>>>> " + numbers);
 //
-////                        Log.d("LOG", "dataUserFamily.length() >>>>>>>>> " + dataUserFamily.length());
-////                        if (j==dataUserFamily.length()-1) {
 //                                    RequestOptions options = new RequestOptions();
 //                                    options.centerCrop();
-////                            JSONObject jobRand = dataUserFamily.getJSONObject(0);
-//                                    Log.d("LOG", "jobRand.getString(\"image\") OOOOOOO >>>>>>>>> " + job.getString("image"));
-//                                    Glide.with(mContext).load(job.getString("image").replace(" ", "%20")).apply(options).into(holder.mImage);
-////            Glide.with(mContext).load(dataUser.getString("image").replace(" ", "%20")).apply(options).into(holder.mImage);
-////                        }
-//
-//                                }
-////                                dataUserFamily = new JSONArray();
+////                                Glide.with(mContext).load(listTarget.get(numbers.get(0)).replace(" ", "%20")).apply(options).into(holder.mImage);
+//                                 Glide.with(mContext).load(dataUser.getString("image").replace(" ", "%20")).apply(options).into(holder.mImage);
 //                            } catch (JSONException e) {
 //                                e.printStackTrace();
 //                            }
-
-
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    error.printStackTrace();
-                }
-            });
-
-//            if (k<jsonArrayUsersFamily.length()) {
-            if (k==0) {
-                mQueue.add(request);
-            }
+//
+//
+//                            //processData();
+//
+////                            dataUserFamily.put(dataUser);
+////
+////
+////
+//////            if(k<jsonArrayUsersFamily.length()-1 ){
+////                            Log.d("TAG", "dataUserFamily lengthx >>>>>>>>> " + dataUserFamily.length());
+//////            if (dataUserFamily.length() == (jsonArrayUsersFamily.length()-1)) {
+////                            try {
+//////                    destinationsArrayList = new ArrayList<>();
+//////                    destinationsArrayList.clear();
+////                                for (int j = 0; j < dataUserFamily.length(); j++) {
+////                                    JSONObject job = dataUserFamily.getJSONObject(j);
+////                                    DestinationsModel model = new DestinationsModel();
+////                                    model.setName(job.optString("name"));
+////                                    model.setImage(job.optString("image"));
+////
+////                                    model.set_id(job.optString("_id"));
+////                                    model.setCategory(job.optString("category"));
+////                                    model.setLocation(job.optString("location"));
+////                                    model.setDescription(job.optString("description"));
+////                                    model.setLatitude(job.optString("latitude"));
+////                                    model.setLongitude(job.optString("longitude"));
+////                                    model.setAddress(job.optString("address"));
+////                                    model.setDistance(job.optString("distance"));
+////                                    model.setNote(job.optString("note"));
+////                                    model.setCosts(job.optString("costs"));
+////                                    model.setTotal_cost(job.optString("total_cost"));
+////
+//////                        destinationsArrayList.add(model);
+////
+//////                        Log.d("LOG", "dataUserFamily.length() >>>>>>>>> " + dataUserFamily.length());
+//////                        if (j==dataUserFamily.length()-1) {
+////                                    RequestOptions options = new RequestOptions();
+////                                    options.centerCrop();
+//////                            JSONObject jobRand = dataUserFamily.getJSONObject(0);
+////                                    Log.d("LOG", "jobRand.getString(\"image\") OOOOOOO >>>>>>>>> " + job.getString("image"));
+////                                    Glide.with(mContext).load(job.getString("image").replace(" ", "%20")).apply(options).into(holder.mImage);
+//////            Glide.with(mContext).load(dataUser.getString("image").replace(" ", "%20")).apply(options).into(holder.mImage);
+//////                        }
+////
+////                                }
+//////                                dataUserFamily = new JSONArray();
+////                            } catch (JSONException e) {
+////                                e.printStackTrace();
+////                            }
+//
+//
+//                        }
+//                    }, new Response.ErrorListener() {
+//                @Override
+//                public void onErrorResponse(VolleyError error) {
+//                    error.printStackTrace();
+//                }
+//            });
+//
+////            if (k<jsonArrayUsersFamily.length()) {
+//            if (k==0) {
+//                mQueue.add(request);
+//            }
 //            } else {
 //                dataUserFamily=new JSONArray();
 //            }
 
-            }
+//            }
 
 //        }
 
-    } catch (JSONException e) {
-        e.printStackTrace();
-    }
+//    } catch (JSONException e) {
+//        e.printStackTrace();
+//    }
 
         
     }
@@ -338,13 +340,13 @@ try {
 //
 //            processData();
 //        }
-        if (url.contains(RestApis.KarmaGroups.vacapediaDestinations+ "/" /* + ID_FAMILY*/)) {
-            Log.d("TAG", "x onAsyncHttpResponseGet() called with: response = [" + response + "], url = [" + url + "]");
-            dataUser = new JSONObject(response);
-            Log.d("TAG", "dataUser >>>>>>>>> " + dataUser);
-            dataUserFamily.put(dataUser);
-            //processData();
-        }
+//        if (url.contains(RestApis.KarmaGroups.vacapediaDestinations+ "/" /* + ID_FAMILY*/)) {
+//            Log.d("TAG", "x onAsyncHttpResponseGet() called with: response = [" + response + "], url = [" + url + "]");
+//            dataUser = new JSONObject(response);
+//            Log.d("TAG", "dataUser >>>>>>>>> " + dataUser);
+//            dataUserFamily.put(dataUser);
+//            //processData();
+//        }
     }
 }
 

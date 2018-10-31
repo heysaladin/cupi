@@ -11,6 +11,8 @@ public class PlanModel {
     private String target_date;
     private String target_time;
     private JSONArray destinations;
+    private String image;
+    private String cost;
 
     public PlanModel() {}
 
@@ -24,6 +26,8 @@ public class PlanModel {
                 ", target_date='" + getTarget_date() + "\'" +
                 ", target_time='" + getTarget_time() + "\'" +
                 ", destinations='" + getDestinations() + "\'" +
+                ", image='" + getImage() + "\'" +
+                ", cost='" + getCost() + "\'" +
                 "}";
     }
 
@@ -81,5 +85,21 @@ public class PlanModel {
 
     public void setDestinations(JSONArray destinations) {
         this.destinations = destinations;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getCost() {
+        return cost;
+    }
+
+    public void setCost(String cost) {
+        this.cost = cost;
     }
 }
