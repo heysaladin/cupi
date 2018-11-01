@@ -80,8 +80,11 @@ public class PlanAdapter extends RecyclerView.Adapter < PlanViewHolder >
         dataUserFamily = new JSONArray();
          Log.d("TAG", "mFlowerList.get(position) >>>>>>>>> " + mFlowerList.get(position));
          if(mFlowerList.get(position).getImage()!="null" || mFlowerList.get(position).getImage()!=null || mFlowerList.get(position).getImage() != "") {
+             RequestOptions options = new RequestOptions();
+             options.centerCrop();
              Glide.with(mContext)
                      .load(mFlowerList.get(position).getImage().replace(" ", "%20"))
+                     .apply(options)
                      .into(holder.mImage);
          }
         holder.mTitle.setText(mFlowerList.get(position).getTitle());

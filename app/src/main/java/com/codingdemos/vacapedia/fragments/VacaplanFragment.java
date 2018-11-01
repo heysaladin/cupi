@@ -45,6 +45,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -78,6 +79,8 @@ public class VacaplanFragment extends Fragment
 
     private ArrayList<String> imagesReadyArray;
 
+    private List<String> imagesBuffer;
+
     public static VacaplanFragment newInstance() {
         VacaplanFragment fragment = new VacaplanFragment();
         return fragment;
@@ -101,6 +104,10 @@ public class VacaplanFragment extends Fragment
         jsonArrayUsersFamily = new JSONArray();
 
         imagesDes = new JSONArray();
+
+//        List<String>
+                imagesBuffer = new ArrayList<>();
+        mQueue = Volley.newRequestQueue(this.getContext());
 
 //        ArrayList < String >
         listTarget = new ArrayList<>();
@@ -144,12 +151,12 @@ public class VacaplanFragment extends Fragment
         response.getAsyncHttp(RestApis.KarmaGroups.vacapediaPlans /* + "/" + ID_FAMILY */, params);
     }
 
-    private void getImageBanner(JSONArray dataPlanParam){
+    private void getImageBanner(final JSONArray dataPlanParam){
         try {
 
 //            JSONArray
 
-            Log.d("TAG", "imagesDes xxx >>>>>>>>> " + imagesDes);
+//            Log.d("TAG", "imagesDes xxx >>>>>>>>> " + imagesDes);
 
             for (int j = 0; j < dataPlanParam.length(); j++) {
                 JSONObject job = null;
@@ -157,119 +164,258 @@ public class VacaplanFragment extends Fragment
                 currentUser = new PlanModel();
                 jsonArrayUsersFamily = new JSONArray(job.optString("destinations"));
                 currentUser.setDestinations(jsonArrayUsersFamily);
+
+                final int finalJ = j;
+                final JSONObject finalJob = job;
+
+
+//                    String[] alphabet = new String[]{};
+                    List<String> list = new ArrayList<>();
+//                            Arrays.asList(alphabet);
+                imagesBuffer.clear();
+                if (imagesDes.length()==0){
+                    JSONObject o = new JSONObject("{" +
+                            "\"destination_id\": \"" + finalJob.getString("_id") + "\"," +
+                            "\"images\": [" +
+                            //                            "{" +
+                            //                            "\"id\": \"" + 0 + "\"," +
+                            //                            "\"image\": \"" + response.optString("image") + "\"" +
+                            //                            "}"
+                            //                            +
+                            "]" +
+                            "}");
+                    imagesDes.put(o);
+                } else {
+                    for (int l = 0; l < imagesDes.length(); l++) {
+                        JSONObject jobl = imagesDes.getJSONObject(l);
+                        list.add(jobl.getString("destination_id"));
+                        Log.d("TAG", "list >>>>>>>>> " + list);
+                        if (!list.contains(finalJob.getString("_id"))) {
+                            JSONObject o = new JSONObject("{" +
+                                    "\"destination_id\": \"" + finalJob.getString("_id") + "\"," +
+                                    "\"images\": [" +
+                                    //                            "{" +
+                                    //                            "\"id\": \"" + 0 + "\"," +
+                                    //                            "\"image\": \"" + response.optString("image") + "\"" +
+                                    //                            "}"
+                                    //                            +
+                                    "]" +
+                                    "}");
+                            imagesDes.put(o);
+                        }
+
+                    }
+                }
+
+
+
                 for (int k = 0; k < jsonArrayUsersFamily.length(); k++) {
                     JSONObject jobk = jsonArrayUsersFamily.getJSONObject(k);
                     final String nowUserId = jobk.optString("destination_id");
 //                    RequestQueue mQueue = null;
-                    mQueue = Volley.newRequestQueue(getContext());
                     String url = RestApis.KarmaGroups.vacapediaDestinations + "/" + nowUserId;
+
                     final int finalK = k;
-                    final int finalJ = j;
-                    final JSONObject finalJob = job;
+
                     JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                             new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject response) {
-                                    // response.optString("image");
-                                    try {
-                                    if (
-                                            imagesDes.length()==0
-//                                                    ||
-//                                            !imagesDes.getJSONObject(finalK).getString("destination_id").equals(nowUserId)
-                                            ) {
-                                        JSONObject o = new JSONObject("{" +
-                                                    "\"destination_id\": \"" + finalJob.getString("_id") + "\"," +
-                                                    "\"images\": [" +
-                                                        "{" +
-                                                        "\"id\": \"" + 0 + "\"," +
-                                                        "\"image\": \"" + response.optString("image") + "\"" +
-                                                        "}"
-                                                    + "]" +
-                                                    "}");
-                                        imagesDes.put(o);
-                                    } else
-                                        if(imagesDes.length()>1)
-                                        {
+//                                    // response.optString("image");
 
-//                                        for (int l = 0; l < imagesDes.length(); l++) {
-                                            JSONObject jobl = imagesDes.getJSONObject(finalK);
-                                            if (jobl.getString("destination_id").equals(finalJob.getString("_id"))) {
+
+
+
+
+                                    try {
+//                                    if (
+//                                            imagesDes.length()<1
+//////                                                    ||
+//////                                            !imagesDes.getJSONObject(finalK).getString("destination_id").equals(nowUserId)
+//                                            ) {
+//                                        JSONObject o = new JSONObject("{" +
+//                                                    "\"destination_id\": \"" + finalJob.getString("_id") + "\"," +
+//                                                    "\"images\": [" +
+//                                                        "{" +
+//                                                        "\"id\": \"" + 0 + "\"," +
+//                                                        "\"image\": \"" + response.optString("image") + "\"" +
+//                                                        "}"
+//                                                    + "]" +
+//                                                    "}");
+//                                        imagesDes.put(o);
+//                                    }
+//                                    else
+////                                        if(imagesDes.length()>1)
+//                                        {
+//                                            Log.d("TAG", "finalK >>>>>>>>> " + finalK);
+
+
+//                                                                                    if (
+//                                                    imagesDes.length()<1
+////                                                    ||
+////                                            !jobl.getString("destination_id").equals(finalJob.getString("_id"))
+//////                                            !imagesDes.getJSONObject(finalK).getString("destination_id").equals(nowUserId)
+//                                                    ) {
+//                                                JSONObject o = new JSONObject("{" +
+//                                                        "\"destination_id\": \"" + finalJob.getString("_id") + "\"," +
+//                                                        "\"images\": [" +
+//                                                        "{" +
+//                                                        "\"id\": \"" + 0 + "\"," +
+//                                                        "\"image\": \"" + response.optString("image") + "\"" +
+//                                                        "}"
+//                                                        + "]" +
+//                                                        "}");
+//                                                imagesDes.put(o);
+//                                            } else {
+
+
+
+
+                                        for (int l = 0; l < imagesDes.length(); l++) {
+                                            JSONObject jobl = imagesDes.getJSONObject(l);
+                                            Log.d("TAG", "jobl.getString(\"destination_id\") >>>>>>>>> " + jobl.getString("destination_id"));
+                                            Log.d("TAG", "finalJob.getString(\"_id\") >>>>>>>>> " + finalJob.getString("_id"));
+//                                            if (
+//                                                    imagesDes.length()<1
+////                                                    ||
+////                                            !jobl.getString("destination_id").equals(finalJob.getString("_id"))
+//////                                            !imagesDes.getJSONObject(finalK).getString("destination_id").equals(nowUserId)
+//                                                    ) {
+//                                                JSONObject o = new JSONObject("{" +
+//                                                        "\"destination_id\": \"" + finalJob.getString("_id") + "\"," +
+//                                                        "\"images\": [" +
+//                                                        "{" +
+//                                                        "\"id\": \"" + 0 + "\"," +
+//                                                        "\"image\": \"" + response.optString("image") + "\"" +
+//                                                        "}"
+//                                                        + "]" +
+//                                                        "}");
+//                                                imagesDes.put(o);
+//                                            }
+//                                            else
+                                                if (jobl.getString("destination_id").equals(finalJob.getString("_id"))) {
                                                 JSONArray imgs = jobl.getJSONArray("images");
                                                 JSONObject oIn = new JSONObject("{" +
-                                                    "\"id\": \"" + finalK + "\"," +
+                                                    "\"id\": \"" + (imgs.length()) + "\"," +
                                                     "\"image\": \"" + response.optString("image") + "\"" +
                                                     "}");
                                                 imgs.put(oIn);
-                                            } else {
-                                                JSONObject o = new JSONObject("{" +
-                                                        "\"destination_id\": \"" + finalJob.getString("_id") + "\"," +
-                                                        "\"images\": [" +
-                                                        "{" +
-                                                        "\"id\": \"" + 0 + "\"," +
-                                                        "\"image\": \"" + response.optString("image") + "\"" +
-                                                        "}"
-                                                        + "]" +
-                                                        "}");
-                                                imagesDes.put(o);
                                             }
-//                                        }
 
-//                                        if (imagesDes.getJSONObject(finalK).getString("destination_id").equals(nowUserId)) {
-//                                            Log.d("TAG", "SAME xxx >>>>>>>>> " + imagesDes.getJSONObject(finalK).getString("destination_id"));
-//                                            JSONArray imgs = new JSONArray(imagesDes.getJSONObject(finalK).getString("images"));
-//                                            JSONObject oIn = new JSONObject("{" +
-//                                                    "\"id\": \"" + finalK + "\"," +
-//                                                    "\"image\": \"" + response.optString("image") + "\"" +
-//                                                    "}");
-//                                            imgs.put(oIn);
-
-//                                        }
-// else {
-//
-//                                            JSONObject o = new JSONObject("{" +
-//                                                    "\"destination_id\": \"" + nowUserId + "\"," +
-//                                                    "\"images\": [" +
-//                                                    "{" +
-//                                                    "\"id\": \"" + finalK + "\"," +
-//                                                    "\"image\": \"" + response.optString("image") + "\"" +
-//                                                    "}"
-//                                                    + "]" +
-//                                                    "}");
-//                                            imagesDes.put(o);
-//
-//                                        }
-                                    }
-
-                                        Log.d("TAG", "imagesDes xxx >>>>>>>>> " + imagesDes);
-
-//                                    if (finalJ +1==jsonArrayUsersFamily.length()){
-//                                        processData();
-//                                    }
-
-
-                                        if (jsonArrayUsersFamily.length()==finalK+1){
-                                            for (int l = 0; l < imagesDes.length(); l++) {
-                                                JSONObject imagesReadyObj = imagesDes.getJSONObject(l);
-                                                JSONArray imagesReady = imagesReadyObj.getJSONArray("images");
-                                                for (int i = 0; i < imagesReady.length(); i++) {
-                                                    numbers.add(i);
+                                            if ( finalK+1 == jsonArrayUsersFamily.length() ) {
+                                                for (int lor = 0; lor < imagesDes.length(); lor++) {
+                                                    JSONObject imagesReadyObj = imagesDes.getJSONObject(lor);
+                                                    JSONArray imagesReady = imagesReadyObj.getJSONArray("images");
+//                                                    imagesBuffer.clear();
+                                                    for (int in = 0; in < imagesReady.length(); in++) {
+                                                        JSONObject jim = imagesReady.getJSONObject(in);
+//                                                        imagesBuffer.add(jim.getString("image"));
+                                                        if(in == 0) {
+                                                            imagesReadyArray.add(jim.getString("image"));
+                                                        }
+                                                    }
                                                 }
-//                                                for (int x = 0; x < imagesReady.length(); x++) {
-                                                    Collections.shuffle(numbers);
-                                                    JSONObject jim = imagesReady.getJSONObject(numbers.get(l));
-//                                                JSONObject jim = imagesReady.getJSONObject(x);
-                                                    imagesReadyArray.add(jim.getString("image"));
-
-//                                                }
+//                                                Log.d("TAG", "imagesBuffer CCCCCC >>>>>>>>> " + imagesBuffer);
+//                                                imagesReadyArray.add(imagesBuffer.get(0));
+//                                                Log.d("TAG", "imagesReadyArray KKKKKKKKKKKKKKKKKK >>>>>>>>> " + imagesReadyArray);
 
                                             }
-                                        }
-                                        if (imagesReadyArray.size()==finalK+1 && jsonArrayUsersFamily.length()==finalK+1){
-                                            processData(imagesReadyArray);
-                                        }
+                                            if (imagesReadyArray.size() == dataPlanParam.length()) {
+                                                processData(imagesReadyArray);
+                                            }
 
 
+//                                            if ( finalJ+1 == dataPlanParam.length() ){
+//                                                for (int lor = 0; lor < imagesDes.length(); lor++) {
+//                                                    JSONObject imagesReadyObj = imagesDes.getJSONObject(lor);
+//                                                    JSONArray imagesReady = imagesReadyObj.getJSONArray("images");
+////                                                    for (int i = 0; i < imagesReady.length(); i++) {
+////                                                        numbers.add(i);
+////                                                    }
+//////                                                for (int x = 0; x < imagesReady.length(); x++) {
+////                                                    Collections.shuffle(numbers);
+////                                                    JSONObject jim = imagesReady.getJSONObject(numbers.get(0));
+////                                                JSONObject jim = imagesReady.getJSONObject(x);
+////                                                    imagesReadyArray.add(jim.getString("image"));
+//
+//                                                    List<String> imagesBuffer = new ArrayList<>();
+//                                                    for (int in = 0; in < imagesReady.length(); in++) {
+//                                                        JSONObject jim = imagesReady.getJSONObject(in);
+//                                                        imagesBuffer.add(jim.getString("image"));
+////                                                        numbers.add(i);
+//
+//
+//                                                        if ( lor+1 == imagesDes.length() ) {
+//                                                            imagesReadyArray.add(imagesBuffer.get(0));
+//                                                            if (imagesReadyArray.size()==finalJ+1){
+//                                                                processData(imagesReadyArray);
+//                                                            }
+//                                                        }
+//
+//                                                    }
+////                                                    for (int i = 0; i < imagesReady.length(); i++) {
+////                                                        numbers.add(i);
+////                                                    }
+////                                                    Collections.shuffle(numbers);
+////                                                    JSONObject jim = imagesBuffer.get(0);
+//
+//
+////                                                }
+//
+//                                                }
+//                                            }
 
+//                                            else {
+//                                                JSONObject o = new JSONObject("{" +
+//                                                        "\"destination_id\": \"" + finalJob.getString("_id") + "\"," +
+//                                                        "\"images\": [" +
+//                                                        "{" +
+//                                                        "\"id\": \"" + 0 + "\"," +
+//                                                        "\"image\": \"" + response.optString("image") + "\"" +
+//                                                        "}"
+//                                                        + "]" +
+//                                                        "}");
+//                                                imagesDes.put(o);
+//                                            }
+//                                        }
+//
+////                                        if (imagesDes.getJSONObject(finalK).getString("destination_id").equals(nowUserId)) {
+////                                            Log.d("TAG", "SAME xxx >>>>>>>>> " + imagesDes.getJSONObject(finalK).getString("destination_id"));
+////                                            JSONArray imgs = new JSONArray(imagesDes.getJSONObject(finalK).getString("images"));
+////                                            JSONObject oIn = new JSONObject("{" +
+////                                                    "\"id\": \"" + finalK + "\"," +
+////                                                    "\"image\": \"" + response.optString("image") + "\"" +
+////                                                    "}");
+////                                            imgs.put(oIn);
+//
+////                                        }
+//// else {
+////
+////                                            JSONObject o = new JSONObject("{" +
+////                                                    "\"destination_id\": \"" + nowUserId + "\"," +
+////                                                    "\"images\": [" +
+////                                                    "{" +
+////                                                    "\"id\": \"" + finalK + "\"," +
+////                                                    "\"image\": \"" + response.optString("image") + "\"" +
+////                                                    "}"
+////                                                    + "]" +
+////                                                    "}");
+////                                            imagesDes.put(o);
+////
+////                                        }
+                                    }
+//
+                                        Log.d("TAG", "imagesDes xxx >>>>>>>>> " + imagesDes);
+//
+////                                    if (finalJ +1==jsonArrayUsersFamily.length()){
+////                                        processData();
+////                                    }
+//
+//
+
+//
+//
+//
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
