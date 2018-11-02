@@ -78,7 +78,7 @@ public class PlanAdapter extends RecyclerView.Adapter < PlanViewHolder >
 //        List < Integer >
                 numbers = new ArrayList < > ();
         dataUserFamily = new JSONArray();
-         Log.d("TAG", "mFlowerList.get(position) >>>>>>>>> " + mFlowerList.get(position));
+//         Log.d("TAG", "mFlowerList.get(position) >>>>>>>>> " + mFlowerList.get(position));
          if(mFlowerList.get(position).getImage()!="null" || mFlowerList.get(position).getImage()!=null || mFlowerList.get(position).getImage() != "") {
              RequestOptions options = new RequestOptions();
              options.centerCrop();
@@ -92,6 +92,10 @@ public class PlanAdapter extends RecyclerView.Adapter < PlanViewHolder >
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), VacaplanActivity.class);
+                intent.putExtra("Title", mFlowerList.get(holder.getAdapterPosition()).getTitle());
+                intent.putExtra("name", mFlowerList.get(holder.getAdapterPosition()).getTitle());
+//                intent.putExtra("location", mFlowerList.get(holder.getAdapterPosition()).getLocation());
+                intent.putExtra("image", mFlowerList.get(holder.getAdapterPosition()).getImage());
                 view.getContext().startActivity(intent);
     /*
     Intent mIntent = new Intent(mContext, DetailActivity.class);

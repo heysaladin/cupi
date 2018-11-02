@@ -38,9 +38,12 @@ public class MyLineAdapter extends RecyclerView.Adapter < FlowerViewHolder > {
             @Override
             public void onClick(View view) {
                 Intent mIntent = new Intent(mContext, DetailActivity.class);
-                mIntent.putExtra("Title", mFlowerList.get(holder.getAdapterPosition()).getName());
+                mIntent.putExtra("name", mFlowerList.get(holder.getAdapterPosition()).getName());
                 mIntent.putExtra("Description", "desc");
-                mIntent.putExtra("Image", mFlowerList.get(holder.getAdapterPosition()).getImage());
+                mIntent.putExtra("image", mFlowerList.get(holder.getAdapterPosition()).getImage());
+//                intent.putExtra("name", mFlowerList.get(holder.getAdapterPosition()).getTitle());
+////                intent.putExtra("location", mFlowerList.get(holder.getAdapterPosition()).getLocation());
+//                intent.putExtra("image", mFlowerList.get(holder.getAdapterPosition()).getImage());
                 mContext.startActivity(mIntent);
             }
         });

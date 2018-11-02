@@ -81,6 +81,8 @@ public class VacaplanFragment extends Fragment
 
     private List<String> imagesBuffer;
 
+    private List<String> stringImages;
+
     public static VacaplanFragment newInstance() {
         VacaplanFragment fragment = new VacaplanFragment();
         return fragment;
@@ -104,6 +106,11 @@ public class VacaplanFragment extends Fragment
         jsonArrayUsersFamily = new JSONArray();
 
         imagesDes = new JSONArray();
+
+
+
+        stringImages = new ArrayList<>();
+//        stringImages.clear();
 
 //        List<String>
                 imagesBuffer = new ArrayList<>();
@@ -151,6 +158,12 @@ public class VacaplanFragment extends Fragment
         response.getAsyncHttp(RestApis.KarmaGroups.vacapediaPlans /* + "/" + ID_FAMILY */, params);
     }
 
+    private void desRequest(String url) {
+        AsyncHttpResponse response = new AsyncHttpResponse(this, false);
+        RequestParams params = new RequestParams();
+        response.getAsyncHttp(url, params);
+    }
+
     private void getImageBanner(final JSONArray dataPlanParam){
         try {
 
@@ -168,56 +181,61 @@ public class VacaplanFragment extends Fragment
                 final int finalJ = j;
                 final JSONObject finalJob = job;
 
-
-//                    String[] alphabet = new String[]{};
-                    List<String> list = new ArrayList<>();
-//                            Arrays.asList(alphabet);
                 imagesBuffer.clear();
-                if (imagesDes.length()==0){
-                    JSONObject o = new JSONObject("{" +
-                            "\"destination_id\": \"" + finalJob.getString("_id") + "\"," +
-                            "\"images\": [" +
-                            //                            "{" +
-                            //                            "\"id\": \"" + 0 + "\"," +
-                            //                            "\"image\": \"" + response.optString("image") + "\"" +
-                            //                            "}"
-                            //                            +
-                            "]" +
-                            "}");
-                    imagesDes.put(o);
-                } else {
-                    for (int l = 0; l < imagesDes.length(); l++) {
-                        JSONObject jobl = imagesDes.getJSONObject(l);
-                        list.add(jobl.getString("destination_id"));
-                        Log.d("TAG", "list >>>>>>>>> " + list);
-                        if (!list.contains(finalJob.getString("_id"))) {
-                            JSONObject o = new JSONObject("{" +
-                                    "\"destination_id\": \"" + finalJob.getString("_id") + "\"," +
-                                    "\"images\": [" +
-                                    //                            "{" +
-                                    //                            "\"id\": \"" + 0 + "\"," +
-                                    //                            "\"image\": \"" + response.optString("image") + "\"" +
-                                    //                            "}"
-                                    //                            +
-                                    "]" +
-                                    "}");
-                            imagesDes.put(o);
-                        }
-
-                    }
-                }
 
 
+//                if (imagesDes.length()<1){
+//                    JSONObject o = new JSONObject("{" +
+//                            "\"destination_id\": \"" + finalJob.getString("_id") + "\"," +
+//                            "\"images\": [" +
+//                            //                            "{" +
+//                            //                            "\"id\": \"" + 0 + "\"," +
+//                            //                            "\"image\": \"" + response.optString("image") + "\"" +
+//                            //                            "}"
+//                            //                            +
+//                            "]" +
+//                            "}");
+//                    imagesDes.put(o);
+//                } else {
+//                    for (int l = 0; l < imagesDes.length(); l++) {
+//                        JSONObject jobl = imagesDes.getJSONObject(l);
+//                        list.add(jobl.getString("destination_id"));
+//                         Log.d("TAG", "list >>>>>>>>> " + list);
+//                        if (!list.contains(finalJob.getString("_id"))) {
+////                            Log.d("TAG", "contain list >>>>>>>>> " + !list.contains(finalJob.getString("_id")));
+//                            JSONObject o = new JSONObject("{" +
+//                                    "\"destination_id\": \"" + finalJob.getString("_id") + "\"," +
+//                                    "\"images\": [" +
+//                                    //                            "{" +
+//                                    //                            "\"id\": \"" + 0 + "\"," +
+//                                    //                            "\"image\": \"" + response.optString("image") + "\"" +
+//                                    //                            "}"
+//                                    //                            +
+//                                    "]" +
+//                                    "}");
+//                            imagesDes.put(o);
+//                        }
+//
+//                    }
+//                }
+
+
+                stringImages.clear();
 
                 for (int k = 0; k < jsonArrayUsersFamily.length(); k++) {
                     JSONObject jobk = jsonArrayUsersFamily.getJSONObject(k);
                     final String nowUserId = jobk.optString("destination_id");
 //                    RequestQueue mQueue = null;
                     String url = RestApis.KarmaGroups.vacapediaDestinations + "/" + nowUserId;
+                    //desRequest(url);
 
                     final int finalK = k;
 
-                    JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+
+
+                    stringImages = new ArrayList<>();
+
+                    final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                             new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject response) {
@@ -228,6 +246,65 @@ public class VacaplanFragment extends Fragment
 
 
                                     try {
+//
+////                                        if(stringImages.size()<(jsonArrayUsersFamily.length())) {
+                                            stringImages.add(response.getString("image"));
+//                                            Log.d("TAG", "response.getString(\"image\") >>>>>>>>> " + response.getString("image"));
+////                                        } else {
+
+
+                                        Log.d("TAG", "stringImages >>>>>>>>> " + stringImages);
+
+                                        Log.d("TAG", "stringImages size >>>>>>>>> " + stringImages.size());
+                                            Log.d("TAG", "jsonArrayUsersFamily length >>>>>>>>> " + (jsonArrayUsersFamily.length()));
+//
+                                        if(stringImages.size()==jsonArrayUsersFamily.length()) {
+//                                        if (finalK+1 == jsonArrayUsersFamily.length()) {
+//
+////                                            for (int i = 0; i < jsonArrayUsersFamily.length(); i++) {
+////                                                numbers.add(i);
+////                                            }
+////                                            Collections.shuffle(numbers);
+////
+////                                            Log.d("TAG", "numbers >>>>>>>>> " + numbers);
+//
+//                                            Log.d("TAG", "finalK >>>>>>>>> " + finalK);
+//
+//                                            Log.d("TAG", "stringImages >>>>>>>>> " + stringImages);
+//
+//                                            Log.d("TAG", "stringImages >>>>>>>>> " + stringImages.size());
+//
+//                                            Log.d("TAG", "jsonArrayUsersFamily >>>>>>>>> " + (jsonArrayUsersFamily.length()));
+//
+////                                            if (stringImages.size() == (jsonArrayUsersFamily.length())) {
+////
+//////                                                Log.d("TAG", "stringImages >>>>>>>>> " + stringImages);
+                                                Log.d("TAG", "stringImages.get(0) >>>>>>>>> " + stringImages.get(0));
+//                                                imagesReadyArray.add(stringImages.get(0));
+////
+////
+//////                                                imagesReadyArray.add(response.optString("image"));
+//                                                if (imagesReadyArray.size() == dataPlanParam.length()) {
+//                                                    processData(imagesReadyArray);
+//                                                }
+////
+////                                            }
+//
+                                            stringImages.clear();
+                                        }
+////
+//
+//                                        }
+
+
+                                        if (finalK == 0) {
+                                            imagesReadyArray.add(response.optString("image"));
+                                        }
+                                        if (imagesReadyArray.size() == dataPlanParam.length()) {
+                                            processData(imagesReadyArray);
+                                        }
+
+
 //                                    if (
 //                                            imagesDes.length()<1
 //////                                                    ||
@@ -272,9 +349,13 @@ public class VacaplanFragment extends Fragment
 
 
                                         for (int l = 0; l < imagesDes.length(); l++) {
+
+//                                            Log.d("TAG", "imagesDes.length() >>>>>>>>> " + imagesDes.length());
+//                                            Log.d("TAG", "imagesDes xxx >>>>>>>>> " + imagesDes);
+
                                             JSONObject jobl = imagesDes.getJSONObject(l);
-                                            Log.d("TAG", "jobl.getString(\"destination_id\") >>>>>>>>> " + jobl.getString("destination_id"));
-                                            Log.d("TAG", "finalJob.getString(\"_id\") >>>>>>>>> " + finalJob.getString("_id"));
+//                                            Log.d("TAG", "jobl.getString(\"destination_id\") >>>>>>>>> " + jobl.getString("destination_id"));
+//                                            Log.d("TAG", "finalJob.getString(\"_id\") >>>>>>>>> " + finalJob.getString("_id"));
 //                                            if (
 //                                                    imagesDes.length()<1
 ////                                                    ||
@@ -302,15 +383,24 @@ public class VacaplanFragment extends Fragment
                                                 imgs.put(oIn);
                                             }
 
-                                            if ( finalK+1 == jsonArrayUsersFamily.length() ) {
+                                            Log.d("TAG", "imagesDes.length() zzz >>>>>>>>> " + (imagesDes.length()-1));
+//                                            Log.d("TAG", "dataPlanParam.length() OOOOOOOOOOOOOOOOOO >>>>>>>>> " + dataPlanParam.length());
+                                            Log.d("TAG", "finalJ yyy >>>>>>>>> " + (finalJ+1));
+                                            if ( imagesDes.length()-1 == finalJ+1 ) {
+                                                Log.d("TAG", "imagesDes OOOOOOOOOOOOOOOOOO >>>>>>>>> " + imagesDes);
                                                 for (int lor = 0; lor < imagesDes.length(); lor++) {
                                                     JSONObject imagesReadyObj = imagesDes.getJSONObject(lor);
                                                     JSONArray imagesReady = imagesReadyObj.getJSONArray("images");
 //                                                    imagesBuffer.clear();
+                                                    Log.d("TAG", "lor >>>>>>>>> " + lor);
                                                     for (int in = 0; in < imagesReady.length(); in++) {
                                                         JSONObject jim = imagesReady.getJSONObject(in);
 //                                                        imagesBuffer.add(jim.getString("image"));
-                                                        if(in == 0) {
+                                                        Log.d("TAG", "in >>>>>>>>> " + in);
+                                                        Log.d("TAG", "jim.getString(\"image\") CCCCCC >>>>>>>>> " + jim.getString("image"));
+                                                        if(
+//                                                                lor == 0 &&
+                                                                in == 0) {
                                                             imagesReadyArray.add(jim.getString("image"));
                                                         }
                                                     }
@@ -320,9 +410,9 @@ public class VacaplanFragment extends Fragment
 //                                                Log.d("TAG", "imagesReadyArray KKKKKKKKKKKKKKKKKK >>>>>>>>> " + imagesReadyArray);
 
                                             }
-                                            if (imagesReadyArray.size() == dataPlanParam.length()) {
-                                                processData(imagesReadyArray);
-                                            }
+//                                            if (imagesReadyArray.size() == dataPlanParam.length()) {
+//                                                processData(imagesReadyArray);
+//                                            }
 
 
 //                                            if ( finalJ+1 == dataPlanParam.length() ){
@@ -405,7 +495,8 @@ public class VacaplanFragment extends Fragment
 ////                                        }
                                     }
 //
-                                        Log.d("TAG", "imagesDes xxx >>>>>>>>> " + imagesDes);
+//                                        Log.d("TAG", "imagesDes.length() >>>>>>>>> " + imagesDes.length());
+//                                        Log.d("TAG", "imagesDes xxx >>>>>>>>> " + imagesDes);
 //
 ////                                    if (finalJ +1==jsonArrayUsersFamily.length()){
 ////                                        processData();
@@ -427,8 +518,15 @@ public class VacaplanFragment extends Fragment
                         }
                     });
 
+
+//                        new Handler().postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//
                     mQueue.add(request);
 
+//                            }
+//                        }, 1000);
 
                 }
             }
@@ -451,6 +549,78 @@ public class VacaplanFragment extends Fragment
             getImageBanner(dataPlan);
 
             //processData();
+        }
+        if (url.contains(RestApis.KarmaGroups.vacapediaDestinations+ "/" /* + ID_FAMILY*/)) {
+            Log.d("TAG", "x onAsyncHttpResponseGet() called with: response = [" + response + "], url = [" + url + "]");
+
+//            try {
+
+
+
+//                    String[] alphabet = new String[]{};
+            List<String> list = new ArrayList<>();
+//                            Arrays.asList(alphabet);
+
+            JSONObject jres = new JSONObject(response);
+
+
+
+//                                        Log.d("TAG", "jres.length() >>>>>>>>> " + jres.length());
+                                        Log.d("TAG", "jres xxx >>>>>>>>> " + jres);
+
+
+
+            if (imagesDes.length()<1){
+                JSONObject o = new JSONObject("{" +
+                        "\"destination_id\": \"" + jres.getString("_id") + "\"," +
+                        "\"images\": [" +
+                                                    "{" +
+                                                    "\"id\": \"" + 0 + "\"," +
+                                                    "\"image\": \"" + jres.getString("image") + "\"" +
+                                                    "}"
+                                                    +
+                        "]" +
+                        "}");
+                imagesDes.put(o);
+            } else {
+                for (int l = 0; l < imagesDes.length(); l++) {
+                    JSONObject jobl = imagesDes.getJSONObject(l);
+                    list.add(jobl.getString("destination_id"));
+                    Log.d("TAG", "list >>>>>>>>> " + list);
+                    if (!list.contains(jres.getString("_id"))) {
+//                            Log.d("TAG", "contain list >>>>>>>>> " + !list.contains(finalJob.getString("_id")));
+                        JSONObject o = new JSONObject("{" +
+                                "\"destination_id\": \"" + jres.getString("_id") + "\"," +
+                                "\"images\": [" +
+                                                            "{" +
+                                                            "\"id\": \"" + 0 + "\"," +
+                                                            "\"image\": \"" + jres.getString("image") + "\"" +
+                                                            "}"
+                                                            +
+                                "]" +
+                                "}");
+                        imagesDes.put(o);
+                    }
+                    else {
+                        JSONArray imgs = jobl.getJSONArray("images");
+                        JSONObject oIn = new JSONObject("{" +
+                                "\"id\": \"" + (imgs.length()) + "\"," +
+                                "\"image\": \"" + jres.getString("image") + "\"" +
+                                "}");
+                        imgs.put(oIn);
+                    }
+
+                }
+            }
+
+
+
+
+
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+
         }
 //        if (url.contains(RestApis.KarmaGroups.vacapediaDestinations+ "xxx/" /* + ID_FAMILY*/)) {
 //            Log.d("TAG", "x onAsyncHttpResponseGet() called with: response = [" + response + "], url = [" + url + "]");
@@ -673,6 +843,7 @@ public class VacaplanFragment extends Fragment
 ////                Log.d("LOG", "imageSelected hhhhhhhh >>>>>>>>> " + imageSelected);
 
                 currentUser.setImage(imagesReadyArray.get(j));
+//                currentUser.setImage(imageSelected);
 
 
                 currentUser.setCost("0");
