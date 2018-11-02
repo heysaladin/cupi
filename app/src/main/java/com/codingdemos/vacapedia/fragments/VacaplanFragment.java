@@ -171,6 +171,17 @@ public class VacaplanFragment extends Fragment
     private void getImageBanner(final JSONArray dataPlanParam){
         try {
 
+
+//                        JSONArray dataJson = dataDestinations;
+//            destinationsArrayListBuffer = new ArrayList< >();
+            destinationsArrayList = new ArrayList<>();
+//            destinationsArrayList = getArrayListFromJSONArray(jsonArrayUsersFamily);
+            mRecyclerView = view.findViewById(R.id.plans);
+            LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this.getContext());
+            mRecyclerView.setLayoutManager(mLinearLayoutManager);
+            destinationsArrayList.clear();
+            Log.d("TAG", "dataUserFamily >>>>>>>>> " + dataUserFamily);
+
 //            JSONArray
 
 //            Log.d("TAG", "imagesDes xxx >>>>>>>>> " + imagesDes);
@@ -179,6 +190,12 @@ public class VacaplanFragment extends Fragment
                 JSONObject job = null;
                 job = dataPlanParam.getJSONObject(j);
                 currentUser = new PlanModel();
+                currentUser.set_id(job.optString("_id"));
+                currentUser.setTitle(job.optString("title"));
+                currentUser.setContent(job.optString("content"));
+                currentUser.setBody_copy(job.optString("body_copy"));
+                currentUser.setTarget_date(job.optString("target_date"));
+                currentUser.setTarget_time(job.optString("target_time("));
                 jsonArrayUsersFamily = new JSONArray(job.optString("destinations"));
                 currentUser.setDestinations(jsonArrayUsersFamily);
 
@@ -718,7 +735,30 @@ public class VacaplanFragment extends Fragment
 //                    stringImages.clear();
 //                }
 
+
+
+                                    for (int i = 0; i < stringImages.size(); i++) {
+                                        numbers.add(i);
+                                    }
+                                    Collections.shuffle(numbers);
+
+
+                currentUser.setImage(stringImages.get(numbers.get(0)));
+//                currentUser.setImage(imageSelected);
+
+
+                currentUser.setCost("0");
+
+//                if (imageSelected != null) {
+                destinationsArrayList.add(currentUser);
+//                }
+
+
             }
+//
+//            destinationsArrayListBuffer = destinationsArrayList;
+            PlanAdapter myAdapter = new PlanAdapter(this.getActivity(), destinationsArrayList);
+            mRecyclerView.setAdapter(myAdapter);
 
 //            Log.d("TAG", "imagesDes xxx >>>>>>>>> " + imagesDes);
 
