@@ -14,8 +14,8 @@ import android.view.ViewGroup;
 
 import com.codingdemos.flowers.R;
 import com.codingdemos.vacapedia.MainActivity;
-import com.codingdemos.vacapedia.PlanAdapter;
-import com.codingdemos.vacapedia.PlanModel;
+import com.codingdemos.vacapedia.handlers.PlanAdapter;
+import com.codingdemos.vacapedia.data.PlanModel;
 import com.codingdemos.vacapedia.rest.AsyncHttpResponse;
 import com.codingdemos.vacapedia.rest.RestApis;
 import com.loopj.android.http.RequestParams;

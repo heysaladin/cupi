@@ -16,13 +16,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
-import com.codingdemos.vacapedia.DestinationsModel;
-import com.codingdemos.vacapedia.GuestDestinationsAdapter;
-import com.codingdemos.vacapedia.GuestDestinationsLongAdapter;
+import com.codingdemos.vacapedia.data.DestinationsModel;
+import com.codingdemos.vacapedia.handlers.GuestDestinationsAdapter;
+import com.codingdemos.vacapedia.handlers.GuestDestinationsLongAdapter;
 import com.codingdemos.vacapedia.MainActivity;
 import com.codingdemos.flowers.R;
-import com.codingdemos.vacapedia.SliderAdapter;
+import com.codingdemos.vacapedia.handlers.SliderAdapter;
 import com.codingdemos.vacapedia.rest.AsyncHttpResponse;
 import com.codingdemos.vacapedia.rest.RestApis;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -73,6 +74,8 @@ public class HomeFragment extends Fragment
 
     private ShimmerFrameLayout mShimmerViewContainer;
 
+    private LinearLayout content;
+
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
         return fragment;
@@ -91,6 +94,9 @@ public class HomeFragment extends Fragment
         view = inflater.inflate(R.layout.fragment_item_three, container, false);
 
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
+
+        content = (LinearLayout) view.findViewById(R.id.content);
+        content.setVisibility(View.GONE);
 
         getKarmaGroupsApiRequest();
         getKarmaGroupsApiRequestNews();
@@ -251,6 +257,7 @@ public class HomeFragment extends Fragment
             // Stopping Shimmer Effect's animation after data is loaded to ListView
             mShimmerViewContainer.stopShimmerAnimation();
             mShimmerViewContainer.setVisibility(View.GONE);
+            content.setVisibility(View.VISIBLE);
 
         } catch (JSONException e) {
             e.printStackTrace();

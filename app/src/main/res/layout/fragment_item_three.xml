@@ -64,7 +64,7 @@
                     android:layout_marginLeft="@dimen/space_15dp"
                     android:layout_marginTop="@dimen/space_15dp"
                     android:layout_marginBottom="@dimen/space_15dp"
-                    android:background="@color/background"
+                    android:background="@drawable/rounded_grey"
                     android:padding="@dimen/space_10dp"
                     android:text="Back to Nature"
                     android:textColor="#333"
@@ -79,14 +79,14 @@
                         android:layout_marginLeft="@dimen/space_15dp"
                         android:layout_width="@dimen/space_200dp"
                         android:layout_height="@dimen/space_160dp"
-                        android:background="@color/background" />
+                        android:background="@drawable/rounded_grey" />
                     <View
                         android:paddingStart="10dp"
                         android:clipToPadding="false"
                         android:layout_marginLeft="@dimen/space_15dp"
                         android:layout_width="@dimen/space_200dp"
                         android:layout_height="@dimen/space_160dp"
-                        android:background="@color/background" />
+                        android:background="@drawable/rounded_grey" />
                 </LinearLayout>
                 <View
                     android:layout_width="230dp"
@@ -94,7 +94,7 @@
                     android:layout_marginLeft="@dimen/space_15dp"
                     android:layout_marginTop="@dimen/space_15dp"
                     android:layout_marginBottom="@dimen/space_15dp"
-                    android:background="@color/background"
+                    android:background="@drawable/rounded_grey"
                     android:padding="@dimen/space_10dp"
                     android:text="Back to Nature"
                     android:textColor="#333"
@@ -109,20 +109,25 @@
                         android:layout_marginLeft="@dimen/space_15dp"
                         android:layout_width="@dimen/space_200dp"
                         android:layout_height="@dimen/space_160dp"
-                        android:background="@color/background" />
+                        android:background="@drawable/rounded_grey" />
                     <View
                         android:paddingStart="10dp"
                         android:clipToPadding="false"
                         android:layout_marginLeft="@dimen/space_15dp"
                         android:layout_width="@dimen/space_200dp"
                         android:layout_height="@dimen/space_160dp"
-                        android:background="@color/background" />
+                        android:background="@drawable/rounded_grey" />
                 </LinearLayout>
 
             </LinearLayout>
 
         </com.facebook.shimmer.ShimmerFrameLayout>
 
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
         <View
             android:elevation="0dp"
             android:background="@color/colorPrimary"
@@ -241,5 +246,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/trans" />
+        </LinearLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

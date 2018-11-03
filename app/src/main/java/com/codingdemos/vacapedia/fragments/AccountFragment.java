@@ -1,9 +1,7 @@
 package com.codingdemos.vacapedia.fragments;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,15 +17,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.codingdemos.vacapedia.FamilyAdapter;
-import com.codingdemos.vacapedia.FamilyModel;
+import com.codingdemos.vacapedia.data.FamilyModel;
 import com.codingdemos.vacapedia.MainActivity;
 import com.codingdemos.flowers.R;
-import com.codingdemos.vacapedia.NotificationAdapter;
-import com.codingdemos.vacapedia.NotificationsActivity;
-import com.codingdemos.vacapedia.NotificationsModel;
-import com.codingdemos.vacapedia.UserAdapter;
-import com.codingdemos.vacapedia.UserModel;
+import com.codingdemos.vacapedia.handlers.NotificationAdapter;
+import com.codingdemos.vacapedia.handlers.UserAdapter;
+import com.codingdemos.vacapedia.data.UserModel;
 import com.codingdemos.vacapedia.rest.AsyncHttpResponse;
 import com.codingdemos.vacapedia.rest.RestApis;
 import com.loopj.android.http.RequestParams;

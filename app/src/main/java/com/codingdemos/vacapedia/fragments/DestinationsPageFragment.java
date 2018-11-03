@@ -13,10 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.codingdemos.flowers.R;
-import com.codingdemos.vacapedia.DestinationsModel;
-import com.codingdemos.vacapedia.GuestDestinationsAdapter;
+import com.codingdemos.vacapedia.data.DestinationsModel;
+import com.codingdemos.vacapedia.handlers.GuestDestinationsAdapter;
 import com.codingdemos.vacapedia.MainActivity;
-import com.codingdemos.vacapedia.MyAdapter;
+import com.codingdemos.vacapedia.handlers.MyAdapter;
 import com.codingdemos.vacapedia.rest.AsyncHttpResponse;
 import com.codingdemos.vacapedia.rest.RestApis;
 import com.loopj.android.http.RequestParams;

@@ -21,6 +21,8 @@ import com.codingdemos.vacapedia.fragments.VacaplanFragment;
 import com.codingdemos.vacapedia.fragments.PagesFragment;
 import com.codingdemos.vacapedia.fragments.HomeFragment;
 import com.codingdemos.vacapedia.fragments.AccountFragment;
+import com.codingdemos.vacapedia.handlers.BottomNavigationViewBehavior;
+import com.codingdemos.vacapedia.handlers.BottomNavigationViewHelper;
 
 public class MainActivity extends AppCompatActivity {
 

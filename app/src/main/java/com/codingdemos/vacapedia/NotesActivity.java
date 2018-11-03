@@ -19,6 +19,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.codingdemos.flowers.R;
+import com.codingdemos.vacapedia.data.NoteData;
+import com.codingdemos.vacapedia.handlers.MasonryAdapter;
+import com.codingdemos.vacapedia.handlers.SpacesItemDecoration;
 import com.codingdemos.vacapedia.rest.AsyncHttpResponse;
 import com.codingdemos.vacapedia.rest.RestApis;
 import com.loopj.android.http.RequestParams;
@@ -39,7 +42,7 @@ public class NotesActivity extends AppCompatActivity
     RecyclerView mRecyclerView;
     private String imageUrl = null;
     private FloatingActionButton fab;
-    private ArrayList < NoteData > noteData;
+    private ArrayList <NoteData> noteData;
     private JSONArray dataNews = null;
 
     private void getIntentData() {

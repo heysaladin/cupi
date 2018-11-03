@@ -15,6 +15,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.codingdemos.flowers.R;
+import com.codingdemos.vacapedia.data.PromosModel;
+import com.codingdemos.vacapedia.handlers.PromosAdapter;
+import com.codingdemos.vacapedia.handlers.SliderAdapter;
 import com.codingdemos.vacapedia.rest.AsyncHttpResponse;
 import com.codingdemos.vacapedia.rest.RestApis;
 import com.loopj.android.http.RequestParams;
@@ -24,7 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListPromosActivity
         extends AppCompatActivity
@@ -37,7 +39,7 @@ public class ListPromosActivity
     TextView mDescription;
 
     private JSONArray dataDestinations = null;
-    private ArrayList < PromosModel > destinationsArrayListBuffer;
+    private ArrayList <PromosModel> destinationsArrayListBuffer;
     private ArrayList < PromosModel > destinationsArrayList;
     private SliderAdapter guestDestinationsAdapter;
     private String imageUrl = null;

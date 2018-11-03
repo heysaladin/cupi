@@ -8,7 +8,7 @@ import android.util.Log;
 //import com.karmagroups.utils.AppIntegers;
 //import com.karmagroups.utils.AppStrings;
 //import com.karmagroups.widgets.BusyDialog;
-import com.codingdemos.vacapedia.AppIntegers;
+import com.codingdemos.vacapedia.data.AppIntegers;
 import com.codingdemos.vacapedia.widgets.BusyDialog;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;

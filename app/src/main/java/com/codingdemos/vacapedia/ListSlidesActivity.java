@@ -1,7 +1,6 @@
 package com.codingdemos.vacapedia;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -16,6 +15,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.codingdemos.flowers.R;
+import com.codingdemos.vacapedia.data.SlidesModel;
+import com.codingdemos.vacapedia.handlers.SliderAdapter;
+import com.codingdemos.vacapedia.handlers.SlidesAdapter;
 import com.codingdemos.vacapedia.rest.AsyncHttpResponse;
 import com.codingdemos.vacapedia.rest.RestApis;
 import com.loopj.android.http.RequestParams;
@@ -25,7 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListSlidesActivity
         extends AppCompatActivity
@@ -38,7 +39,7 @@ public class ListSlidesActivity
     TextView mDescription;
 
     private JSONArray dataDestinations = null;
-    private ArrayList < SlidesModel > destinationsArrayListBuffer;
+    private ArrayList <SlidesModel> destinationsArrayListBuffer;
     private ArrayList < SlidesModel > destinationsArrayList;
     private SliderAdapter guestDestinationsAdapter;
     private String imageUrl = null;

@@ -15,6 +15,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.codingdemos.flowers.R;
+import com.codingdemos.vacapedia.data.NotificationsModel;
+import com.codingdemos.vacapedia.handlers.NotificationAdapter;
 import com.codingdemos.vacapedia.rest.AsyncHttpResponse;
 import com.codingdemos.vacapedia.rest.RestApis;
 import com.loopj.android.http.RequestParams;
@@ -37,7 +39,7 @@ public class NotificationsActivity
     TextView mDescription;
 
     private JSONArray dataDestinations = null;
-    private ArrayList < NotificationsModel > destinationsArrayListBuffer;
+    private ArrayList <NotificationsModel> destinationsArrayListBuffer;
     private ArrayList < NotificationsModel > destinationsArrayList;
     private NotificationAdapter guestDestinationsAdapter;
     private String imageUrl = null;
