@@ -34,6 +34,14 @@
         android:orderInCategory="11"
         android:title="List Promo"
         app:showAsAction="never"/>
+    <item android:id="@+id/action_add_plan"
+        android:orderInCategory="11"
+        android:title="Add Plan"
+        app:showAsAction="never"/>
+    <item android:id="@+id/action_list_plans"
+        android:orderInCategory="11"
+        android:title="List Plans"
+        app:showAsAction="never"/>
     <item android:id="@+id/action_scroll"
         android:orderInCategory="11"
         android:title="Scroll"

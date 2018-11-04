@@ -70,6 +70,9 @@
         <activity android:name="com.codingdemos.vacapedia.ScrollActivity" />
         <activity android:name="com.codingdemos.vacapedia.CheeseDetailActivity" />
         <activity android:name="com.codingdemos.vacapedia.VacaplanActivity" />
+        <activity android:name="com.codingdemos.vacapedia.AddPlanActivity" />
+        <activity android:name="com.codingdemos.vacapedia.EditPlanActivity" />
+        <activity android:name="com.codingdemos.vacapedia.ListPlansActivity" />
     </application>
 
 </manifest>

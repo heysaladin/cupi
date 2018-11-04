@@ -71,6 +71,16 @@ public class MainActivity extends AppCompatActivity {
                 Intent mIntentDestinationAddPromos = new Intent(this, ListPromosActivity.class);
                 this.startActivity(mIntentDestinationAddPromos);
                 return true;
+            case R.id.action_add_plan:
+                Toast.makeText(this, "AddPlanActivity", Toast.LENGTH_SHORT).show();
+                Intent mIntentDestinationAddPlan = new Intent(this, AddPlanActivity.class);
+                this.startActivity(mIntentDestinationAddPlan);
+                return true;
+            case R.id.action_list_plans:
+                Toast.makeText(this, "ListPlanActivity", Toast.LENGTH_SHORT).show();
+                Intent mIntentDestinationAddPlans = new Intent(this, ListPlansActivity.class);
+                this.startActivity(mIntentDestinationAddPlans);
+                return true;
             case R.id.action_scroll:
                 Toast.makeText(this, "ListPromoActivity", Toast.LENGTH_SHORT).show();
                 Intent mIntentDestinationAddScroll = new Intent(this, CheeseDetailActivity.class);

@@ -137,7 +137,11 @@ public class VacaplanFragment
                     cost += parseInteger(intCost.get(c));
                 }
 
-                currentUser.setImage(stringImages.get(numbers.get(0)));
+                if(stringImages.size()>1) {
+                    currentUser.setImage(stringImages.get(numbers.get(0)));
+                }else{
+                    currentUser.setImage(stringImages.get(0));
+                }
                 currentUser.setCost(String.valueOf(cost));
 
                 destinationsArrayList.add(currentUser);
