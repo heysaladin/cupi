@@ -195,6 +195,57 @@
                     android:textColorHint="#aaa"
                     android:textSize="@dimen/font_medium"
                     android:visibility="visible" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <android.support.v7.widget.RecyclerView
+                        android:clipToPadding="false"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        android:id="@+id/recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbars="vertical" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/bn_find_a_restaurant_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/book_now_field_height"
+                    android:layout_gravity="center"
+                    android:background="@color/white">
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/bn_restaurant_acs"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/signup_field_height"
+                        android:background="@color/white"
+                        android:spinnerMode="dropdown"
+                        android:visibility="gone" />
+                    <ImageView
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/space_10dp"
+                        android:id="@+id/bn_find_a_restaurant_icon_iv"
+                        android:layout_width="@dimen/signup_field_icon_size"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icn_drop" />
+
+                    <TextView
+                        android:id="@+id/bn_find_a_restaurant_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="@dimen/space_10dp"
+                        android:layout_toLeftOf="@id/bn_find_a_restaurant_icon_iv"
+                        android:hint="find_a_restaurant"
+                        android:maxLines="1"
+                        android:paddingLeft="@dimen/space_10dp"
+                        android:textColor="#333"
+                        android:textSize="@dimen/font_medium" />
+                </RelativeLayout>
+
                 <EditText
                     android:textCursorDrawable="@null"
                     android:id="@+id/destinations"

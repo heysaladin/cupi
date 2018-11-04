@@ -46,12 +46,17 @@ public class PlanAdapter extends RecyclerView.Adapter < PlanViewHolder > {
         }
         holder.big_price.setText(mFlowerList.get(position).getCost());
         holder.mTitle.setText(mFlowerList.get(position).getTitle());
+        holder.target_date.setText(mFlowerList.get(position).getTarget_date());
+        holder.textViewDesc.setText(mFlowerList.get(position).getBody_copy());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), VacaplanActivity.class);
                 intent.putExtra("name", mFlowerList.get(holder.getAdapterPosition()).getTitle());
                 intent.putExtra("image", mFlowerList.get(holder.getAdapterPosition()).getImage());
+                intent.putExtra("body_copy", mFlowerList.get(holder.getAdapterPosition()).getBody_copy());
+                intent.putExtra("target_date", mFlowerList.get(holder.getAdapterPosition()).getTarget_date());
+                intent.putExtra("location", "");
                 view.getContext().startActivity(intent);
             }
         });
@@ -67,7 +72,7 @@ public class PlanAdapter extends RecyclerView.Adapter < PlanViewHolder > {
 class PlanViewHolder extends RecyclerView.ViewHolder {
 
     ImageView mImage;
-    TextView mTitle, big_price;
+    TextView mTitle, big_price, target_date, location, textViewDesc;
     CardView mCardView;
 
     PlanViewHolder(View itemView) {
@@ -77,6 +82,9 @@ class PlanViewHolder extends RecyclerView.ViewHolder {
         mTitle = itemView.findViewById(R.id.title);
         mCardView = itemView.findViewById(R.id.card_plan);
         big_price = itemView.findViewById(R.id.big_price);
+        target_date = itemView.findViewById(R.id.target_date);
+        location = itemView.findViewById(R.id.location);
+        textViewDesc = itemView.findViewById(R.id.textViewDesc);
 
     }
 }

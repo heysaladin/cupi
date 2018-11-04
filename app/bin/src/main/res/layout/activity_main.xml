@@ -33,6 +33,7 @@
         android:layout_gravity="bottom"
         android:background="@color/colorPrimary"
         android:visibility="visible"
+        app:labelVisibilityMode="labeled"
         app:itemIconTint="@color/cardview_dark_background"
         app:itemTextColor="@color/cardview_dark_background"
         app:menu="@menu/bottom_navigation_items" />
