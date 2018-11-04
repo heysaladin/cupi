@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.codingdemos.flowers.R;
 import com.codingdemos.vacapedia.MainActivity;
+import com.codingdemos.vacapedia.data.DestinationsModel;
 import com.codingdemos.vacapedia.handlers.PlanAdapter;
 import com.codingdemos.vacapedia.data.PlanModel;
 import com.codingdemos.vacapedia.rest.AsyncHttpResponse;
@@ -35,6 +36,7 @@ public class VacaplanFragment
 
     private View view;
     private List < Integer > numbers;
+    private ArrayList < PlanModel > destinationsArrayListBuff;
     private ArrayList < PlanModel > destinationsArrayList;
     private RecyclerView mRecyclerView;
     private PlanModel currentUser;
@@ -101,6 +103,8 @@ public class VacaplanFragment
 
         try {
 
+            destinationsArrayListBuff = new ArrayList < > ();
+            destinationsArrayListBuff.clear();
             destinationsArrayList = new ArrayList < > ();
             mRecyclerView = view.findViewById(R.id.plans);
             LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this.getContext());
@@ -148,13 +152,52 @@ public class VacaplanFragment
 
             }
 
-            PlanAdapter myAdapter = new PlanAdapter(this.getActivity(), destinationsArrayList);
+//            for (int i = 0; i < destinationsArrayList.size(); i++) {
+//                numbers.add(i);
+//            }
+//            Collections.shuffle(numbers);
+//
+//            //JSONArray destinationsArrayListBuf = new JSONArray();
+//            for (int i = 0; i < numbers.size(); i++) {
+//                destinationsArrayListBuff.add(destinationsArrayList.get(numbers.get(i)));
+//            }
+
+            destinationsArrayListBuff = createRandomList(destinationsArrayList);
+
+            PlanAdapter myAdapter = new PlanAdapter(this.getActivity(), destinationsArrayListBuff);
             mRecyclerView.setAdapter(myAdapter);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+
+
+    private ArrayList <PlanModel> createRandomList(ArrayList < PlanModel > listTarget) {
+        Log.d("LOG", "listTarget >>>>>>>>> " + listTarget);
+        ArrayList < PlanModel > listResult;
+        List < Integer > numbers = new ArrayList < > ();
+        for (int i = 0; i < listTarget.size(); i++) {
+            numbers.add(i);
+        }
+        Collections.shuffle(numbers);
+        Log.d("LOG", "createRandomList numbers >>>>>>>>> " + numbers);
+
+        int size = listTarget.size();
+        ArrayList < PlanModel > buffer = new ArrayList < PlanModel > ();
+
+        if (listTarget.size() >= size) {
+            for (int i = 0; i < size; i++) {
+                Log.d("LOG", "createRandomList hashSet.get(i) >>>>>>>>> " + numbers.get(i));
+                buffer.add(listTarget.get(numbers.get(i)));
+            }
+            Log.d("LOG", "buffer >>>>>>>>> " + buffer);
+            return listResult = buffer;
+        } else {
+            return listResult = listTarget;
+        }
+    };
+
 
     private int parseInteger(String s) {
         try {
