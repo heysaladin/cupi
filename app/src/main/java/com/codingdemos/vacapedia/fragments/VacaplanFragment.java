@@ -132,6 +132,8 @@ public class VacaplanFragment
                     String costNow = jobk.optString("total_cost");
                 }
 
+                numbers.clear();
+
                 for (int i = 0; i < stringImages.size(); i++) {
                     numbers.add(i);
                 }
@@ -142,7 +144,12 @@ public class VacaplanFragment
                 }
 
                 if(stringImages.size()>1) {
-                    currentUser.setImage(stringImages.get(numbers.get(0)));
+                    if (numbers.get(0)!=0) {
+                        Log.d("LOG", "numbers >>>>>>>>> " + numbers);
+                        currentUser.setImage(stringImages.get(numbers.get(0) - 1));
+                    } else {
+                        currentUser.setImage(stringImages.get(numbers.get(0)));
+                    }
                 }else{
                     currentUser.setImage(stringImages.get(0));
                 }
