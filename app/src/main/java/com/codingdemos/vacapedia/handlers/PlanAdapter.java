@@ -39,6 +39,7 @@ public class PlanAdapter extends RecyclerView.Adapter < PlanViewHolder > {
         if (mFlowerList.get(position).getImage() != "null" || mFlowerList.get(position).getImage() != null || mFlowerList.get(position).getImage() != "") {
             RequestOptions options = new RequestOptions();
             options.centerCrop();
+            options.placeholder(R.drawable.default_image);
             Glide.with(mContext)
                     .load(mFlowerList.get(position).getImage().replace(" ", "%20"))
                     .apply(options)

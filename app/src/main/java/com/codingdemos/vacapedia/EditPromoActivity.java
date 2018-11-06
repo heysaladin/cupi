@@ -186,7 +186,7 @@ public class EditPromoActivity extends AppCompatActivity
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
-                        Intent in = new Intent(EditPromoActivity.this, MainActivity.class);
+                        Intent in = new Intent(EditPromoActivity.this, ListPromosActivity.class);
                         EditPromoActivity.this.startActivity( in );
                         EditPromoActivity.this.finish();
                         Toast.makeText(EditPromoActivity.this, "Thank You", Toast.LENGTH_LONG).show();

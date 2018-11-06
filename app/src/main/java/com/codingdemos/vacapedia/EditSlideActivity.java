@@ -185,7 +185,7 @@ public class EditSlideActivity extends AppCompatActivity
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
-                        Intent in = new Intent(EditSlideActivity.this, MainActivity.class);
+                        Intent in = new Intent(EditSlideActivity.this, ListSlidesActivity.class);
                         EditSlideActivity.this.startActivity( in );
                         EditSlideActivity.this.finish();
                         Toast.makeText(EditSlideActivity.this, "Thank You", Toast.LENGTH_LONG).show();

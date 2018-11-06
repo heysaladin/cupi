@@ -288,7 +288,7 @@ public class EditPlanActivity extends AppCompatActivity
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
-                        Intent in = new Intent(EditPlanActivity.this, MainActivity.class);
+                        Intent in = new Intent(EditPlanActivity.this, ListPlansActivity.class);
                         EditPlanActivity.this.startActivity( in );
                         EditPlanActivity.this.finish();
                         Toast.makeText(EditPlanActivity.this, "Thank You", Toast.LENGTH_LONG).show();

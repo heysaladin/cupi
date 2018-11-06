@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.codingdemos.flowers.R;
 import com.codingdemos.vacapedia.DestinationListActivity;
 import com.codingdemos.vacapedia.data.DestinationsModel;
@@ -52,8 +53,12 @@ public class GuestDestinationsLongAdapter extends RecyclerView.Adapter < GuestDe
         final DestinationsModel model = arrayList.get(position);
         String img = "https://www.dakwatuna.com/wp-content/uploads/2015/07/masjidil-haram.jpg";
         Log.d("LOG", "model.getImage() +++++++++++++++ " + model.getImage());
+        RequestOptions options = new RequestOptions();
+        options.centerCrop();
+        options.placeholder(R.drawable.default_image);
         Glide.with(context)
                 .load(model.getImage())
+                .apply(options)
                 .into(holder.item_home_destination_image_iv);
         holder.item_home_destination_name_tv.setText(model.getName());
         holder.item_home_destination_parent_rl.setOnClickListener(new View.OnClickListener() {
