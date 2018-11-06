@@ -37,7 +37,6 @@
                 android:id="@+id/item_home_destination_image_iv"
                 android:layout_width="200dp"
                 android:layout_height="160dp"
-                android:src="@drawable/hagia_sophia"
                 android:adjustViewBounds="true"
                 android:background="@drawable/rounded"
                 android:scaleType="centerCrop" />

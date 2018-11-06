@@ -31,7 +31,7 @@ public class PlansLineAdapter extends RecyclerView.Adapter < PlanLineViewHolder 
 
     @Override
     public PlanLineViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_row_item_notification, parent, false);
+        View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_row_item_plan, parent, false);
         return new PlanLineViewHolder(mView);
     }
 

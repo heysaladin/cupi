@@ -53,11 +53,20 @@ public class PlanAdapter extends RecyclerView.Adapter < PlanViewHolder > {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), VacaplanActivity.class);
+                
                 intent.putExtra("name", mFlowerList.get(holder.getAdapterPosition()).getTitle());
                 intent.putExtra("image", mFlowerList.get(holder.getAdapterPosition()).getImage());
-                intent.putExtra("body_copy", mFlowerList.get(holder.getAdapterPosition()).getBody_copy());
-                intent.putExtra("target_date", mFlowerList.get(holder.getAdapterPosition()).getTarget_date());
+//                intent.putExtra("body_copy", mFlowerList.get(holder.getAdapterPosition()).getBody_copy());
+//                intent.putExtra("target_date", mFlowerList.get(holder.getAdapterPosition()).getTarget_date());
                 intent.putExtra("location", "");
+
+                intent.putExtra("_id", mFlowerList.get(holder.getAdapterPosition()).get_id());
+                intent.putExtra("body_copy", mFlowerList.get(holder.getAdapterPosition()).getBody_copy());
+                intent.putExtra("content", mFlowerList.get(holder.getAdapterPosition()).getContent());
+                intent.putExtra("target_date", mFlowerList.get(holder.getAdapterPosition()).getTarget_date());
+                intent.putExtra("title", mFlowerList.get(holder.getAdapterPosition()).getTitle());
+                intent.putExtra("target_time", mFlowerList.get(holder.getAdapterPosition()).getTarget_time());
+                intent.putExtra("destinations", String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getDestinations()));
                 view.getContext().startActivity(intent);
             }
         });
