@@ -170,6 +170,7 @@ public class VacaplanFragment
 //            }
 
             destinationsArrayListBuff = createRandomList(destinationsArrayList);
+            //destinationsArrayListBuff = destinationsArrayList;
 
             PlanAdapter myAdapter = new PlanAdapter(this.getActivity(), destinationsArrayListBuff);
             mRecyclerView.setAdapter(myAdapter);

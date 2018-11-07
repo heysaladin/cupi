@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.codingdemos.flowers.R;
 import com.codingdemos.vacapedia.data.PlanModel;
@@ -36,6 +38,7 @@ public class PlanAdapter extends RecyclerView.Adapter < PlanViewHolder > {
 
     @Override
     public void onBindViewHolder(final PlanViewHolder holder, final int position) {
+        /*
         if (mFlowerList.get(position).getImage() != "null" || mFlowerList.get(position).getImage() != null || mFlowerList.get(position).getImage() != "") {
             RequestOptions options = new RequestOptions();
             options.centerCrop();
@@ -45,6 +48,20 @@ public class PlanAdapter extends RecyclerView.Adapter < PlanViewHolder > {
                     .apply(options)
                     .into(holder.mImage);
         }
+        */
+        RequestOptions options = new RequestOptions()
+                //.signature(mFlowerList.get(position).get_id())
+                .format(DecodeFormat.PREFER_RGB_565)
+                .centerCrop()
+                .placeholder(R.drawable.default_image)
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+
+        Glide.with(mContext)
+                .load(mFlowerList.get(position).getImage().replace(" ", "%20"))
+                .apply(options)
+                .thumbnail(0.5f)
+                .into(holder.mImage);
+
         holder.big_price.setText(mFlowerList.get(position).getCost());
         holder.mTitle.setText(mFlowerList.get(position).getTitle());
         holder.target_date.setText(mFlowerList.get(position).getTarget_date());
