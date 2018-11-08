@@ -95,6 +95,13 @@
             android:orientation="vertical"
             android:paddingTop="24dp">
 
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/space_250dp"
+                android:id="@+id/dd_contact_us_map_fragment"
+                tools:context=".MapsActivity"
+                android:name="com.google.android.gms.maps.SupportMapFragment" />
+
             <Button
                 android:id="@+id/openAutoPlace"
                 android:layout_width="match_parent"

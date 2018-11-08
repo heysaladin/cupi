@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -30,6 +31,24 @@ import com.codingdemos.vacapedia.handlers.DestinationsTimeLineAdapter;
 import com.codingdemos.vacapedia.handlers.SliderAdapter;
 import com.codingdemos.vacapedia.rest.AsyncHttpResponse;
 import com.codingdemos.vacapedia.rest.RestApis;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+//import com.google.android.gms.maps.CameraUpdateFactory;
+//import com.google.android.gms.maps.GoogleMap;
+//import com.google.android.gms.maps.GoogleMapOptions;
+//import com.google.android.gms.maps.OnMapReadyCallback;
+//import com.google.android.gms.maps.SupportMapFragment;
+//import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+//import com.google.android.gms.maps.model.LatLng;
+//import com.google.android.gms.maps.model.MarkerOptions;
+
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
@@ -39,9 +58,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class VacaplanActivity extends AppCompatActivity implements
-        AsyncHttpResponse.AsyncHttpResponseListener {
+        AsyncHttpResponse.AsyncHttpResponseListener,
+        OnMapReadyCallback {
 
     Toolbar mToolbar;
+
+    private String lat = "0.0";
+    private String lng = "0.0";
 
     private String name = null;
     private String image = null;
@@ -67,6 +90,8 @@ public class VacaplanActivity extends AppCompatActivity implements
     private String imageUrl = null;
     private RecyclerView mRecyclerView;
     private String restaurantName = "";
+
+    private GoogleMap googleMap;
 
     private Button openAutoPlace, openDirectionMap, openOjek;
 
@@ -121,6 +146,32 @@ public class VacaplanActivity extends AppCompatActivity implements
 
     public static final String EXTRA_NAME = "cheese_name";
 
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+        googleMap = map;
+        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+    }
+
+
+    private void addmarker(String snippet) {
+        try {
+            googleMap.clear();
+            LatLng latLng = new LatLng(Double.parseDouble(lat), Double.parseDouble(lng));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng))));
+            // Zoom in the Google Map
+            googleMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+            googleMap.addMarker(new MarkerOptions()
+                    .position(latLng)
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location_on_black_24dp))
+                    .title(String.valueOf(Html.fromHtml(snippet)))
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,6 +182,27 @@ public class VacaplanActivity extends AppCompatActivity implements
 
 
         getIntentData();
+
+
+        SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.dd_contact_us_map_fragment);
+//        supportMapFragment.getMapAsync(VacaplanActivity.this);
+        supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                googleMap = googleMap;
+
+                //do load your map and other map stuffs here...
+            }
+        });
+        GoogleMapOptions op = new GoogleMapOptions();
+        op.zOrderOnTop(true);
+        SupportMapFragment.newInstance(op);
+
+
+        lat = "-6.175110";
+        lng = "106.865039";
+
+
 
 
 
@@ -333,6 +405,9 @@ public class VacaplanActivity extends AppCompatActivity implements
             Log.d("TAG", "x onAsyncHttpResponseGet() called with: response = [" + response + "], url = [" + url + "]");
             dataDestinations = new JSONArray(response);
             processData();
+
+            addmarker("Lokasi");
+
         }
     }
 

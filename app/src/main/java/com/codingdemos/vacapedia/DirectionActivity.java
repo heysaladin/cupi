@@ -96,33 +96,33 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
                     Log.d("LOC", "response.body() >>>>>>>>>>>>> " + response.body());
                     Log.d("LOC", "dataDirection >>>>>>>>>>>>> " + dataDirection);
 
-                    LegsItem dataLegs = dataDirection.getRoutes().get(0).getLegs().get(0);
-
-                    // Dapatkan garis polyline
-                    String polylinePoint = dataDirection.getRoutes().get(0).getOverviewPolyline().getPoints();
-                    // Decode
-                    List<LatLng> decodePath = PolyUtil.decode(polylinePoint);
-                    // Gambar garis ke maps
-                    mMap.addPolyline(new PolylineOptions().addAll(decodePath)
-                            .width(8f).color(Color.argb(255, 56, 167, 252)))
-                            .setGeodesic(true);
-
-                    // Tambah Marker
-                    mMap.addMarker(new MarkerOptions().position(pickUpLatLng).title("Lokasi Awal"));
-                    mMap.addMarker(new MarkerOptions().position(locationLatLng).title("Lokasi Akhir"));
-                    // Dapatkan jarak dan waktu
-                    Distance dataDistance = dataLegs.getDistance();
-                    Duration dataDuration = dataLegs.getDuration();
-
-                    // Set Nilai Ke Widget
-                    tvStartAddress.setText("start location : " + dataLegs.getStartAddress().toString());
-                    tvEndAddress.setText("end location : " + dataLegs.getEndAddress().toString());
-
-                    tvDistance.setText("distance : " + dataDistance.getText() + " (" + dataDistance.getValue() + ")");
-                    tvDuration.setText("duration : " + dataDuration.getText() + " (" + dataDuration.getValue() + ")");
-                    /** START
-                     * Logic untuk membuat layar berada ditengah2 dua koordinat
-                     */
+//                    LegsItem dataLegs = dataDirection.getRoutes().get(0).getLegs().get(0);
+//
+//                    // Dapatkan garis polyline
+//                    String polylinePoint = dataDirection.getRoutes().get(0).getOverviewPolyline().getPoints();
+//                    // Decode
+//                    List<LatLng> decodePath = PolyUtil.decode(polylinePoint);
+//                    // Gambar garis ke maps
+//                    mMap.addPolyline(new PolylineOptions().addAll(decodePath)
+//                            .width(8f).color(Color.argb(255, 56, 167, 252)))
+//                            .setGeodesic(true);
+//
+//                    // Tambah Marker
+//                    mMap.addMarker(new MarkerOptions().position(pickUpLatLng).title("Lokasi Awal"));
+//                    mMap.addMarker(new MarkerOptions().position(locationLatLng).title("Lokasi Akhir"));
+//                    // Dapatkan jarak dan waktu
+//                    Distance dataDistance = dataLegs.getDistance();
+//                    Duration dataDuration = dataLegs.getDuration();
+//
+//                    // Set Nilai Ke Widget
+//                    tvStartAddress.setText("start location : " + dataLegs.getStartAddress().toString());
+//                    tvEndAddress.setText("end location : " + dataLegs.getEndAddress().toString());
+//
+//                    tvDistance.setText("distance : " + dataDistance.getText() + " (" + dataDistance.getValue() + ")");
+//                    tvDuration.setText("duration : " + dataDuration.getText() + " (" + dataDuration.getValue() + ")");
+//                    /** START
+//                     * Logic untuk membuat layar berada ditengah2 dua koordinat
+//                     */
 
                     LatLngBounds.Builder latLongBuilder = new LatLngBounds.Builder();
                     latLongBuilder.include(pickUpLatLng);
