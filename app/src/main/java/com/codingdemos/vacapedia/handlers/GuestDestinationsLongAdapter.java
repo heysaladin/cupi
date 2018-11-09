@@ -93,10 +93,20 @@ public class GuestDestinationsLongAdapter extends RecyclerView.Adapter < GuestDe
                     intent.putExtra(intent_param_post_title, model.getName());
                     intent.putExtra(intent_param_menu_id, model.getMenuID());
 
+                    intent.putExtra("_id", model.get_id());
                     intent.putExtra("Title", model.getName());
                     intent.putExtra("Description", model.getName());
                     intent.putExtra("Image", model.getImage());
                     intent.putExtra("description", model.getDescription());
+
+                    intent.putExtra("category", model.getCategory());
+                    intent.putExtra("latitude", model.getLatitude());
+                    intent.putExtra("longitude", model.getLongitude());
+                    intent.putExtra("address", model.getAddress());
+                    intent.putExtra("distance", model.getDistance());
+                    intent.putExtra("note", model.getNote());
+                    intent.putExtra("costs", model.getCosts());
+                    intent.putExtra("total_cost", model.getTotal_cost());
 
                     context.startActivity(intent);
                 }

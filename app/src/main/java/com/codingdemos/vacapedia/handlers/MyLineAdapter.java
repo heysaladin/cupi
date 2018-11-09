@@ -47,6 +47,7 @@ public class MyLineAdapter extends RecyclerView.Adapter <FlowerViewHolder> {
             @Override
             public void onClick(View view) {
                 Intent mIntent = new Intent(mContext, DetailActivity.class);
+                mIntent.putExtra("_id", mFlowerList.get(holder.getAdapterPosition()).get_id());
                 mIntent.putExtra("name", mFlowerList.get(holder.getAdapterPosition()).getName());
                 mIntent.putExtra("Description", "desc");
                 mIntent.putExtra("image", mFlowerList.get(holder.getAdapterPosition()).getImage());
@@ -54,6 +55,17 @@ public class MyLineAdapter extends RecyclerView.Adapter <FlowerViewHolder> {
 //                intent.putExtra("name", mFlowerList.get(holder.getAdapterPosition()).getTitle());
 ////                intent.putExtra("location", mFlowerList.get(holder.getAdapterPosition()).getLocation());
 //                intent.putExtra("image", mFlowerList.get(holder.getAdapterPosition()).getImage());
+
+                mIntent.putExtra("location", mFlowerList.get(holder.getAdapterPosition()).getLocation());
+                mIntent.putExtra("category", mFlowerList.get(holder.getAdapterPosition()).getCategory());
+                mIntent.putExtra("latitude", mFlowerList.get(holder.getAdapterPosition()).getLatitude());
+                mIntent.putExtra("longitude", mFlowerList.get(holder.getAdapterPosition()).getLongitude());
+                mIntent.putExtra("address", mFlowerList.get(holder.getAdapterPosition()).getAddress());
+                mIntent.putExtra("distance", mFlowerList.get(holder.getAdapterPosition()).getDistance());
+                mIntent.putExtra("note", mFlowerList.get(holder.getAdapterPosition()).getNote());
+                mIntent.putExtra("costs", mFlowerList.get(holder.getAdapterPosition()).getCosts());
+                mIntent.putExtra("total_cost", mFlowerList.get(holder.getAdapterPosition()).getTotal_cost());
+
                 mContext.startActivity(mIntent);
             }
         });

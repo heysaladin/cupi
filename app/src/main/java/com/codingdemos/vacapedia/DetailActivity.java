@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.codingdemos.flowers.R;
+import com.codingdemos.vacapedia.fragments.DestinationsEditPageFragment;
 import com.codingdemos.vacapedia.network.ApiServices;
 import com.codingdemos.vacapedia.network.InitLibrary;
 import com.codingdemos.vacapedia.response.ResponseRoute;
@@ -68,7 +70,20 @@ public class DetailActivity extends AppCompatActivity implements
     private String description = null;
 
 
+    private String _id = null;
+    private String category = null;
+    private String location = null;
+    private String latitude = null;
+    private String longitude = null;
+    private String address = null;
+    private String distance = null;
+    private String note = null;
+    private String costs = null;
+    private String total_cost = null;
+
+
     private GoogleMap mMap;
+    private FloatingActionButton appbar;
 
 
     //    private String API_KEY = "AIzaSyCiaIGnvo1Bc6WXbiiqy3E2ukbWjWj1VpQ";
@@ -93,6 +108,16 @@ public class DetailActivity extends AppCompatActivity implements
         image = intent.getStringExtra("image");
         description = intent.getStringExtra("description");
 
+        _id = intent.getStringExtra("_id");
+        category = intent.getStringExtra("category");
+        location = intent.getStringExtra("location");
+        latitude = intent.getStringExtra("latitude");
+        longitude = intent.getStringExtra("longitude");
+        address = intent.getStringExtra("address");
+        distance = intent.getStringExtra("distance");
+        note = intent.getStringExtra("note");
+        costs = intent.getStringExtra("costs");
+        total_cost = intent.getStringExtra("total_cost");
 
         TextView description_tv = (TextView) findViewById(R.id.description);
         description_tv.setText(description);
@@ -166,6 +191,28 @@ public class DetailActivity extends AppCompatActivity implements
 
 
 
+
+        appbar = findViewById(R.id.float_btn);
+        appbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mIntent = new Intent(DetailActivity.this, EditDestinationActivity.class);
+                mIntent.putExtra("_id", _id);
+                mIntent.putExtra("name", name);
+                mIntent.putExtra("image", image);
+                mIntent.putExtra("category", category);
+                mIntent.putExtra("location", location);
+                mIntent.putExtra("description", description);
+                mIntent.putExtra("latitude", latitude);
+                mIntent.putExtra("longitude", longitude);
+                mIntent.putExtra("address", address);
+                mIntent.putExtra("distance", distance);
+                mIntent.putExtra("note", note);
+                mIntent.putExtra("costs", costs);
+                mIntent.putExtra("total_cost", total_cost);
+                DetailActivity.this.startActivity(mIntent);
+            }
+        });
 
         Intent intent = getIntent();
         final String cheeseName = intent.getStringExtra(EXTRA_NAME);

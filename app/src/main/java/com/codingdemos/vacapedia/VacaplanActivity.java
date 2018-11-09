@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -107,6 +108,8 @@ public class VacaplanActivity extends AppCompatActivity implements
     private static String nowDestinationsSelected = "";
 
     private GoogleMap mMap;
+
+    private FloatingActionButton appbar;
 
 
 //    private String API_KEY = "AIzaSyCiaIGnvo1Bc6WXbiiqy3E2ukbWjWj1VpQ";
@@ -292,6 +295,24 @@ public class VacaplanActivity extends AppCompatActivity implements
 
 
 
+
+
+        appbar = findViewById(R.id.float_btn);
+        appbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mIntent = new Intent(VacaplanActivity.this, EditPlanActivity.class);
+                mIntent.putExtra("_id", id);
+                mIntent.putExtra("body_copy", body_copyString);
+                mIntent.putExtra("content", contentString);
+                mIntent.putExtra("target_date", target_dateString);
+                mIntent.putExtra("title", titleString);
+                mIntent.putExtra("target_time", target_timeString);
+                mIntent.putExtra("destinations", destinationsString);
+                //mIntent.putExtra("destinations", String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getDestinations()).substring(1, String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getDestinations()).length()-1));
+                VacaplanActivity.this.startActivity(mIntent);
+            }
+        });
 
         Intent intent = getIntent();
         final String cheeseName = intent.getStringExtra(EXTRA_NAME);
