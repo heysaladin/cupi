@@ -511,7 +511,7 @@ public class VacaplanActivity extends AppCompatActivity implements
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.sample_actions, menu);
+        //getMenuInflater().inflate(R.menu.sample_actions, menu);
         return true;
     }
 

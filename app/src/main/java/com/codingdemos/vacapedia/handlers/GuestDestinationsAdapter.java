@@ -96,6 +96,7 @@ public class GuestDestinationsAdapter extends RecyclerView.Adapter < GuestDestin
                     intent.putExtra("name", model.getName());
                     intent.putExtra("location", model.getLocation());
                     intent.putExtra("image", model.getImage());
+                    intent.putExtra("description", model.getDescription());
 
                     context.startActivity(intent);
                 }

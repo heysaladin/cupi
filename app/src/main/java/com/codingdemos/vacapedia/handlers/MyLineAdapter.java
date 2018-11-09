@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.codingdemos.flowers.R;
 import com.codingdemos.vacapedia.DetailActivity;
 import com.codingdemos.vacapedia.data.DestinationsModel;
@@ -33,10 +34,15 @@ public class MyLineAdapter extends RecyclerView.Adapter <FlowerViewHolder> {
 
     @Override
     public void onBindViewHolder(final FlowerViewHolder holder, int position) {
+        RequestOptions options = new RequestOptions();
+        options.centerCrop();
+        options.placeholder(R.drawable.default_image);
         Glide.with(mContext)
                 .load(mFlowerList.get(position).getImage().replace(" ", "%20"))
+                .apply(options)
                 .into(holder.mImage);
         holder.mTitle.setText(mFlowerList.get(position).getName());
+        holder.tvDesc.setText(mFlowerList.get(position).getLocation());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,6 +50,7 @@ public class MyLineAdapter extends RecyclerView.Adapter <FlowerViewHolder> {
                 mIntent.putExtra("name", mFlowerList.get(holder.getAdapterPosition()).getName());
                 mIntent.putExtra("Description", "desc");
                 mIntent.putExtra("image", mFlowerList.get(holder.getAdapterPosition()).getImage());
+                mIntent.putExtra("description", mFlowerList.get(holder.getAdapterPosition()).getDescription());
 //                intent.putExtra("name", mFlowerList.get(holder.getAdapterPosition()).getTitle());
 ////                intent.putExtra("location", mFlowerList.get(holder.getAdapterPosition()).getLocation());
 //                intent.putExtra("image", mFlowerList.get(holder.getAdapterPosition()).getImage());

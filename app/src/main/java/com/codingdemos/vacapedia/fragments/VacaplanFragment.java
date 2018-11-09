@@ -42,6 +42,7 @@ public class VacaplanFragment
     private PlanModel currentUser;
     private JSONArray jsonArrayUsersFamily;
     private List < String > stringImages;
+    private List < String > stringLocations;
     private List < String > intCost;
     private int cost = 0;
 
@@ -124,12 +125,16 @@ public class VacaplanFragment
                 currentUser.setDestinations(jsonArrayUsersFamily);
 
                 stringImages = new ArrayList < > ();
+                stringLocations = new ArrayList < > ();
                 intCost = new ArrayList < > ();
                 for (int k = 0; k < jsonArrayUsersFamily.length(); k++) {
                     JSONObject jobk = jsonArrayUsersFamily.getJSONObject(k);
                     String imgNow = jobk.optString("image");
                     stringImages.add(imgNow);
+                    String locationNow = jobk.optString("location");
+                    stringLocations.add(locationNow);
                     String costNow = jobk.optString("total_cost");
+                    intCost.add(costNow);
                 }
 
                 numbers.clear();
@@ -147,11 +152,14 @@ public class VacaplanFragment
                     if (numbers.get(0)!=0) {
                         Log.d("LOG", "numbers >>>>>>>>> " + numbers);
                         currentUser.setImage(stringImages.get(numbers.get(0) - 1));
+                        currentUser.setLocation(stringLocations.get(numbers.get(0) - 1));
                     } else {
                         currentUser.setImage(stringImages.get(numbers.get(0)));
+                        currentUser.setLocation(stringLocations.get(numbers.get(0)));
                     }
                 }else{
                     currentUser.setImage(stringImages.get(0));
+                    currentUser.setLocation(stringLocations.get(0));
                 }
                 currentUser.setCost(String.valueOf(cost));
 

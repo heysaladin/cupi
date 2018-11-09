@@ -13,6 +13,7 @@ public class PlanModel {
     private JSONArray destinations;
     private String image;
     private String cost;
+    private String location;
 
     public PlanModel() {}
 
@@ -28,6 +29,7 @@ public class PlanModel {
                 ", destinations='" + getDestinations() + "\'" +
                 ", image='" + getImage() + "\'" +
                 ", cost='" + getCost() + "\'" +
+                ", location='" + getLocation() + "\'" +
                 "}";
     }
 
@@ -101,5 +103,13 @@ public class PlanModel {
 
     public void setCost(String cost) {
         this.cost = cost;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

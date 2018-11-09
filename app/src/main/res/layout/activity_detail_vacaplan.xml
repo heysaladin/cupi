@@ -134,14 +134,17 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Information"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                        android:text="Information" />
+
+                    <!--android:textAppearance="@style/TextAppearance.AppCompat.Title"-->
 
                     <TextView
+                        android:paddingVertical="@dimen/space_5dp"
                         android:id="@+id/body_copy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/space_25dp"
+                        android:textSize="18dp"
+                        android:textStyle="italic"
                         android:text="" />
 
                     <TextView
@@ -154,18 +157,83 @@
 
             </android.support.v7.widget.CardView>
 
-            <LinearLayout
-                android:orientation="vertical"
+
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <android.support.v7.widget.RecyclerView
-                    android:clipToPadding="false"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/card_margin"
+                android:layout_marginLeft="@dimen/card_margin"
+                android:layout_marginRight="@dimen/card_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_15dp"
+                    android:layout_gravity="left"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="0dp"
+                    android:paddingVertical="@dimen/space_0dp">
+
+                <View
+                    android:layout_width="@dimen/space_25dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="0dp" />
+
+                <View
+                    android:layout_width="@dimen/space_1dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="0dp"
+                    android:background="#eee" />
+                </LinearLayout>
+
+            <!--android:clipToPadding="false"-->
+            <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+
+            <!--<LinearLayout-->
+                <!--android:orientation="vertical"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent">-->
+
+            <!--android:scrollbars="vertical"-->
+
+            <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerview"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scrollbars="vertical" />
-            </LinearLayout>
+                    android:layout_height="match_parent"/>
+            <!--</LinearLayout>-->
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/space_15dp"
+                    android:layout_gravity="left"
+                    android:gravity="left"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="0dp"
+                    android:paddingVertical="@dimen/space_0dp">
+
+                    <View
+                        android:layout_width="@dimen/space_25dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="0dp" />
+
+                    <View
+                        android:layout_width="@dimen/space_1dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="0dp"
+                        android:background="#eee" />
+                </LinearLayout>
+                </LinearLayout>
+        </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
@@ -179,17 +247,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <!--<TextView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:textAppearance="@style/TextAppearance.AppCompat.Title" />-->
+
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:text="Note"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
                     <TextView
                         android:id="@+id/note"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="" />
+                        android:textStyle="italic"
+                        android:textSize="16dp" />
 
                 </LinearLayout>
 
@@ -208,16 +281,17 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:text="Cost"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
                     <TextView
                         android:id="@+id/costs"
+                        android:text=""
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="" />
+                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
 
                 </LinearLayout>
 
@@ -239,7 +313,7 @@
         android:layout_width="wrap_content"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|right|end"
-        android:src="@drawable/ic_description_black_24dp"
+        android:src="@drawable/ic_edit_black_24dp"
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true" />
 

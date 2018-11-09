@@ -66,6 +66,7 @@ public class PlanAdapter extends RecyclerView.Adapter < PlanViewHolder > {
         holder.mTitle.setText(mFlowerList.get(position).getTitle());
         holder.target_date.setText(mFlowerList.get(position).getTarget_date());
         holder.textViewDesc.setText(mFlowerList.get(position).getBody_copy());
+        holder.location.setText(mFlowerList.get(position).getLocation());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
