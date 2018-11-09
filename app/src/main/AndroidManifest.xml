@@ -55,15 +55,15 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCw96GO7U6nd8CnCVjIISXvgG3T36BKUUY"/>
+        <!--<meta-data-->
+            <!--android:name="com.google.android.geo.API_KEY"-->
+            <!--android:value="AIzaSyCiaIGnvo1Bc6WXbiiqy3E2ukbWjWj1VpQ"/>-->
         <!--<meta-data-->
             <!--android:name="com.google.android.geo.API_KEY"-->
             <!--android:value="AIzaSyAT6cY6dg_0KTQtDJ2WCnxLXLxfqKnK6m0"/>-->
-        <!--<meta-data-->
-            <!--android:name="com.google.android.maps.v2.API_KEY"-->
-            <!--android:value="AIzaSyCw96GO7U6nd8CnCVjIISXvgG3T36BKUUY"/>-->
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCw96GO7U6nd8CnCVjIISXvgG3T36BKUUY"/>
 
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 

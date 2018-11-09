@@ -49,7 +49,8 @@ import com.codingdemos.flowers.R;
 public class OjekActivity extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
 
-    private String API_KEY = "AIzaSyCw96GO7U6nd8CnCVjIISXvgG3T36BKUUY";
+    private String API_KEY = "AIzaSyCiaIGnvo1Bc6WXbiiqy3E2ukbWjWj1VpQ";
+//    private String API_KEY = "AIzaSyCw96GO7U6nd8CnCVjIISXvgG3T36BKUUY";
 //    private String API_KEY = "AIzaSyAT6cY6dg_0KTQtDJ2WCnxLXLxfqKnK6m0";
 
     public LatLng pickUpLatLng = null;

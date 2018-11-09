@@ -1,6 +1,7 @@
 package com.codingdemos.vacapedia;
 
 
+import android.app.DownloadManager;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,10 +35,13 @@ import retrofit2.Response;
 
 import com.codingdemos.flowers.R;
 
+import org.json.JSONObject;
+
 public class DirectionActivity extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
 
-    private String API_KEY = "AIzaSyCw96GO7U6nd8CnCVjIISXvgG3T36BKUUY";
+    private String API_KEY = "AIzaSyCiaIGnvo1Bc6WXbiiqy3E2ukbWjWj1VpQ";
+//    private String API_KEY = "AIzaSyCw96GO7U6nd8CnCVjIISXvgG3T36BKUUY";
 //    private String API_KEY = "AIzaSyAT6cY6dg_0KTQtDJ2WCnxLXLxfqKnK6m0";
 
     private LatLng pickUpLatLng = new LatLng(-6.175110, 106.865039); // Jakarta
@@ -68,8 +72,8 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
     }
 
     private void actionRoute() {
-        String lokasiAwal = pickUpLatLng.latitude + "," + pickUpLatLng.longitude;
-        String lokasiAkhir = locationLatLng.latitude + "," + locationLatLng.longitude;
+        final String lokasiAwal = pickUpLatLng.latitude + "," + pickUpLatLng.longitude;
+        final String lokasiAkhir = locationLatLng.latitude + "," + locationLatLng.longitude;
 
         // Panggil Retrofit
         ApiServices api = InitLibrary.getInstance();
@@ -92,6 +96,33 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
                     ResponseRoute dataDirection = response.body();
 
                     Log.d("LOC", "response.raw().request().url() >>>>>>>>>>>>> " + response.raw().request().url());
+
+
+//                    RequestQueue queue = Volley.newRequestQueue(this);
+//                    final String url = response.raw().request().url();
+//
+//// prepare the Request
+//                    JsonObjectRequest getRequest = new JsonObjectRequest(DownloadManager.Request.Method.GET, url, null,
+//                            new Response.Listener<JSONObject>()
+//                            {
+//                                @Override
+//                                public void onResponse(JSONObject response) {
+//                                    // display response
+//                                    Log.d("Response", response.toString());
+//                                }
+//                            },
+//                            new Response.ErrorListener()
+//                            {
+//                                @Override
+//                                public void onErrorResponse(VolleyError error) {
+//                                    Log.d("Error.Response", response);
+//                                }
+//                            }
+//                    );
+//
+//// add it to the RequestQueue
+//                    queue.add(getRequest);
+
 
                     Log.d("LOC", "response.body() >>>>>>>>>>>>> " + response.body());
                     Log.d("LOC", "dataDirection >>>>>>>>>>>>> " + dataDirection);
@@ -123,6 +154,10 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
 //                    /** START
 //                     * Logic untuk membuat layar berada ditengah2 dua koordinat
 //                     */
+
+
+                    mMap.addMarker(new MarkerOptions().position(pickUpLatLng));
+                    mMap.addMarker(new MarkerOptions().position(locationLatLng));
 
                     LatLngBounds.Builder latLongBuilder = new LatLngBounds.Builder();
                     latLongBuilder.include(pickUpLatLng);
