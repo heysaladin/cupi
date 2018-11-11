@@ -91,7 +91,9 @@ public class DetailActivity extends AppCompatActivity implements
 //    private String API_KEY = "AIzaSyAT6cY6dg_0KTQtDJ2WCnxLXLxfqKnK6m0";
 
 //    private LatLng pickUpLatLng = new LatLng(-6.175110, 106.865039); // Jakarta
-    private LatLng locationLatLng = new LatLng(-6.197301,106.795951); // Cirebon
+    //private LatLng locationLatLng = new LatLng(-6.197301,106.795951); // Cirebon
+
+    private LatLng locationLatLng = new LatLng(-8.677393, 115.207279);
 
     private TextView tvStartAddress, tvEndAddress, tvDuration, tvDistance;
 

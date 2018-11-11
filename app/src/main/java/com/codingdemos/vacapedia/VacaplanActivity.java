@@ -62,6 +62,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -91,6 +92,7 @@ public class VacaplanActivity extends AppCompatActivity implements
     private String target_dateString = null;
     private String target_timeString = null;
     private static String destinationsString = null;
+    private String pointsString = null;
 
     private JSONArray desPlan = null;
     private JSONArray dataDestinations = null;
@@ -111,6 +113,8 @@ public class VacaplanActivity extends AppCompatActivity implements
 
     private FloatingActionButton appbar;
 
+    private JSONArray desPointsObj;
+
 
 //    private String API_KEY = "AIzaSyCiaIGnvo1Bc6WXbiiqy3E2ukbWjWj1VpQ";
     private String API_KEY = "AIzaSyCw96GO7U6nd8CnCVjIISXvgG3T36BKUUY";
@@ -119,7 +123,29 @@ public class VacaplanActivity extends AppCompatActivity implements
     private LatLng pickUpLatLng = new LatLng(-6.175110, 106.865039); // Jakarta
     private LatLng locationLatLng = new LatLng(-6.197301,106.795951); // Cirebon
 
+    private List<LatLng> desPoints = new ArrayList<LatLng>();
+
     private TextView tvStartAddress, tvEndAddress, tvDuration, tvDistance;
+
+
+    private Double parseDoubleFromString(String s) {
+
+        Log.d("LOC", "s >>>>>>>>>>>>> " + s);
+
+        String sinit = "0";
+
+        try {
+            if (s == "null" || s == null || s == "") {
+                sinit = s;
+                return Double.parseDouble(sinit);
+            } else {
+                return Double.parseDouble(s);
+            }
+        } catch (NumberFormatException e) {
+            return Double.parseDouble("0");
+        }
+    }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -142,12 +168,57 @@ public class VacaplanActivity extends AppCompatActivity implements
         target_timeString = intent.getStringExtra("target_time");
         //destinationsString = intent.getStringExtra("destinations");
 
+        pointsString = intent.getStringExtra("destinations");
+
+        JSONArray jarrPoints = new JSONArray();
+        desPointsObj = new JSONArray();
+
+
+
+        try {
+            jarrPoints = new JSONArray(pointsString);
+//                JSONObject jobk = jarrPoints.getJSONObject(i);
+            for (int i = 0; i < jarrPoints.length(); i++) {
+                JSONObject jobk = jarrPoints.getJSONObject(i);
+//                String latItem = jobk.optString("latitude");
+//                String longItem = jobk.optString("longitude");
+//                LatLng desItemPoin = new LatLng(parseDoubleFromString(latItem), parseDoubleFromString(longItem));
+//                desPoints.add(desItemPoin);
+//            }
+
+
+                String latItem = jobk.optString("latitude");
+                String longItem = jobk.optString("longitude");
+                Log.d("LOG", "latItem >>>>>>>>> " + latItem);
+                Log.d("LOG", "longItem >>>>>>>>> " + longItem);
+
+//                    if (parseDoubleFromString(latItem)!=Double.parseDouble("0")) {
+//                        latItem = "-8.677335";
+//                    }
+//                    if (parseDoubleFromString(longItem)!=Double.parseDouble("0")) {
+//                        longItem = "115.2070699";
+//                    }
+
+//                    LatLng desItemPoin = new LatLng(parseDoubleFromString(latItem), parseDoubleFromString(longItem));
+
+                JSONObject desItemPoin = new JSONObject("{" +
+                        "\"latitude\":\"" + latItem + "\", " +
+                        "\"longitude\":\"" + longItem + "\"" +
+                        "}");
+
+                desPointsObj.put(desItemPoin);
+                Log.d("LOG", "desPointsObj >>>>>>>>> DDDDDDDDDD " + desPointsObj);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         JSONArray jdes = null;
         try {
             jdes = new JSONArray(intent.getStringExtra("destinations"));
 
             desPlan = jdes;
-
 
             Log.d("XXX", "jdes: " + jdes);
             //ArrayList < String > jsarr = new ArrayList < > ();
@@ -211,7 +282,20 @@ public class VacaplanActivity extends AppCompatActivity implements
 
         getIntentData();
 
+        Log.d("LOG", "desPointsObj >>>>>>>>> OBOBOBOBOBOB " + desPointsObj);
+        try {
+        for (int i = 0; i < desPointsObj.length(); i++) {
+            JSONObject jobk = null;
+                jobk = desPointsObj.getJSONObject(i);
+            String latItem = jobk.optString("latitude");
+                String longItem = jobk.optString("longitude");
+                LatLng desItemPoin = new LatLng(parseDoubleFromString(latItem), parseDoubleFromString(longItem));
+                desPoints.add(desItemPoin);
+            }
 
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         // Maps
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -462,19 +546,30 @@ public class VacaplanActivity extends AppCompatActivity implements
 //                     */
 
 
-                    mMap.addMarker(new MarkerOptions().position(pickUpLatLng));
-                    mMap.addMarker(new MarkerOptions().position(locationLatLng));
+//                    mMap.addMarker(new MarkerOptions().position(pickUpLatLng));
+//                    mMap.addMarker(new MarkerOptions().position(locationLatLng));
 
                     LatLngBounds.Builder latLongBuilder = new LatLngBounds.Builder();
-                    latLongBuilder.include(pickUpLatLng);
-                    latLongBuilder.include(locationLatLng);
+
+                    for(int z=0; z < desPoints.size(); z++) {
+//                        JSONObject jdesob = jdes.getJSONObject(z);
+                        LatLng itemPoin = desPoints.get(z);
+                        mMap.addMarker(new MarkerOptions().position(itemPoin));
+                        latLongBuilder.include(itemPoin);
+                        Log.d("LOC", "itemPoin >>>>>>>>>>>>> OOOOOOOOOOOOOO " + itemPoin);
+                    }
+
+//                    latLongBuilder.include(pickUpLatLng);
+//                    latLongBuilder.include(locationLatLng);
 
                     // Bounds Coordinata
                     LatLngBounds bounds = latLongBuilder.build();
 
                     int width = getResources().getDisplayMetrics().widthPixels;
                     int height = getResources().getDisplayMetrics().heightPixels;
-                    int paddingMap = (int) (width * 0.2); //jarak dari
+//                    int paddingMap = (int) (width * 0.2); //jarak dari
+                    int paddingMap = (int) (width * 0.1); //jarak dari
+//                    int paddingMap = 0; //jarak dari
                     CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, paddingMap);
                     mMap.animateCamera(cu);
 

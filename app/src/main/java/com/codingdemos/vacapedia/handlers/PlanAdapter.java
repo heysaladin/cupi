@@ -17,6 +17,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.codingdemos.flowers.R;
 import com.codingdemos.vacapedia.data.PlanModel;
 import com.codingdemos.vacapedia.VacaplanActivity;
+import com.google.android.gms.maps.model.LatLng;
+
+import org.json.JSONArray;
 
 import java.util.List;
 
@@ -24,14 +27,20 @@ public class PlanAdapter extends RecyclerView.Adapter < PlanViewHolder > {
 
     private Context mContext;
     private List <PlanModel> mFlowerList;
+//    private JSONArray jsonArrayUsersFamily;
 
-    public PlanAdapter(Context mContext, List < PlanModel > mFlowerList) {
+    public PlanAdapter(Context mContext, List < PlanModel > mFlowerList
+//            , JSONArray desPointsParam
+    ) {
         this.mContext = mContext;
         this.mFlowerList = mFlowerList;
+//        this.jsonArrayUsersFamily = desPointsParam;
     }
 
     @Override
-    public PlanViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PlanViewHolder onCreateViewHolder(ViewGroup parent, int viewType
+//            , List<LatLng> desPoints
+    ) {
         View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_plan, parent, false);
         return new PlanViewHolder(mView);
     }
@@ -85,6 +94,9 @@ public class PlanAdapter extends RecyclerView.Adapter < PlanViewHolder > {
                 intent.putExtra("title", mFlowerList.get(holder.getAdapterPosition()).getTitle());
                 intent.putExtra("target_time", mFlowerList.get(holder.getAdapterPosition()).getTarget_time());
                 intent.putExtra("destinations", String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getDestinations()));
+
+//                intent.putExtra("points", String.valueOf(jsonArrayUsersFamily));
+
                 view.getContext().startActivity(intent);
             }
         });

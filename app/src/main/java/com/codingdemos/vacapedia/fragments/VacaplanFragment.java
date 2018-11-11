@@ -19,6 +19,7 @@ import com.codingdemos.vacapedia.handlers.PlanAdapter;
 import com.codingdemos.vacapedia.data.PlanModel;
 import com.codingdemos.vacapedia.rest.AsyncHttpResponse;
 import com.codingdemos.vacapedia.rest.RestApis;
+import com.google.android.gms.maps.model.LatLng;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
@@ -45,6 +46,10 @@ public class VacaplanFragment
     private List < String > stringLocations;
     private List < String > intCost;
     private int cost = 0;
+
+
+    private JSONArray desPoints = new JSONArray();
+
 
     public static VacaplanFragment newInstance() {
         VacaplanFragment fragment = new VacaplanFragment();
@@ -100,6 +105,26 @@ public class VacaplanFragment
         response.getAsyncHttp(RestApis.KarmaGroups.vacapediaPlans /* + "/" + ID_FAMILY */ , params);
     }
 
+
+
+    private Double parseDoubleFromString(String s) {
+
+        Log.d("LOC", "s >>>>>>>>>>>>> " + s);
+
+        String sinit = "0";
+
+        try {
+            if (s == "null" || s == null || s == "") {
+                sinit = s;
+                return Double.parseDouble(sinit);
+            } else {
+                return Double.parseDouble(s);
+            }
+        } catch (NumberFormatException e) {
+            return Double.parseDouble("0");
+        }
+    }
+
     private void getImageBanner(final JSONArray dataPlanParam) {
 
         try {
@@ -130,6 +155,7 @@ public class VacaplanFragment
                 stringImages.clear();
                 stringLocations.clear();
                 intCost.clear();
+                desPoints = new JSONArray();
                 cost = 0;
                 for (int k = 0; k < jsonArrayUsersFamily.length(); k++) {
                     JSONObject jobk = jsonArrayUsersFamily.getJSONObject(k);
@@ -139,6 +165,29 @@ public class VacaplanFragment
                     stringLocations.add(locationNow);
                     String costNow = jobk.optString("total_cost");
                     intCost.add(costNow);
+//
+//                    String latItem = jobk.optString("latitude");
+//                    String longItem = jobk.optString("longitude");
+//                    Log.d("LOG", "latItem >>>>>>>>> " + latItem);
+//                    Log.d("LOG", "longItem >>>>>>>>> " + longItem);
+//
+////                    if (parseDoubleFromString(latItem)!=Double.parseDouble("0")) {
+////                        latItem = "-8.677335";
+////                    }
+////                    if (parseDoubleFromString(longItem)!=Double.parseDouble("0")) {
+////                        longItem = "115.2070699";
+////                    }
+//
+////                    LatLng desItemPoin = new LatLng(parseDoubleFromString(latItem), parseDoubleFromString(longItem));
+//
+//                    JSONObject desItemPoin = new JSONObject("{" +
+//                            "\"latitude\":\"" + latItem +"\", " +
+//                            "\"longitude\":\"" + longItem + "\"" +
+//                            "}");
+//
+//                    desPoints.put(desItemPoin);
+//                    Log.d("LOG", "desPoints >>>>>>>>> DDDDDDDDDD " + desPoints);
+
                 }
 
                 numbers.clear();
@@ -184,7 +233,9 @@ public class VacaplanFragment
             destinationsArrayListBuff = createRandomList(destinationsArrayList);
             //destinationsArrayListBuff = destinationsArrayList;
 
-            PlanAdapter myAdapter = new PlanAdapter(this.getActivity(), destinationsArrayListBuff);
+            PlanAdapter myAdapter = new PlanAdapter(this.getActivity(), destinationsArrayListBuff
+//                    , jsonArrayUsersFamily
+            );
             mRecyclerView.setAdapter(myAdapter);
 
         } catch (JSONException e) {
