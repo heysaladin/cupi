@@ -102,6 +102,8 @@
                 <!--tools:context=".MapsActivity"-->
                 <!--android:name="com.google.android.gms.maps.SupportMapFragment" />-->
 
+
+
             <!--<Button-->
                 <!--android:id="@+id/openAutoPlace"-->
                 <!--android:layout_width="match_parent"-->

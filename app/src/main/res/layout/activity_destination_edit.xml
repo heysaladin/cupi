@@ -159,6 +159,14 @@
                     android:textColor="#333"
                     android:textColorHint="#aaa"
                     android:textSize="@dimen/font_medium" />
+
+                <fragment
+                    android:id="@+id/place_autocomplete_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+                    />
+
                 <EditText
                     android:textCursorDrawable="@null"
                     android:id="@+id/latitude"
@@ -285,6 +293,53 @@
                     android:textColorHint="#aaa"
                     android:textSize="@dimen/font_medium"
                     android:visibility="visible" />
+
+
+
+
+                <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textStyle="bold"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginTop="10dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:text="Destination Location Info :"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textSize="18sp"/>&ndash;&gt;-->
+                <!--<TextView-->
+                    <!--android:id="@+id/tvDestLocAddr"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Destination Address : Jl Anggreks Cendrawasi"-->
+                    <!--android:textSize="14sp"/>-->
+
+                <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textStyle="bold"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginTop="10dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:text="Lat :"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textSize="18sp"/>&ndash;&gt;-->
+                <!--<TextView-->
+                    <!--android:id="@+id/tvDestLat"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Destination Address : Jl Anggreks Cendrawasi"-->
+                    <!--android:textSize="14sp"/>-->
+
+                <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textStyle="bold"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:layout_marginTop="10dp"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:text="Long :"&ndash;&gt;-->
+                    <!--&lt;!&ndash;android:textSize="18sp"/>&ndash;&gt;-->
+                <!--<TextView-->
+                    <!--android:id="@+id/tvDestLong"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Destination Address : Jl Anggreks Cendrawasi"-->
+                    <!--android:textSize="14sp"/>-->
+
+
                 <TextView
                     android:layout_alignParentTop="true"
                     android:layout_centerInParent="true"

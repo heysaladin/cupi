@@ -19,6 +19,10 @@ import com.codingdemos.vacapedia.handlers.PlanAdapter;
 import com.codingdemos.vacapedia.data.PlanModel;
 import com.codingdemos.vacapedia.rest.AsyncHttpResponse;
 import com.codingdemos.vacapedia.rest.RestApis;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.model.LatLng;
 import com.loopj.android.http.RequestParams;
 
@@ -29,6 +33,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 public class VacaplanFragment
         extends Fragment
@@ -68,6 +74,9 @@ public class VacaplanFragment
         jsonArrayUsersFamily = new JSONArray();
         numbers = new ArrayList < > ();
         getKarmaGroupsApiRequest();
+
+
+
         return view;
     }
 

@@ -35,6 +35,10 @@ import com.codingdemos.vacapedia.network.InitLibrary;
 import com.codingdemos.vacapedia.response.ResponseRoute;
 import com.codingdemos.vacapedia.rest.AsyncHttpResponse;
 import com.codingdemos.vacapedia.rest.RestApis;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -69,6 +73,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 public class VacaplanActivity extends AppCompatActivity implements
         AsyncHttpResponse.AsyncHttpResponseListener,
@@ -299,6 +305,14 @@ public class VacaplanActivity extends AppCompatActivity implements
 
 
         getIntentData();
+
+
+
+
+
+
+
+
 
         Log.d("LOG", "desPointsObj >>>>>>>>> OBOBOBOBOBOB " + desPointsObj);
         try {

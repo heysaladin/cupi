@@ -19,10 +19,18 @@ import android.widget.Toast;
 import com.codingdemos.flowers.R;
 import com.codingdemos.vacapedia.rest.AsyncHttpResponse;
 import com.codingdemos.vacapedia.rest.RestApis;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 public class EditDestinationActivity extends AppCompatActivity
         implements View.OnClickListener,
@@ -59,6 +67,58 @@ public class EditDestinationActivity extends AppCompatActivity
     private String costsString = null;
     private String total_costString = null;
 
+
+    // Deklarasi variable
+    private TextView tvPickUpFrom, tvDestLocation;
+    private TextView tvPickUpAddr, tvPickUpLatLng, tvPickUpName;
+    private TextView tvDestLocAddr, tvDestLocLatLng, tvDestLocName, tvDestLat, tvDestLong;
+    public static final int PICK_UP = 0;
+    public static final int DEST_LOC = 1;
+    private static int REQUEST_CODE = 0;
+
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        //Toast.makeText(this, "Sini Gaes", Toast.LENGTH_SHORT).show();
+//        // Pastikan Resultnya OK
+//        if (resultCode == RESULT_OK){
+//            //Toast.makeText(this, "Sini Gaes2", Toast.LENGTH_SHORT).show();
+//            // Tampung Data tempat ke variable
+//            Place placeData = PlaceAutocomplete.getPlace(this, data);
+//            if (placeData.isDataValid()){
+//                // Show in Log Cat
+//                Log.d("autoCompletePlace Data", placeData.toString());
+//                // Dapatkan Detail
+//                String placeAddress = placeData.getAddress().toString();
+//                LatLng placeLatLng = placeData.getLatLng();
+//                String placeName = placeData.getName().toString();
+//                // Cek user milih titik jemput atau titik tujuan
+//                switch (REQUEST_CODE){
+////                    case PICK_UP:
+////                        // Set ke widget lokasi asal
+////                        tvPickUpFrom.setText(placeAddress);
+////                        tvPickUpAddr.setText("Location Address : " + placeAddress);
+////                        tvPickUpLatLng.setText("LatLang : " + placeLatLng.toString());
+////                        tvPickUpName.setText("Place Name : " + placeName);
+////                        break;
+//                    case DEST_LOC:
+//                        // Set ke widget lokasi tujuan
+//                        tvDestLocation.setText(placeAddress);
+//                        tvDestLocAddr.setText("Destination Address : " + placeAddress);
+////                        tvDestLocLatLng.setText("LatLang : " + placeLatLng.toString());
+////                        tvDestLocName.setText("Place Name : " + placeName);
+//                        tvDestLat.setText("Destination Lat : " + placeLatLng.latitude);
+//                        tvDestLong.setText("Destination Long : " + placeLatLng.longitude);
+//                        break;
+//                }
+//            } else {
+//                // Data tempat tidak valid
+//                Toast.makeText(this, "Invalid Place !", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//    }
+
     private void getIntentData() {
         Intent intent = this.getIntent();
         id = intent.getStringExtra("_id");
@@ -80,6 +140,7 @@ public class EditDestinationActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_destination_edit);
+
         mToolbar = findViewById(R.id.toolbar);
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -90,6 +151,51 @@ public class EditDestinationActivity extends AppCompatActivity
         });
         mToolbar.setTitle("Note");
         initUI();
+
+
+
+
+
+//        tvDestLocAddr = findViewById(R.id.tvDestLocAddr);
+//        tvDestLat = findViewById(R.id.tvDestLat);
+//        tvDestLong = findViewById(R.id.tvDestLong);
+
+
+        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                // TODO: Get info about the selected place.
+                Log.i(TAG, "Place: " + place.getName());
+                String placeAddress = place.getAddress().toString();
+                LatLng placeLatLng = place.getLatLng();
+                String placeName = place.getName().toString();
+//                tvDestLocAddr.setText("Destination Address : " + placeAddress);
+////                        tvDestLocLatLng.setText("LatLang : " + placeLatLng.toString());
+////                        tvDestLocName.setText("Place Name : " + placeName);
+//                tvDestLat.setText("Destination Lat : " + placeLatLng.latitude);
+//                tvDestLong.setText("Destination Long : " + placeLatLng.longitude);
+
+                address.setText(placeAddress);
+                latitude.setText(String.valueOf(placeLatLng.latitude));
+                longitude.setText(String.valueOf(placeLatLng.longitude));
+
+
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
+                Log.i(TAG, "An error occurred: " + status);
+            }
+        });
+
+
+
+
+
+
     }
 
     @SuppressLint({
