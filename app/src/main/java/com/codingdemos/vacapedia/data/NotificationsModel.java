@@ -2,7 +2,14 @@ package com.codingdemos.vacapedia.data;
 
 public class NotificationsModel {
 
-    String title, postID, image, menuID, menuName;
+    String title;
+    String postID;
+    String image;
+    String menuID;
+    String menuName;
+    private String content;
+    private String category;
+    private String _id;
 
     public NotificationsModel() {}
 
@@ -49,7 +56,33 @@ public class NotificationsModel {
                 ", image='" + image + "\'" +
                 ", menuID='" + menuID + "\'" +
                 ", menuName='" + menuName + "\'" +
+                ", content='" + content + "\'" +
+                ", category='" + category + "\'" +
+                ", _id='" + _id + "\'" +
                 "}";
     }
 
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 }

@@ -37,6 +37,7 @@ public class NotificationAdapter extends RecyclerView.Adapter < NotificationView
                 .load(mFlowerList.get(position).getImage().replace(" ", "%20"))
                 .into(holder.mImage);
         holder.mTitle.setText(mFlowerList.get(position).getTitle());
+        holder.tvDesc.setText(mFlowerList.get(position).getContent());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,7 +61,7 @@ public class NotificationAdapter extends RecyclerView.Adapter < NotificationView
 class NotificationViewHolder extends RecyclerView.ViewHolder {
 
     ImageView mImage;
-    TextView mTitle;
+    TextView mTitle, tvDesc;
     CardView mCardView;
 
     NotificationViewHolder(View itemView) {
@@ -69,5 +70,6 @@ class NotificationViewHolder extends RecyclerView.ViewHolder {
         mImage = itemView.findViewById(R.id.ivImage);
         mTitle = itemView.findViewById(R.id.tvTitle);
         mCardView = itemView.findViewById(R.id.cardview);
+        tvDesc = itemView.findViewById(R.id.tvDesc);
     }
 }

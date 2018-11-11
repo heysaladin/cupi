@@ -16,8 +16,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.codingdemos.vacapedia.data.DestinationsModel;
 import com.codingdemos.vacapedia.handlers.GuestDestinationsAdapter;
 import com.codingdemos.vacapedia.handlers.GuestDestinationsLongAdapter;
@@ -36,6 +39,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -54,6 +58,8 @@ public class HomeFragment extends Fragment
 
     private ViewPager viewPager;
     private TabLayout indicator;
+
+    private ImageView up_coming_image;
 
     private List < Integer > color;
     private List < String > colorName;
@@ -298,6 +304,7 @@ public class HomeFragment extends Fragment
                 for (int i = 0; i < size; i++) {
                     Log.d("LOG", "hashSet.get(i) >>>>>>>>> " + numbers.get(i));
                     buffer.put(dataNews.get(numbers.get(i)));
+                    // buffer.put(dataNews.get(i));
                 }
             }
 
@@ -307,12 +314,13 @@ public class HomeFragment extends Fragment
                 dataJson = dataNews;
             }
 
+            up_coming_image = (ImageView) view.findViewById(R.id.up_coming_image);
+
             guest_destinations_rv_long = (RecyclerView) view.findViewById(R.id.guest_destinations_rv_long);
             destinationsArrayListLong = new ArrayList < > ();
             linearLayoutManagerLong = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false);
             guest_destinations_rv_long.setLayoutManager(linearLayoutManagerLong);
-            guestDestinationsAdapterLong = new GuestDestinationsLongAdapter(this.getActivity(), destinationsArrayListLong);
-            guest_destinations_rv_long.setAdapter(guestDestinationsAdapterLong);
+
 
             destinationsArrayListLong.clear();
 
@@ -347,7 +355,22 @@ public class HomeFragment extends Fragment
 
                 dma.add(model);
                 destinationsArrayListLong.add(model);
+
+                if (j==0){
+                    RequestOptions options = new RequestOptions();
+                    options.centerCrop();
+                    options.placeholder(R.drawable.default_image);
+                    Glide.with(Objects.requireNonNull(this.getActivity()))
+                            .load(model.getImage())
+                            .apply(options)
+                            .into(up_coming_image);
+                }
+
             }
+
+            guestDestinationsAdapterLong = new GuestDestinationsLongAdapter(this.getActivity(), destinationsArrayListLong);
+            guest_destinations_rv_long.setAdapter(guestDestinationsAdapterLong);
+
             guestDestinationsAdapterLong.notifyDataSetChanged();
         } catch (JSONException e) {
             e.printStackTrace();

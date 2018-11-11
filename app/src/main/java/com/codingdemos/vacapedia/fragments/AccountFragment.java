@@ -142,21 +142,41 @@ public class AccountFragment extends Fragment
 //                    destinationsArrayList.add(model);
 //                    currentFamily
 
+
+
+//                        JSONArray dataJson = dataDestinations;
+//            destinationsArrayListBuffer = new ArrayList< >();
+                    destinationsArrayList = new ArrayList<>();
+//            destinationsArrayList = getArrayListFromJSONArray(jsonArrayUsersFamily);
+                    mRecyclerView = view.findViewById(R.id.recyclerview);
+                    LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this.getContext());
+                    mRecyclerView.setLayoutManager(mLinearLayoutManager);
+                    destinationsArrayList.clear();
+
+
                     for (int k = 0; k < jsonArrayUsersFamily.length(); k++) {
                         JSONObject jobk = jsonArrayUsersFamily.getJSONObject(k);
-                        String nowUserId = jobk.optString("user_id");
-                        AsyncHttpResponse response = new AsyncHttpResponse(this, false);
-                        RequestParams params = new RequestParams();
-                        response.getAsyncHttp(RestApis.KarmaGroups.vacapediaUsers + "/" + nowUserId, params);
-                        if (k==(jsonArrayUsersFamily.length()-1)){
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    loadUsers();
-                                }
-                            }, 1000);
-                        }
+//                        String nowUserId = jobk.optString("user_id");
+//                        AsyncHttpResponse response = new AsyncHttpResponse(this, false);
+//                        RequestParams params = new RequestParams();
+//                        response.getAsyncHttp(RestApis.KarmaGroups.vacapediaUsers + "/" + nowUserId, params);
+//                        if (k==(jsonArrayUsersFamily.length()-1)){
+//                            new Handler().postDelayed(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    loadUsers();
+//                                }
+//                            }, 1000);
+//                        }
+                        loadUsers(jobk);
                     }
+
+
+//            destinationsArrayListBuffer = destinationsArrayList;
+                    UserAdapter myAdapter = new UserAdapter(this.getActivity(), destinationsArrayList);
+                    mRecyclerView.setAdapter(myAdapter);
+//            guestDestinationsAdapter.notifyDataSetChanged();
+
 
 
                 }
@@ -189,25 +209,25 @@ public class AccountFragment extends Fragment
     }
 
 //    @Override
-    public void loadUsers() {
+    public void loadUsers(JSONObject job) {
 //        super.onStart();
 
 //        if (dataUserFamily.length() > 0) {
 
-            try {
-
-//                        JSONArray dataJson = dataDestinations;
-//            destinationsArrayListBuffer = new ArrayList< >();
-                destinationsArrayList = new ArrayList<>();
-//            destinationsArrayList = getArrayListFromJSONArray(jsonArrayUsersFamily);
-                mRecyclerView = view.findViewById(R.id.recyclerview);
-                LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this.getContext());
-                mRecyclerView.setLayoutManager(mLinearLayoutManager);
-                destinationsArrayList.clear();
+//            try {
+//
+////                        JSONArray dataJson = dataDestinations;
+////            destinationsArrayListBuffer = new ArrayList< >();
+//                destinationsArrayList = new ArrayList<>();
+////            destinationsArrayList = getArrayListFromJSONArray(jsonArrayUsersFamily);
+//                mRecyclerView = view.findViewById(R.id.recyclerview);
+//                LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this.getContext());
+//                mRecyclerView.setLayoutManager(mLinearLayoutManager);
+//                destinationsArrayList.clear();
                 Log.d("TAG", "dataUserFamily >>>>>>>>> " + dataUserFamily);
-                for (int j = 0; j < dataUserFamily.length(); j++) {
-                    JSONObject job = null;
-                    job = dataUserFamily.getJSONObject(j);
+//                for (int j = 0; j < dataUserFamily.length(); j++) {
+//                    JSONObject job = null;
+//                    job = dataUserFamily.getJSONObject(j);
                     currentUser = new UserModel();
                     currentUser.set_id(job.optString("_id"));
                     currentUser.setName(job.optString("name"));
@@ -220,15 +240,15 @@ public class AccountFragment extends Fragment
                     currentUser.setCountry(job.optString("country"));
                     currentUser.setSayings(job.optString("sayings"));
                     destinationsArrayList.add(currentUser);
-                }
-//            destinationsArrayListBuffer = destinationsArrayList;
-                UserAdapter myAdapter = new UserAdapter(this.getActivity(), destinationsArrayList);
-                mRecyclerView.setAdapter(myAdapter);
-//            guestDestinationsAdapter.notifyDataSetChanged();
+//                }
+////            destinationsArrayListBuffer = destinationsArrayList;
+//                UserAdapter myAdapter = new UserAdapter(this.getActivity(), destinationsArrayList);
+//                mRecyclerView.setAdapter(myAdapter);
+////            guestDestinationsAdapter.notifyDataSetChanged();
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
 
 //        }
 
@@ -251,13 +271,13 @@ public class AccountFragment extends Fragment
     private void getKarmaGroupsApiRequest() {
         AsyncHttpResponse response = new AsyncHttpResponse(this, false);
         RequestParams params = new RequestParams();
-        response.getAsyncHttp(RestApis.KarmaGroups.vacapediaFamilies /* + "/" + ID_FAMILY */, params);
+        response.getAsyncHttp(RestApis.KarmaGroups.vacapediaFamilies + "/" + ID_FAMILY /* */, params);
     }
 
     @Override
     public void onAsyncHttpResponseGet(String response, String url) throws JSONException {
         Log.d("TAG", "onAsyncHttpResponseGet() called with: response = [" + response + "], url = [" + url + "]");
-        if (url.equals(RestApis.KarmaGroups.vacapediaFamilies/* + "/" + ID_FAMILY*/)) {
+        if (url.contains(RestApis.KarmaGroups.vacapediaFamilies/* + "/" + ID_FAMILY*/)) {
             Log.d("TAG", "x onAsyncHttpResponseGet() called with: response = [" + response + "], url = [" + url + "]");
 //            // dataDestinations = new JSONArray(response);
 //            JSONObject job = new JSONObject("{" +
@@ -265,7 +285,11 @@ public class AccountFragment extends Fragment
 //                    "}");
 //            dataDestinations.put(job);
 
-            dataDestinations = new JSONArray(response);
+            dataDestinations = new JSONArray();
+
+            JSONObject dataResponse = new JSONObject(response);
+            dataDestinations.put(dataResponse);
+//            dataDestinations = new JSONArray(response);
 
             processData();
         }

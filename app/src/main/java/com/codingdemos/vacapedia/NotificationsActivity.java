@@ -104,6 +104,9 @@ public class NotificationsActivity
                 model.setTitle(job.optString("title"));
                 model.setPostID(job.optString("id"));
                 model.setImage(job.optString(image));
+                model.setContent(job.optString("content"));
+                model.setCategory(job.optString("category"));
+                model.set_id(job.optString("_id"));
                 dma.add(model);
                 destinationsArrayList.add(model);
             }

@@ -39,11 +39,13 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 //import com.google.android.gms.maps.CameraUpdateFactory;
@@ -81,7 +83,7 @@ public class VacaplanActivity extends AppCompatActivity implements
     private String image = null;
 
 
-    private TextView body_copy_tv, content_tv, note_tv, costs_tv;
+    private TextView body_copy_tv, content_tv, note_tv, costs_tv, title_bold_tv, address_tv, target_date_tv;
 
     private String id = null;
     private String titleString = null;
@@ -113,10 +115,16 @@ public class VacaplanActivity extends AppCompatActivity implements
 
     private FloatingActionButton appbar;
 
+    private String cost = "0";
+
     private JSONArray desPointsObj;
 
+    private static float MAP_ZOOM_MAX = 3;
+    private static float MAP_ZOOM_MIN = 21;
 
-//    private String API_KEY = "AIzaSyCiaIGnvo1Bc6WXbiiqy3E2ukbWjWj1VpQ";
+
+
+    //    private String API_KEY = "AIzaSyCiaIGnvo1Bc6WXbiiqy3E2ukbWjWj1VpQ";
     private String API_KEY = "AIzaSyCw96GO7U6nd8CnCVjIISXvgG3T36BKUUY";
 //    private String API_KEY = "AIzaSyAT6cY6dg_0KTQtDJ2WCnxLXLxfqKnK6m0";
 
@@ -126,6 +134,10 @@ public class VacaplanActivity extends AppCompatActivity implements
     private List<LatLng> desPoints = new ArrayList<LatLng>();
 
     private TextView tvStartAddress, tvEndAddress, tvDuration, tvDistance;
+
+    private GoogleMap map;
+    LatLngBounds.Builder builder;
+    CameraUpdate cu;
 
 
     private Double parseDoubleFromString(String s) {
@@ -150,6 +162,10 @@ public class VacaplanActivity extends AppCompatActivity implements
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
+        MAP_ZOOM_MAX = mMap.getMaxZoomLevel();
+        MAP_ZOOM_MIN = mMap.getMinZoomLevel();
+
     }
 
     private void getIntentData() {
@@ -169,6 +185,8 @@ public class VacaplanActivity extends AppCompatActivity implements
         //destinationsString = intent.getStringExtra("destinations");
 
         pointsString = intent.getStringExtra("destinations");
+
+        cost = intent.getStringExtra("cost");
 
         JSONArray jarrPoints = new JSONArray();
         desPointsObj = new JSONArray();
@@ -308,6 +326,17 @@ public class VacaplanActivity extends AppCompatActivity implements
         // jalankan method
         actionRoute();
 
+//        /**get the reference of map from layout*/
+//
+//        SupportMapFragment map = (SupportMapFragment) getSupportFragmentManager()
+//                .findFragmentById(R.id.map);
+//        map.getMapAsync(this);
+//
+////        map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map));//.getMap();
+//        /**call the map set up method*/
+//        mSetUpMap();
+
+
 
 //
 //        SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.dd_contact_us_map_fragment);
@@ -403,14 +432,21 @@ public class VacaplanActivity extends AppCompatActivity implements
 
         body_copy_tv = findViewById(R.id.body_copy);
         content_tv = findViewById(R.id.content);
-        note_tv = findViewById(R.id.note);
+        // note_tv = findViewById(R.id.note);
         costs_tv = findViewById(R.id.costs);
 
         body_copy_tv.setText(body_copyString);
         content_tv.setText(contentString);
-        note_tv.setText("some note");
-        costs_tv.setText("0");
+        //note_tv.setText("some note");
+        costs_tv.setText(cost);
 
+        title_bold_tv = findViewById(R.id.title_bold);
+//        address_tv = findViewById(R.id.address);
+        target_date_tv = findViewById(R.id.target_date);
+
+        title_bold_tv.setText(titleString);
+//        address_tv.setText(addressString);
+        target_date_tv.setText(target_dateString);
 
         final Toolbar toolbar = findViewById(R.id.toolbar_collapse);
         setSupportActionBar(toolbar);
@@ -451,6 +487,52 @@ public class VacaplanActivity extends AppCompatActivity implements
 
     }
 
+
+    /**create method to set map view*/
+    public void mSetUpMap() {
+        /**clear the map before redraw to them*/
+//        map.clear();
+        /**Create dummy Markers List*/
+        List<Marker> markersList = new ArrayList<Marker>();
+        Marker Delhi = map.addMarker(new MarkerOptions().position(new LatLng(
+                28.61, 77.2099)).title("Delhi"));
+        Marker Chaandigarh = map.addMarker(new MarkerOptions().position(new LatLng(
+                30.75, 76.78)).title("Chandigarh"));
+        Marker SriLanka = map.addMarker(new MarkerOptions().position(new LatLng(
+                7.000, 81.0000)).title("Sri Lanka"));
+        Marker America = map.addMarker(new MarkerOptions().position(new LatLng(
+                38.8833, 77.0167)).title("America"));
+        Marker Arab = map.addMarker(new MarkerOptions().position(new LatLng(
+                24.000, 45.000)).title("Arab"));
+
+        /**Put all the markers into arraylist*/
+        markersList.add(Delhi);
+        markersList.add(SriLanka);
+        markersList.add(America);
+        markersList.add(Arab);
+        markersList.add(Chaandigarh);
+
+        /**create for loop for get the latLngbuilder from the marker list*/
+        builder = new LatLngBounds.Builder();
+        for (Marker m : markersList) {
+            builder.include(m.getPosition());
+        }
+        /**initialize the padding for map boundary*/
+        int padding = 50;
+        /**create the bounds from latlngBuilder to set into map camera*/
+        LatLngBounds bounds = builder.build();
+        /**create the camera with bounds and padding to set into map*/
+        cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+        /**call the map call back to know map is loaded or not*/
+        map.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                /**set animated zoom camera into map*/
+                map.animateCamera(cu);
+
+            }
+        });
+    }
 
 
 
@@ -565,13 +647,34 @@ public class VacaplanActivity extends AppCompatActivity implements
                     // Bounds Coordinata
                     LatLngBounds bounds = latLongBuilder.build();
 
+//                    LatLngBounds bounds = mMap.getProjection().getVisibleRegion().latLngBounds;
+//
+//                    for (Marker k : mListMarkers) {
+//                        if (bounds.contains(k.getPosition())) {
+//                            currentFoundPoi++;
+//                        }
+//                    }
+
                     int width = getResources().getDisplayMetrics().widthPixels;
-                    int height = getResources().getDisplayMetrics().heightPixels;
+//                    int height = getResources().getDisplayMetrics().heightPixels - 500;
+
+//                    int width = 1;
+                    int height = 250 * 2;
+
 //                    int paddingMap = (int) (width * 0.2); //jarak dari
-                    int paddingMap = (int) (width * 0.1); //jarak dari
-//                    int paddingMap = 0; //jarak dari
-                    CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, paddingMap);
+//                    int paddingMap = (int) (width * 0.1); //jarak dari
+                    int paddingMap = 50; //jarak dari
+                    final CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, paddingMap);
                     mMap.animateCamera(cu);
+
+                    mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                        @Override
+                        public void onMapLoaded() {
+                            /**set animated zoom camera into map*/
+                            mMap.animateCamera(cu);
+
+                        }
+                    });
 
                     /** END
                      * Logic untuk membuat layar berada ditengah2 dua koordinat

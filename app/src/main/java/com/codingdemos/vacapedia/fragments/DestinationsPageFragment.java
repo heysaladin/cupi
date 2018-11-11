@@ -152,7 +152,7 @@ public class DestinationsPageFragment extends Fragment
             destinationsArrayListBuffer = destinationsArrayList;
             MyAdapter myAdapter = new MyAdapter(view.getContext(), destinationsArrayListBuffer);
             mRecyclerView.setAdapter(myAdapter);
-            guestDestinationsAdapter.notifyDataSetChanged();
+            //guestDestinationsAdapter.notifyDataSetChanged();
         } catch (JSONException e) {
             e.printStackTrace();
         }

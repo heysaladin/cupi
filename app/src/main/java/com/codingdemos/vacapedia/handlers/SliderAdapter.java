@@ -13,6 +13,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.codingdemos.flowers.R;
 
 import java.util.List;
@@ -58,8 +61,16 @@ public class SliderAdapter extends PagerAdapter {
         textViewDesc.setText(colorCopy.get(position));
 
         ImageView imageView = (ImageView) view.findViewById(R.id.item_slide_image_iv);
+        RequestOptions options = new RequestOptions()
+                //.signature(mFlowerList.get(position).get_id())
+                .format(DecodeFormat.PREFER_RGB_565)
+                .centerCrop()
+                .placeholder(R.drawable.default_image)
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
         Glide.with(context)
                 .load(colorImage.get(position))
+                .apply(options)
+                .thumbnail(0.5f)
                 .into(imageView);
 
         ViewPager viewPager = (ViewPager) container;

@@ -11,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.codingdemos.flowers.R;
 import com.codingdemos.vacapedia.EditSlideActivity;
 import com.codingdemos.vacapedia.data.SlidesModel;
@@ -35,8 +38,16 @@ public class SlidesAdapter extends RecyclerView.Adapter < SlidesViewHolder > {
 
     @Override
     public void onBindViewHolder(final SlidesViewHolder holder, int position) {
+        RequestOptions options = new RequestOptions()
+                //.signature(mFlowerList.get(position).get_id())
+                .format(DecodeFormat.PREFER_RGB_565)
+                .centerCrop()
+                .placeholder(R.drawable.default_image)
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE);
         Glide.with(mContext)
                 .load(mFlowerList.get(position).getImage().replace(" ", "%20"))
+                .apply(options)
+                .thumbnail(0.5f)
                 .into(holder.mImage);
         holder.mTitle.setText(mFlowerList.get(position).getTitle());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {

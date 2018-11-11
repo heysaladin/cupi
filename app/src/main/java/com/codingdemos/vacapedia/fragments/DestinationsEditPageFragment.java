@@ -183,7 +183,7 @@ public class DestinationsEditPageFragment
                     swipeController.onDraw(c);
                 }
             });
-            guestDestinationsAdapter.notifyDataSetChanged();
+            //guestDestinationsAdapter.notifyDataSetChanged();
 
         } catch (JSONException e) {
             e.printStackTrace();

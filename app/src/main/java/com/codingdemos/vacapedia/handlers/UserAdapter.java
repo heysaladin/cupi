@@ -136,6 +136,7 @@ public class UserAdapter extends RecyclerView.Adapter < UserViewHolder > {
                 .load(mFlowerList.get(position).getPhoto_profile().replace(" ", "%20"))
                 .into(holder.mImage);
         holder.mTitle.setText(mFlowerList.get(position).getName());
+        holder.tvDesc.setText(mFlowerList.get(position).getSayings());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,7 +160,7 @@ public class UserAdapter extends RecyclerView.Adapter < UserViewHolder > {
 class UserViewHolder extends RecyclerView.ViewHolder {
 
     ImageView mImage;
-    TextView mTitle;
+    TextView mTitle, tvDesc;
     CardView mCardView;
 
     UserViewHolder(View itemView) {
@@ -168,5 +169,6 @@ class UserViewHolder extends RecyclerView.ViewHolder {
         mImage = itemView.findViewById(R.id.ivImage);
         mTitle = itemView.findViewById(R.id.tvTitle);
         mCardView = itemView.findViewById(R.id.cardview);
+        tvDesc = itemView.findViewById(R.id.tvDesc);
     }
 }

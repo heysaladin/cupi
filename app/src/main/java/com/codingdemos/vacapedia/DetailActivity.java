@@ -389,8 +389,10 @@ public class DetailActivity extends AppCompatActivity implements
                     LatLngBounds bounds = latLongBuilder.build();
 
                     int width = getResources().getDisplayMetrics().widthPixels;
-                    int height = getResources().getDisplayMetrics().heightPixels;
-                    int paddingMap = (int) (width * 0.2); //jarak dari
+//                    int height = getResources().getDisplayMetrics().heightPixels;
+                    int height = 250;
+//                    int paddingMap = (int) (width * 0.2); //jarak dari
+                    int paddingMap = 50; //jarak dari
                     CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, paddingMap);
                     mMap.animateCamera(cu);
 

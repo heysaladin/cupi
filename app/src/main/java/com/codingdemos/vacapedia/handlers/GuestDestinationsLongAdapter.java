@@ -88,6 +88,7 @@ public class GuestDestinationsLongAdapter extends RecyclerView.Adapter < GuestDe
 
                     context.startActivity(intent);
                 } else {
+                    /*
                     Intent intent = new Intent(context, DetailActivity.class);
                     intent.putExtra(intent_param_post_id, model.getPostID());
                     intent.putExtra(intent_param_post_title, model.getName());
@@ -109,6 +110,7 @@ public class GuestDestinationsLongAdapter extends RecyclerView.Adapter < GuestDe
                     intent.putExtra("total_cost", model.getTotal_cost());
 
                     context.startActivity(intent);
+                    */
                 }
             }
         });

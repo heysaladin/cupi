@@ -86,7 +86,7 @@
                 <TextView
                     android:id="@+id/tvTime"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/space_25dp"
+                    android:layout_height="wrap_content"
                     android:layout_below="@id/tvTitle"
                     android:layout_toRightOf="@id/wrapper"
                     android:gravity="top|left"
@@ -99,18 +99,19 @@
                 <TextView
                     android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/space_30dp"
+                    android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/wrapper"
                     android:gravity="bottom|left"
                     android:text="TextView Coh"
                     android:textColor="@color/cardview_dark_background"
                     android:textSize="18sp"
+                    android:maxLines="2"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvCosts"
                     android:layout_width="wrap_content"
-                    android:layout_height="@dimen/space_30dp"
+                    android:layout_height="wrap_content"
                     android:layout_below="@id/tvTitle"
                     android:layout_toRightOf="@id/wrapper"
                     android:gravity="top|left"
