@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.codingdemos.flowers.R;
 import com.codingdemos.vacapedia.DestinationListActivity;
 import com.codingdemos.vacapedia.DetailActivity;
+import com.codingdemos.vacapedia.data.DestinationsModel;
 import com.codingdemos.vacapedia.data.SubGroupModel;
 
 import java.util.ArrayList;
@@ -116,6 +117,25 @@ public class DestinationListAdapter extends RecyclerView.Adapter < DestinationLi
                     intent.putExtra("Title", model.getName());
                     intent.putExtra("Description", model.getName());
                     intent.putExtra("Image", model.getName());
+
+
+//                    Intent mIntent = intent;
+
+//                    DestinationsModel destinationsArrayListBuffer = model;
+
+//                    mIntent.putExtra("_id", model.get_id());
+//                    mIntent.putExtra("name", destinationsArrayListBuffer.get(position).getName());
+//                    mIntent.putExtra("image", destinationsArrayListBuffer.get(position).getImage());
+//                    mIntent.putExtra("category", destinationsArrayListBuffer.get(position).getCategory());
+//                    mIntent.putExtra("location", destinationsArrayListBuffer.get(position).getLocation());
+//                    mIntent.putExtra("description", destinationsArrayListBuffer.get(position).getDescription());
+//                    mIntent.putExtra("latitude", destinationsArrayListBuffer.get(position).getLatitude());
+//                    mIntent.putExtra("longitude", destinationsArrayListBuffer.get(position).getLongitude());
+//                    mIntent.putExtra("address", destinationsArrayListBuffer.get(position).getAddress());
+//                    mIntent.putExtra("distance", destinationsArrayListBuffer.get(position).getDistance());
+//                    mIntent.putExtra("note", destinationsArrayListBuffer.get(position).getNote());
+//                    mIntent.putExtra("costs", destinationsArrayListBuffer.get(position).getCosts());
+//                    mIntent.putExtra("total_cost", destinationsArrayListBuffer.get(position).getTotal_cost());
 
                     context.startActivity(intent);
                 }

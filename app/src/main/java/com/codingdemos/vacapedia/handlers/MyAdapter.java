@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,8 @@ public class MyAdapter extends RecyclerView.Adapter < FlowerViewHolder > {
                 mIntent.putExtra("note", mFlowerList.get(holder.getAdapterPosition()).getNote());
                 mIntent.putExtra("costs", mFlowerList.get(holder.getAdapterPosition()).getCosts());
                 mIntent.putExtra("total_cost", mFlowerList.get(holder.getAdapterPosition()).getTotal_cost());
+
+                Log.d("LOG", "holder.getAdapterPosition()).getLatitude() >>>>>>>>> " + mFlowerList.get(holder.getAdapterPosition()).getLatitude());
 
                 mContext.startActivity(mIntent);
             }

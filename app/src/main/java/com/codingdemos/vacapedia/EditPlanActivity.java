@@ -501,6 +501,23 @@ public class EditPlanActivity extends AppCompatActivity
                 model.setPostID(job.optString("id"));
                 model.setImage(job.optString("image"));
 
+//                model.setMenuName("nama" + j);
+//                model.setName(job.optString(name));
+//                model.setPostID(job.optString("id"));
+//                model.setImage(job.optString(image));
+
+                model.set_id(job.optString("_id"));
+                model.setCategory(job.optString("category"));
+                model.setLocation(job.optString("location"));
+                model.setDescription(job.optString("description"));
+                model.setLatitude(job.optString("latitude"));
+                model.setLongitude(job.optString("longitude"));
+                model.setAddress(job.optString("address"));
+                model.setDistance(job.optString("distance"));
+                model.setNote(job.optString("note"));
+                model.setCosts(job.optString("costs"));
+                model.setTotal_cost(job.optString("total_cost"));
+
 
                 dma.add(model);
                 destinationsArrayList.add(model);

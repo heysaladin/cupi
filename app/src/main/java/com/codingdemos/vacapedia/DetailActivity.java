@@ -73,8 +73,8 @@ public class DetailActivity extends AppCompatActivity implements
     private String _id = null;
     private String category = null;
     private String location = null;
-    private String latitude = null;
-    private String longitude = null;
+    private String latitude = "0";
+    private String longitude = "0";
     private String address = null;
     private String distance = null;
     private String note = null;
@@ -119,9 +119,36 @@ public class DetailActivity extends AppCompatActivity implements
         costs = intent.getStringExtra("costs");
         total_cost = intent.getStringExtra("total_cost");
 
+
+//        Log.d("LOC", "latitude >>>>>>>>>>>>> " + latitude);
+
+        if (parseDoubleFromString(latitude)!=Double.parseDouble("0") || parseDoubleFromString(longitude)!=Double.parseDouble("0")) {
+            locationLatLng = new LatLng(Double.parseDouble(latitude),Double.parseDouble(longitude)); // Cirebon
+        }
+
         TextView description_tv = (TextView) findViewById(R.id.description);
         description_tv.setText(description);
 
+    }
+
+
+
+    private Double parseDoubleFromString(String s) {
+
+        Log.d("LOC", "s >>>>>>>>>>>>> " + s);
+
+        String sinit = "0";
+
+        try {
+            if (s == "null" || s == null || s == "") {
+                sinit = s;
+                return Double.parseDouble(sinit);
+            } else {
+                return Double.parseDouble(s);
+            }
+        } catch (NumberFormatException e) {
+            return Double.parseDouble("0");
+        }
     }
 
 //    @Override

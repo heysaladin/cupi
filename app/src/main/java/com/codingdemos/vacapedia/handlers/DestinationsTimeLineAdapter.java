@@ -22,6 +22,7 @@ public class DestinationsTimeLineAdapter extends RecyclerView.Adapter < Destinat
 
     private Context mContext;
     private List <DestinationsModel> mFlowerList;
+    private List <DestinationsModel> destinationsArrayListBuffer;
 
     public DestinationsTimeLineAdapter(Context mContext, List <DestinationsModel> mFlowerList) {
         this.mContext = mContext;
@@ -72,6 +73,25 @@ public class DestinationsTimeLineAdapter extends RecyclerView.Adapter < Destinat
                 intent.putExtra("name", mFlowerList.get(position).getName());
                 intent.putExtra("location", mFlowerList.get(position).getLocation());
                 intent.putExtra("image", mFlowerList.get(position).getImage());
+
+                Intent mIntent = intent;
+
+                destinationsArrayListBuffer = mFlowerList;
+
+                mIntent.putExtra("_id", destinationsArrayListBuffer.get(position).get_id());
+                mIntent.putExtra("name", destinationsArrayListBuffer.get(position).getName());
+                mIntent.putExtra("image", destinationsArrayListBuffer.get(position).getImage());
+                mIntent.putExtra("category", destinationsArrayListBuffer.get(position).getCategory());
+                mIntent.putExtra("location", destinationsArrayListBuffer.get(position).getLocation());
+                mIntent.putExtra("description", destinationsArrayListBuffer.get(position).getDescription());
+                mIntent.putExtra("latitude", destinationsArrayListBuffer.get(position).getLatitude());
+                mIntent.putExtra("longitude", destinationsArrayListBuffer.get(position).getLongitude());
+                mIntent.putExtra("address", destinationsArrayListBuffer.get(position).getAddress());
+                mIntent.putExtra("distance", destinationsArrayListBuffer.get(position).getDistance());
+                mIntent.putExtra("note", destinationsArrayListBuffer.get(position).getNote());
+                mIntent.putExtra("costs", destinationsArrayListBuffer.get(position).getCosts());
+                mIntent.putExtra("total_cost", destinationsArrayListBuffer.get(position).getTotal_cost());
+
 
                 mContext.startActivity(intent);
 

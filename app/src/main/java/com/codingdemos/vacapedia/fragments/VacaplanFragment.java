@@ -127,6 +127,10 @@ public class VacaplanFragment
                 stringImages = new ArrayList < > ();
                 stringLocations = new ArrayList < > ();
                 intCost = new ArrayList < > ();
+                stringImages.clear();
+                stringLocations.clear();
+                intCost.clear();
+                cost = 0;
                 for (int k = 0; k < jsonArrayUsersFamily.length(); k++) {
                     JSONObject jobk = jsonArrayUsersFamily.getJSONObject(k);
                     String imgNow = jobk.optString("image");

@@ -108,6 +108,8 @@ public class GuestDestinationsAdapter extends RecyclerView.Adapter < GuestDestin
                     intent.putExtra("costs", model.getCosts());
                     intent.putExtra("total_cost", model.getTotal_cost());
 
+                    Log.d("LOG", "model.getLatitude() >>>>>>>>> " + model.getLatitude());
+
                     context.startActivity(intent);
                 }
             }
