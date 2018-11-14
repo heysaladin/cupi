@@ -81,7 +81,11 @@
     <dimen name="slide_desc">16dp</dimen>
     <dimen name="desc_padding">40dp</dimen>
 
-
+  <string-array name="types">
+    <item>Mobile</item>
+    <item>Office</item>
+    <item>Home</item>
+  </string-array>
 
 
 </resources>

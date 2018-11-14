@@ -10,9 +10,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +33,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 public class EditDestinationActivity extends AppCompatActivity
@@ -76,6 +83,11 @@ public class EditDestinationActivity extends AppCompatActivity
     public static final int DEST_LOC = 1;
     private static int REQUEST_CODE = 0;
 
+    private LinearLayout parentLinearLayout;
+
+    private LinearLayout wrapper_dynamic;
+
+    private JSONArray costList;
 
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -136,6 +148,46 @@ public class EditDestinationActivity extends AppCompatActivity
         total_costString = intent.getStringExtra("total_cost");
     }
 
+    public void onAddField(View v) {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View rowView = inflater.inflate(R.layout.field, null);
+        EditText currentEdit = rowView.findViewById(R.id.number_edit_text);
+        editTextList.add(currentEdit);
+        // Add the new row before the add field button.
+        parentLinearLayout.addView(rowView, parentLinearLayout.getChildCount() - 1);
+
+
+        Log.d("LOG", "count >>>>>>>>> " + String.valueOf(Integer.parseInt(String.valueOf(parentLinearLayout.getChildCount())) - 1));
+
+
+    }
+
+    public void onDelete(View v) {
+        parentLinearLayout.removeView((View) v.getParent());
+        Log.d("LOG", "count >>>>>>>>> " + String.valueOf(Integer.parseInt(String.valueOf(parentLinearLayout.getChildCount())) - 1));
+    }
+
+    private List<EditText> editTextList = new ArrayList<EditText>();
+
+    private Button submitButton() {
+        Button button = new Button(this);
+        button.setHeight(WRAP_CONTENT);
+        button.setText("Submit");
+        button.setOnClickListener(submitListener);
+        return button;
+    }
+
+    // Access the value of the EditText
+
+    private View.OnClickListener submitListener = new View.OnClickListener() {
+        public void onClick(View view) {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (EditText editText : editTextList) {
+                stringBuilder.append(editText.getText().toString());
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,7 +201,23 @@ public class EditDestinationActivity extends AppCompatActivity
                 onBackPressed();
             }
         });
-        mToolbar.setTitle("Note");
+        mToolbar.setTitle("Edit Destination");
+
+        parentLinearLayout = (LinearLayout) findViewById(R.id.parent_linear_layout);
+
+        wrapper_dynamic = (LinearLayout) findViewById(R.id.wrapper_dynamic);
+
+//        LinearLayout linearLayout = new LinearLayout(this);
+////        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(FILL_PARENT, WRAP_CONTENT);
+////        linearLayout.setLayoutParams(params);
+////        linearLayout.setOrientation(VERTICAL);
+////
+////        int count = 10;
+////        linearLayout.addView(tableLayout(count));
+//        linearLayout.addView(submitButton());
+//        setContentView(linearLayout);
+
+
         initUI();
 
 
@@ -302,7 +370,7 @@ public class EditDestinationActivity extends AppCompatActivity
             jobjContactDetails.put("address", String.valueOf(address.getText()).trim());
             jobjContactDetails.put("distance", String.valueOf(distance.getText()).trim());
             jobjContactDetails.put("note", String.valueOf(note.getText()).trim());
-            jobjContactDetails.put("costs", jarr);
+            jobjContactDetails.put("costs", costList);
             jobjContactDetails.put("total_cost", String.valueOf(total_cost.getText()).trim());
         } catch (Exception e) {
             e.printStackTrace();
@@ -350,7 +418,30 @@ public class EditDestinationActivity extends AppCompatActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.dd_booking_form_tv:
-                bookValidations();
+                // bookValidations();
+
+                int parentLong = Integer.parseInt(String.valueOf(parentLinearLayout.getChildCount())) - 1;
+
+                for (int k = 0; k < parentLong; k++) {
+                    try {
+                        View currentView = parentLinearLayout.getChildAt(k);
+                        EditText currentEditName = currentView.findViewById(R.id.text_edit_text);
+                        EditText currentEditCost = currentView.findViewById(R.id.number_edit_text);
+                        //Log.d(TAG, k + ">>>>>>>> : " + currentEdit.getText() );
+                        if(!currentEditName.getText().equals("")||!currentEditCost.getText().equals("")) {
+                            JSONObject costObj = new JSONObject("{" +
+                                    "\"name\":\"" + currentEditName.getText() + "\"," +
+                                    "\"cost\":\"" + currentEditCost.getText() + "\"" +
+                                    "}");
+                        Log.d(TAG, k + ">>>>>>>> : " + costObj );
+                        costList.put(costObj);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
                 break;
         }
     }
