@@ -27,7 +27,7 @@
             android:layout_height="1dp"
             android:layout_marginHorizontal="0dp"
             android:layout_marginVertical="10dp"
-            android:background="@android:color/darker_gray"></LinearLayout>
+            android:background="@android:color/darker_gray" />
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:scrollbars="none"

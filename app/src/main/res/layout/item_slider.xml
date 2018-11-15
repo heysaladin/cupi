@@ -23,7 +23,6 @@
             android:gravity="center"
             android:textColor="@android:color/white"
             android:textSize="24sp" />
-
         <TextView
             android:id="@+id/textViewDesc"
             android:layout_width="match_parent"
@@ -34,7 +33,6 @@
             android:textColor="#ccc"
             android:textSize="14sp" />
     </LinearLayout>
-
     <ImageView
         android:id="@+id/item_slide_image_iv"
         android:layout_width="match_parent"

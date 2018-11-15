@@ -159,14 +159,12 @@
                     android:textColor="#333"
                     android:textColorHint="#aaa"
                     android:textSize="@dimen/font_medium" />
-
                 <fragment
                     android:id="@+id/place_autocomplete_fragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
                     />
-
                 <EditText
                     android:textCursorDrawable="@null"
                     android:id="@+id/latitude"
@@ -275,102 +273,27 @@
                     android:textColorHint="#aaa"
                     android:textSize="@dimen/font_medium"
                     android:visibility="visible" />
-
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/parent_linear_layout_recycler_view"-->
-                    <!--android:orientation="vertical"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content">-->
-                    <!--<android.support.v7.widget.RecyclerView-->
-                        <!--android:clipToPadding="false"-->
-                        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
-                        <!--android:id="@+id/recyclerview"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:scrollbars="vertical" />-->
-                <!--</LinearLayout>-->
-
                 <LinearLayout
                     android:id="@+id/parent_linear_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
-                    android:orientation="vertical" >
-                <!--<LinearLayout-->
-                    <!--android:id="@+id/wrapper_dynamic"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="50dp"-->
-                    <!--android:orientation="horizontal" >-->
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_weight="3"-->
-                        <!--android:layout_height="75dp"-->
-                        <!--android:orientation="vertical"-->
-                        <!--&gt;-->
-                        <!--<TextView-->
-                            <!--android:text="Name:"-->
-                            <!--android:textSize="@dimen/space_10dp"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="@dimen/space_25dp" />-->
-                        <!--<EditText-->
-                            <!--android:id="@+id/text_edit_text"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="@dimen/space_50dp"-->
-                            <!--android:inputType="text"/>-->
-                    <!--</LinearLayout>-->
-                    <!--<LinearLayout-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_weight="3"-->
-                        <!--android:layout_height="75dp"-->
-                        <!--android:orientation="vertical"-->
-                        <!--&gt;-->
-                        <!--<TextView-->
-                            <!--android:text="Cost:"-->
-                            <!--android:textSize="@dimen/space_10dp"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="@dimen/space_25dp" />-->
-                        <!--<EditText-->
-                            <!--android:id="@+id/number_edit_text"-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="@dimen/space_50dp"-->
-                            <!--android:inputType="text"/>-->
-                    <!--</LinearLayout>-->
-                    <!--&lt;!&ndash;<EditText&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:id="@+id/number_edit_text"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_weight="5"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:inputType="phone"/>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<Spinner&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:id="@+id/type_spinner"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_width="0dp"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:layout_weight="3"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:entries="@array/types"&ndash;&gt;-->
-                        <!--&lt;!&ndash;android:gravity="right" />&ndash;&gt;-->
-                    <!--<Button-->
-                        <!--android:id="@+id/delete_button"-->
-                        <!--android:layout_width="0dp"-->
-                        <!--android:layout_height="40dp"-->
-                        <!--android:layout_weight="1"-->
-                        <!--android:background="@android:drawable/ic_delete"-->
-                        <!--android:onClick="onDelete"/>-->
-                <!--</LinearLayout>-->
-                <Button
-                    android:id="@+id/add_field_button"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:background="#555"
-                    android:layout_gravity="center"
-                    android:onClick="onAddField"
-                    android:textColor="#FFF"
-                    android:text="Add Field"
-                    android:paddingLeft="5dp"/>
-            </LinearLayout>
-
+                    android:orientation="vertical"
+                    >
+                    <Button
+                        android:id="@+id/add_field_button"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="#555"
+                        android:layout_gravity="center"
+                        android:onClick="onAddField"
+                        android:textColor="#FFF"
+                        android:text="Add Field"
+                        android:paddingLeft="5dp"/>
+                </LinearLayout>
                 <EditText
                     android:textCursorDrawable="@null"
                     android:id="@+id/total_cost"
@@ -389,53 +312,6 @@
                     android:textColorHint="#aaa"
                     android:textSize="@dimen/font_medium"
                     android:visibility="visible" />
-
-
-
-
-                <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:textStyle="bold"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_marginTop="10dp"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:text="Destination Location Info :"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:textSize="18sp"/>&ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvDestLocAddr"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Destination Address : Jl Anggreks Cendrawasi"-->
-                    <!--android:textSize="14sp"/>-->
-
-                <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:textStyle="bold"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_marginTop="10dp"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:text="Lat :"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:textSize="18sp"/>&ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvDestLat"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Destination Address : Jl Anggreks Cendrawasi"-->
-                    <!--android:textSize="14sp"/>-->
-
-                <!--&lt;!&ndash;<TextView&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:textStyle="bold"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:layout_marginTop="10dp"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:text="Long :"&ndash;&gt;-->
-                    <!--&lt;!&ndash;android:textSize="18sp"/>&ndash;&gt;-->
-                <!--<TextView-->
-                    <!--android:id="@+id/tvDestLong"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="Destination Address : Jl Anggreks Cendrawasi"-->
-                    <!--android:textSize="14sp"/>-->
-
-
                 <TextView
                     android:layout_alignParentTop="true"
                     android:layout_centerInParent="true"
