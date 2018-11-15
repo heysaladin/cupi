@@ -54,9 +54,7 @@ public class VacaplanFragment
     private List < String > intCost;
     private int cost = 0;
 
-
     private JSONArray desPoints = new JSONArray();
-
 
     public static VacaplanFragment newInstance() {
         VacaplanFragment fragment = new VacaplanFragment();
@@ -76,12 +74,8 @@ public class VacaplanFragment
         jsonArrayCosts = new JSONArray();
         numbers = new ArrayList < > ();
         getKarmaGroupsApiRequest();
-
-
-
         return view;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -116,14 +110,9 @@ public class VacaplanFragment
         response.getAsyncHttp(RestApis.KarmaGroups.vacapediaPlans /* + "/" + ID_FAMILY */ , params);
     }
 
-
-
     private Double parseDoubleFromString(String s) {
-
-        Log.d("LOC", "s >>>>>>>>>>>>> " + s);
-
+        // Log.d("LOC", "s >>>>>>>>>>>>> " + s);
         String sinit = "0";
-
         try {
             if (s == "null" || s == null || s == "") {
                 sinit = s;
@@ -137,9 +126,7 @@ public class VacaplanFragment
     }
 
     private void getImageBanner(final JSONArray dataPlanParam) {
-
         try {
-
             destinationsArrayListBuff = new ArrayList < > ();
             destinationsArrayListBuff.clear();
             destinationsArrayList = new ArrayList < > ();
@@ -147,7 +134,6 @@ public class VacaplanFragment
             LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(this.getContext());
             mRecyclerView.setLayoutManager(mLinearLayoutManager);
             destinationsArrayList.clear();
-
             for (int j = 0; j < dataPlanParam.length(); j++) {
                 JSONObject job = dataPlanParam.getJSONObject(j);
                 currentUser = new PlanModel();
@@ -161,7 +147,6 @@ public class VacaplanFragment
                 currentUser.setCosts(jsonArrayCosts);
                 jsonArrayUsersFamily = new JSONArray(job.optString("destinations"));
                 currentUser.setDestinations(jsonArrayUsersFamily);
-
                 stringImages = new ArrayList < > ();
                 stringLocations = new ArrayList < > ();
                 intCost = new ArrayList < > ();
@@ -178,94 +163,49 @@ public class VacaplanFragment
                     stringLocations.add(locationNow);
                     String costNow = jobk.optString("total_cost");
                     intCost.add(costNow);
-//
-//                    String latItem = jobk.optString("latitude");
-//                    String longItem = jobk.optString("longitude");
-//                    Log.d("LOG", "latItem >>>>>>>>> " + latItem);
-//                    Log.d("LOG", "longItem >>>>>>>>> " + longItem);
-//
-////                    if (parseDoubleFromString(latItem)!=Double.parseDouble("0")) {
-////                        latItem = "-8.677335";
-////                    }
-////                    if (parseDoubleFromString(longItem)!=Double.parseDouble("0")) {
-////                        longItem = "115.2070699";
-////                    }
-//
-////                    LatLng desItemPoin = new LatLng(parseDoubleFromString(latItem), parseDoubleFromString(longItem));
-//
-//                    JSONObject desItemPoin = new JSONObject("{" +
-//                            "\"latitude\":\"" + latItem +"\", " +
-//                            "\"longitude\":\"" + longItem + "\"" +
-//                            "}");
-//
-//                    desPoints.put(desItemPoin);
-//                    Log.d("LOG", "desPoints >>>>>>>>> DDDDDDDDDD " + desPoints);
-
                 }
-
                 numbers.clear();
-
                 for (int i = 0; i < stringImages.size(); i++) {
                     numbers.add(i);
                 }
                 Collections.shuffle(numbers);
-
                 for (int c = 0; c < intCost.size(); c++) {
                     cost += parseInteger(intCost.get(c));
                 }
-
-                if(stringImages.size()>1) {
-                    if (numbers.get(0)!=0) {
-                        Log.d("LOG", "numbers >>>>>>>>> " + numbers);
+                if (stringImages.size() > 1) {
+                    if (numbers.get(0) != 0) {
+                        // Log.d("LOG", "numbers >>>>>>>>> " + numbers);
                         currentUser.setImage(stringImages.get(numbers.get(0) - 1));
                         currentUser.setLocation(stringLocations.get(numbers.get(0) - 1));
                     } else {
                         currentUser.setImage(stringImages.get(numbers.get(0)));
                         currentUser.setLocation(stringLocations.get(numbers.get(0)));
                     }
-                }else{
+                } else {
                     currentUser.setImage(stringImages.get(0));
                     currentUser.setLocation(stringLocations.get(0));
                 }
                 currentUser.setCost(String.valueOf(cost));
-
                 destinationsArrayList.add(currentUser);
-
             }
-
-//            for (int i = 0; i < destinationsArrayList.size(); i++) {
-//                numbers.add(i);
-//            }
-//            Collections.shuffle(numbers);
-//
-//            //JSONArray destinationsArrayListBuf = new JSONArray();
-//            for (int i = 0; i < numbers.size(); i++) {
-//                destinationsArrayListBuff.add(destinationsArrayList.get(numbers.get(i)));
-//            }
-
             destinationsArrayListBuff = createRandomList(destinationsArrayList);
-            //destinationsArrayListBuff = destinationsArrayList;
-
-            PlanAdapter myAdapter = new PlanAdapter(this.getActivity(), destinationsArrayListBuff
-//                    , jsonArrayUsersFamily
-            );
+            PlanAdapter myAdapter = new PlanAdapter(this.getActivity(), destinationsArrayListBuff);
             mRecyclerView.setAdapter(myAdapter);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
 
-    private ArrayList <PlanModel> createRandomList(ArrayList < PlanModel > listTarget) {
-        Log.d("LOG", "listTarget >>>>>>>>> " + listTarget);
+    private ArrayList < PlanModel > createRandomList(ArrayList < PlanModel > listTarget) {
+        // Log.d("LOG", "listTarget >>>>>>>>> " + listTarget);
         ArrayList < PlanModel > listResult;
         List < Integer > numbers = new ArrayList < > ();
         for (int i = 0; i < listTarget.size(); i++) {
             numbers.add(i);
         }
         Collections.shuffle(numbers);
-        Log.d("LOG", "createRandomList numbers >>>>>>>>> " + numbers);
+        // Log.d("LOG", "createRandomList numbers >>>>>>>>> " + numbers);
 
         int size = listTarget.size();
         ArrayList < PlanModel > buffer = new ArrayList < PlanModel > ();
@@ -275,7 +215,7 @@ public class VacaplanFragment
                 Log.d("LOG", "createRandomList hashSet.get(i) >>>>>>>>> " + numbers.get(i));
                 buffer.add(listTarget.get(numbers.get(i)));
             }
-            Log.d("LOG", "buffer >>>>>>>>> " + buffer);
+            // Log.d("LOG", "buffer >>>>>>>>> " + buffer);
             return listResult = buffer;
         } else {
             return listResult = listTarget;

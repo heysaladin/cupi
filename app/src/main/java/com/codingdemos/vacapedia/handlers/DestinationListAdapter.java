@@ -30,7 +30,7 @@ public class DestinationListAdapter extends RecyclerView.Adapter < DestinationLi
     String intent_param_menu_id = "menuID";
 
     private static final String TAG = "DestinationListAdapter";
-    ArrayList <SubGroupModel> arrayList;
+    ArrayList < SubGroupModel > arrayList;
     Context context;
     String groupName;
 
@@ -50,7 +50,7 @@ public class DestinationListAdapter extends RecyclerView.Adapter < DestinationLi
     @Override
     public void onBindViewHolder(DestinationListAdapter.AdapterHolder holder, final int position) {
         final SubGroupModel model = arrayList.get(position);
-        Log.d(TAG, "model : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + model);
+        // Log.d(TAG, "model : >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + model);
         Glide.with(context)
                 .load(model.getBgimage().replace(" ", "%20"))
                 .into(holder.item_destination_image_iv);
@@ -60,9 +60,9 @@ public class DestinationListAdapter extends RecyclerView.Adapter < DestinationLi
         holder.item_destination_parent_rl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "groupName >>>>>>>>>>>>>>>>>>>>>> " + groupName);
+                // Log.d(TAG, "groupName >>>>>>>>>>>>>>>>>>>>>> " + groupName);
                 if (groupName.equals(group_karma_beach)) {
-                    Log.d(TAG, "AppStrings.Unique.group_karma_beach >>>>>>>>>>>>>>>>>>>>>> " + group_karma_beach);
+                    // Log.d(TAG, "AppStrings.Unique.group_karma_beach >>>>>>>>>>>>>>>>>>>>>> " + group_karma_beach);
                     Intent intent = new Intent(context, DetailActivity.class);
                     intent.putExtra(intent_param_post_id, model.getPostID());
                     intent.putExtra(intent_param_menu_id, model.getMenuID());
@@ -117,25 +117,6 @@ public class DestinationListAdapter extends RecyclerView.Adapter < DestinationLi
                     intent.putExtra("Title", model.getName());
                     intent.putExtra("Description", model.getName());
                     intent.putExtra("Image", model.getName());
-
-
-//                    Intent mIntent = intent;
-
-//                    DestinationsModel destinationsArrayListBuffer = model;
-
-//                    mIntent.putExtra("_id", model.get_id());
-//                    mIntent.putExtra("name", destinationsArrayListBuffer.get(position).getName());
-//                    mIntent.putExtra("image", destinationsArrayListBuffer.get(position).getImage());
-//                    mIntent.putExtra("category", destinationsArrayListBuffer.get(position).getCategory());
-//                    mIntent.putExtra("location", destinationsArrayListBuffer.get(position).getLocation());
-//                    mIntent.putExtra("description", destinationsArrayListBuffer.get(position).getDescription());
-//                    mIntent.putExtra("latitude", destinationsArrayListBuffer.get(position).getLatitude());
-//                    mIntent.putExtra("longitude", destinationsArrayListBuffer.get(position).getLongitude());
-//                    mIntent.putExtra("address", destinationsArrayListBuffer.get(position).getAddress());
-//                    mIntent.putExtra("distance", destinationsArrayListBuffer.get(position).getDistance());
-//                    mIntent.putExtra("note", destinationsArrayListBuffer.get(position).getNote());
-//                    mIntent.putExtra("costs", destinationsArrayListBuffer.get(position).getCosts());
-//                    mIntent.putExtra("total_cost", destinationsArrayListBuffer.get(position).getTotal_cost());
 
                     context.startActivity(intent);
                 }

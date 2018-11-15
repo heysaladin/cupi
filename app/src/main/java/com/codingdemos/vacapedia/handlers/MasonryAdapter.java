@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class MasonryAdapter extends RecyclerView.Adapter < MasonryAdapter.MasonryView > {
 
     private Context context;
-    private ArrayList <NoteData> mFlowerList;
+    private ArrayList < NoteData > mFlowerList;
 
     int[] imgList = {
             R.drawable.hagia_sophia,

@@ -23,17 +23,17 @@ import java.util.ArrayList;
 
 public class GuestDestinationsAdapter extends RecyclerView.Adapter < GuestDestinationsAdapter.AdapterHolder > {
 
-    String group_karma_beach = "Karma Beach";
-    String group_karma_spa = "Karma Spa";
-    String group_karma_restaurant = "Karma Restaurants";
-    String group_karma_boutique = "Boutique";
-    String intent_param_sub_group = "sub_group";
-    String intent_param_post_id = "postID";
-    String intent_param_post_title = "postTitle";
-    String intent_param_menu_id = "menuID";
+    private String group_karma_beach = "Karma Beach";
+    private String group_karma_spa = "Karma Spa";
+    private String group_karma_restaurant = "Karma Restaurants";
+    private String group_karma_boutique = "Boutique";
+    private String intent_param_sub_group = "sub_group";
+    private String intent_param_post_id = "postID";
+    private String intent_param_post_title = "postTitle";
+    private String intent_param_menu_id = "menuID";
 
     private static final String TAG = "GuestDestinationsAdapter";
-    ArrayList <DestinationsModel> arrayList;
+    ArrayList < DestinationsModel > arrayList;
     Context context;
 
     public GuestDestinationsAdapter(Context context, ArrayList < DestinationsModel > arrayList) {
@@ -52,7 +52,7 @@ public class GuestDestinationsAdapter extends RecyclerView.Adapter < GuestDestin
     public void onBindViewHolder(GuestDestinationsAdapter.AdapterHolder holder, int position) {
         final DestinationsModel model = arrayList.get(position);
         String img = "https://www.dakwatuna.com/wp-content/uploads/2015/07/masjidil-haram.jpg";
-        Log.d("LOG", "model.getImage() +++++++++++++++ " + model.getImage());
+        // Log.d("LOG", "model.getImage() +++++++++++++++ " + model.getImage());
         RequestOptions options = new RequestOptions();
         options.centerCrop();
         options.placeholder(R.drawable.default_image);
@@ -108,7 +108,7 @@ public class GuestDestinationsAdapter extends RecyclerView.Adapter < GuestDestin
                     intent.putExtra("costs", model.getCosts());
                     intent.putExtra("total_cost", model.getTotal_cost());
 
-                    Log.d("LOG", "model.getLatitude() >>>>>>>>> " + model.getLatitude());
+                    // Log.d("LOG", "model.getLatitude() >>>>>>>>> " + model.getLatitude());
 
                     context.startActivity(intent);
                 }

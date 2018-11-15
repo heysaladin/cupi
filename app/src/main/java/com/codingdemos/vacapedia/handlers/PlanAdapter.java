@@ -26,40 +26,34 @@ import java.util.List;
 public class PlanAdapter extends RecyclerView.Adapter < PlanViewHolder > {
 
     private Context mContext;
-    private List <PlanModel> mFlowerList;
-//    private JSONArray jsonArrayUsersFamily;
+    private List < PlanModel > mFlowerList;
 
     public PlanAdapter(Context mContext, List < PlanModel > mFlowerList
-//            , JSONArray desPointsParam
     ) {
         this.mContext = mContext;
         this.mFlowerList = mFlowerList;
-//        this.jsonArrayUsersFamily = desPointsParam;
     }
 
     @Override
-    public PlanViewHolder onCreateViewHolder(ViewGroup parent, int viewType
-//            , List<LatLng> desPoints
-    ) {
+    public PlanViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_plan, parent, false);
         return new PlanViewHolder(mView);
     }
 
     @Override
     public void onBindViewHolder(final PlanViewHolder holder, final int position) {
-        /*
-        if (mFlowerList.get(position).getImage() != "null" || mFlowerList.get(position).getImage() != null || mFlowerList.get(position).getImage() != "") {
-            RequestOptions options = new RequestOptions();
-            options.centerCrop();
-            options.placeholder(R.drawable.default_image);
-            Glide.with(mContext)
-                    .load(mFlowerList.get(position).getImage().replace(" ", "%20"))
-                    .apply(options)
-                    .into(holder.mImage);
-        }
-        */
+  /*
+  if (mFlowerList.get(position).getImage() != "null" || mFlowerList.get(position).getImage() != null || mFlowerList.get(position).getImage() != "") {
+      RequestOptions options = new RequestOptions();
+      options.centerCrop();
+      options.placeholder(R.drawable.default_image);
+      Glide.with(mContext)
+              .load(mFlowerList.get(position).getImage().replace(" ", "%20"))
+              .apply(options)
+              .into(holder.mImage);
+  }
+  */
         RequestOptions options = new RequestOptions()
-                //.signature(mFlowerList.get(position).get_id())
                 .format(DecodeFormat.PREFER_RGB_565)
                 .centerCrop()
                 .placeholder(R.drawable.default_image)
@@ -80,26 +74,18 @@ public class PlanAdapter extends RecyclerView.Adapter < PlanViewHolder > {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), VacaplanActivity.class);
-                
                 intent.putExtra("name", mFlowerList.get(holder.getAdapterPosition()).getTitle());
                 intent.putExtra("image", mFlowerList.get(holder.getAdapterPosition()).getImage());
-//                intent.putExtra("body_copy", mFlowerList.get(holder.getAdapterPosition()).getBody_copy());
-//                intent.putExtra("target_date", mFlowerList.get(holder.getAdapterPosition()).getTarget_date());
                 intent.putExtra("location", "");
-
                 intent.putExtra("_id", mFlowerList.get(holder.getAdapterPosition()).get_id());
                 intent.putExtra("body_copy", mFlowerList.get(holder.getAdapterPosition()).getBody_copy());
                 intent.putExtra("content", mFlowerList.get(holder.getAdapterPosition()).getContent());
                 intent.putExtra("target_date", mFlowerList.get(holder.getAdapterPosition()).getTarget_date());
                 intent.putExtra("title", mFlowerList.get(holder.getAdapterPosition()).getTitle());
                 intent.putExtra("target_time", mFlowerList.get(holder.getAdapterPosition()).getTarget_time());
-                intent.putExtra("costs", String.valueOf( mFlowerList.get(holder.getAdapterPosition()).getCosts() ));
+                intent.putExtra("costs", String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getCosts()));
                 intent.putExtra("destinations", String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getDestinations()));
-
                 intent.putExtra("cost", mFlowerList.get(holder.getAdapterPosition()).getCost());
-
-//                intent.putExtra("points", String.valueOf(jsonArrayUsersFamily));
-
                 view.getContext().startActivity(intent);
             }
         });
@@ -120,7 +106,6 @@ class PlanViewHolder extends RecyclerView.ViewHolder {
 
     PlanViewHolder(View itemView) {
         super(itemView);
-
         mImage = itemView.findViewById(R.id.image);
         mTitle = itemView.findViewById(R.id.title);
         mCardView = itemView.findViewById(R.id.card_plan);

@@ -18,7 +18,7 @@ import java.util.List;
 public class FamilyAdapter extends RecyclerView.Adapter < FamilyViewHolder > {
 
     private Context mContext;
-    private List <FamilyModel> mFlowerList;
+    private List < FamilyModel > mFlowerList;
 
     public FamilyAdapter(Context mContext, List < FamilyModel > mFlowerList) {
         this.mContext = mContext;
@@ -39,15 +39,7 @@ public class FamilyAdapter extends RecyclerView.Adapter < FamilyViewHolder > {
         holder.mTitle.setText(mFlowerList.get(position).getName());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-    /*
-    Intent mIntent = new Intent(mContext, DetailActivity.class);
-    mIntent.putExtra("Title", mFlowerList.get(holder.getAdapterPosition()).getTitle());
-    mIntent.putExtra("Description", "desc");
-    mIntent.putExtra("Image", mFlowerList.get(holder.getAdapterPosition()).getImage());
-    mContext.startActivity(mIntent);
-    */
-            }
+            public void onClick(View view) {}
         });
     }
 
@@ -65,7 +57,6 @@ class FamilyViewHolder extends RecyclerView.ViewHolder {
 
     FamilyViewHolder(View itemView) {
         super(itemView);
-
         mImage = itemView.findViewById(R.id.ivImage);
         mTitle = itemView.findViewById(R.id.tvTitle);
         mCardView = itemView.findViewById(R.id.cardview);

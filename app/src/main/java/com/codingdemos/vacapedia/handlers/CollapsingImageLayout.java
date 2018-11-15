@@ -138,10 +138,10 @@ public class CollapsingImageLayout extends FrameLayout {
             getViewOffsetHelper(child).onViewLayout();
 
             switch (child.getId()) {
-//                case R.id.avatar:
-//                    mImageLeftExpanded = child.getLeft();
-//                    mImageTopExpanded = child.getTop();
-//                    break;
+                //                case R.id.avatar:
+                //                    mImageLeftExpanded = child.getLeft();
+                //                    mImageTopExpanded = child.getTop();
+                //                    break;
                 case R.id.title:
                     mTitleLeftExpanded = child.getLeft();
                     mTitleTopExpanded = child.getTop();
@@ -174,7 +174,7 @@ public class CollapsingImageLayout extends FrameLayout {
 
             final int insetTop = mLastInsets != null ? mLastInsets.getSystemWindowInsetTop() : 0;
             final int scrollRange = appBarLayout.getTotalScrollRange();
-            float offsetFactor = (float) (-verticalOffset) / (float) scrollRange;
+            float offsetFactor = (float)(-verticalOffset) / (float) scrollRange;
             final int heightDiff = getHeight() - getMinimumHeight();
             Log.d(TAG, "onOffsetChanged(), offsetFactor = " + offsetFactor);
 
@@ -195,69 +195,24 @@ public class CollapsingImageLayout extends FrameLayout {
                     offsetHelper.setTopAndBottomOffset(offset); // parallax
                 }
 
-//                if (child.getId() == R.id.avatar) {
-//
-//                    float scaleFactor = 1F - offsetFactor * .5F ;
-//                    child.setScaleX(scaleFactor);
-//                    child.setScaleY(scaleFactor);
-//
-//                    int topOffset = (int) ((mImageTopCollapsed - mImageTopExpanded) * offsetFactor) - verticalOffset;
-//                    int leftOffset = (int) ((mImageLeftCollapsed - mImageLeftExpanded) * offsetFactor);
-//                    child.setPivotX(0);
-//                    child.setPivotY(0);
-//                    offsetHelper.setTopAndBottomOffset(topOffset);
-//                    offsetHelper.setLeftAndRightOffset(leftOffset);
-//                }
-
                 if (child.getId() == R.id.title) {
 
-                    int topOffset = (int) ((mTitleTopCollapsed - mTitleTopExpanded) * offsetFactor) - verticalOffset;
-                    int leftOffset = (int) ((mTitleLeftCollapsed - mTitleLeftExpanded) * offsetFactor);
+                    int topOffset = (int)((mTitleTopCollapsed - mTitleTopExpanded) * offsetFactor) - verticalOffset;
+                    int leftOffset = (int)((mTitleLeftCollapsed - mTitleLeftExpanded) * offsetFactor);
                     offsetHelper.setTopAndBottomOffset(topOffset);
                     offsetHelper.setLeftAndRightOffset(leftOffset);
                     Log.d(TAG, "onOffsetChanged(), offsetting title top = " + topOffset + ", left = " + leftOffset);
                     Log.d(TAG, "onOffsetChanged(), offsetting title mTitleLeftCollapsed = " + mTitleLeftCollapsed + ", mTitleLeftExpanded = " + mTitleLeftExpanded);
-
-//                    Log.d("TAG", ">>>>>>>>>" + "topOffset" + topOffset);
-//                    Log.d("TAG", ">>>>>>>>>" + "mTitleTopCollapsed" + mTitleTopCollapsed);
-                    if (topOffset==28&&leftOffset==-(leftWindow-mTitleLeftCollapsed)) {
+                    if (topOffset == 28 && leftOffset == -(leftWindow - mTitleLeftCollapsed)) {
                         Log.d("TAG", ">>>>>>>>>" + "SAMPAIIIIIIIIII!!!!!");
-
-
-//                        ScrollView scr = (ScrollView) findViewById(R.id.scr);
-//                        scr.setOnTouchListener(new ScrollView.OnTouchListener() {
-//                            @Override
-//                            public boolean onTouch(View v, MotionEvent event) {
-//                                int action = event.getAction();
-//                                switch (action) {
-//                                    case MotionEvent.ACTION_DOWN:
-//                                        // Disallow ScrollView to intercept touch events.
-//                                        v.getParent().requestDisallowInterceptTouchEvent(true);
-//                                        break;
-//
-//                                    case MotionEvent.ACTION_UP:
-//                                        // Allow ScrollView to intercept touch events.
-//                                        v.getParent().requestDisallowInterceptTouchEvent(false);
-//                                        break;
-//                                }
-//
-//                                // Handle ScrollView touch events.
-//                                v.onTouchEvent(event);
-//                                return true;
-//                            }
-//                        });
-
                     }
-                    if (topOffset==0&&leftOffset==0) {
+                    if (topOffset == 0 && leftOffset == 0) {
                         Log.d("TAG", ">>>>>>>>>" + "PULANGG!!!!!");
                     }
-
                 }
-
                 if (child.getId() == R.id.subtitle) {
-
-                    int topOffset = (int) ((mSubtitleTopCollapsed - mSubtitleTopExpanded) * offsetFactor) - verticalOffset;
-                    int leftOffset = (int) ((mSubtitleLeftCollapsed - mSubtitleLeftExpanded) * offsetFactor);
+                    int topOffset = (int)((mSubtitleTopCollapsed - mSubtitleTopExpanded) * offsetFactor) - verticalOffset;
+                    int leftOffset = (int)((mSubtitleLeftCollapsed - mSubtitleLeftExpanded) * offsetFactor);
                     offsetHelper.setTopAndBottomOffset(topOffset);
                     offsetHelper.setLeftAndRightOffset(leftOffset);
                 }
@@ -279,7 +234,6 @@ public class CollapsingImageLayout extends FrameLayout {
     static class ViewOffsetHelper {
 
         private final View mView;
-
         private int mLayoutTop;
         private int mLayoutLeft;
         private int mOffsetTop;
@@ -355,4 +309,6 @@ public class CollapsingImageLayout extends FrameLayout {
         public int getLeftAndRightOffset() {
             return mOffsetLeft;
         }
-    }}
+    }
+
+}

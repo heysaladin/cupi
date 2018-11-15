@@ -68,7 +68,6 @@ class PromoViewHolder extends RecyclerView.ViewHolder {
 
     PromoViewHolder(View itemView) {
         super(itemView);
-
         mImage = itemView.findViewById(R.id.ivImage);
         mTitle = itemView.findViewById(R.id.tvTitle);
         mCardView = itemView.findViewById(R.id.cardview);

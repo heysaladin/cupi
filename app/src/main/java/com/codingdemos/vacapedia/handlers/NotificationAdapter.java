@@ -18,7 +18,7 @@ import java.util.List;
 public class NotificationAdapter extends RecyclerView.Adapter < NotificationViewHolder > {
 
     private Context mContext;
-    private List <NotificationsModel> mFlowerList;
+    private List < NotificationsModel > mFlowerList;
 
     public NotificationAdapter(Context mContext, List < NotificationsModel > mFlowerList) {
         this.mContext = mContext;

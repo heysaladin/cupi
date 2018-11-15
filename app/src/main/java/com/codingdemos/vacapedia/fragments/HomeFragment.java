@@ -48,38 +48,28 @@ public class HomeFragment extends Fragment
         AsyncHttpResponse.AsyncHttpResponseListener {
 
     private View view;
-
-    String image = "image";
-    String name = "name";
-
+    private String image = "image";
+    private String name = "name";
     private JSONArray dataDestinations = null;
     private JSONArray dataNews = null;
     private JSONArray dataSlides = null;
-
     private ViewPager viewPager;
     private TabLayout indicator;
-
     private ImageView up_coming_image;
-
     private List < Integer > color;
     private List < String > colorName;
     private List < String > colorImage;
     private List < String > colorCopy;
-
     private ArrayList < DestinationsModel > destinationsArrayListBuffer, destinationsArrayListArchBuffer, destinationsArrayListCulinaryBuffer, destinationsArrayListArtBuffer;
-
     private RecyclerView guest_destinations_rv, guest_destinations_rv_architecture, guest_destinations_rv_culinary, guest_destinations_rv_art;
     private LinearLayoutManager linearLayoutManager, linearLayoutManagerArch, linearLayoutManagerCulinary, linearLayoutManagerArt;
     private ArrayList < DestinationsModel > destinationsArrayList, destinationsArrayListArch, destinationsArrayListCulinary, destinationsArrayListArt;
     private GuestDestinationsAdapter guestDestinationsAdapter, guestDestinationsAdapterArch, guestDestinationsAdapterCulinary, guestDestinationsAdapterArt;
-
     private RecyclerView guest_destinations_rv_long;
     private LinearLayoutManager linearLayoutManagerLong;
     private ArrayList < DestinationsModel > destinationsArrayListLong;
     private GuestDestinationsLongAdapter guestDestinationsAdapterLong;
-
     private ShimmerFrameLayout mShimmerViewContainer;
-
     private LinearLayout content;
 
     public static HomeFragment newInstance() {
@@ -96,18 +86,13 @@ public class HomeFragment extends Fragment
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         view = inflater.inflate(R.layout.fragment_item_three, container, false);
-
         mShimmerViewContainer = view.findViewById(R.id.shimmer_view_container);
-
         content = (LinearLayout) view.findViewById(R.id.content);
         content.setVisibility(View.GONE);
-
         getKarmaGroupsApiRequest();
         getKarmaGroupsApiRequestNews();
         getKarmaGroupsApiRequestSlides();
-
         return view;
     }
 
@@ -152,17 +137,17 @@ public class HomeFragment extends Fragment
             numbers.add(i);
         }
         Collections.shuffle(numbers);
-        Log.d("LOG", "createRandomList numbers >>>>>>>>> " + numbers);
+        // Log.d("LOG", "createRandomList numbers >>>>>>>>> " + numbers);
 
         int size = 7;
         ArrayList < DestinationsModel > buffer = new ArrayList < DestinationsModel > ();
 
         if (listTarget.size() >= size) {
             for (int i = 0; i < size; i++) {
-                Log.d("LOG", "createRandomList hashSet.get(i) >>>>>>>>> " + numbers.get(i));
+                // Log.d("LOG", "createRandomList hashSet.get(i) >>>>>>>>> " + numbers.get(i));
                 buffer.add(listTarget.get(numbers.get(i)));
             }
-            Log.d("LOG", "buffer >>>>>>>>> " + buffer);
+            // Log.d("LOG", "buffer >>>>>>>>> " + buffer);
             return listResult = buffer;
         } else {
             return listResult = listTarget;
@@ -214,12 +199,6 @@ public class HomeFragment extends Fragment
                 model.setName(job.optString(name));
                 model.setPostID(job.optString("id"));
                 model.setImage(job.optString(image));
-
-//                model.setMenuName("nama" + j);
-//                model.setName(job.optString(name));
-//                model.setPostID(job.optString("id"));
-//                model.setImage(job.optString(image));
-
                 model.set_id(job.optString("_id"));
                 model.setCategory(job.optString("category"));
                 model.setLocation(job.optString("location"));
@@ -231,7 +210,6 @@ public class HomeFragment extends Fragment
                 model.setNote(job.optString("note"));
                 model.setCosts(job.optString("costs"));
                 model.setTotal_cost(job.optString("total_cost"));
-
                 switch (Integer.parseInt(job.optString("category"))) {
                     case 1:
                         dma.add(model);
@@ -295,16 +273,15 @@ public class HomeFragment extends Fragment
                 numbers.add(i);
             }
             Collections.shuffle(numbers);
-            Log.d("LOG", "numbers >>>>>>>>> " + numbers);
+            // Log.d("LOG", "numbers >>>>>>>>> " + numbers);
 
             int size = 5;
             JSONArray buffer = new JSONArray();
 
             if (dataNews.length() == size) {
                 for (int i = 0; i < size; i++) {
-                    Log.d("LOG", "hashSet.get(i) >>>>>>>>> " + numbers.get(i));
+                    // Log.d("LOG", "hashSet.get(i) >>>>>>>>> " + numbers.get(i));
                     buffer.put(dataNews.get(numbers.get(i)));
-                    // buffer.put(dataNews.get(i));
                 }
             }
 
@@ -321,7 +298,6 @@ public class HomeFragment extends Fragment
             linearLayoutManagerLong = new LinearLayoutManager(this.getActivity(), LinearLayoutManager.HORIZONTAL, false);
             guest_destinations_rv_long.setLayoutManager(linearLayoutManagerLong);
 
-
             destinationsArrayListLong.clear();
 
             JSONArray jarry = dataJson;
@@ -335,12 +311,6 @@ public class HomeFragment extends Fragment
                 model.setName(job.optString(name));
                 model.setPostID(job.optString("id"));
                 model.setImage(job.optString(image));
-
-//                model.setMenuName("nama" + j);
-//                model.setName(job.optString(name));
-//                model.setPostID(job.optString("id"));
-//                model.setImage(job.optString(image));
-
                 model.set_id(job.optString("_id"));
                 model.setCategory(job.optString("category"));
                 model.setLocation(job.optString("location"));
@@ -352,11 +322,9 @@ public class HomeFragment extends Fragment
                 model.setNote(job.optString("note"));
                 model.setCosts(job.optString("costs"));
                 model.setTotal_cost(job.optString("total_cost"));
-
                 dma.add(model);
                 destinationsArrayListLong.add(model);
-
-                if (j==0){
+                if (j == 0) {
                     RequestOptions options = new RequestOptions();
                     options.centerCrop();
                     options.placeholder(R.drawable.default_image);
@@ -365,7 +333,6 @@ public class HomeFragment extends Fragment
                             .apply(options)
                             .into(up_coming_image);
                 }
-
             }
 
             guestDestinationsAdapterLong = new GuestDestinationsLongAdapter(this.getActivity(), destinationsArrayListLong);
@@ -411,34 +378,12 @@ public class HomeFragment extends Fragment
         if (url.equals(RestApis.KarmaGroups.vacapediaSlides)) {
             Log.d("TAG", "x onAsyncHttpResponseGet() called with: response = [" + response + "], url = [" + url + "]");
             dataSlides = new JSONArray(response);
-
             viewPager = (ViewPager) view.findViewById(R.id.viewPager);
             indicator = (TabLayout) view.findViewById(R.id.indicator);
-
             color = new ArrayList < > ();
-//        color.add(Color.BLACK);
-//        color.add(Color.BLACK);
-//        color.add(Color.BLACK);
-//        color.add(Color.BLACK);
-//        color.add(Color.BLACK);
-
             colorName = new ArrayList < > ();
-//        colorName.add("Fun on Beach");
-//        colorName.add("Amazing Tample");
-//        colorName.add("Exotic Culinaries");
-//        colorName.add("Wonderful Cultures");
-//        colorName.add("Vacation Planning");
-
-
             colorCopy = new ArrayList < > ();
-
             colorImage = new ArrayList < > ();
-//        colorImage.add("http://www.bravotv.com/sites/nbcubravotv/files/field_blog_image/2017/05/most-wanted-beach-must-haves-promote.jpg");
-//        colorImage.add("https://image.freepik.com/free-photo/pura-ulun-danu-bratan-temple-bali-indonesia_30824-288.jpg");
-//        colorImage.add("https://s20642.pcdn.co/wp-content/uploads/2016/07/Bumbu-Bali-Nusa.jpg");
-//        colorImage.add("https://statik.tempo.co/data/2015/12/30/id_468670/468670_620.jpg");
-//        colorImage.add("https://s.yimg.com/ny/api/res/1.2/NmvEqUC_SWc12zxYi6GwsQ--~A/YXBwaWQ9aGlnaGxhbmRlcjtzbT0xO3c9ODAwO2lsPXBsYW5l/http://41.media.tumblr.com/535416e4be3cca14974d7d5a6d9d65df/tumblr_inline_nz6mhnXO6r1tcrvl6_1280.jpg");
-
             if (dataSlides != null) {
                 try {
                     JSONArray jarry = dataSlides;

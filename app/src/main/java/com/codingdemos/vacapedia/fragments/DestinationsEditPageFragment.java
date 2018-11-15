@@ -50,17 +50,14 @@ public class DestinationsEditPageFragment
         implements
         AsyncHttpResponse.AsyncHttpResponseListener {
 
-    RecyclerView mRecyclerView;
-    SwipeController swipeController = null;
-    String image = "image";
-    String name = "name";
-
+    private RecyclerView mRecyclerView;
+    private SwipeController swipeController = null;
+    private String image = "image";
+    private String name = "name";
     private View view;
     private JSONArray dataDestinations = null;
     private ArrayList < DestinationsModel > destinationsArrayListBuffer;
     private ArrayList < DestinationsModel > destinationsArrayList;
-    private GuestDestinationsAdapter guestDestinationsAdapter;
-
     private BusyDialog progressDialog;
 
     public static DestinationsEditPageFragment newInstance() {
@@ -107,35 +104,28 @@ public class DestinationsEditPageFragment
     }
 
     private void callDelete(int position) {
-
         String idToDelete = destinationsArrayListBuffer.get(position).get_id();
-
         String url = RestApis.KarmaGroups.vacapediaDestinations + "/" + idToDelete;
-        Log.d(TAG, " url >>>>>>>> : " + url );
+        Log.d(TAG, " url >>>>>>>> : " + url);
         progressDialog = new BusyDialog(getActivity(), false, "");
         progressDialog.show();
-
         final RequestQueue mRequestQueue;
         // Setup instance
         mRequestQueue = Volley.newRequestQueue(getActivity());
-        //String url = RestApis.KarmaGroups.vacapediaNotes + "/" + id;
         StringRequest dr = new StringRequest(Request.Method.DELETE, url,
                 new com.android.volley.Response.Listener < String > () {
                     @Override
                     public void onResponse(String response) {
                         progressDialog.dismiss();
                         // response
-//                                    Intent in = new Intent(getActivity(), NotesActivity.class);
-//                                    getActivity().startActivity( in );
-//                                    getActivity().finish();
-                        Log.d(TAG, " SUCCESS >>>>>>>> " );
+                        Log.d(TAG, " SUCCESS >>>>>>>> ");
                     }
                 },
                 new com.android.volley.Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // error.
-                        Log.d(TAG, " FAIL >>>>>>>> " );
+                        Log.d(TAG, " FAIL >>>>>>>> ");
                     }
                 }
         );
@@ -190,7 +180,6 @@ public class DestinationsEditPageFragment
                 model.setName(job.optString(name));
                 model.setPostID(job.optString("id"));
                 model.setImage(job.optString(image));
-
                 model.set_id(job.optString("_id"));
                 model.setCategory(job.optString("category"));
                 model.setLocation(job.optString("location"));
@@ -202,7 +191,6 @@ public class DestinationsEditPageFragment
                 model.setNote(job.optString("note"));
                 model.setCosts(job.optString("costs"));
                 model.setTotal_cost(job.optString("total_cost"));
-
                 dma.add(model);
                 destinationsArrayList.add(model);
             }
@@ -212,9 +200,7 @@ public class DestinationsEditPageFragment
             swipeController = new SwipeController(new SwipeControllerActions() {
                 @Override
                 public void onRightClicked(int position) {
-
                     callDelete(position);
-
                     destinationsArrayListBuffer.remove(position);
                     myAdapter.notifyItemRemoved(position);
                     myAdapter.notifyItemRangeChanged(position, myAdapter.getItemCount());
@@ -237,8 +223,6 @@ public class DestinationsEditPageFragment
                     swipeController.onDraw(c);
                 }
             });
-            //guestDestinationsAdapter.notifyDataSetChanged();
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

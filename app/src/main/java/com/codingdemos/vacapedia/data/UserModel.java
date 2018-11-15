@@ -110,4 +110,5 @@ public class UserModel {
     public void setSayings(String sayings) {
         this.sayings = sayings;
     }
+
 }

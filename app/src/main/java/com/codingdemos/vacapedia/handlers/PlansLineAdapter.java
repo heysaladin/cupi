@@ -10,21 +10,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.codingdemos.flowers.R;
 import com.codingdemos.vacapedia.EditPlanActivity;
-import com.codingdemos.vacapedia.EditPromoActivity;
 import com.codingdemos.vacapedia.data.PlanModel;
-import com.codingdemos.vacapedia.data.PromosModel;
 
 import java.util.List;
 
 public class PlansLineAdapter extends RecyclerView.Adapter < PlanLineViewHolder > {
 
     private Context mContext;
-    private List <PlanModel> mFlowerList;
+    private List < PlanModel > mFlowerList;
 
-    public PlansLineAdapter(Context mContext, List <PlanModel> mFlowerList) {
+    public PlansLineAdapter(Context mContext, List < PlanModel > mFlowerList) {
         this.mContext = mContext;
         this.mFlowerList = mFlowerList;
     }
@@ -37,9 +34,6 @@ public class PlansLineAdapter extends RecyclerView.Adapter < PlanLineViewHolder 
 
     @Override
     public void onBindViewHolder(final PlanLineViewHolder holder, int position) {
-//        Glide.with(mContext)
-//                .load(mFlowerList.get(position).getImage().replace(" ", "%20"))
-//                .into(holder.mImage);
         holder.mTitle.setText(mFlowerList.get(position).getTitle());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,9 +45,8 @@ public class PlansLineAdapter extends RecyclerView.Adapter < PlanLineViewHolder 
                 mIntent.putExtra("target_date", mFlowerList.get(holder.getAdapterPosition()).getTarget_date());
                 mIntent.putExtra("title", mFlowerList.get(holder.getAdapterPosition()).getTitle());
                 mIntent.putExtra("target_time", mFlowerList.get(holder.getAdapterPosition()).getTarget_time());
-                mIntent.putExtra("costs", String.valueOf( mFlowerList.get(holder.getAdapterPosition()).getCosts() ));
+                mIntent.putExtra("costs", String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getCosts()));
                 mIntent.putExtra("destinations", String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getDestinations()));
-                //mIntent.putExtra("destinations", String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getDestinations()).substring(1, String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getDestinations()).length()-1));
                 mContext.startActivity(mIntent);
             }
         });
@@ -73,11 +66,9 @@ class PlanLineViewHolder extends RecyclerView.ViewHolder {
 
     PlanLineViewHolder(View itemView) {
         super(itemView);
-
         mImage = itemView.findViewById(R.id.ivImage);
         mTitle = itemView.findViewById(R.id.tvTitle);
         mCardView = itemView.findViewById(R.id.cardview);
     }
 
 }
-

@@ -16,7 +16,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import com.codingdemos.flowers.R;
 
-public class ListAdapter extends ArrayAdapter< JSONObject > {
+public class ListAdapter extends ArrayAdapter < JSONObject > {
 
     private static final String TAG = "ListAdapter";
     private int vg;
@@ -50,11 +50,7 @@ public class ListAdapter extends ArrayAdapter< JSONObject > {
         txtRestaurantTitle = (TextView) itemView.findViewById(R.id.karma_resorts_group_title);
         TextView txtRestaurant = (TextView) itemView.findViewById(R.id.karma_resorts_item);
         try {
-//            if (list.get(position).getString("isTitle").equals("true")) {
-//                txtRestaurantTitle.setText(list.get(position).getString("name"));
-//            } else {
-                txtRestaurant.setText(list.get(position).getString("name"));
-//            }
+            txtRestaurant.setText(list.get(position).getString("name"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -65,15 +61,7 @@ public class ListAdapter extends ArrayAdapter< JSONObject > {
     @Override
     public boolean isEnabled(int position) {
         boolean returnVal = true;
-//        try {
-//            if (list.get(position).getString("isTitle").equals("true")) {
-//                returnVal = false;
-//            } else {
-                returnVal = true;
-//            }
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+        returnVal = true;
         return returnVal;
     }
 

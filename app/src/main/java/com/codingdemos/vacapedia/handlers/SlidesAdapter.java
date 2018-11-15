@@ -39,7 +39,6 @@ public class SlidesAdapter extends RecyclerView.Adapter < SlidesViewHolder > {
     @Override
     public void onBindViewHolder(final SlidesViewHolder holder, int position) {
         RequestOptions options = new RequestOptions()
-                //.signature(mFlowerList.get(position).get_id())
                 .format(DecodeFormat.PREFER_RGB_565)
                 .centerCrop()
                 .placeholder(R.drawable.default_image)
@@ -79,7 +78,6 @@ class SlidesViewHolder extends RecyclerView.ViewHolder {
 
     SlidesViewHolder(View itemView) {
         super(itemView);
-
         mImage = itemView.findViewById(R.id.ivImage);
         mTitle = itemView.findViewById(R.id.tvTitle);
         mCardView = itemView.findViewById(R.id.cardview);

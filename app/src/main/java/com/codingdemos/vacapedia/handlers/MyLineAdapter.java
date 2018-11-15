@@ -16,10 +16,10 @@ import com.codingdemos.vacapedia.handlers.FlowerViewHolder;
 
 import java.util.List;
 
-public class MyLineAdapter extends RecyclerView.Adapter <FlowerViewHolder> {
+public class MyLineAdapter extends RecyclerView.Adapter < FlowerViewHolder > {
 
     private Context mContext;
-    private List <DestinationsModel> mFlowerList;
+    private List < DestinationsModel > mFlowerList;
 
     public MyLineAdapter(Context mContext, List < DestinationsModel > mFlowerList) {
         this.mContext = mContext;
@@ -52,10 +52,6 @@ public class MyLineAdapter extends RecyclerView.Adapter <FlowerViewHolder> {
                 mIntent.putExtra("Description", "desc");
                 mIntent.putExtra("image", mFlowerList.get(holder.getAdapterPosition()).getImage());
                 mIntent.putExtra("description", mFlowerList.get(holder.getAdapterPosition()).getDescription());
-//                intent.putExtra("name", mFlowerList.get(holder.getAdapterPosition()).getTitle());
-////                intent.putExtra("location", mFlowerList.get(holder.getAdapterPosition()).getLocation());
-//                intent.putExtra("image", mFlowerList.get(holder.getAdapterPosition()).getImage());
-
                 mIntent.putExtra("location", mFlowerList.get(holder.getAdapterPosition()).getLocation());
                 mIntent.putExtra("category", mFlowerList.get(holder.getAdapterPosition()).getCategory());
                 mIntent.putExtra("latitude", mFlowerList.get(holder.getAdapterPosition()).getLatitude());
@@ -65,7 +61,6 @@ public class MyLineAdapter extends RecyclerView.Adapter <FlowerViewHolder> {
                 mIntent.putExtra("note", mFlowerList.get(holder.getAdapterPosition()).getNote());
                 mIntent.putExtra("costs", mFlowerList.get(holder.getAdapterPosition()).getCosts());
                 mIntent.putExtra("total_cost", mFlowerList.get(holder.getAdapterPosition()).getTotal_cost());
-
                 mContext.startActivity(mIntent);
             }
         });

@@ -21,10 +21,10 @@ import java.util.List;
 public class DestinationsTimeLineAdapter extends RecyclerView.Adapter < DestinationsTimeLineViewHolder > {
 
     private Context mContext;
-    private List <DestinationsModel> mFlowerList;
-    private List <DestinationsModel> destinationsArrayListBuffer;
+    private List < DestinationsModel > mFlowerList;
+    private List < DestinationsModel > destinationsArrayListBuffer;
 
-    public DestinationsTimeLineAdapter(Context mContext, List <DestinationsModel> mFlowerList) {
+    public DestinationsTimeLineAdapter(Context mContext, List < DestinationsModel > mFlowerList) {
         this.mContext = mContext;
         this.mFlowerList = mFlowerList;
     }
@@ -44,40 +44,21 @@ public class DestinationsTimeLineAdapter extends RecyclerView.Adapter < Destinat
                 .load(mFlowerList.get(position).getImage())
                 .apply(options)
                 .into(holder.mImage);
-//        holder.item_home_destination_name_tv.setText(model.getName());
-//        Glide.with(mContext)
-//                .load(mFlowerList.get(position).getImage().replace(" ", "%20"))
-//                .into(holder.mImage);
         holder.tvTime.setText("8.00 WITA");
         holder.tvCosts.setText(mFlowerList.get(position).getTotal_cost());
         holder.mTitle.setText(mFlowerList.get(position).getName());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent mIntent = new Intent(mContext, EditPlanActivity.class);
-//                mIntent.putExtra("_id", mFlowerList.get(holder.getAdapterPosition()).get_id());
-//                mIntent.putExtra("body_copy", mFlowerList.get(holder.getAdapterPosition()).getBody_copy());
-//                mIntent.putExtra("content", mFlowerList.get(holder.getAdapterPosition()).getContent());
-//                mIntent.putExtra("target_date", mFlowerList.get(holder.getAdapterPosition()).getTarget_date());
-//                mIntent.putExtra("title", mFlowerList.get(holder.getAdapterPosition()).getTitle());
-//                mIntent.putExtra("target_time", mFlowerList.get(holder.getAdapterPosition()).getTarget_time());
-//                mIntent.putExtra("destinations", String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getDestinations()));
-//                //mIntent.putExtra("destinations", String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getDestinations()).substring(1, String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getDestinations()).length()-1));
-//                mContext.startActivity(mIntent);
-
                 Intent intent = new Intent(mContext, DetailActivity.class);
                 intent.putExtra("id", mFlowerList.get(position).getPostID());
                 intent.putExtra("title", mFlowerList.get(position).getName());
                 intent.putExtra("menu_id", mFlowerList.get(position).getMenuID());
-
                 intent.putExtra("name", mFlowerList.get(position).getName());
                 intent.putExtra("location", mFlowerList.get(position).getLocation());
                 intent.putExtra("image", mFlowerList.get(position).getImage());
-
                 Intent mIntent = intent;
-
                 destinationsArrayListBuffer = mFlowerList;
-
                 mIntent.putExtra("_id", destinationsArrayListBuffer.get(position).get_id());
                 mIntent.putExtra("name", destinationsArrayListBuffer.get(position).getName());
                 mIntent.putExtra("image", destinationsArrayListBuffer.get(position).getImage());
@@ -91,11 +72,7 @@ public class DestinationsTimeLineAdapter extends RecyclerView.Adapter < Destinat
                 mIntent.putExtra("note", destinationsArrayListBuffer.get(position).getNote());
                 mIntent.putExtra("costs", destinationsArrayListBuffer.get(position).getCosts());
                 mIntent.putExtra("total_cost", destinationsArrayListBuffer.get(position).getTotal_cost());
-
-
                 mContext.startActivity(intent);
-
-
             }
         });
     }
@@ -114,7 +91,6 @@ class DestinationsTimeLineViewHolder extends RecyclerView.ViewHolder {
 
     DestinationsTimeLineViewHolder(View itemView) {
         super(itemView);
-
         mImage = itemView.findViewById(R.id.ivImage);
         mTitle = itemView.findViewById(R.id.tvTitle);
         mCardView = itemView.findViewById(R.id.card_image);
@@ -123,4 +99,3 @@ class DestinationsTimeLineViewHolder extends RecyclerView.ViewHolder {
     }
 
 }
-

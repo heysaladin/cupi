@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,7 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter < FlowerViewHolder > {
 
     private Context mContext;
-    private List <DestinationsModel> mFlowerList;
+    private List < DestinationsModel > mFlowerList;
 
     public MyAdapter(Context mContext, List < DestinationsModel > mFlowerList) {
         this.mContext = mContext;
@@ -55,10 +54,6 @@ public class MyAdapter extends RecyclerView.Adapter < FlowerViewHolder > {
                 mIntent.putExtra("Description", "desc");
                 mIntent.putExtra("image", mFlowerList.get(holder.getAdapterPosition()).getImage());
                 mIntent.putExtra("description", mFlowerList.get(holder.getAdapterPosition()).getDescription());
-//                intent.putExtra("name", mFlowerList.get(holder.getAdapterPosition()).getTitle());
-////                intent.putExtra("location", mFlowerList.get(holder.getAdapterPosition()).getLocation());
-//                intent.putExtra("image", mFlowerList.get(holder.getAdapterPosition()).getImage());
-
                 mIntent.putExtra("location", mFlowerList.get(holder.getAdapterPosition()).getLocation());
                 mIntent.putExtra("category", mFlowerList.get(holder.getAdapterPosition()).getCategory());
                 mIntent.putExtra("latitude", mFlowerList.get(holder.getAdapterPosition()).getLatitude());
@@ -68,9 +63,7 @@ public class MyAdapter extends RecyclerView.Adapter < FlowerViewHolder > {
                 mIntent.putExtra("note", mFlowerList.get(holder.getAdapterPosition()).getNote());
                 mIntent.putExtra("costs", mFlowerList.get(holder.getAdapterPosition()).getCosts());
                 mIntent.putExtra("total_cost", mFlowerList.get(holder.getAdapterPosition()).getTotal_cost());
-
-                Log.d("LOG", "holder.getAdapterPosition()).getLatitude() >>>>>>>>> " + mFlowerList.get(holder.getAdapterPosition()).getLatitude());
-
+                // Log.d("LOG", "holder.getAdapterPosition()).getLatitude() >>>>>>>>> " + mFlowerList.get(holder.getAdapterPosition()).getLatitude());
                 mContext.startActivity(mIntent);
             }
         });
@@ -90,7 +83,6 @@ class FlowerViewHolder extends RecyclerView.ViewHolder {
 
     FlowerViewHolder(View itemView) {
         super(itemView);
-
         mImage = itemView.findViewById(R.id.ivImage);
         mTitle = itemView.findViewById(R.id.tvTitle);
         tvDesc = itemView.findViewById(R.id.tvDesc);

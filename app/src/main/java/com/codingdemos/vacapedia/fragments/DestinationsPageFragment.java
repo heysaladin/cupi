@@ -31,16 +31,14 @@ public class DestinationsPageFragment extends Fragment
         implements
         AsyncHttpResponse.AsyncHttpResponseListener {
 
-    String image = "image";
-    String name = "name";
-    RecyclerView mRecyclerView;
-
+    private String image = "image";
+    private String name = "name";
+    private RecyclerView mRecyclerView;
     private int fragment = 0;
     private View view;
     private JSONArray dataDestinations = null;
     private ArrayList < DestinationsModel > destinationsArrayListBuffer;
     private ArrayList < DestinationsModel > destinationsArrayList;
-    private GuestDestinationsAdapter guestDestinationsAdapter;
 
     public static DestinationsPageFragment newInstance() {
         DestinationsPageFragment fragment = new DestinationsPageFragment();
@@ -128,12 +126,6 @@ public class DestinationsPageFragment extends Fragment
                 model.setName(job.optString(name));
                 model.setPostID(job.optString("id"));
                 model.setImage(job.optString(image));
-
-//                model.setMenuName("nama" + j);
-//                model.setName(job.optString(name));
-//                model.setPostID(job.optString("id"));
-//                model.setImage(job.optString(image));
-
                 model.set_id(job.optString("_id"));
                 model.setCategory(job.optString("category"));
                 model.setLocation(job.optString("location"));
@@ -145,14 +137,12 @@ public class DestinationsPageFragment extends Fragment
                 model.setNote(job.optString("note"));
                 model.setCosts(job.optString("costs"));
                 model.setTotal_cost(job.optString("total_cost"));
-
                 dma.add(model);
                 destinationsArrayList.add(model);
             }
             destinationsArrayListBuffer = destinationsArrayList;
             MyAdapter myAdapter = new MyAdapter(view.getContext(), destinationsArrayListBuffer);
             mRecyclerView.setAdapter(myAdapter);
-            //guestDestinationsAdapter.notifyDataSetChanged();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -163,7 +153,6 @@ public class DestinationsPageFragment extends Fragment
         RequestParams params = new RequestParams();
         response.getAsyncHttp(RestApis.KarmaGroups.vacapediaDestinations, params);
     }
-
 
     @Override
     public void onAsyncHttpResponseGet(String response, String url) throws JSONException {

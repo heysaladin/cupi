@@ -62,7 +62,6 @@ public class SliderAdapter extends PagerAdapter {
 
         ImageView imageView = (ImageView) view.findViewById(R.id.item_slide_image_iv);
         RequestOptions options = new RequestOptions()
-                //.signature(mFlowerList.get(position).get_id())
                 .format(DecodeFormat.PREFER_RGB_565)
                 .centerCrop()
                 .placeholder(R.drawable.default_image)

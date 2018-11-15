@@ -28,12 +28,9 @@ public class GuestDestinationsLongAdapter extends RecyclerView.Adapter < GuestDe
     String group_karma_restaurant = "Karma Restaurants";
     String group_karma_boutique = "Boutique";
     String intent_param_sub_group = "sub_group";
-    String intent_param_post_id = "postID";
-    String intent_param_post_title = "postTitle";
-    String intent_param_menu_id = "menuID";
 
     private static final String TAG = "GuestDestinationsAdapter";
-    ArrayList <DestinationsModel> arrayList;
+    ArrayList < DestinationsModel > arrayList;
     Context context;
 
     public GuestDestinationsLongAdapter(Context context, ArrayList < DestinationsModel > arrayList) {
@@ -52,7 +49,7 @@ public class GuestDestinationsLongAdapter extends RecyclerView.Adapter < GuestDe
     public void onBindViewHolder(GuestDestinationsLongAdapter.AdapterHolder holder, int position) {
         final DestinationsModel model = arrayList.get(position);
         String img = "https://www.dakwatuna.com/wp-content/uploads/2015/07/masjidil-haram.jpg";
-        Log.d("LOG", "model.getImage() +++++++++++++++ " + model.getImage());
+        // Log.d("LOG", "model.getImage() +++++++++++++++ " + model.getImage());
         RequestOptions options = new RequestOptions();
         options.centerCrop();
         options.placeholder(R.drawable.default_image);
@@ -88,29 +85,29 @@ public class GuestDestinationsLongAdapter extends RecyclerView.Adapter < GuestDe
 
                     context.startActivity(intent);
                 } else {
-                    /*
-                    Intent intent = new Intent(context, DetailActivity.class);
-                    intent.putExtra(intent_param_post_id, model.getPostID());
-                    intent.putExtra(intent_param_post_title, model.getName());
-                    intent.putExtra(intent_param_menu_id, model.getMenuID());
+     /*
+     Intent intent = new Intent(context, DetailActivity.class);
+     intent.putExtra(intent_param_post_id, model.getPostID());
+     intent.putExtra(intent_param_post_title, model.getName());
+     intent.putExtra(intent_param_menu_id, model.getMenuID());
 
-                    intent.putExtra("_id", model.get_id());
-                    intent.putExtra("Title", model.getName());
-                    intent.putExtra("Description", model.getName());
-                    intent.putExtra("Image", model.getImage());
-                    intent.putExtra("description", model.getDescription());
+     intent.putExtra("_id", model.get_id());
+     intent.putExtra("Title", model.getName());
+     intent.putExtra("Description", model.getName());
+     intent.putExtra("Image", model.getImage());
+     intent.putExtra("description", model.getDescription());
 
-                    intent.putExtra("category", model.getCategory());
-                    intent.putExtra("latitude", model.getLatitude());
-                    intent.putExtra("longitude", model.getLongitude());
-                    intent.putExtra("address", model.getAddress());
-                    intent.putExtra("distance", model.getDistance());
-                    intent.putExtra("note", model.getNote());
-                    intent.putExtra("costs", model.getCosts());
-                    intent.putExtra("total_cost", model.getTotal_cost());
+     intent.putExtra("category", model.getCategory());
+     intent.putExtra("latitude", model.getLatitude());
+     intent.putExtra("longitude", model.getLongitude());
+     intent.putExtra("address", model.getAddress());
+     intent.putExtra("distance", model.getDistance());
+     intent.putExtra("note", model.getNote());
+     intent.putExtra("costs", model.getCosts());
+     intent.putExtra("total_cost", model.getTotal_cost());
 
-                    context.startActivity(intent);
-                    */
+     context.startActivity(intent);
+     */
                 }
             }
         });
