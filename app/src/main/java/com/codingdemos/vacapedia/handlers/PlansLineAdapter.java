@@ -51,6 +51,7 @@ public class PlansLineAdapter extends RecyclerView.Adapter < PlanLineViewHolder 
                 mIntent.putExtra("target_date", mFlowerList.get(holder.getAdapterPosition()).getTarget_date());
                 mIntent.putExtra("title", mFlowerList.get(holder.getAdapterPosition()).getTitle());
                 mIntent.putExtra("target_time", mFlowerList.get(holder.getAdapterPosition()).getTarget_time());
+                mIntent.putExtra("costs", String.valueOf( mFlowerList.get(holder.getAdapterPosition()).getCosts() ));
                 mIntent.putExtra("destinations", String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getDestinations()));
                 //mIntent.putExtra("destinations", String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getDestinations()).substring(1, String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getDestinations()).length()-1));
                 mContext.startActivity(mIntent);

@@ -93,6 +93,7 @@ public class PlanAdapter extends RecyclerView.Adapter < PlanViewHolder > {
                 intent.putExtra("target_date", mFlowerList.get(holder.getAdapterPosition()).getTarget_date());
                 intent.putExtra("title", mFlowerList.get(holder.getAdapterPosition()).getTitle());
                 intent.putExtra("target_time", mFlowerList.get(holder.getAdapterPosition()).getTarget_time());
+                intent.putExtra("costs", String.valueOf( mFlowerList.get(holder.getAdapterPosition()).getCosts() ));
                 intent.putExtra("destinations", String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getDestinations()));
 
                 intent.putExtra("cost", mFlowerList.get(holder.getAdapterPosition()).getCost());

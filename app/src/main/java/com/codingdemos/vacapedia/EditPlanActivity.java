@@ -23,6 +23,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -30,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codingdemos.flowers.R;
+import com.codingdemos.vacapedia.data.CostsModel;
 import com.codingdemos.vacapedia.data.DestinationsModel;
 import com.codingdemos.vacapedia.handlers.ListAdapter;
 import com.codingdemos.vacapedia.handlers.DestinationsLineAdapter;
@@ -56,6 +58,7 @@ public class EditPlanActivity extends AppCompatActivity
     private EditText content;
     private EditText target_date;
     private EditText target_time;
+    private EditText costs;
     private EditText destinations;
     private android.app.AlertDialog.Builder alertDialogBuilder = null;
     private android.app.AlertDialog alertDialog = null;
@@ -72,6 +75,8 @@ public class EditPlanActivity extends AppCompatActivity
     private String contentString = null;
     private String target_dateString = null;
     private String target_timeString = null;
+    private String costsString = null;
+//    private String costString = null;
     private static String destinationsString = null;
 
     private JSONArray desPlan = null;
@@ -83,7 +88,23 @@ public class EditPlanActivity extends AppCompatActivity
     private RecyclerView mRecyclerView;
     private String restaurantName = "";
 
+    private JSONArray costJsonArray = new JSONArray();
+
+    private ArrayList <CostsModel> destinationsArrayListBufferc;
+    private ArrayList < CostsModel > destinationsArrayListc;
+
     private static String nowDestinationsSelected = "";
+
+
+    private LinearLayout parentLinearLayout;
+
+    private LinearLayout parentLinearLayoutRecycler;
+    private RecyclerView parentRecycler;
+
+    private LinearLayout wrapper_dynamic;
+
+    private JSONArray costList;
+
 
     private void getIntentData() {
         Intent intent = this.getIntent();
@@ -95,6 +116,8 @@ public class EditPlanActivity extends AppCompatActivity
         contentString = intent.getStringExtra("content");
         target_dateString = intent.getStringExtra("target_date");
         target_timeString = intent.getStringExtra("target_time");
+//        costString = intent.getStringExtra("costs");
+        costsString = intent.getStringExtra("costs");
         //destinationsString = intent.getStringExtra("destinations");
 
         JSONArray jdes = null;
@@ -124,13 +147,95 @@ public class EditPlanActivity extends AppCompatActivity
         Log.d(TAG, "target_dateString = [" + target_dateString + "]");
         Log.d(TAG, "target_timeString = [" + target_timeString + "]");
         Log.d(TAG, "destinationsString = [" + destinationsString + "]");
+
+        Log.d(TAG, "costsString = [" + costsString + "]");
+
+        JSONArray constList = new JSONArray();
+        try {
+            constList = new JSONArray(costsString);
+
+
+            destinationsArrayListBufferc = new ArrayList < > ();
+            destinationsArrayListc = new ArrayList < > ();
+//            mRecyclerView = findViewById(R.id.recyclerview);
+//            LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(EditDestinationActivity.this);
+//            mRecyclerView.setLayoutManager(mLinearLayoutManager);
+            destinationsArrayListc.clear();
+
+            for (int j = 0; j < constList.length(); j++) {
+                JSONObject constItem = constList.getJSONObject(j);
+
+                CostsModel modelc = new CostsModel();
+                modelc.set_id(constItem.optString("_id"));
+                modelc.setName(constItem.optString("name"));
+                modelc.setCost(constItem.optString("cost"));
+
+                destinationsArrayListc.add(modelc);
+
+            }
+
+            costJsonArray = constList;
+
+            costsString = String.valueOf(costJsonArray);
+
+
+//            costJsonArray = destinationsArrayList;
+
+//            destinationsArrayListBuffer = destinationsArrayList;
+//            CostsLineAdapter myAdapter = new CostsLineAdapter(EditDestinationActivity.this, destinationsArrayListBuffer );
+//            mRecyclerView.setAdapter(myAdapter);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+
     }
+
+
+
+
+
+    public void onAddFieldFill(String name, String cost) {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View rowView = inflater.inflate(R.layout.field, null);
+        EditText currentName = rowView.findViewById(R.id.text_edit_text);
+        EditText currentCost = rowView.findViewById(R.id.number_edit_text);
+        currentName.setText(name);
+        currentCost.setText(cost);
+        parentLinearLayout.addView(rowView, parentLinearLayout.getChildCount() - 1);
+        Log.d("LOG", "count >>>>>>>>> " + String.valueOf(Integer.parseInt(String.valueOf(parentLinearLayout.getChildCount())) - 1));
+    }
+
+    public void onAddField(View v) {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View rowView = inflater.inflate(R.layout.field, null);
+//        EditText currentEdit = rowView.findViewById(R.id.number_edit_text);
+//        editTextList.add(currentEdit);
+        // Add the new row before the add field button.
+        parentLinearLayout.addView(rowView, parentLinearLayout.getChildCount() - 1);
+
+        Log.d("LOG", "count >>>>>>>>> " + String.valueOf(Integer.parseInt(String.valueOf(parentLinearLayout.getChildCount())) - 1));
+
+    }
+
+    public void onDelete(View v) {
+        parentLinearLayout.removeView((View) v.getParent());
+        Log.d("LOG", "count >>>>>>>>> " + String.valueOf(Integer.parseInt(String.valueOf(parentLinearLayout.getChildCount())) - 1));
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan_edit);
         mToolbar = findViewById(R.id.toolbar);
+
+        parentLinearLayout = (LinearLayout) findViewById(R.id.parent_linear_layout);
+
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +253,18 @@ public class EditPlanActivity extends AppCompatActivity
     })
     private void initUI() {
         getIntentData();
+
+
+        try {
+            for (int j = 0; j < costJsonArray.length(); j++) {
+                JSONObject costItem = costJsonArray.getJSONObject(j);
+                onAddFieldFill(costItem.getString("name"), costItem.getString("cost"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         TextView dd_booking_form_tv = (TextView) findViewById(R.id.dd_booking_form_tv);
         dd_booking_form_tv.setOnClickListener(this);
@@ -164,6 +281,7 @@ public class EditPlanActivity extends AppCompatActivity
         content = (EditText) findViewById(R.id.content);
         target_date = (EditText) findViewById(R.id.target_date);
         target_time = (EditText) findViewById(R.id.target_time);
+        costs = (EditText) findViewById(R.id.costs);
         destinations = (EditText) findViewById(R.id.destinations);
 
         bn_find_a_restaurant_tv.setText(restaurantName);
@@ -175,6 +293,7 @@ public class EditPlanActivity extends AppCompatActivity
         content.setText(contentString);
         target_date.setText(target_dateString);
         target_time.setText(target_timeString);
+        //costs.setText(costString);
 
         destinations.setText(nowDestinationsSelected);
 //        destinations.setText(destinationsString);
@@ -258,6 +377,8 @@ public class EditPlanActivity extends AppCompatActivity
             jobjContactDetails.put("content", String.valueOf(content.getText()).trim());
             jobjContactDetails.put("target_date", String.valueOf(target_date.getText()).trim());
             jobjContactDetails.put("target_time", String.valueOf(target_time.getText()).trim());
+            //jobjContactDetails.put("costs", String.valueOf(costs.getText()).trim());
+            jobjContactDetails.put("costs", costList);
             jobjContactDetails.put("destinations", dest);
         } catch (Exception e) {
             e.printStackTrace();
@@ -305,6 +426,58 @@ public class EditPlanActivity extends AppCompatActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.dd_booking_form_tv:
+
+
+                costList = new JSONArray();
+
+
+//                int parentLongRecycler = Integer.parseInt(String.valueOf(parentRecycler.getChildCount())) - 1;
+//
+//                for (int j = 0; j < parentLongRecycler; j++) {
+//                    try {
+//                        View currentView = parentRecycler.getChildAt(j);
+//                        EditText currentEditName = currentView.findViewById(R.id.text_edit_text);
+//                        EditText currentEditCost = currentView.findViewById(R.id.number_edit_text);
+//                        //Log.d(TAG, j + ">>>>>>>> : " + currentEdit.getText() );
+//                        if(!currentEditName.getText().toString().equals("")||!currentEditCost.getText().toString().equals("")) {
+//                            JSONObject costObj = new JSONObject("{" +
+//                                    "\"name\":\"" + currentEditName.getText() + "\"," +
+//                                    "\"cost\":\"" + currentEditCost.getText() + "\"" +
+//                                    "}");
+//                            Log.d(TAG, j + " j >>>>>>>> : " + costObj );
+//                            costList.put(costObj);
+//                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+
+
+                int parentLong = Integer.parseInt(String.valueOf(parentLinearLayout.getChildCount())) - 1;
+
+                for (int k = 0; k < parentLong; k++) {
+                    try {
+                        View currentView = parentLinearLayout.getChildAt(k);
+                        EditText currentEditName = currentView.findViewById(R.id.text_edit_text);
+                        EditText currentEditCost = currentView.findViewById(R.id.number_edit_text);
+                        //Log.d(TAG, k + ">>>>>>>> : " + currentEdit.getText() );
+                        if(!currentEditName.getText().toString().equals("")||!currentEditCost.getText().toString().equals("")) {
+                            JSONObject costObj = new JSONObject("{" +
+                                    "\"name\":\"" + currentEditName.getText() + "\"," +
+                                    "\"cost\":\"" + currentEditCost.getText() + "\"" +
+                                    "}");
+                            Log.d(TAG, k + " k >>>>>>>> : " + costObj );
+                            costList.put(costObj);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+
                 bookValidations();
                 break;
             case R.id.bn_find_a_restaurant_rl:

@@ -98,6 +98,8 @@ public class VacaplanActivity extends AppCompatActivity implements
     private String body_copyString = null;
     private String contentString = null;
     private String target_dateString = null;
+    private String costsString = null;
+    private String costString = null;
     private String target_timeString = null;
     private static String destinationsString = null;
     private String pointsString = null;
@@ -129,6 +131,7 @@ public class VacaplanActivity extends AppCompatActivity implements
     private static float MAP_ZOOM_MIN = 21;
 
 
+    private JSONArray jarrPoints;
 
     //    private String API_KEY = "AIzaSyCiaIGnvo1Bc6WXbiiqy3E2ukbWjWj1VpQ";
     private String API_KEY = "AIzaSyCw96GO7U6nd8CnCVjIISXvgG3T36BKUUY";
@@ -188,13 +191,15 @@ public class VacaplanActivity extends AppCompatActivity implements
         contentString = intent.getStringExtra("content");
         target_dateString = intent.getStringExtra("target_date");
         target_timeString = intent.getStringExtra("target_time");
+        costsString = intent.getStringExtra("costs");
         //destinationsString = intent.getStringExtra("destinations");
 
         pointsString = intent.getStringExtra("destinations");
 
         cost = intent.getStringExtra("cost");
 
-        JSONArray jarrPoints = new JSONArray();
+//        JSONArray
+                jarrPoints = new JSONArray();
         desPointsObj = new JSONArray();
 
 
@@ -433,9 +438,21 @@ public class VacaplanActivity extends AppCompatActivity implements
                 mIntent.putExtra("body_copy", body_copyString);
                 mIntent.putExtra("content", contentString);
                 mIntent.putExtra("target_date", target_dateString);
+                mIntent.putExtra("costs", costsString);
                 mIntent.putExtra("title", titleString);
                 mIntent.putExtra("target_time", target_timeString);
-                mIntent.putExtra("destinations", destinationsString);
+                mIntent.putExtra("destinations", String.valueOf(jarrPoints));
+
+
+//                mIntent.putExtra("_id", mFlowerList.get(holder.getAdapterPosition()).get_id());
+//                mIntent.putExtra("body_copy", mFlowerList.get(holder.getAdapterPosition()).getBody_copy());
+//                mIntent.putExtra("content", mFlowerList.get(holder.getAdapterPosition()).getContent());
+//                mIntent.putExtra("target_date", mFlowerList.get(holder.getAdapterPosition()).getTarget_date());
+//                mIntent.putExtra("title", mFlowerList.get(holder.getAdapterPosition()).getTitle());
+//                mIntent.putExtra("target_time", mFlowerList.get(holder.getAdapterPosition()).getTarget_time());
+//                mIntent.putExtra("destinations", String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getDestinations()));
+
+
                 //mIntent.putExtra("destinations", String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getDestinations()).substring(1, String.valueOf(mFlowerList.get(holder.getAdapterPosition()).getDestinations()).length()-1));
                 VacaplanActivity.this.startActivity(mIntent);
             }

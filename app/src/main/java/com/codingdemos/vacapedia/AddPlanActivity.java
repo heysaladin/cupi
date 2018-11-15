@@ -58,6 +58,7 @@ public class AddPlanActivity extends AppCompatActivity
     private EditText content;
     private EditText target_date;
     private EditText target_time;
+    private EditText costs;
     private EditText destinations;
     private AlertDialog.Builder alertDialogBuilder = null;
     private AlertDialog alertDialog = null;
@@ -110,6 +111,7 @@ public class AddPlanActivity extends AppCompatActivity
         body_copy = (EditText) findViewById(R.id.body_copy);
         content = (EditText) findViewById(R.id.content);
         target_date = (EditText) findViewById(R.id.target_date);
+        costs = (EditText) findViewById(R.id.costs);
         target_time = (EditText) findViewById(R.id.target_time);
         destinations = (EditText) findViewById(R.id.destinations);
 
@@ -192,6 +194,7 @@ public class AddPlanActivity extends AppCompatActivity
             jobjContactDetails.put("content", String.valueOf(content.getText()).trim());
             jobjContactDetails.put("target_date", String.valueOf(target_date.getText()).trim());
             jobjContactDetails.put("target_time", String.valueOf(target_time.getText()).trim());
+            jobjContactDetails.put("costs", String.valueOf(costs.getText()).trim());
             jobjContactDetails.put("destinations", dest);
         } catch (Exception e) {
             e.printStackTrace();

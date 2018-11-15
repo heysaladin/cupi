@@ -8,6 +8,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,10 +18,16 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codingdemos.flowers.R;
+import com.codingdemos.vacapedia.data.CostsModel;
+import com.codingdemos.vacapedia.data.DestinationsModel;
+import com.codingdemos.vacapedia.handlers.CostsLineAdapter;
+import com.codingdemos.vacapedia.handlers.DestinationsLineAdapter;
+import com.codingdemos.vacapedia.handlers.SliderAdapter;
 import com.codingdemos.vacapedia.rest.AsyncHttpResponse;
 import com.codingdemos.vacapedia.rest.RestApis;
 import com.google.android.gms.common.api.Status;
@@ -28,6 +36,7 @@ import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.model.LatLng;
+import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -74,6 +83,8 @@ public class EditDestinationActivity extends AppCompatActivity
     private String costsString = null;
     private String total_costString = null;
 
+    private RecyclerView mRecyclerView;
+
 
     // Deklarasi variable
     private TextView tvPickUpFrom, tvDestLocation;
@@ -85,9 +96,53 @@ public class EditDestinationActivity extends AppCompatActivity
 
     private LinearLayout parentLinearLayout;
 
+    private LinearLayout parentLinearLayoutRecycler;
+    private RecyclerView parentRecycler;
+
     private LinearLayout wrapper_dynamic;
 
     private JSONArray costList;
+
+
+    private EditText title;
+    //    private EditText image;
+//    private EditText category;
+    private EditText body_copy;
+    private EditText content;
+    private EditText target_date;
+    private EditText target_time;
+    private EditText destinations;
+//    private android.app.AlertDialog.Builder alertDialogBuilder = null;
+//    private android.app.AlertDialog alertDialog = null;
+//    private String noteID = null;
+
+    private RelativeLayout bn_find_a_restaurant_rl;
+    private static TextView bn_find_a_restaurant_tv;
+
+//    private String id = null;
+    private String titleString = null;
+    //    private String imageString = null;
+//    private String categoryString = null;
+    private String body_copyString = null;
+    private String contentString = null;
+    private String target_dateString = null;
+    private String target_timeString = null;
+    private static String destinationsString = null;
+
+    private JSONArray desPlan = null;
+    private JSONArray dataDestinations = null;
+    private ArrayList <CostsModel> destinationsArrayListBuffer;
+    private ArrayList < CostsModel > destinationsArrayList;
+    private SliderAdapter guestDestinationsAdapter;
+    private String imageUrl = null;
+//    private RecyclerView mRecyclerView;
+    private String restaurantName = "";
+
+    private static String nowDestinationsSelected = "";
+
+    private JSONArray costJsonArray = new JSONArray();
+
+
 
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -144,21 +199,70 @@ public class EditDestinationActivity extends AppCompatActivity
         addressString = intent.getStringExtra("address");
         distanceString = intent.getStringExtra("distance");
         noteString = intent.getStringExtra("note");
-        // costs = intent.getStringExtra("costs");
+         costsString = intent.getStringExtra("costs");
         total_costString = intent.getStringExtra("total_cost");
+
+        JSONArray constList = new JSONArray();
+        try {
+            constList = new JSONArray(costsString);
+
+
+            destinationsArrayListBuffer = new ArrayList < > ();
+            destinationsArrayList = new ArrayList < > ();
+//            mRecyclerView = findViewById(R.id.recyclerview);
+//            LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(EditDestinationActivity.this);
+//            mRecyclerView.setLayoutManager(mLinearLayoutManager);
+            destinationsArrayList.clear();
+
+            for (int j = 0; j < constList.length(); j++) {
+                JSONObject constItem = constList.getJSONObject(j);
+
+                CostsModel model = new CostsModel();
+                model.set_id(constItem.optString("_id"));
+                model.setName(constItem.optString("name"));
+                model.setCost(constItem.optString("cost"));
+
+                destinationsArrayList.add(model);
+
+            }
+
+            costJsonArray = constList;
+
+
+//            costJsonArray = destinationsArrayList;
+
+//            destinationsArrayListBuffer = destinationsArrayList;
+//            CostsLineAdapter myAdapter = new CostsLineAdapter(EditDestinationActivity.this, destinationsArrayListBuffer );
+//            mRecyclerView.setAdapter(myAdapter);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+    public void onAddFieldFill(String name, String cost) {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View rowView = inflater.inflate(R.layout.field, null);
+        EditText currentName = rowView.findViewById(R.id.text_edit_text);
+        EditText currentCost = rowView.findViewById(R.id.number_edit_text);
+        currentName.setText(name);
+        currentCost.setText(cost);
+        parentLinearLayout.addView(rowView, parentLinearLayout.getChildCount() - 1);
+        Log.d("LOG", "count >>>>>>>>> " + String.valueOf(Integer.parseInt(String.valueOf(parentLinearLayout.getChildCount())) - 1));
     }
 
     public void onAddField(View v) {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View rowView = inflater.inflate(R.layout.field, null);
-        EditText currentEdit = rowView.findViewById(R.id.number_edit_text);
-        editTextList.add(currentEdit);
+//        EditText currentEdit = rowView.findViewById(R.id.number_edit_text);
+//        editTextList.add(currentEdit);
         // Add the new row before the add field button.
         parentLinearLayout.addView(rowView, parentLinearLayout.getChildCount() - 1);
 
-
         Log.d("LOG", "count >>>>>>>>> " + String.valueOf(Integer.parseInt(String.valueOf(parentLinearLayout.getChildCount())) - 1));
-
 
     }
 
@@ -167,26 +271,26 @@ public class EditDestinationActivity extends AppCompatActivity
         Log.d("LOG", "count >>>>>>>>> " + String.valueOf(Integer.parseInt(String.valueOf(parentLinearLayout.getChildCount())) - 1));
     }
 
-    private List<EditText> editTextList = new ArrayList<EditText>();
-
-    private Button submitButton() {
-        Button button = new Button(this);
-        button.setHeight(WRAP_CONTENT);
-        button.setText("Submit");
-        button.setOnClickListener(submitListener);
-        return button;
-    }
-
-    // Access the value of the EditText
-
-    private View.OnClickListener submitListener = new View.OnClickListener() {
-        public void onClick(View view) {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (EditText editText : editTextList) {
-                stringBuilder.append(editText.getText().toString());
-            }
-        }
-    };
+////    private List<EditText> editTextList = new ArrayList<EditText>();
+//
+//    private Button submitButton() {
+//        Button button = new Button(this);
+//        button.setHeight(WRAP_CONTENT);
+//        button.setText("Submit");
+//        button.setOnClickListener(submitListener);
+//        return button;
+//    }
+//
+//    // Access the value of the EditText
+//
+//    private View.OnClickListener submitListener = new View.OnClickListener() {
+//        public void onClick(View view) {
+//            StringBuilder stringBuilder = new StringBuilder();
+//            for (EditText editText : editTextList) {
+//                stringBuilder.append(editText.getText().toString());
+//            }
+//        }
+//    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,8 +308,10 @@ public class EditDestinationActivity extends AppCompatActivity
         mToolbar.setTitle("Edit Destination");
 
         parentLinearLayout = (LinearLayout) findViewById(R.id.parent_linear_layout);
+//        parentLinearLayoutRecycler = (LinearLayout) findViewById(R.id.parent_linear_layout_recycler_view);
+//        parentRecycler = (RecyclerView) findViewById(R.id.recyclerview);
 
-        wrapper_dynamic = (LinearLayout) findViewById(R.id.wrapper_dynamic);
+//        wrapper_dynamic = (LinearLayout) findViewById(R.id.wrapper_dynamic);
 
 //        LinearLayout linearLayout = new LinearLayout(this);
 ////        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(FILL_PARENT, WRAP_CONTENT);
@@ -272,6 +378,16 @@ public class EditDestinationActivity extends AppCompatActivity
     })
     private void initUI() {
         getIntentData();
+
+        try {
+            for (int j = 0; j < costJsonArray.length(); j++) {
+                JSONObject costItem = costJsonArray.getJSONObject(j);
+                onAddFieldFill(costItem.getString("name"), costItem.getString("cost"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         TextView dd_booking_form_tv = (TextView) findViewById(R.id.dd_booking_form_tv);
         dd_booking_form_tv.setOnClickListener(this);
@@ -418,7 +534,32 @@ public class EditDestinationActivity extends AppCompatActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.dd_booking_form_tv:
-                // bookValidations();
+
+                costList = new JSONArray();
+
+
+//                int parentLongRecycler = Integer.parseInt(String.valueOf(parentRecycler.getChildCount())) - 1;
+//
+//                for (int j = 0; j < parentLongRecycler; j++) {
+//                    try {
+//                        View currentView = parentRecycler.getChildAt(j);
+//                        EditText currentEditName = currentView.findViewById(R.id.text_edit_text);
+//                        EditText currentEditCost = currentView.findViewById(R.id.number_edit_text);
+//                        //Log.d(TAG, j + ">>>>>>>> : " + currentEdit.getText() );
+//                        if(!currentEditName.getText().toString().equals("")||!currentEditCost.getText().toString().equals("")) {
+//                            JSONObject costObj = new JSONObject("{" +
+//                                    "\"name\":\"" + currentEditName.getText() + "\"," +
+//                                    "\"cost\":\"" + currentEditCost.getText() + "\"" +
+//                                    "}");
+//                            Log.d(TAG, j + " j >>>>>>>> : " + costObj );
+//                            costList.put(costObj);
+//                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+
 
                 int parentLong = Integer.parseInt(String.valueOf(parentLinearLayout.getChildCount())) - 1;
 
@@ -428,12 +569,12 @@ public class EditDestinationActivity extends AppCompatActivity
                         EditText currentEditName = currentView.findViewById(R.id.text_edit_text);
                         EditText currentEditCost = currentView.findViewById(R.id.number_edit_text);
                         //Log.d(TAG, k + ">>>>>>>> : " + currentEdit.getText() );
-                        if(!currentEditName.getText().equals("")||!currentEditCost.getText().equals("")) {
+                        if(!currentEditName.getText().toString().equals("")||!currentEditCost.getText().toString().equals("")) {
                             JSONObject costObj = new JSONObject("{" +
                                     "\"name\":\"" + currentEditName.getText() + "\"," +
                                     "\"cost\":\"" + currentEditCost.getText() + "\"" +
                                     "}");
-                        Log.d(TAG, k + ">>>>>>>> : " + costObj );
+                        Log.d(TAG, k + " k >>>>>>>> : " + costObj );
                         costList.put(costObj);
                         }
                     } catch (JSONException e) {
@@ -441,6 +582,8 @@ public class EditDestinationActivity extends AppCompatActivity
                     }
 
                 }
+
+                bookValidations();
 
                 break;
         }
@@ -456,5 +599,117 @@ public class EditDestinationActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
     }
+
+//
+//    private void processData() {
+//        try {
+//            JSONArray dataJson = desPlan;
+//            destinationsArrayListBuffer = new ArrayList < > ();
+//            destinationsArrayList = new ArrayList < > ();
+//            mRecyclerView = findViewById(R.id.recyclerview);
+//            LinearLayoutManager mLinearLayoutManager = new LinearLayoutManager(EditDestinationActivity.this);
+//            mRecyclerView.setLayoutManager(mLinearLayoutManager);
+//            destinationsArrayList.clear();
+//            JSONArray jarry = dataJson;
+//            ArrayList <DestinationsModel> dma = new ArrayList < > ();
+//            dma.clear();
+//            for (int j = 0; j < jarry.length(); j++) {
+//                JSONObject job = jarry.getJSONObject(j);
+//                /*
+//                PlanModel model = new PlanModel();
+//                model.set_id(job.optString("_id"));
+//                model.setTitle(job.optString("title"));
+//                model.setBody_copy(job.optString("body_copy"));
+//                model.setContent(job.optString("content"));
+//                model.setTarget_date(job.optString("target_date"));
+//                model.setTarget_time(job.optString("target_time"));
+//                //JSONArray dest = new JSONArray();
+//                JSONArray jdes = new JSONArray(job.optString("destinations"));
+//                / *
+//                Log.d("XXX", "jdes: " + jdes);
+//                //ArrayList < String > jsarr = new ArrayList < > ();
+//                StringBuilder jPlain = new StringBuilder();
+//                for(int z=0; z < jdes.length(); z++){
+//                    JSONObject jdesob = jdes.getJSONObject(z);
+//                    //jsarr.add(jdesob.getString("_id"));
+//                    jPlain.append(jdesob.getString("_id"));
+//                }
+//                Log.d("XXX", "jPlain: " + jPlain);
+//                //String jarrClean = String.valueOf(String.valueOf(jsarr).trim().replaceAll("\"","").split("\\s*,\\s*"));
+//                //dest.put(String.valueOf(destinations.getText()).trim());
+////                String[] animalsArray = String.valueOf(jPlain).trim().replaceAll("\"","").split("\\s*,\\s*");
+//                String[] animalsArray = String.valueOf(jPlain).trim().replaceAll("\"","").split("\\s*,\\s*");
+//                Log.d("XXX", "animalsArray: " + animalsArray);
+//                for(int i=0; i < animalsArray.length; i++){
+//                    dest.put((animalsArray[i]).replaceAll("\"",""));
+//                }
+//                Log.d("XXX", "dest: " + dest);
+//                * /
+//
+//                model.setDestinations(jdes);
+////                model.setImage(job.optString("image"));
+//                // model.setCategory(job.optString("category"));
+////                jobjContactDetails.put("body_copy", String.valueOf(body_copy.getText()).trim());
+////                jobjContactDetails.put("content", String.valueOf(content.getText()).trim());
+////                jobjContactDetails.put("target_date", String.valueOf(target_date.getText()).trim());
+////                jobjContactDetails.put("target_time", String.valueOf(target_time.getText()).trim());
+////                jobjContactDetails.put("destinations", dest);
+//                */
+//
+//
+//                DestinationsModel model = new DestinationsModel();
+//                model.setMenuID(String.valueOf(j));
+//                model.setMenuName("nama" + j);
+//                model.setName(job.optString("name"));
+//                model.setPostID(job.optString("id"));
+//                model.setImage(job.optString("image"));
+//
+////                model.setMenuName("nama" + j);
+////                model.setName(job.optString(name));
+////                model.setPostID(job.optString("id"));
+////                model.setImage(job.optString(image));
+//
+//                model.set_id(job.optString("_id"));
+//                model.setCategory(job.optString("category"));
+//                model.setLocation(job.optString("location"));
+//                model.setDescription(job.optString("description"));
+//                model.setLatitude(job.optString("latitude"));
+//                model.setLongitude(job.optString("longitude"));
+//                model.setAddress(job.optString("address"));
+//                model.setDistance(job.optString("distance"));
+//                model.setNote(job.optString("note"));
+//                model.setCosts(job.optString("costs"));
+//                model.setTotal_cost(job.optString("total_cost"));
+//
+//
+//                dma.add(model);
+//                destinationsArrayList.add(model);
+//            }
+//            destinationsArrayListBuffer = destinationsArrayList;
+//            DestinationsLineAdapter myAdapter = new DestinationsLineAdapter(EditDestinationActivity.this, destinationsArrayListBuffer );
+//            mRecyclerView.setAdapter(myAdapter);
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    private void getKarmaGroupsApiRequest() {
+//        AsyncHttpResponse response = new AsyncHttpResponse(this, false);
+//        RequestParams params = new RequestParams();
+//        response.getAsyncHttp(RestApis.KarmaGroups.vacapediaDestinations, params);
+//    }
+//
+//    @Override
+//    public void onAsyncHttpResponseGet(String response, String url) throws JSONException {
+//        Log.d("TAG", "onAsyncHttpResponseGet() called with: response = [" + response + "], url = [" + url + "]");
+//        if (url.equals(RestApis.KarmaGroups.vacapediaDestinations)) {
+//            Log.d("TAG", "x onAsyncHttpResponseGet() called with: response = [" + response + "], url = [" + url + "]");
+//            dataDestinations = new JSONArray(response);
+//            processData();
+//        }
+//    }
+
+
 
 }

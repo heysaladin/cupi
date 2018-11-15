@@ -48,6 +48,7 @@ public class VacaplanFragment
     private RecyclerView mRecyclerView;
     private PlanModel currentUser;
     private JSONArray jsonArrayUsersFamily;
+    private JSONArray jsonArrayCosts;
     private List < String > stringImages;
     private List < String > stringLocations;
     private List < String > intCost;
@@ -72,6 +73,7 @@ public class VacaplanFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_item_four, container, false);
         jsonArrayUsersFamily = new JSONArray();
+        jsonArrayCosts = new JSONArray();
         numbers = new ArrayList < > ();
         getKarmaGroupsApiRequest();
 
@@ -154,7 +156,9 @@ public class VacaplanFragment
                 currentUser.setContent(job.optString("content"));
                 currentUser.setBody_copy(job.optString("body_copy"));
                 currentUser.setTarget_date(job.optString("target_date"));
-                currentUser.setTarget_time(job.optString("target_time("));
+                currentUser.setTarget_time(job.optString("target_time"));
+                jsonArrayCosts = new JSONArray(job.optString("costs"));
+                currentUser.setCosts(jsonArrayCosts);
                 jsonArrayUsersFamily = new JSONArray(job.optString("destinations"));
                 currentUser.setDestinations(jsonArrayUsersFamily);
 

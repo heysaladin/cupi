@@ -10,6 +10,7 @@ public class PlanModel {
     private String body_copy;
     private String target_date;
     private String target_time;
+    private JSONArray costs;
     private JSONArray destinations;
     private String image;
     private String cost;
@@ -26,6 +27,7 @@ public class PlanModel {
                 ", body_copy='" + getBody_copy() + "\'" +
                 ", target_date='" + getTarget_date() + "\'" +
                 ", target_time='" + getTarget_time() + "\'" +
+                ", costs='" + getCosts() + "\'" +
                 ", destinations='" + getDestinations() + "\'" +
                 ", image='" + getImage() + "\'" +
                 ", cost='" + getCost() + "\'" +
@@ -111,5 +113,13 @@ public class PlanModel {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public JSONArray getCosts() {
+        return costs;
+    }
+
+    public void setCosts(JSONArray costs) {
+        this.costs = costs;
     }
 }

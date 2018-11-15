@@ -107,6 +107,7 @@ public class ListPlansActivity
                 model.setBody_copy(job.optString("body_copy"));
                 model.setContent(job.optString("content"));
                 model.setTarget_date(job.optString("target_date"));
+                model.setCosts(job.optJSONArray("costs"));
                 model.setTarget_time(job.optString("target_time"));
                 //JSONArray dest = new JSONArray();
                 JSONArray jdes = new JSONArray(job.optString("destinations"));
