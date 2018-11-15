@@ -48,21 +48,15 @@ import com.codingdemos.flowers.R;
 
 public class OjekActivity extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
-
     private String API_KEY = "AIzaSyCiaIGnvo1Bc6WXbiiqy3E2ukbWjWj1VpQ";
-//    private String API_KEY = "AIzaSyCw96GO7U6nd8CnCVjIISXvgG3T36BKUUY";
-//    private String API_KEY = "AIzaSyAT6cY6dg_0KTQtDJ2WCnxLXLxfqKnK6m0";
-
     public LatLng pickUpLatLng = null;
     public LatLng locationLatLng = null;
-
     private TextView tvStartAddress, tvEndAddress;
     private TextView tvPrice, tvDistance;
     private Button btnNext;
     private LinearLayout infoPanel;
     // Deklarasi variable
     private TextView tvPickUpFrom, tvDestLocation;
-
     public static final int PICK_UP = 0;
     public static final int DEST_LOC = 1;
     private static int REQUEST_CODE = 0;
@@ -71,7 +65,7 @@ public class OjekActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ojek);
-//        getSupportActionBar().setTitle("Ojek Hampir Online");
+        //        getSupportActionBar().setTitle("Ojek Hampir Online");
 
         // Inisialisasi Widget
         wigetInit();
@@ -94,8 +88,6 @@ public class OjekActivity extends AppCompatActivity implements OnMapReadyCallbac
                 showPlaceAutoComplete(DEST_LOC);
             }
         });
-
-
     }
 
     // Method untuk Inisilisasi Widget agar lebih rapih
@@ -191,7 +183,6 @@ public class OjekActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap = googleMap;
         mMap.setPadding(10, 180, 10, 10);
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
@@ -208,26 +199,26 @@ public class OjekActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Panggil Retrofit
         ApiServices api = InitLibrary.getInstance();
         // Siapkan request
-        Call<ResponseRoute> routeRequest = api.request_route(lokasiAwal, lokasiAkhir, API_KEY);
-        Log.d("LOC", "routeRequest >>>>>>>>>>>>> " + routeRequest);
+        Call < ResponseRoute > routeRequest = api.request_route(lokasiAwal, lokasiAkhir, API_KEY);
+        // Log.d("LOC", "routeRequest >>>>>>>>>>>>> " + routeRequest);
         // kirim request
-        routeRequest.enqueue(new Callback<ResponseRoute>() {
+        routeRequest.enqueue(new Callback < ResponseRoute > () {
             @Override
-            public void onResponse(Call<ResponseRoute> call, Response<ResponseRoute> response) {
+            public void onResponse(Call < ResponseRoute > call, Response < ResponseRoute > response) {
 
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     // tampung response ke variable
                     ResponseRoute dataDirection = response.body();
 
-                    Log.d("LOC", "response.body() >>>>>>>>>>>>> " + response.body());
-                    Log.d("LOC", "dataDirection >>>>>>>>>>>>> " + dataDirection);
+                    // Log.d("LOC", "response.body() >>>>>>>>>>>>> " + response.body());
+                    // Log.d("LOC", "dataDirection >>>>>>>>>>>>> " + dataDirection);
 
                     LegsItem dataLegs = dataDirection.getRoutes().get(0).getLegs().get(0);
 
                     // Dapatkan garis polyline
                     String polylinePoint = dataDirection.getRoutes().get(0).getOverviewPolyline().getPoints();
                     // Decode
-                    List<LatLng> decodePath = PolyUtil.decode(polylinePoint);
+                    List < LatLng > decodePath = PolyUtil.decode(polylinePoint);
                     // Gambar garis ke maps
                     mMap.addPolyline(new PolylineOptions().addAll(decodePath)
                             .width(8f).color(Color.argb(255, 56, 167, 252)))
@@ -249,7 +240,6 @@ public class OjekActivity extends AppCompatActivity implements OnMapReadyCallbac
                     /** START
                      * Logic untuk membuat layar berada ditengah2 dua koordinat
                      */
-
                     LatLngBounds.Builder latLongBuilder = new LatLngBounds.Builder();
                     latLongBuilder.include(pickUpLatLng);
                     latLongBuilder.include(locationLatLng);
@@ -259,7 +249,7 @@ public class OjekActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     int width = getResources().getDisplayMetrics().widthPixels;
                     int height = getResources().getDisplayMetrics().heightPixels;
-                    int paddingMap = (int) (width * 0.2); //jarak dari
+                    int paddingMap = (int)(width * 0.2); //jarak dari
                     CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, paddingMap);
                     mMap.animateCamera(cu);
 
@@ -275,7 +265,7 @@ public class OjekActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
 
             @Override
-            public void onFailure(Call<ResponseRoute> call, Throwable t) {
+            public void onFailure(Call < ResponseRoute > call, Throwable t) {
                 t.printStackTrace();
             }
         });

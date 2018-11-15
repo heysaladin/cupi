@@ -92,7 +92,7 @@ public class EditSlideActivity extends AppCompatActivity
         body_copy.setText(body_copyString);
         description.setText(descriptionString);
 
-        Toast.makeText(EditSlideActivity.this, noteID, Toast.LENGTH_LONG).show();
+        // Toast.makeText(EditSlideActivity.this, noteID, Toast.LENGTH_LONG).show();
 
     }
 

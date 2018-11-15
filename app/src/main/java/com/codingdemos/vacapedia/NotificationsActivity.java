@@ -32,18 +32,16 @@ public class NotificationsActivity
         implements
         AsyncHttpResponse.AsyncHttpResponseListener {
 
-    String image = "image";
-    String name = "name";
-    Toolbar mToolbar;
-    ImageView mFlower;
-    TextView mDescription;
-
+    private String image = "image";
+    private Toolbar mToolbar;
+    private ImageView mFlower;
+    private TextView mDescription;
     private JSONArray dataDestinations = null;
     private ArrayList <NotificationsModel> destinationsArrayListBuffer;
     private ArrayList < NotificationsModel > destinationsArrayList;
     private NotificationAdapter guestDestinationsAdapter;
     private String imageUrl = null;
-    RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView;
 
     private void getIntentData() {
         Intent intent = getIntent();
@@ -67,7 +65,6 @@ public class NotificationsActivity
         });
         mDescription = findViewById(R.id.tvDescription);
         mToolbar.setTitle("Notifications");
-
         Bundle mBundle = getIntent().getExtras();
         if (mBundle != null) {
             mToolbar.setTitle(mBundle.getString("Title"));

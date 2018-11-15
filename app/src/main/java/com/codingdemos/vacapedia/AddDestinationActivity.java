@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,37 +46,22 @@ public class AddDestinationActivity extends AppCompatActivity
     private EditText total_cost;
     private AlertDialog.Builder alertDialogBuilder = null;
     private AlertDialog alertDialog = null;
-
-
     private LinearLayout parentLinearLayout;
-
-    private LinearLayout parentLinearLayoutRecycler;
-    private RecyclerView parentRecycler;
-
-    private LinearLayout wrapper_dynamic;
-
     private JSONArray costList;
-
     private void getIntentData() {
         Intent intent = this.getIntent();
     }
 
-
     public void onAddField(View v) {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View rowView = inflater.inflate(R.layout.field, null);
-//        EditText currentEdit = rowView.findViewById(R.id.number_edit_text);
-//        editTextList.add(currentEdit);
-        // Add the new row before the add field button.
         parentLinearLayout.addView(rowView, parentLinearLayout.getChildCount() - 1);
-
-        Log.d("LOG", "count >>>>>>>>> " + String.valueOf(Integer.parseInt(String.valueOf(parentLinearLayout.getChildCount())) - 1));
-
+        // Log.d("LOG", "count >>>>>>>>> " + String.valueOf(Integer.parseInt(String.valueOf(parentLinearLayout.getChildCount())) - 1));
     }
 
     public void onDelete(View v) {
         parentLinearLayout.removeView((View) v.getParent());
-        Log.d("LOG", "count >>>>>>>>> " + String.valueOf(Integer.parseInt(String.valueOf(parentLinearLayout.getChildCount())) - 1));
+        // Log.d("LOG", "count >>>>>>>>> " + String.valueOf(Integer.parseInt(String.valueOf(parentLinearLayout.getChildCount())) - 1));
     }
 
 
@@ -85,9 +69,7 @@ public class AddDestinationActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_destination_add);
-
         parentLinearLayout = (LinearLayout) findViewById(R.id.parent_linear_layout);
-
         mToolbar = findViewById(R.id.toolbar);
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -222,7 +204,6 @@ public class AddDestinationActivity extends AppCompatActivity
                         Intent in = new Intent(AddDestinationActivity.this, MainActivity.class);
                         AddDestinationActivity.this.startActivity( in );
                         AddDestinationActivity.this.finish();
-                        // Toast.makeText(AddNoteActivity.this, "Thank You", Toast.LENGTH_LONG).show();
                     }
                 });
         if (alertDialog != null && alertDialog.isShowing()) {
@@ -236,59 +217,25 @@ public class AddDestinationActivity extends AppCompatActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.dd_booking_form_tv:
-
-
-
                 costList = new JSONArray();
-
-
-//                int parentLongRecycler = Integer.parseInt(String.valueOf(parentRecycler.getChildCount())) - 1;
-//
-//                for (int j = 0; j < parentLongRecycler; j++) {
-//                    try {
-//                        View currentView = parentRecycler.getChildAt(j);
-//                        EditText currentEditName = currentView.findViewById(R.id.text_edit_text);
-//                        EditText currentEditCost = currentView.findViewById(R.id.number_edit_text);
-//                        //Log.d(TAG, j + ">>>>>>>> : " + currentEdit.getText() );
-//                        if(!currentEditName.getText().toString().equals("")||!currentEditCost.getText().toString().equals("")) {
-//                            JSONObject costObj = new JSONObject("{" +
-//                                    "\"name\":\"" + currentEditName.getText() + "\"," +
-//                                    "\"cost\":\"" + currentEditCost.getText() + "\"" +
-//                                    "}");
-//                            Log.d(TAG, j + " j >>>>>>>> : " + costObj );
-//                            costList.put(costObj);
-//                        }
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                }
-
-
                 int parentLong = Integer.parseInt(String.valueOf(parentLinearLayout.getChildCount())) - 1;
-
                 for (int k = 0; k < parentLong; k++) {
                     try {
                         View currentView = parentLinearLayout.getChildAt(k);
                         EditText currentEditName = currentView.findViewById(R.id.text_edit_text);
                         EditText currentEditCost = currentView.findViewById(R.id.number_edit_text);
-                        //Log.d(TAG, k + ">>>>>>>> : " + currentEdit.getText() );
-                        if(!currentEditName.getText().toString().equals("")||!currentEditCost.getText().toString().equals("")) {
+                        if (!currentEditName.getText().toString().equals("") || !currentEditCost.getText().toString().equals("")) {
                             JSONObject costObj = new JSONObject("{" +
                                     "\"name\":\"" + currentEditName.getText() + "\"," +
                                     "\"cost\":\"" + currentEditCost.getText() + "\"" +
                                     "}");
-                            Log.d(TAG, k + " k >>>>>>>> : " + costObj );
+                            // Log.d(TAG, k + " k >>>>>>>> : " + costObj);
                             costList.put(costObj);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
-
-
-
                 bookValidations();
                 break;
         }

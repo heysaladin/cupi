@@ -33,17 +33,14 @@ public class ListPromosActivity
         implements
         AsyncHttpResponse.AsyncHttpResponseListener {
 
-    String image = "image";
-    Toolbar mToolbar;
-    ImageView mFlower;
-    TextView mDescription;
-
+    private Toolbar mToolbar;
+    private ImageView mFlower;
+    private TextView mDescription;
     private JSONArray dataDestinations = null;
     private ArrayList <PromosModel> destinationsArrayListBuffer;
     private ArrayList < PromosModel > destinationsArrayList;
-    private SliderAdapter guestDestinationsAdapter;
     private String imageUrl = null;
-    RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView;
 
     private void getIntentData() {
         Intent intent = getIntent();

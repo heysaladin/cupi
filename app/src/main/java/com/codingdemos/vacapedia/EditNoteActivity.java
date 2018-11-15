@@ -33,11 +33,9 @@ public class EditNoteActivity extends AppCompatActivity
     private AlertDialog.Builder alertDialogBuilder = null;
     private AlertDialog alertDialog = null;
     private String noteID = null;
-
     private String id = null;
     private String title = null;
     private String note = null;
-
     private void getIntentData() {
         Intent intent = this.getIntent();
         id = intent.getStringExtra("_id");
@@ -72,12 +70,9 @@ public class EditNoteActivity extends AppCompatActivity
         dd_booking_form_tv.setOnClickListener(this);
         title_tv = (EditText) findViewById(R.id.title_tv);
         note_tv = (EditText) findViewById(R.id.note_tv);
-
         title_tv.setText(title);
         note_tv.setText(note);
-
         Toast.makeText(EditNoteActivity.this, noteID, Toast.LENGTH_LONG).show();
-
     }
 
     /*

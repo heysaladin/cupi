@@ -28,7 +28,7 @@ public class EditPromoActivity extends AppCompatActivity
         implements View.OnClickListener,
         AsyncHttpResponse.AsyncHttpResponseListener {
     Toolbar mToolbar;
-    private static final String TAG = "EditNoteActivity";
+    private static final String TAG = "EditPromoActivity";
     private EditText title;
     private EditText image;
     private EditText category;
@@ -37,14 +37,12 @@ public class EditPromoActivity extends AppCompatActivity
     private AlertDialog.Builder alertDialogBuilder = null;
     private AlertDialog alertDialog = null;
     private String noteID = null;
-
     private String id = null;
     private String titleString = null;
     private String imageString = null;
     private String categoryString = null;
     private String body_copyString = null;
     private String descriptionString = null;
-
     private void getIntentData() {
         Intent intent = this.getIntent();
         id = intent.getStringExtra("_id");
@@ -92,7 +90,7 @@ public class EditPromoActivity extends AppCompatActivity
         body_copy.setText(body_copyString);
         description.setText(descriptionString);
 
-        Toast.makeText(EditPromoActivity.this, noteID, Toast.LENGTH_LONG).show();
+        // Toast.makeText(EditPromoActivity.this, noteID, Toast.LENGTH_LONG).show();
 
     }
 

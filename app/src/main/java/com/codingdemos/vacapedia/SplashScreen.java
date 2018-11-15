@@ -16,7 +16,6 @@ public class SplashScreen extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
         new Handler().postDelayed(new Runnable() {
 
             /*
@@ -30,7 +29,6 @@ public class SplashScreen extends Activity {
                 // Start your app main activity
                 Intent i = new Intent(SplashScreen.this, WelcomeActivity.class);
                 startActivity(i);
-
                 // close this activity
                 finish();
             }

@@ -64,8 +64,7 @@ public class NotesActivity extends AppCompatActivity
             public void onClick(View view) {
                 Intent mIntent = new Intent(NotesActivity.this, AddNoteActivity.class);
                 NotesActivity.this.startActivity(mIntent);
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
 

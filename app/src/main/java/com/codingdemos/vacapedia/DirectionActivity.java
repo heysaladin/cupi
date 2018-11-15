@@ -1,15 +1,14 @@
 package com.codingdemos.vacapedia;
 
 
-import android.app.DownloadManager;
-import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.codingdemos.flowers.R;
 import com.codingdemos.vacapedia.network.ApiServices;
 import com.codingdemos.vacapedia.network.InitLibrary;
+import com.codingdemos.vacapedia.response.ResponseRoute;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,36 +17,19 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.maps.android.PolyUtil;
-import com.codingdemos.vacapedia.network.ApiServices;
-import com.codingdemos.vacapedia.network.InitLibrary;
-import com.codingdemos.vacapedia.response.Distance;
-import com.codingdemos.vacapedia.response.Duration;
-import com.codingdemos.vacapedia.response.LegsItem;
-import com.codingdemos.vacapedia.response.ResponseRoute;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import com.codingdemos.flowers.R;
-
-import org.json.JSONObject;
-
 public class DirectionActivity extends AppCompatActivity implements OnMapReadyCallback {
+
     private GoogleMap mMap;
-
     private String API_KEY = "AIzaSyCiaIGnvo1Bc6WXbiiqy3E2ukbWjWj1VpQ";
-//    private String API_KEY = "AIzaSyCw96GO7U6nd8CnCVjIISXvgG3T36BKUUY";
-//    private String API_KEY = "AIzaSyAT6cY6dg_0KTQtDJ2WCnxLXLxfqKnK6m0";
-
     private LatLng pickUpLatLng = new LatLng(-6.175110, 106.865039); // Jakarta
-    private LatLng locationLatLng = new LatLng(-6.197301,106.795951); // Cirebon
-
+    private LatLng locationLatLng = new LatLng(-6.197301, 106.795951); // Cirebon
     private TextView tvStartAddress, tvEndAddress, tvDuration, tvDistance;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,9 +38,6 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        // Set Title bar
-//        getSupportActionBar().setTitle("Direction Maps API");
-        // Inisialisasi Widget
         widgetInit();
         // jalankan method
         actionRoute();
@@ -78,87 +57,26 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
         // Panggil Retrofit
         ApiServices api = InitLibrary.getInstance();
         // Siapkan request
-        Call<ResponseRoute> routeRequest = api.request_route(lokasiAwal, lokasiAkhir, API_KEY);
+        Call < ResponseRoute > routeRequest = api.request_route(lokasiAwal, lokasiAkhir, API_KEY);
 
-        Log.d("LOC", "routeRequest >>>>>>>>>>>>> " + routeRequest);
-
-        Log.d("LOC", "lokasiAwal >>>>>>>>>>>>> " + lokasiAwal);
-        Log.d("LOC", "lokasiAkhir >>>>>>>>>>>>> " + lokasiAkhir);
-        Log.d("LOC", "API_KEY >>>>>>>>>>>>> " + API_KEY);
+        // Log.d("LOC", "routeRequest >>>>>>>>>>>>> " + routeRequest);
+        // Log.d("LOC", "lokasiAwal >>>>>>>>>>>>> " + lokasiAwal);
+        // Log.d("LOC", "lokasiAkhir >>>>>>>>>>>>> " + lokasiAkhir);
+        // Log.d("LOC", "API_KEY >>>>>>>>>>>>> " + API_KEY);
 
         // kirim request
-        routeRequest.enqueue(new Callback<ResponseRoute>() {
+        routeRequest.enqueue(new Callback < ResponseRoute > () {
             @Override
-            public void onResponse(Call<ResponseRoute> call, Response<ResponseRoute> response) {
+            public void onResponse(Call < ResponseRoute > call, Response < ResponseRoute > response) {
 
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     // tampung response ke variable
                     ResponseRoute dataDirection = response.body();
-
-                    Log.d("LOC", "response.raw().request().url() >>>>>>>>>>>>> " + response.raw().request().url());
-
-
-//                    RequestQueue queue = Volley.newRequestQueue(this);
-//                    final String url = response.raw().request().url();
-//
-//// prepare the Request
-//                    JsonObjectRequest getRequest = new JsonObjectRequest(DownloadManager.Request.Method.GET, url, null,
-//                            new Response.Listener<JSONObject>()
-//                            {
-//                                @Override
-//                                public void onResponse(JSONObject response) {
-//                                    // display response
-//                                    Log.d("Response", response.toString());
-//                                }
-//                            },
-//                            new Response.ErrorListener()
-//                            {
-//                                @Override
-//                                public void onErrorResponse(VolleyError error) {
-//                                    Log.d("Error.Response", response);
-//                                }
-//                            }
-//                    );
-//
-//// add it to the RequestQueue
-//                    queue.add(getRequest);
-
-
-                    Log.d("LOC", "response.body() >>>>>>>>>>>>> " + response.body());
-                    Log.d("LOC", "dataDirection >>>>>>>>>>>>> " + dataDirection);
-
-//                    LegsItem dataLegs = dataDirection.getRoutes().get(0).getLegs().get(0);
-//
-//                    // Dapatkan garis polyline
-//                    String polylinePoint = dataDirection.getRoutes().get(0).getOverviewPolyline().getPoints();
-//                    // Decode
-//                    List<LatLng> decodePath = PolyUtil.decode(polylinePoint);
-//                    // Gambar garis ke maps
-//                    mMap.addPolyline(new PolylineOptions().addAll(decodePath)
-//                            .width(8f).color(Color.argb(255, 56, 167, 252)))
-//                            .setGeodesic(true);
-//
-//                    // Tambah Marker
-//                    mMap.addMarker(new MarkerOptions().position(pickUpLatLng).title("Lokasi Awal"));
-//                    mMap.addMarker(new MarkerOptions().position(locationLatLng).title("Lokasi Akhir"));
-//                    // Dapatkan jarak dan waktu
-//                    Distance dataDistance = dataLegs.getDistance();
-//                    Duration dataDuration = dataLegs.getDuration();
-//
-//                    // Set Nilai Ke Widget
-//                    tvStartAddress.setText("start location : " + dataLegs.getStartAddress().toString());
-//                    tvEndAddress.setText("end location : " + dataLegs.getEndAddress().toString());
-//
-//                    tvDistance.setText("distance : " + dataDistance.getText() + " (" + dataDistance.getValue() + ")");
-//                    tvDuration.setText("duration : " + dataDuration.getText() + " (" + dataDuration.getValue() + ")");
-//                    /** START
-//                     * Logic untuk membuat layar berada ditengah2 dua koordinat
-//                     */
-
-
+                    // Log.d("LOC", "response.raw().request().url() >>>>>>>>>>>>> " + response.raw().request().url());
+                    // Log.d("LOC", "response.body() >>>>>>>>>>>>> " + response.body());
+                    // Log.d("LOC", "dataDirection >>>>>>>>>>>>> " + dataDirection);
                     mMap.addMarker(new MarkerOptions().position(pickUpLatLng));
                     mMap.addMarker(new MarkerOptions().position(locationLatLng));
-
                     LatLngBounds.Builder latLongBuilder = new LatLngBounds.Builder();
                     latLongBuilder.include(pickUpLatLng);
                     latLongBuilder.include(locationLatLng);
@@ -168,27 +86,22 @@ public class DirectionActivity extends AppCompatActivity implements OnMapReadyCa
 
                     int width = getResources().getDisplayMetrics().widthPixels;
                     int height = getResources().getDisplayMetrics().heightPixels;
-                    int paddingMap = (int) (width * 0.2); //jarak dari
+                    int paddingMap = (int)(width * 0.2); //jarak dari
                     CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, width, height, paddingMap);
                     mMap.animateCamera(cu);
-
-                    /** END
-                     * Logic untuk membuat layar berada ditengah2 dua koordinat
-                     */
-
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseRoute> call, Throwable t) {
+            public void onFailure(Call < ResponseRoute > call, Throwable t) {
                 t.printStackTrace();
             }
         });
     }
 
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
     }
+
 }

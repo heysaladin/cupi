@@ -9,31 +9,13 @@
     <item name="colorAccent">@color/colorAccent</item>
     <item name="android:statusBarColor" tools:targetApi="lollipop">@color/colorPrimary</item>
 
-      <!--<item name="android:statusBarColor" tools:targetApi="lollipop" tools:ignore="DuplicateDefinition,NewApi">@android:color/transparent</item>-->
-      <!--<item name="android:navigationBarColor" tools:targetApi="lollipop">@android:color/transparent</item>-->
-      <!--<item name="android:windowTranslucentStatus">true</item>-->
-      <!--<item name="android:windowTranslucentNavigation">true</item>-->
-      <!--<item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop">true</item>-->
-
-      <!--<item name="android:windowDrawsSystemBarBackgrounds" tools:targetApi="lollipop" tools:ignore="DuplicateDefinition,NewApi">true</item>-->
-
-
-    <!--<item name="colorPrimary">@color/colorPrimary</item>-->
-    <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-    <!--<item name="colorAccent">@color/colorAccent</item>-->
     <item name="windowActionBar">false</item>
     <item name="windowNoTitle">true</item>
 
-
   </style>
 
-
   <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
   <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-
-
 
   <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
     <!-- android:textColorPrimary adalah warna teks title yang ada di Toolbar  -->
@@ -49,11 +31,6 @@
     <!-- Memberi warna kontrol untuk efek ripples atau pemilihan list -->
     <item name="colorControlHighlight">@color/white</item>
 
-    <!-- Tambahkan jika ingin memberi efek ripple saat memilih salah satu ikon -->
-    <!--
-    <item name="selectableItemBackground">?android:selectableItemBackground</item>
-    <item name="selectableItemBackgroundBorderless">?android:selectableItemBackground</item>
-    -->
   </style>
 
   <!-- Mengatur style title yang ada di dalam Toolbar -->
@@ -61,8 +38,6 @@
     <item name="android:textSize">21sp</item>
     <item name="android:textStyle">italic</item>
   </style>
-
-
 
   <style name="expandedappbar" parent="@android:style/TextAppearance.Medium">
     <item name="android:textSize">48sp</item>
@@ -75,16 +50,6 @@
     <item name="android:textColor">@color/white</item>
   </style>
 
-
-
-    <!--<style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">-->
-        <!--<item name="android:textColorPrimary">@color/cor_texto_primaria</item>-->
-        <!--<item name="colorPrimary">@color/cor_primaria</item>-->
-        <!--<item name="colorPrimaryDark">@color/cor_primaria_escura</item>-->
-        <!--<item name="colorAccent">@color/cor_acentuada</item>-->
-    <!--</style>-->
-    <!--<style name="AppTheme" parent="AppTheme.Base">-->
-    <!--</style>-->
     <style name="AppTheme.Translucent" parent="AppTheme">
     </style>
     <style name="Titulo">
@@ -96,9 +61,6 @@
         <item name="android:textColor">@android:color/darker_gray</item>
     </style>
 
-
-
-
   <style name="Widget.CardContent" parent="android:Widget">
     <item name="android:paddingLeft">16dp</item>
     <item name="android:paddingRight">16dp</item>
@@ -106,7 +68,6 @@
     <item name="android:paddingBottom">24dp</item>
     <item name="android:orientation">vertical</item>
   </style>
-
 
   <style name="layout_resorts_group">
     <item name="android:layout_width">wrap_content</item>
@@ -120,7 +81,6 @@
     <item name="android:layout_marginBottom">@dimen/space_2dp</item>
   </style>
 
-
   <style name="layout_resorts_title">
     <item name="android:layout_width">wrap_content</item>
     <item name="android:layout_height">wrap_content</item>
@@ -131,7 +91,5 @@
     <item name="android:maxLines">1</item>
     <item name="android:layout_marginTop">@dimen/space_5dp</item>
   </style>
-
-
 
 </resources>

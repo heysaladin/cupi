@@ -29,7 +29,7 @@ public class PlaceAutoCompleteActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_auto_complete);
-//        getSupportActionBar().setTitle("Place Auto Complete");
+        //        getSupportActionBar().setTitle("Place Auto Complete");
         // Inisialisasi Widget
         wigetInit();
         // Event OnClick
@@ -87,13 +87,12 @@ public class PlaceAutoCompleteActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //Toast.makeText(this, "Sini Gaes", Toast.LENGTH_SHORT).show();
         // Pastikan Resultnya OK
-        if (resultCode == RESULT_OK){
+        if (resultCode == RESULT_OK) {
             //Toast.makeText(this, "Sini Gaes2", Toast.LENGTH_SHORT).show();
             // Tampung Data tempat ke variable
             Place placeData = PlaceAutocomplete.getPlace(this, data);
-            if (placeData.isDataValid()){
+            if (placeData.isDataValid()) {
                 // Show in Log Cat
                 Log.d("autoCompletePlace Data", placeData.toString());
                 // Dapatkan Detail
@@ -101,7 +100,7 @@ public class PlaceAutoCompleteActivity extends AppCompatActivity {
                 LatLng placeLatLng = placeData.getLatLng();
                 String placeName = placeData.getName().toString();
                 // Cek user milih titik jemput atau titik tujuan
-                switch (REQUEST_CODE){
+                switch (REQUEST_CODE) {
                     case PICK_UP:
                         // Set ke widget lokasi asal
                         tvPickUpFrom.setText(placeAddress);
@@ -119,7 +118,7 @@ public class PlaceAutoCompleteActivity extends AppCompatActivity {
                 }
             } else {
                 // Data tempat tidak valid
-                Toast.makeText(this, "Invalid Place !", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(this, "Invalid Place !", Toast.LENGTH_SHORT).show();
             }
         }
     }

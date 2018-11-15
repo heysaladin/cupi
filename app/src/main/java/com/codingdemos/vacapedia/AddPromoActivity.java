@@ -28,7 +28,7 @@ public class AddPromoActivity extends AppCompatActivity
         implements View.OnClickListener,
         AsyncHttpResponse.AsyncHttpResponseListener {
     Toolbar mToolbar;
-    private static final String TAG = "AddDestinationActivity";
+    private static final String TAG = "AddPromoActivity";
     private EditText title;
     private EditText image;
     private EditText category;
@@ -36,7 +36,6 @@ public class AddPromoActivity extends AppCompatActivity
     private EditText description;
     private AlertDialog.Builder alertDialogBuilder = null;
     private AlertDialog alertDialog = null;
-
     private void getIntentData() {
         Intent intent = this.getIntent();
     }
@@ -164,7 +163,6 @@ public class AddPromoActivity extends AppCompatActivity
                         Intent in = new Intent(AddPromoActivity.this, MainActivity.class);
                         AddPromoActivity.this.startActivity( in );
                         AddPromoActivity.this.finish();
-                        // Toast.makeText(AddNoteActivity.this, "Thank You", Toast.LENGTH_LONG).show();
                     }
                 });
         if (alertDialog != null && alertDialog.isShowing()) {

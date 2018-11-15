@@ -17,9 +17,6 @@
 
   <string name="ok">Ok</string>
 
-
-
-  <!--<string name="app_name">Engenheiros do Hawaii</string>-->
   <string name="formacao">Formação</string>
   <string name="musicas">Músicas</string>
 
@@ -28,9 +25,6 @@
 
   <string name="vector_check">M 0 14 L 9.6 21.6 M 7.7 21.7 L 24 0</string>
   <string name="vector_cancel">M 0 0 L 24 24 M 0 24 L 24 0</string>
-
-
-
 
   <string name="cheese_ipsum">Jarlsberg lancashire edam. Dolcelatte hard cheese brie st. agur blue
     cheese caerphilly bavarian bergkase cheese and biscuits mascarpone. Cheeseburger swiss bavarian
@@ -45,9 +39,6 @@
   <string name="menu_night_mode_night">Night (always)</string>
   <string name="menu_night_mode_auto">Auto</string>
 
-
-
-  <!--<string name="app_name">Intro Slider</string>-->
   <string name="title_activity_welcome">Home Screen</string>
   <string name="next">NEXT</string>
   <string name="skip">SKIP</string>
@@ -68,8 +59,6 @@
   <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
   <string name="play_again">Play Again</string>
 
-
-
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
@@ -86,6 +75,5 @@
     <item>Office</item>
     <item>Home</item>
   </string-array>
-
 
 </resources>

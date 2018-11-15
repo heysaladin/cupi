@@ -29,7 +29,7 @@ public class AddSlideActivity extends AppCompatActivity
         implements View.OnClickListener,
         AsyncHttpResponse.AsyncHttpResponseListener {
     Toolbar mToolbar;
-    private static final String TAG = "AddDestinationActivity";
+    private static final String TAG = "AddSlideActivity";
     private EditText title;
     private EditText image;
     private EditText category;
@@ -37,7 +37,6 @@ public class AddSlideActivity extends AppCompatActivity
     private EditText description;
     private AlertDialog.Builder alertDialogBuilder = null;
     private AlertDialog alertDialog = null;
-
     private void getIntentData() {
         Intent intent = this.getIntent();
     }
@@ -165,7 +164,6 @@ public class AddSlideActivity extends AppCompatActivity
                         Intent in = new Intent(AddSlideActivity.this, MainActivity.class);
                         AddSlideActivity.this.startActivity( in );
                         AddSlideActivity.this.finish();
-                        // Toast.makeText(AddNoteActivity.this, "Thank You", Toast.LENGTH_LONG).show();
                     }
                 });
         if (alertDialog != null && alertDialog.isShowing()) {

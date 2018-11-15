@@ -33,17 +33,14 @@ public class ListSlidesActivity
         implements
         AsyncHttpResponse.AsyncHttpResponseListener {
 
-    String image = "image";
-    Toolbar mToolbar;
-    ImageView mFlower;
-    TextView mDescription;
-
+    private Toolbar mToolbar;
+    private ImageView mFlower;
+    private TextView mDescription;
     private JSONArray dataDestinations = null;
     private ArrayList <SlidesModel> destinationsArrayListBuffer;
     private ArrayList < SlidesModel > destinationsArrayList;
-    private SliderAdapter guestDestinationsAdapter;
     private String imageUrl = null;
-    RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView;
 
     private void getIntentData() {
         Intent intent = getIntent();

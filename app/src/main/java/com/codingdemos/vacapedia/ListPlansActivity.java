@@ -36,17 +36,14 @@ public class ListPlansActivity
         implements
         AsyncHttpResponse.AsyncHttpResponseListener {
 
-    String image = "image";
-    Toolbar mToolbar;
-    ImageView mFlower;
-    TextView mDescription;
-
+    private Toolbar mToolbar;
+    private ImageView mFlower;
+    private TextView mDescription;
     private JSONArray dataDestinations = null;
-    private ArrayList <PlanModel> destinationsArrayListBuffer;
+    private ArrayList < PlanModel > destinationsArrayListBuffer;
     private ArrayList < PlanModel > destinationsArrayList;
-    private SliderAdapter guestDestinationsAdapter;
     private String imageUrl = null;
-    RecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView;
 
     private void getIntentData() {
         Intent intent = getIntent();
@@ -109,41 +106,13 @@ public class ListPlansActivity
                 model.setTarget_date(job.optString("target_date"));
                 model.setCosts(job.optJSONArray("costs"));
                 model.setTarget_time(job.optString("target_time"));
-                //JSONArray dest = new JSONArray();
                 JSONArray jdes = new JSONArray(job.optString("destinations"));
-                /*
-                Log.d("XXX", "jdes: " + jdes);
-                //ArrayList < String > jsarr = new ArrayList < > ();
-                StringBuilder jPlain = new StringBuilder();
-                for(int z=0; z < jdes.length(); z++){
-                    JSONObject jdesob = jdes.getJSONObject(z);
-                    //jsarr.add(jdesob.getString("_id"));
-                    jPlain.append(jdesob.getString("_id"));
-                }
-                Log.d("XXX", "jPlain: " + jPlain);
-                //String jarrClean = String.valueOf(String.valueOf(jsarr).trim().replaceAll("\"","").split("\\s*,\\s*"));
-                //dest.put(String.valueOf(destinations.getText()).trim());
-//                String[] animalsArray = String.valueOf(jPlain).trim().replaceAll("\"","").split("\\s*,\\s*");
-                String[] animalsArray = String.valueOf(jPlain).trim().replaceAll("\"","").split("\\s*,\\s*");
-                Log.d("XXX", "animalsArray: " + animalsArray);
-                for(int i=0; i < animalsArray.length; i++){
-                    dest.put((animalsArray[i]).replaceAll("\"",""));
-                }
-                Log.d("XXX", "dest: " + dest);
-                */
                 model.setDestinations(jdes);
-//                model.setImage(job.optString("image"));
-                // model.setCategory(job.optString("category"));
-//                jobjContactDetails.put("body_copy", String.valueOf(body_copy.getText()).trim());
-//                jobjContactDetails.put("content", String.valueOf(content.getText()).trim());
-//                jobjContactDetails.put("target_date", String.valueOf(target_date.getText()).trim());
-//                jobjContactDetails.put("target_time", String.valueOf(target_time.getText()).trim());
-//                jobjContactDetails.put("destinations", dest);
                 dma.add(model);
                 destinationsArrayList.add(model);
             }
             destinationsArrayListBuffer = destinationsArrayList;
-            PlansLineAdapter myAdapter = new PlansLineAdapter(ListPlansActivity.this, destinationsArrayListBuffer );
+            PlansLineAdapter myAdapter = new PlansLineAdapter(ListPlansActivity.this, destinationsArrayListBuffer);
             mRecyclerView.setAdapter(myAdapter);
 
         } catch (JSONException e) {

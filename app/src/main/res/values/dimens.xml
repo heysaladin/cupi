@@ -52,7 +52,6 @@
     <dimen name="space_300dp">300dp</dimen>
     <dimen name="space_400dp">400dp</dimen>
 
-
     <dimen name="border_button_size">3dp</dimen>
     <dimen name="title_header_height">50dp</dimen>
     <dimen name="title_header_icon_height">25dp</dimen>
@@ -71,32 +70,13 @@
     <dimen name="contact_us_left_drawable_icon_size">20dp</dimen>
     <dimen name="menu_social_icon_size">30dp</dimen>
 
-
     <dimen name="activityPadding">16dp</dimen>
     <dimen name="placeholderImage">60dp</dimen>
     <dimen name="placeholderTextHeight">8dp</dimen>
     <dimen name="padding_10">10dp</dimen>
 
-
-
-    <!--<dimen name="toolbar_padding_normal">0dp</dimen>-->
-    <!--<dimen name="toolbar_padding_translucent">0dp</dimen>-->
-    <!--<dimen name="toolbar_height_normal">56dp</dimen>-->
-    <!--<dimen name="toolbar_height_translucent">56dp</dimen>-->
-
-
-
     <dimen name="app_bar_height">180dp</dimen>
-    <!--<dimen name="fab_margin">16dp</dimen>-->
     <dimen name="text_margin">16dp</dimen>
-
-    <!--<dimen name="image_left_margin_collapsed">16dp</dimen>-->
-    <!--<dimen name="image_top_margin_collapsed">64dp</dimen>-->
-    <!--<dimen name="title_left_margin_collapsed">72dp</dimen>-->
-    <!--<dimen name="title_top_margin_collapsed">64dp</dimen>-->
-    <!--<dimen name="subtitle_left_margin_collapsed">72dp</dimen>-->
-    <!--<dimen name="subtitle_top_margin_collapsed">88dp</dimen>-->
-
 
     <dimen name="image_left_margin_collapsed">16dp</dimen>
     <dimen name="image_top_margin_collapsed">64dp</dimen>
@@ -105,15 +85,8 @@
     <dimen name="subtitle_left_margin_collapsed">16dp</dimen>
     <dimen name="subtitle_top_margin_collapsed">88dp</dimen>
 
-
-
-
-    <!--<dimen name="detail_backdrop_height">256dp</dimen>-->
     <dimen name="detail_backdrop_height">356dp</dimen>
     <dimen name="card_margin">16dp</dimen>
-    <!--<dimen name="fab_margin">16dp</dimen>-->
     <dimen name="list_item_avatar_size">40dp</dimen>
-
-
 
 </resources>
