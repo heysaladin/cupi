@@ -23,6 +23,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
@@ -76,14 +77,44 @@ public class AddPlanActivity extends AppCompatActivity
 
     private static String nowDestinationsSelected = "";
 
+
+    private LinearLayout parentLinearLayout;
+
+    private LinearLayout parentLinearLayoutRecycler;
+    private RecyclerView parentRecycler;
+
+    private LinearLayout wrapper_dynamic;
+
+    private JSONArray costList;
+
     private void getIntentData() {
         Intent intent = this.getIntent();
+    }
+
+    public void onAddField(View v) {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View rowView = inflater.inflate(R.layout.field, null);
+//        EditText currentEdit = rowView.findViewById(R.id.number_edit_text);
+//        editTextList.add(currentEdit);
+        // Add the new row before the add field button.
+        parentLinearLayout.addView(rowView, parentLinearLayout.getChildCount() - 1);
+
+        Log.d("LOG", "count >>>>>>>>> " + String.valueOf(Integer.parseInt(String.valueOf(parentLinearLayout.getChildCount())) - 1));
+
+    }
+
+    public void onDelete(View v) {
+        parentLinearLayout.removeView((View) v.getParent());
+        Log.d("LOG", "count >>>>>>>>> " + String.valueOf(Integer.parseInt(String.valueOf(parentLinearLayout.getChildCount())) - 1));
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan_add);
+
+        parentLinearLayout = (LinearLayout) findViewById(R.id.parent_linear_layout);
+
         mToolbar = findViewById(R.id.toolbar);
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -182,8 +213,12 @@ public class AddPlanActivity extends AppCompatActivity
         JSONArray dest = new JSONArray();
         //dest.put(String.valueOf(destinations.getText()).trim());
         String[] animalsArray = String.valueOf(destinations.getText()).trim().split("\\s*,\\s*");
-        for(int i=0; i < animalsArray.length; i++){
-            dest.put(animalsArray[i]);
+        if (animalsArray.length > 1) {
+            for (int i = 0; i < animalsArray.length; i++) {
+                dest.put(animalsArray[i]);
+            }
+        } else if (animalsArray.length == 1) {
+            dest.put(String.valueOf(destinations.getText()).trim());
         }
         try {
             jobjContactDetails = new JSONObject();
@@ -194,7 +229,7 @@ public class AddPlanActivity extends AppCompatActivity
             jobjContactDetails.put("content", String.valueOf(content.getText()).trim());
             jobjContactDetails.put("target_date", String.valueOf(target_date.getText()).trim());
             jobjContactDetails.put("target_time", String.valueOf(target_time.getText()).trim());
-            jobjContactDetails.put("costs", String.valueOf(costs.getText()).trim());
+            jobjContactDetails.put("costs", costList);
             jobjContactDetails.put("destinations", dest);
         } catch (Exception e) {
             e.printStackTrace();
@@ -242,6 +277,61 @@ public class AddPlanActivity extends AppCompatActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.dd_booking_form_tv:
+
+
+
+
+                costList = new JSONArray();
+
+
+//                int parentLongRecycler = Integer.parseInt(String.valueOf(parentRecycler.getChildCount())) - 1;
+//
+//                for (int j = 0; j < parentLongRecycler; j++) {
+//                    try {
+//                        View currentView = parentRecycler.getChildAt(j);
+//                        EditText currentEditName = currentView.findViewById(R.id.text_edit_text);
+//                        EditText currentEditCost = currentView.findViewById(R.id.number_edit_text);
+//                        //Log.d(TAG, j + ">>>>>>>> : " + currentEdit.getText() );
+//                        if(!currentEditName.getText().toString().equals("")||!currentEditCost.getText().toString().equals("")) {
+//                            JSONObject costObj = new JSONObject("{" +
+//                                    "\"name\":\"" + currentEditName.getText() + "\"," +
+//                                    "\"cost\":\"" + currentEditCost.getText() + "\"" +
+//                                    "}");
+//                            Log.d(TAG, j + " j >>>>>>>> : " + costObj );
+//                            costList.put(costObj);
+//                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+
+
+                int parentLong = Integer.parseInt(String.valueOf(parentLinearLayout.getChildCount())) - 1;
+
+                for (int k = 0; k < parentLong; k++) {
+                    try {
+                        View currentView = parentLinearLayout.getChildAt(k);
+                        EditText currentEditName = currentView.findViewById(R.id.text_edit_text);
+                        EditText currentEditCost = currentView.findViewById(R.id.number_edit_text);
+                        //Log.d(TAG, k + ">>>>>>>> : " + currentEdit.getText() );
+                        if(!currentEditName.getText().toString().equals("")||!currentEditCost.getText().toString().equals("")) {
+                            JSONObject costObj = new JSONObject("{" +
+                                    "\"name\":\"" + currentEditName.getText() + "\"," +
+                                    "\"cost\":\"" + currentEditCost.getText() + "\"" +
+                                    "}");
+                            Log.d(TAG, k + " k >>>>>>>> : " + costObj );
+                            costList.put(costObj);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+
+
+
                 bookValidations();
                 break;
             case R.id.bn_find_a_restaurant_rl:

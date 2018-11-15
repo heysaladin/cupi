@@ -14,8 +14,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.codingdemos.flowers.R;
+import com.codingdemos.vacapedia.NoteActivity;
+import com.codingdemos.vacapedia.NotesActivity;
 import com.codingdemos.vacapedia.data.DestinationsModel;
 import com.codingdemos.vacapedia.EditDestinationActivity;
 import com.codingdemos.vacapedia.handlers.GuestDestinationsAdapter;
@@ -25,6 +33,8 @@ import com.codingdemos.vacapedia.handlers.SwipeController;
 import com.codingdemos.vacapedia.handlers.SwipeControllerActions;
 import com.codingdemos.vacapedia.rest.AsyncHttpResponse;
 import com.codingdemos.vacapedia.rest.RestApis;
+import com.codingdemos.vacapedia.widgets.BusyDialog;
+import com.google.android.gms.common.api.Response;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
@@ -32,6 +42,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 public class DestinationsEditPageFragment
         extends Fragment
@@ -48,6 +60,8 @@ public class DestinationsEditPageFragment
     private ArrayList < DestinationsModel > destinationsArrayListBuffer;
     private ArrayList < DestinationsModel > destinationsArrayList;
     private GuestDestinationsAdapter guestDestinationsAdapter;
+
+    private BusyDialog progressDialog;
 
     public static DestinationsEditPageFragment newInstance() {
         DestinationsEditPageFragment fragment = new DestinationsEditPageFragment();
@@ -90,6 +104,43 @@ public class DestinationsEditPageFragment
         mIntent.putExtra("costs", destinationsArrayListBuffer.get(position).getCosts());
         mIntent.putExtra("total_cost", destinationsArrayListBuffer.get(position).getTotal_cost());
         DestinationsEditPageFragment.this.getActivity().startActivity(mIntent);
+    }
+
+    private void callDelete(int position) {
+
+        String idToDelete = destinationsArrayListBuffer.get(position).get_id();
+
+        String url = RestApis.KarmaGroups.vacapediaDestinations + "/" + idToDelete;
+        Log.d(TAG, " url >>>>>>>> : " + url );
+        progressDialog = new BusyDialog(getActivity(), false, "");
+        progressDialog.show();
+
+        final RequestQueue mRequestQueue;
+        // Setup instance
+        mRequestQueue = Volley.newRequestQueue(getActivity());
+        //String url = RestApis.KarmaGroups.vacapediaNotes + "/" + id;
+        StringRequest dr = new StringRequest(Request.Method.DELETE, url,
+                new com.android.volley.Response.Listener < String > () {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        // response
+//                                    Intent in = new Intent(getActivity(), NotesActivity.class);
+//                                    getActivity().startActivity( in );
+//                                    getActivity().finish();
+                        Log.d(TAG, " SUCCESS >>>>>>>> " );
+                    }
+                },
+                new com.android.volley.Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error.
+                        Log.d(TAG, " FAIL >>>>>>>> " );
+                    }
+                }
+        );
+        mRequestQueue.add(dr);
+
     }
 
     @Override
@@ -161,6 +212,9 @@ public class DestinationsEditPageFragment
             swipeController = new SwipeController(new SwipeControllerActions() {
                 @Override
                 public void onRightClicked(int position) {
+
+                    callDelete(position);
+
                     destinationsArrayListBuffer.remove(position);
                     myAdapter.notifyItemRemoved(position);
                     myAdapter.notifyItemRangeChanged(position, myAdapter.getItemCount());
